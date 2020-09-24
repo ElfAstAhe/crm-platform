@@ -10,20 +10,22 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
 import javax.persistence.SequenceGenerator;
+import java.io.Serializable;
 import java.util.Objects;
 import java.util.StringJoiner;
 
 /**
+ * Базовая реализация entity c id
  *
  * @author elf
  */
 @MappedSuperclass
-public abstract class BaseIdentity implements Identity {
+public abstract class BaseIdEntity implements IdEntity {
     @Id
     @Basic(optional = false)
     @Column(name = "id", nullable = false)
     @GeneratedValue(
-            generator = CommonEntityConstants.GENERATOR_OBJECT, 
+            generator = CommonEntityConstants.GENERATOR_OBJECT,
             strategy = GenerationType.SEQUENCE)
     @SequenceGenerator(
             name = CommonEntityConstants.GENERATOR_OBJECT,
@@ -32,10 +34,10 @@ public abstract class BaseIdentity implements Identity {
             allocationSize = 1)
     private Long id;
 
-    public BaseIdentity() {
+    public BaseIdEntity() {
     }
     
-    public BaseIdentity(Long id) {
+    public BaseIdEntity(Long id) {
         this.id = id;
     }
 
@@ -55,8 +57,8 @@ public abstract class BaseIdentity implements Identity {
 
     @Override
     public String toString() {
-        return new StringJoiner(",", "common.dal.entity.BaseDalModel[", "]")
-                .add(StringUtils.buildKeyValue("id", getId()))
+        return new StringJoiner(",", "common.dal.entity.BaseIdentity[", "]")
+                .add(StringUtils.buildKeyValue("id", id))
                 .toString();
     }
 }

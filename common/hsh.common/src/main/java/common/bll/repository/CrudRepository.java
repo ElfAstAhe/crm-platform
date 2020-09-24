@@ -10,13 +10,11 @@ import java.util.concurrent.Future;
  * @author elf
  * @param <TModel> модель
  * @param <TKey> ключ
- * @param <TId> УИЭ
  * @param <TListConditions> условия отбора
  */
 public interface CrudRepository<
         TModel extends BusinessModel,
         TKey,
-        TId,
         TListConditions extends ListConditions> {
     /**
      * Получить экземпляр по id

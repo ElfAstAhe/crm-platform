@@ -1,6 +1,6 @@
 package common.dal.dao;
 
-import common.dal.entity.BaseIdentity;
+import common.dal.entity.BaseIdEntity;
 
 import java.util.List;
 import java.util.concurrent.Future;
@@ -8,18 +8,18 @@ import java.util.concurrent.Future;
 /**
  * Интерфейс репозитория актуальных значений
  *
- * @param <TKey>
- * @param <TEntity>
+ * @param <Key>
+ * @param <Entity>
  * @author elf
  */
-public interface LastValuesDao<TKey, TEntity extends BaseIdentity> {
+public interface LastValuesDao<Key, Entity extends BaseIdEntity> {
     /**
      * Получить 1 последнее значение по ключу
      *
      * @param key ключ
      * @return entity
      */
-    TEntity findLast(TKey key);
+    Entity findLast(Key key);
 
     /**
      * Получить 1 последнее значение по ключу (async)
@@ -27,7 +27,7 @@ public interface LastValuesDao<TKey, TEntity extends BaseIdentity> {
      * @param key ключ
      * @return entity
      */
-    Future<TEntity> findLastAsync(TKey key);
+    Future<Entity> findLastAsync(Key key);
 
     /**
      * Получить список последних значений
@@ -36,7 +36,7 @@ public interface LastValuesDao<TKey, TEntity extends BaseIdentity> {
      * @param rowCount кол-во строк
      * @return список последних значений
      */
-    List<TEntity> listLast(TKey key, int rowCount);
+    List<Entity> listLast(Key key, int rowCount);
 
     /**
      * Получить список последних значений (async)
@@ -45,6 +45,6 @@ public interface LastValuesDao<TKey, TEntity extends BaseIdentity> {
      * @param rowCount кол-во строк
      * @return список последних значений
      */
-    Future<List<TEntity>> listLastAsync(TKey key, int rowCount);
+    Future<List<Entity>> listLastAsync(Key key, int rowCount);
 }
 

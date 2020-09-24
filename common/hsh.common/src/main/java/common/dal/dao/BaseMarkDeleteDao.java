@@ -2,22 +2,24 @@ package common.dal.dao;
 
 import common.dal.entity.MarkDelete;
 
+import java.io.Serializable;
+
 /**
  * base mark delete dictionary crud dao
  *
  * @author elf
- * @param <TEntity> entity
- * @param <TKey> key
+ * @param <Entity> entity
+ * @param <Key>    unique key
  */
-public abstract class BaseMarkDeleteDao<TEntity extends MarkDelete, TKey>
-        extends BaseCrudDao<TEntity, TKey>{
+public abstract class BaseMarkDeleteDao<Entity extends MarkDelete, Key extends Serializable>
+        extends BaseCrudDao<Entity, Key>{
     
-    public BaseMarkDeleteDao(Class<TEntity> entityClass) {
+    public BaseMarkDeleteDao(Class<Entity> entityClass) {
         super(entityClass);
     }
     
     @Override
-    public void remove(TEntity entity) {
+    public void remove(Entity entity) {
         if (entity == null)
             throw new NullPointerException();
         

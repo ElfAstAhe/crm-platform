@@ -11,7 +11,7 @@
     <properties>
         <!-- root project -->
         <crm.platform.version.suffix>-SNAPSHOT</crm.platform.version.suffix>
-        <crm.platfrom.version>2.0.0${crm.platform.version.suffix}</crm.platfrom.version>
+        <crm.platfrom.version>1.0.0${crm.platform.version.suffix}</crm.platfrom.version>
         <crm.platform.baseDir>${project.basedir}</crm.platform.baseDir>
 
         <!-- common libraries -->

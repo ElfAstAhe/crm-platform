@@ -4,8 +4,7 @@ package common.dal.entity;
  *
  * @author elf
  */
-public interface MarkDelete extends Identity {
-    
-    public int getDeleteFlag();
-    public void setDeleteFlag(int deleteFlag);
+public interface MarkDelete extends IdEntity {
+    int getDeleteFlag();
+    void setDeleteFlag(int deleteFlag);
 }

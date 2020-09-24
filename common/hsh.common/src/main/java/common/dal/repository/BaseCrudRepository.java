@@ -5,7 +5,7 @@ import common.bll.repository.CrudRepository;
 import common.bll.repository.ListConditions;
 import common.dal.converter.SimpleConverter;
 import common.dal.dao.CrudDao;
-import common.dal.entity.Identity;
+import common.dal.entity.IdEntity;
 
 import javax.ejb.AsyncResult;
 import javax.ejb.Asynchronous;
@@ -54,7 +54,7 @@ public abstract class BaseCrudRepository<
 
     @Override
     public TModel create(TModel model) {
-        Identity entity = getConverter().toNewEntity(model);
+        IdEntity entity = getConverter().toNewEntity(model);
         return getConverter().toModel(getCrudDao().create(entity));
     }
 
@@ -70,7 +70,7 @@ public abstract class BaseCrudRepository<
         // Валидируем
         // validator.validateExisted(model);
         // Подгружаем
-        Identity entity = getCrudDao().find(model.getId());
+        IdEntity entity = getCrudDao().find(model.getId());
         if (entity == null)
             return null;
         return getConverter().toModel(getCrudDao().edit(getConverter().toEntity(model, entity)));
@@ -85,7 +85,7 @@ public abstract class BaseCrudRepository<
 
     @Override
     public void remove(TId id) {
-        Identity entity = getCrudDao().find(id);
+        IdEntity entity = getCrudDao().find(id);
         if (entity != null)
             getCrudDao().remove(entity);
     }
@@ -129,9 +129,9 @@ public abstract class BaseCrudRepository<
 
 //    protected abstract ExecutorService getExecutorService();
 
-    protected abstract <Entity extends Identity, Key> CrudDao<Entity, Key> getCrudDao();
+    protected abstract <Entity extends IdEntity, Key> CrudDao<Entity, Key> getCrudDao();
 
-    protected abstract <Entity extends Identity> SimpleConverter<Entity, TModel> getConverter();
+    protected abstract <Entity extends IdEntity> SimpleConverter<Entity, TModel> getConverter();
 
     protected abstract common.dal.dao.ListConditions toDaoListConditions(TListConditions repoListConditions);
 

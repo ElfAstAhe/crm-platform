@@ -4,8 +4,8 @@ package common.bll.model;
  * Бизнес модель
  *
  * @author elf
- * @param <Key>
+ * @param <Key> Бизнес ключ
  */
-public interface BusinessModel<Key> {
+public interface BusinessModel<Key extends BusinessModelKey> {
     Key getKey();
 }

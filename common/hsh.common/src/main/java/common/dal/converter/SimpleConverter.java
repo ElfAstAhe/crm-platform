@@ -1,17 +1,19 @@
 package common.dal.converter;
 
 import common.bll.model.BusinessModel;
-import common.dal.entity.Identity;
+import common.dal.entity.IdEntity;
+import common.dal.entity.LongIdentity;
 
 /**
  * Конвертор entity <--> model
  *
  * @author elf
- * @param <Entity>
- * @param <Key>
- * @param <Model>
+ * @param <Entity> сущность
+ * @param <Model>  бизнес модель
  */
-public interface SimpleConverter<Entity extends Identity, Key, Model extends BusinessModel<Key>> {
+public interface SimpleConverter<Entity extends IdEntity,
+        Model extends BusinessModel>
+{
     Entity toNewEntity(Model model);
     
     Model toModel(Entity entity);

@@ -1,6 +1,6 @@
 package common.dal.converter;
 
-import common.dal.entity.Identity;
+import common.dal.entity.IdEntity;
 
 /**
  * Функциональный интерфейс загрузки entity
@@ -8,6 +8,6 @@ import common.dal.entity.Identity;
  * @author elf
  * @param <Entity> тип entity
  */
-public interface EntityLoaderFunc<Entity extends Identity> {
+public interface EntityLoaderFunc<Entity extends IdEntity> {
     Entity find(Long id);
 }

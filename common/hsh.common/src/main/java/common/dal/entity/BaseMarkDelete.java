@@ -9,7 +9,7 @@ import javax.persistence.MappedSuperclass;
  * @author elf
  */
 @MappedSuperclass
-public class BaseMarkDelete extends BaseIdentity implements MarkDelete {
+public class BaseMarkDelete extends BaseIdEntity implements MarkDelete {
     @Basic(optional = false)
     @Column(name = "delete_flag", nullable = false)
     private int deleteFlag;

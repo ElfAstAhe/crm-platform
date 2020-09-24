@@ -4,6 +4,6 @@ package common.dal.entity;
  *
  * @author elf
  */
-public interface Identity {
+public interface IdEntity {
     Long getId();
 }
