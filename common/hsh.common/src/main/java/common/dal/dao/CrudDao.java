@@ -110,4 +110,8 @@ public interface CrudDao<Entity extends IdEntity, Key> {
      * @return row count
      */
     Future<Long> countAsync();
+
+    Long count(FilterParams params);
+
+    Future<Long> countAsync(FilterParams params);
 }

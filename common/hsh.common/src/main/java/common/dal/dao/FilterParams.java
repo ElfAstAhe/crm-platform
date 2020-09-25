@@ -1,5 +1,6 @@
 package common.dal.dao;
 
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -10,7 +11,7 @@ import java.util.Map;
 public interface FilterParams {
     int getFromRow();
     int getRowCount();
-    Map<String,Object> getFilter();
+    List<Map<String, Object>> getFilterSet();
     SortOrderEnum getSortOrder();
     String getField();
 }

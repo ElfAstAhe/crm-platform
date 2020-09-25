@@ -1,8 +1,8 @@
 package common.dal.converter;
 
 import common.bll.model.BusinessModel;
+import common.bll.model.BusinessModelKey;
 import common.dal.entity.IdEntity;
-import common.dal.entity.LongIdentity;
 
 /**
  * Конвертор entity <--> model
@@ -12,7 +12,7 @@ import common.dal.entity.LongIdentity;
  * @param <Model>  бизнес модель
  */
 public interface SimpleConverter<Entity extends IdEntity,
-        Model extends BusinessModel>
+        Model extends BusinessModel<? extends BusinessModelKey>>
 {
     Entity toNewEntity(Model model);
     

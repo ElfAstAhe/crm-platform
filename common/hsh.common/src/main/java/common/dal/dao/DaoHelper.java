@@ -3,7 +3,6 @@ package common.dal.dao;
 import common.dal.entity.IdEntity;
 import org.apache.commons.lang3.StringUtils;
 
-import javax.persistence.JoinTable;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.Path;
 import javax.persistence.criteria.Predicate;
@@ -11,10 +10,7 @@ import javax.persistence.criteria.Root;
 import javax.persistence.metamodel.SingularAttribute;
 import java.lang.reflect.Field;
 import java.math.BigDecimal;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Map;
-import java.util.Objects;
+import java.util.*;
 
 /**
  * dao helper
@@ -33,7 +29,7 @@ public class DaoHelper<Entity extends IdEntity> {
     public Predicate createSingleCondition(CriteriaBuilder cb,
                                            Map<String, Object> filters,
                                            Root<Entity> root,
-                                           List<JoinTable> joins) {
+                                           List<DaoUtils.JoinTable> joins) {
         Predicate[] and = filters.entrySet()
                 .stream()
                 .map(f -> {
@@ -109,10 +105,29 @@ public class DaoHelper<Entity extends IdEntity> {
     protected Predicate createCustomPredicate(CriteriaBuilder cb,
                                               Path<?> pathFilter,
                                               Root<Entity> root,
-                                              List<JoinTable> joins,
+                                              List<DaoUtils.JoinTable> joins,
                                               String name,
                                               Object value) {
         return null;
+    }
+
+    /**
+     * for overriding
+     *
+     * @return joins
+     */
+    public List<DaoUtils.JoinTable> getJoins(Root<Entity> root) {
+        return new ArrayList<>();
+    }
+
+    protected Predicate createWhere(CriteriaBuilder cb, Root<Entity> root, List<DaoUtils.JoinTable> joins, List<Map<String, Object>> filterSet) {
+        if (filterSet == null || filterSet.isEmpty()) {
+            return cb.conjunction();
+        }
+
+        return cb.or(filterSet.stream()
+                .map(filters -> createSingleCondition(cb, filters, root, joins))
+                .toArray(Predicate[]::new));
     }
 
     protected Class<Entity> getEntityClass() {
@@ -131,11 +146,11 @@ public class DaoHelper<Entity extends IdEntity> {
      * @param field field
      * @return path
      */
-    protected Path<?> getCustomPath(Root<Entity> root, List<JoinTable> joins, String field) {
+    protected Path<?> createCustomPath(Root<Entity> root, List<DaoUtils.JoinTable> joins, String field) {
         return null;
     }
 
-    private Path<?> getPathInternal(Root<Entity> root, List<JoinTable> joins, String field) {
+    public Path<?> createPathConditioning(Root<Entity> root, List<DaoUtils.JoinTable> joins, String field) {
         if (StringUtils.isNotEmpty(field)) {
             if (field.endsWith(CriteriaConditionBuilder.CONDITION_NOT_EQUAL))
                 field = field.replace(CriteriaConditionBuilder.CONDITION_NOT_EQUAL, StringUtils.EMPTY);
@@ -151,15 +166,12 @@ public class DaoHelper<Entity extends IdEntity> {
                 field = field.replace(CriteriaConditionBuilder.CONDITION_EQUAL, StringUtils.EMPTY);
         }
 
-        if (usePath)
-            return getPath(root, joins, field);
-        else
-            return root.get(field);
+        return usePath ? createPath(root, joins, field) : root.get(field);
     }
 
     @SuppressWarnings({"unchecked", "rawtypes"})
-    protected Path<?> getPath(Root<Entity> root, List<JoinTable> joins, String field) {
-        Path<?> path = getCustomPath(root, joins, field);
+    public Path<?> createPath(Root<Entity> root, List<DaoUtils.JoinTable> joins, String field) {
+        Path<?> path = createCustomPath(root, joins, field);
         if (path != null) {
             return path;
         }
@@ -180,5 +192,4 @@ public class DaoHelper<Entity extends IdEntity> {
 
         return root.get(DaoUtils.getEntityIdField(entityClass));
     }
-
 }

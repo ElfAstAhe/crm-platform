@@ -1,14 +1,18 @@
 package common.dal.dao;
 
 import common.dal.entity.IdEntity;
+import org.jooq.tools.StringUtils;
 
 import javax.ejb.AsyncResult;
 import javax.ejb.Asynchronous;
 import javax.persistence.EntityManager;
+import javax.persistence.LockModeType;
 import javax.persistence.TypedQuery;
-import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.*;
 import java.io.Serializable;
+import java.util.Collections;
 import java.util.List;
+import java.util.Map;
 import java.util.concurrent.Future;
 
 /**
@@ -24,8 +28,7 @@ public abstract class BaseCrudDao<Entity extends IdEntity, Key extends Serializa
     private final DaoHelper<Entity> daoHelper;
 
     public BaseCrudDao(Class<Entity> entityClass) {
-        this.entityClass = entityClass;
-        this.daoHelper = new DaoHelper<>(entityClass, false);
+        this(entityClass, new DaoHelper<>(entityClass, false));
     }
 
     public BaseCrudDao(Class<Entity> entityClass, DaoHelper<Entity> daoHelper) {
@@ -80,13 +83,43 @@ public abstract class BaseCrudDao<Entity extends IdEntity, Key extends Serializa
 
     @Override
     public List<Entity> listFiltered(FilterParams params) {
-        CriteriaQuery<Entity> cq = getEntityManager().getCriteriaBuilder()
-                .createQuery(entityClass);
-        cq.select(cq.from(entityClass));
-        TypedQuery<Entity> q = getEntityManager().createQuery(cq);
-        q.setMaxResults(params.getRowCount() - params.getFromRow() + 1);
-        q.setFirstResult(params.getFromRow());
-        return q.getResultList();
+//        CriteriaQuery<Entity> cq = getEntityManager().getCriteriaBuilder()
+//                .createQuery(entityClass);
+//        cq.select(cq.from(entityClass));
+//        TypedQuery<Entity> q = getEntityManager().createQuery(cq);
+//        q.setMaxResults(params.getRowCount() - params.getFromRow() + 1);
+//        q.setFirstResult(params.getFromRow());
+//        return q.getResultList();
+        CriteriaBuilder cb = getEntityManager().getCriteriaBuilder();
+        CriteriaQuery<Entity> cq = cb.createQuery(entityClass);
+        Root<Entity> root = cq.from(entityClass);
+        List<DaoUtils.JoinTable> joins = daoHelper.getJoins(root);
+        setFetchings(root);
+
+        cq.select(root);
+
+        if (params.getSortOrder() != null && !StringUtils.isBlank(params.getField())) {
+            if (params.getSortOrder().equals(SortOrderEnum.ASCENDING)) {
+                cq.orderBy(cb.asc(daoHelper.createPathConditioning(root, joins, params.getField())));
+            } else if (params.getSortOrder().equals(SortOrderEnum.DESCENDING)) {
+                cq.orderBy(cb.desc(daoHelper.createPathConditioning(root, joins, params.getField())));
+            }
+        }
+
+        cq.where(daoHelper.createWhere(cb, root, joins, params.getFilterSet()));
+        TypedQuery<Entity> tq = getEntityManager().createQuery(cq)
+                .setLockMode(LockModeType.NONE);
+
+        if (params.getFromRow() != 0)
+            tq.setFirstResult(params.getFromRow());
+        if (params.getRowCount() != 0)
+            tq.setMaxResults(params.getRowCount());
+
+        List<Entity> result = tq.setLockMode(LockModeType.NONE)
+                .getResultList();
+        result.forEach(getEntityManager()::detach);
+
+        return result;
     }
 
     @Override
@@ -103,14 +136,33 @@ public abstract class BaseCrudDao<Entity extends IdEntity, Key extends Serializa
 
     @Override
     public Long count() {
-        CriteriaQuery<Long> cq = getEntityManager().getCriteriaBuilder()
-                .createQuery(Long.class);
-        cq = cq.select(getEntityManager().getCriteriaBuilder()
-                .count(cq.from(entityClass)));
-        TypedQuery<Long> q = getEntityManager().createQuery(cq);
-        return (q.getSingleResult());
+//
+//        CriteriaQuery<Long> cq = getEntityManager().getCriteriaBuilder()
+//                .createQuery(Long.class);
+//        cq = cq.select(getEntityManager().getCriteriaBuilder()
+//                .count(cq.from(entityClass)));
+//        TypedQuery<Long> q = getEntityManager().createQuery(cq);
+//        return (q.getSingleResult());
+        return count(new BaseFilterParams(0,
+                0,
+                DaoUtils.createFilterSet(Collections.emptyMap()),
+                SortOrderEnum.UNSORTED,
+                null));
     }
 
+    @Override
+    public Long count(FilterParams params) {
+        boolean isFieldBlank = StringUtils.isBlank(params.getField());
+        return countInternal(isFieldBlank ? null : params.getField(),
+                params.getFilterSet(),
+                isFieldBlank);
+    }
+
+    @Override
+    @Asynchronous
+    public Future<Long> countAsync(FilterParams params) {
+        return new AsyncResult<>(count(params));
+    }
 
     @Override
     @Asynchronous
@@ -168,5 +220,52 @@ public abstract class BaseCrudDao<Entity extends IdEntity, Key extends Serializa
         return daoHelper;
     }
 
+    /**
+     * for overriding
+     *
+     * @param root root
+     * @return expression
+     */
+    protected Expression<?> countByField(Root<Entity> root) {
+        return null;
+    }
+
+    /**
+     * for overriding
+     *
+     * @param root root
+     */
+    protected void setFetchings(Root<Entity> root) {
+        // nothing
+    }
+
     protected abstract EntityManager getEntityManager();
+
+    private Long countInternal(String field, List<Map<String, Object>> filterSet, boolean isAutoField) {
+        CriteriaBuilder cb = getEntityManager().getCriteriaBuilder();
+        CriteriaQuery<Long> cq = cb.createQuery(Long.class);
+
+        Root<Entity> root = cq.from(entityClass);
+        List<DaoUtils.JoinTable> joins = daoHelper.getJoins(root);
+
+        Expression<?> path;
+        if (isAutoField) {
+            path = countByField(root);
+            if (path == null) {
+                path = root;
+            }
+        } else {
+            path = daoHelper.createPath(root, joins, field);
+        }
+        cq.select(cb.countDistinct(path));
+
+        Predicate where = daoHelper.createWhere(cb, root, joins, filterSet);
+        if (where != null) {
+            cq.where(where);
+        }
+
+        return getEntityManager().createQuery(cq)
+                .setLockMode(LockModeType.NONE)
+                .getSingleResult();
+    }
 }

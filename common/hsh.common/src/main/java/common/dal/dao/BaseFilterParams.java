@@ -1,30 +1,27 @@
 package common.dal.dao;
 
-import java.util.HashMap;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 public class BaseFilterParams implements FilterParams{
     public static final int DEFAULT_FROM_ROW = 0;
     public static final int DEFAULT_ROW_COUNT = 100;
 
-    private int fromRow = DEFAULT_FROM_ROW;
-    private int rowCount = DEFAULT_ROW_COUNT;
-    private Map<String, Object> filter = new HashMap<>();
-    private SortOrderEnum sortOrder = SortOrderEnum.UNSORTED;
-    private String field;
-
-    public BaseFilterParams() {
-        // default constructor
-    }
+    private final int fromRow;
+    private final int rowCount;
+    private final List<Map<String, Object>> filterSet;
+    private final SortOrderEnum sortOrder;
+    private final String field;
 
     public BaseFilterParams(int fromRow,
                             int rowCount,
-                            Map<String, Object> filter,
+                            List<Map<String, Object>> filterSet,
                             SortOrderEnum sortOrder,
                             String field) {
         this.fromRow = fromRow;
         this.rowCount = rowCount;
-        this.filter = filter;
+        this.filterSet = filterSet;
         this.sortOrder = sortOrder;
         this.field = field;
     }
@@ -40,11 +37,6 @@ public class BaseFilterParams implements FilterParams{
     }
 
     @Override
-    public Map<String, Object> getFilter() {
-        return filter;
-    }
-
-    @Override
     public SortOrderEnum getSortOrder() {
         return sortOrder;
     }
@@ -54,23 +46,8 @@ public class BaseFilterParams implements FilterParams{
         return field;
     }
 
-    public void setFromRow(int fromRow) {
-        this.fromRow = fromRow;
-    }
-
-    public void setRowCount(int rowCount) {
-        this.rowCount = rowCount;
-    }
-
-    public void setFilter(Map<String, Object> filter) {
-        this.filter = filter;
-    }
-
-    public void setSortOrder(SortOrderEnum sortOrder) {
-        this.sortOrder = sortOrder;
-    }
-
-    public void setField(String field) {
-        this.field = field;
+    @Override
+    public List<Map<String, Object>> getFilterSet() {
+        return filterSet;
     }
 }

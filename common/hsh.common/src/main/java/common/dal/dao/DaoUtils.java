@@ -5,8 +5,13 @@ import org.jooq.tools.StringUtils;
 
 import javax.persistence.EmbeddedId;
 import javax.persistence.Id;
+import javax.persistence.criteria.Join;
 import javax.persistence.metamodel.SingularAttribute;
 import java.lang.reflect.Field;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.Map;
 
 public class DaoUtils {
     private DaoUtils() {
@@ -64,6 +69,37 @@ public class DaoUtils {
             return Class.forName(entityClass.getName() + "_");
         } catch (ClassNotFoundException ex) {
             return null;
+        }
+    }
+
+    public static List<Map<String, Object>> createFilterSet(Map<String, Object> filters) {
+        if (filters == null)
+            return new ArrayList<>();
+
+        return Collections.singletonList(filters);
+    }
+
+    public static class JoinTable {
+        private final Join<?, ?> join;
+        private final Class<?> root;
+        private final Class<?> target;
+
+        public JoinTable(Join<?, ?> join, Class<?> root, Class<?> target) {
+            this.join = join;
+            this.root = root;
+            this.target = target;
+        }
+
+        public Join<?, ?> getJoin() {
+            return join;
+        }
+
+        public Class<?> getRoot() {
+            return root;
+        }
+
+        public Class<?> getTarget() {
+            return target;
         }
     }
 }
