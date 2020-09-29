@@ -1,7 +1,7 @@
 package common.ep.controller;
 
 import common.dto.helper.ExceptionDtoHelper;
-import common.ep.facade.BaseCrudFacade;
+import common.ep.facade.CrudFacade;
 import common.web.MimeTypes;
 import org.apache.commons.lang3.StringUtils;
 
@@ -13,11 +13,10 @@ import java.net.URI;
 import java.util.List;
 
 /**
- * Базовый класс контроллера
- *
- * @author elf
+ * base crud controller class
+ * @param <Dto>
  */
-public abstract class BaseCrudController<TDto, TKey> {
+public abstract class BaseCrudController<Dto> {
 
     @GET
     @Path("{id}")
@@ -35,7 +34,7 @@ public abstract class BaseCrudController<TDto, TKey> {
             }
 
             // Обработка
-            TDto result = getCrudFacade().getInstance(_id);
+            Dto result = getCrudFacade().getInstance(_id);
 
             // Не нашли
             if (result == null)
@@ -68,44 +67,44 @@ public abstract class BaseCrudController<TDto, TKey> {
         }
     }
 
-    @GET
-    @Path("list")
-    @Produces({MimeTypes.Application.JSON, MimeTypes.Application.XML})
-    public Response list(
-            @QueryParam("fromRow") @DefaultValue(value = "0") String fromRow,
-            @QueryParam("rowCount") @DefaultValue(value = "100") String rowCount
-    ) {
-        try {
-            // Параметры
-            int paramFromRow;
-            int paramRowCount;
-            try {
-                paramFromRow = Integer.parseInt(fromRow);
-                paramRowCount = Integer.parseInt(rowCount);
-            } catch (NumberFormatException ex) {
-//                return Response.status(Response.Status.BAD_REQUEST).build();
-                throw new BadRequestException();
-            }
-
-            return Response
-                    .ok(getGenericEntity(getCrudFacade().listInstances(paramFromRow, paramRowCount)))
-                    .build();
-        } catch (WebApplicationException ex) {
-            throw ex;
-        } catch (Throwable ex) {
-            return Response
-                    .serverError()
-                    .entity(ExceptionDtoHelper.toDto(ex))
-                    .build();
-        }
-    }
+//    @GET
+//    @Path("list")
+//    @Produces({MimeTypes.Application.JSON, MimeTypes.Application.XML})
+//    public Response list(
+//            @QueryParam("fromRow") @DefaultValue(value = "0") String fromRow,
+//            @QueryParam("rowCount") @DefaultValue(value = "100") String rowCount
+//    ) {
+//        try {
+//            // Параметры
+//            int paramFromRow;
+//            int paramRowCount;
+//            try {
+//                paramFromRow = Integer.parseInt(fromRow);
+//                paramRowCount = Integer.parseInt(rowCount);
+//            } catch (NumberFormatException ex) {
+////                return Response.status(Response.Status.BAD_REQUEST).build();
+//                throw new BadRequestException();
+//            }
+//
+//            return Response
+//                    .ok(getGenericEntity(getCrudFacade().listInstances(paramFromRow, paramRowCount)))
+//                    .build();
+//        } catch (WebApplicationException ex) {
+//            throw ex;
+//        } catch (Throwable ex) {
+//            return Response
+//                    .serverError()
+//                    .entity(ExceptionDtoHelper.toDto(ex))
+//                    .build();
+//        }
+//    }
 
     @POST
     @Consumes({MimeTypes.Application.JSON, MimeTypes.Application.XML})
     @Produces({MimeTypes.Application.JSON, MimeTypes.Application.XML})
-    public Response createInstance(TDto instance) {
+    public Response createInstance(Dto instance) {
         try {
-            TDto result = getCrudFacade().createInstance(instance);
+            Dto result = getCrudFacade().createInstance(instance);
 
             URI uri = getUriInfo()
                     .getAbsolutePathBuilder()
@@ -126,7 +125,7 @@ public abstract class BaseCrudController<TDto, TKey> {
     @Consumes({MimeTypes.Application.JSON, MimeTypes.Application.XML})
     @Produces({MimeTypes.Application.JSON, MimeTypes.Application.XML})
     public Response editInstance(
-            @PathParam("id") String id, TDto instance) {
+            @PathParam("id") String id, Dto instance) {
         try {
             // Параметры
             if (instance == null || StringUtils.isBlank(id)) {
@@ -172,31 +171,11 @@ public abstract class BaseCrudController<TDto, TKey> {
         }
     }
 
-    protected Response getInstanceByKeySimpleFunc(String key) {
-        try {
-            // Обработка
-            TDto result = getCrudFacade().getInstanceByKey(toFacadeKey(key));
-
-            // Не нашли
-            if (result == null)
-                return Response.noContent().build();
-
-            return Response.ok(result).build();
-        } catch (Throwable ex) {
-            return Response
-                    .serverError()
-                    .entity(ExceptionDtoHelper.toDto(ex))
-                    .build();
-        }
-    }
-
-    protected abstract BaseCrudFacade<TDto, TKey> getCrudFacade();
+    protected abstract CrudFacade<Dto> getCrudFacade();
 
     protected abstract UriInfo getUriInfo();
 
-    protected abstract TKey toFacadeKey(Object... key);
+    protected abstract Long getDtoId(Dto instance);
 
-    protected abstract Long getDtoId(TDto instance);
-
-    protected abstract GenericEntity<List<TDto>> getGenericEntity(List<TDto> list);
+    protected abstract GenericEntity<List<Dto>> getGenericEntity(List<Dto> list);
 }

@@ -8,6 +8,8 @@
     <version>1.0</version>
     <packaging>pom</packaging>
     <modules>
+        <module>audit-service</module>
+        <module>audit-dto</module>
     </modules>
     <properties>
         <crm.platform.baseDir>${project.basedir}/../..</crm.platform.baseDir>

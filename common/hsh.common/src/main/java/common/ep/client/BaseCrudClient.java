@@ -21,10 +21,9 @@ import java.util.logging.Logger;
  * Базовая реализация Crud клиента
  *
  * @param <Dto> dto class
- * @param <Key> key class
  * @author elf
  */
-public abstract class BaseCrudClient<Dto, Key> extends BaseClient implements CrudClient<Dto, Key> {
+public abstract class BaseCrudClient<Dto> extends BaseClient implements CrudClient<Dto> {
     private static final String TEMPLATE_AUTH_VALUE = "Bearer %s";
 
     private final Class<? extends Dto> dtoClass;
@@ -48,7 +47,7 @@ public abstract class BaseCrudClient<Dto, Key> extends BaseClient implements Cru
     }
 
     @Override
-    public Dto getInstance(Long id) throws RsException {
+    public Dto getInstance(Object id) throws RsException {
         String responseBody = null;
         try (Response resp = buildRequest(target.path(PATH_GET_INSTANCE).resolveTemplate(PATH_PARAM_ID, id))
                 .accept(getMediaType())
@@ -76,33 +75,6 @@ public abstract class BaseCrudClient<Dto, Key> extends BaseClient implements Cru
     }
 
     @Override
-    public Dto getInstanceByKey(Key key) throws RsException {
-        String responseBody = null;
-        try (Response resp = buildRequest(target.path(PATH_GET_INSTANCE_BY_KEY).queryParam(QUERY_PARAM_KEY, key))
-                .accept(getMediaType())
-                .get()) {
-            // Фиксируем буфер
-            resp.bufferEntity();
-            responseBody = resp.readEntity(String.class);
-            // Проверки
-            // Если ошибка
-            if (resp.getStatus() >= Response.Status.BAD_REQUEST.getStatusCode())
-                throw new RsException(Messages.REMOTE_EXCEPTION,
-                        resp.getStatus(),
-                        resp.readEntity(ExceptionDto.class));
-            // Если ничего
-            if (resp.getStatus() == Response.Status.NO_CONTENT.getStatusCode())
-                return null;
-
-            return resp.readEntity(dtoClass);
-        } catch (Throwable ex) {
-            logger.log(Level.SEVERE, "error getInstanceByKey", ex);
-            logger.log(Level.INFO, StringUtils.formatNull("response body [%s]", responseBody));
-            throw ex;
-        }
-    }
-
-    @Override
     public List<Dto> listAllInstances() throws RsException {
         String responseBody = null;
         try (Response resp = buildRequest(target.path(PATH_LIST_ALL))
@@ -121,32 +93,6 @@ public abstract class BaseCrudClient<Dto, Key> extends BaseClient implements Cru
             return resp.readEntity(getListGenericType());
         } catch (Throwable ex) {
             logger.log(Level.SEVERE, "error listAllInstances", ex);
-            logger.log(Level.INFO, StringUtils.formatNull("response body [%s]", responseBody));
-            throw ex;
-        }
-    }
-
-    @Override
-    public List<Dto> listInstances(int fromRow, int rowCount) throws RsException {
-        String responseBody = null;
-        try (Response resp = buildRequest(target.path(PATH_LIST)
-                .queryParam(QUERY_PARAM_FROM_ROW, fromRow)
-                .queryParam(QUERY_PARAM_ROW_COUNT, rowCount))
-                .accept(getMediaType())
-                .get()) {
-            // Фиксируем буфер
-            resp.bufferEntity();
-            responseBody = resp.readEntity(String.class);
-            // Проверки
-            // Если ошибка
-            if (resp.getStatus() >= Response.Status.BAD_REQUEST.getStatusCode())
-                throw new RsException(Messages.REMOTE_EXCEPTION,
-                        resp.getStatus(),
-                        resp.readEntity(ExceptionDto.class));
-
-            return resp.readEntity(getListGenericType());
-        } catch (Throwable ex) {
-            logger.log(Level.SEVERE, "error listInstances", ex);
             logger.log(Level.INFO, StringUtils.formatNull("response body [%s]", responseBody));
             throw ex;
         }
@@ -205,7 +151,7 @@ public abstract class BaseCrudClient<Dto, Key> extends BaseClient implements Cru
     }
 
     @Override
-    public void removeInstance(Long id) throws RsException {
+    public void removeInstance(Object id) throws RsException {
         String responseBody = null;
         try (Response resp = buildRequest(target.path(PATH_REMOVE_INSTANCE).resolveTemplate(PATH_PARAM_ID, id))
                 .accept(getMediaType())
@@ -227,38 +173,28 @@ public abstract class BaseCrudClient<Dto, Key> extends BaseClient implements Cru
     }
 
     @Override
-    public Future<Dto> getInstanceAsync(Long id) {
-        return getExecutor().submit(() -> this.getInstance(id));
-    }
-
-    @Override
-    public Future<Dto> getInstanceByKeyAsync(Key key) {
-        return getExecutor().submit(() -> this.getInstanceByKey(key));
+    public Future<Dto> getInstanceAsync(Object id) {
+        return getExecutorService().submit(() -> this.getInstance(id));
     }
 
     @Override
     public Future<List<Dto>> listAllAsync() {
-        return getExecutor().submit(this::listAllInstances);
-    }
-
-    @Override
-    public Future<List<Dto>> listInstancesAsync(int fromRow, int rowCount) {
-        return getExecutor().submit(() -> this.listInstances(fromRow, rowCount));
+        return getExecutorService().submit(this::listAllInstances);
     }
 
     @Override
     public Future<Dto> createInstanceAsync(Dto instance) {
-        return getExecutor().submit(() -> this.createInstance(instance));
+        return getExecutorService().submit(() -> this.createInstance(instance));
     }
 
     @Override
     public Future<Dto> editInstanceAsync(Dto instance) {
-        return getExecutor().submit(() -> this.editInstance(instance));
+        return getExecutorService().submit(() -> this.editInstance(instance));
     }
 
     @Override
-    public Future<?> removeInstanceAsync(Long id) {
-        return getExecutor().submit(() -> {
+    public Future<?> removeInstanceAsync(Object id) {
+        return getExecutorService().submit(() -> {
             try {
                 this.removeInstance(id);
             } catch (RsException ex) {
@@ -267,7 +203,7 @@ public abstract class BaseCrudClient<Dto, Key> extends BaseClient implements Cru
         });
     }
 
-    public CrudClient<Dto, Key> withJwtToken(String jwtToken) {
+    public CrudClient<Dto> withJwtToken(String jwtToken) {
         setJwtToken(jwtToken);
         return this;
     }

@@ -35,6 +35,7 @@ public class XmlSerializerHelper {
         return deserializeOrThrow(new StringReader(data), clazz);
     }
 
+    @SuppressWarnings("unchecked")
     public static <T> T deserializeOrThrow(Reader reader, Class<T> clazz) throws JAXBException {
         JAXBContext ctx = JAXBContext.newInstance(clazz);
         Unmarshaller um = ctx.createUnmarshaller();

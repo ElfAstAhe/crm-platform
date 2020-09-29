@@ -36,6 +36,8 @@ public class HttpUtils {
             throw new IllegalArgumentException(StringUtils.EMPTY);
 
         String reqUri = request.getRequestURI();
-        return request.getRequestURL().toString().replaceFirst(reqUri, "");
+        return request.getRequestURL()
+                .toString()
+                .replaceFirst(reqUri, "");
     }
 }

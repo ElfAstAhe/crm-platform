@@ -36,7 +36,7 @@ public class DaoHelper<Entity extends IdEntity> {
                     String key = f.getKey();
                     Object value = f.getValue();
                     if (!Objects.equals(value, StringUtils.EMPTY)) {
-                        Path<?> pathFilter = null;  // <==== getPathInternal
+                        Path<?> pathFilter = createPathConditioning(root, joins, key);  // <==== getPathInternal
                         Predicate customPredicate = createCustomPredicate(cb, pathFilter, root, joins, key, value);
                         if (customPredicate != null)
                             return customPredicate;

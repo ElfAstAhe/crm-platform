@@ -1,6 +1,7 @@
 package common.bll.repository;
 
 import common.bll.model.BusinessModel;
+import common.bll.model.BusinessModelKey;
 
 import java.util.List;
 import java.util.concurrent.Future;
@@ -8,66 +9,56 @@ import java.util.concurrent.Future;
 /**
  * Интерфейс crud репозитория
  * @author elf
- * @param <TModel> модель
- * @param <TKey> ключ
- * @param <TListConditions> условия отбора
+ * @param <Model> модель
+ * @param <Key> ключ
  */
 public interface CrudRepository<
-        TModel extends BusinessModel,
-        TKey,
-        TListConditions extends ListConditions> {
+        Model extends BusinessModel<? extends BusinessModelKey>,
+        Key extends BusinessModelKey> {
     /**
      * Получить экземпляр по id
      * @param id УИЭ
      * @return модель
      */
-    Future<TModel> findAsync(TId id);
-    TModel find(TId id);
+    Future<Model> findAsync(Object id);
+    Model find(Object id);
     
     /**
      * Получить экземпляр по коду (уникальный ключ)
      * @param key ключ
      * @return модель
      */
-    Future<TModel> findByKeyAsync(TKey key);
-    TModel findByKey(TKey key);
+    Future<Model> findByKeyAsync(Key key);
+    Model findByKey(Key key);
 
     /**
      * Создать экземпляр
      * @param model модель
      * @return модель
      */
-    Future<TModel> createAsync(TModel model);
-    TModel create(TModel model);
+    Future<Model> createAsync(Model model);
+    Model create(Model model);
     
     /**
      * Изменить экземпляр
      * @param model модель
      * @return модель
      */
-    Future<TModel> editAsync(TModel model);
-    TModel edit(TModel model);
+    Future<Model> editAsync(Model model);
+    Model edit(Model model);
     
     /**
      * Физически удалить экземпляр
      * @param id УИЭ
      * @return 
      */
-    void removeAsync(TId id);
-    void remove(TId id);
+    void removeAsync(Object id);
+    void remove(Object id);
     
     /**
      * Получить список всех экземпляров
      * @return 
      */
-    Future<List<TModel>> listAllAsync();
-    List<TModel> listAll();
-
-    /**
-     * Получить список экземпляров по критерию
-     * @param conditions
-     * @return 
-     */
-    Future<List<TModel>> listAsync(TListConditions conditions);
-    List<TModel> list(TListConditions conditions);
+    Future<List<Model>> listAllAsync();
+    List<Model> listAll();
 }

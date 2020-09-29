@@ -31,21 +31,14 @@ public final class ExceptionDto implements Serializable{
     @JsonbProperty(value = "stackTrace")
     private String stackTrace;
 
+    @XmlElement(name = "cause")
+    @JsonbProperty(value = "cause")
+    private ExceptionDto cause;
+
     // КОНСТРУКТОРЫ и ДЕСТРУКТОРЫ
     // По умолчанию
     public ExceptionDto(){
         // default constructor
-    }
-    
-    // Полное заполнение
-    public ExceptionDto(
-            String exception,
-            String message,
-            String stackTrace
-    ) {
-        this.exception = exception;
-        this.message = message;
-        this.stackTrace = stackTrace;
     }
     
     public String getException() {
@@ -70,5 +63,13 @@ public final class ExceptionDto implements Serializable{
 
     public void setStackTrace(String stackTrace) {
         this.stackTrace = stackTrace;
+    }
+
+    public ExceptionDto getCause() {
+        return cause;
+    }
+
+    public void setCause(ExceptionDto cause) {
+        this.cause = cause;
     }
 }

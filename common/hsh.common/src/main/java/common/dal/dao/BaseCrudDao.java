@@ -27,7 +27,7 @@ public abstract class BaseCrudDao<Entity extends IdEntity, Key extends Serializa
     private final Class<Entity> entityClass;
     private final DaoHelper<Entity> daoHelper;
 
-    public BaseCrudDao(Class<Entity> entityClass) {
+    public BaseCrudDao(Class<Entity> entityClass)          {
         this(entityClass, new DaoHelper<>(entityClass, false));
     }
 

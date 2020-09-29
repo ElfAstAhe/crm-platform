@@ -30,24 +30,24 @@ public abstract class BaseClient implements AutoCloseable {
 
     private final Client client;
     private String mediaType;
-    private ExecutorService executor;
+    private ExecutorService executorService;
 
     public BaseClient(
             long connectTimeoutMilliseconds,
             long readTimeoutMilliseconds,
             String mediaType,
             HostnameVerifier sslHostnameVerifier,
-            ExecutorService executor) {
+            ExecutorService executorService) {
         ClientBuilder cb = ClientBuilder.newBuilder()
                 .connectTimeout(connectTimeoutMilliseconds, TimeUnit.MILLISECONDS)
                 .readTimeout(readTimeoutMilliseconds, TimeUnit.MILLISECONDS)
-                .executorService(executor)
+                .executorService(executorService)
                 .hostnameVerifier(sslHostnameVerifier != null ?
                         sslHostnameVerifier :
                         this::defaultHostnameVerifier);
         client = cb.build();
         this.mediaType = mediaType;
-        this.executor = executor;
+        this.executorService = executorService;
     }
 
     @Override
@@ -63,16 +63,16 @@ public abstract class BaseClient implements AutoCloseable {
         return mediaType;
     }
 
-    public ExecutorService getExecutor() {
-        return executor;
+    public ExecutorService getExecutorService() {
+        return executorService;
     }
 
     public void setMediaType(String mediaType) {
         this.mediaType = mediaType;
     }
 
-    public void setExecutor(ExecutorService executor) {
-        this.executor = executor;
+    public void setExecutorService(ExecutorService executorService) {
+        this.executorService = executorService;
     }
 
     protected boolean defaultHostnameVerifier(String string, SSLSession sslSession) {

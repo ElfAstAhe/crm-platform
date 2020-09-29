@@ -1,6 +1,7 @@
 package common.dto.helper;
 
 import common.dto.ExceptionDto;
+import common.dto.builder.ExceptionDtoBuilder;
 import common.web.MimeTypes;
 import org.apache.commons.lang3.StringUtils;
 
@@ -37,11 +38,12 @@ public class ExceptionDtoHelper {
     public static ExceptionDto toDto(Throwable ex) {
         if (ex == null)
             return null;
-        
-        return new ExceptionDto(
-                ex.getClass().getName(),
-                ex.getMessage(),
-                getStackTrace(ex));
+
+        return ExceptionDtoBuilder.get()
+                .setException(ex.getClass().getName())
+                .setMessage(ex.getMessage())
+                .setStackTrace(getStackTrace(ex))
+                .build();
     }
 
     /**

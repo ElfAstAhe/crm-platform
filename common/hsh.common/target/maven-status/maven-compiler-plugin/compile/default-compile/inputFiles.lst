@@ -1,6 +1,7 @@
 /home/elf/work/crm-platform/common/hsh.common/src/main/java/common/bll/model/SerializerFormatEnum.java
 /home/elf/work/crm-platform/common/hsh.common/src/main/java/common/ep/mapper/RequestEntityTooLargeExceptionMapper.java
 /home/elf/work/crm-platform/common/hsh.common/src/main/java/common/bll/provider/FilteredDataProvider.java
+/home/elf/work/crm-platform/common/hsh.common/src/main/java/common/dto/builder/ExceptionDtoBuilder.java
 /home/elf/work/crm-platform/common/hsh.common/src/main/java/common/ep/mapper/NotSupportedExceptionMapper.java
 /home/elf/work/crm-platform/common/hsh.common/src/main/java/common/dal/entity/MarkDelete.java
 /home/elf/work/crm-platform/common/hsh.common/src/main/java/common/ep/mapper/BadRequestExceptionMapper.java
@@ -14,6 +15,7 @@
 /home/elf/work/crm-platform/common/hsh.common/src/main/java/common/util/serialization/XmlSerializerHelper.java
 /home/elf/work/crm-platform/common/hsh.common/src/main/java/common/ep/controller/BaseCrudController.java
 /home/elf/work/crm-platform/common/hsh.common/src/main/java/common/exceptions/ep/ExceptionHelper.java
+/home/elf/work/crm-platform/common/hsh.common/src/main/java/common/ep/facade/CrudFacade.java
 /home/elf/work/crm-platform/common/hsh.common/src/main/java/common/exceptions/EpException.java
 /home/elf/work/crm-platform/common/hsh.common/src/main/java/common/dal/migration/BaseJpaMigration.java
 /home/elf/work/crm-platform/common/hsh.common/src/main/java/common/ep/listener/BaseActiveHttpRequestCountListener.java
@@ -37,7 +39,6 @@
 /home/elf/work/crm-platform/common/hsh.common/src/main/java/common/ep/mapper/ProxyAuthenticationRequiredExceptionMapper.java
 /home/elf/work/crm-platform/common/hsh.common/src/main/java/common/dal/dao/FilterParams.java
 /home/elf/work/crm-platform/common/hsh.common/src/main/java/common/dal/CommonEntityConstants.java
-/home/elf/work/crm-platform/common/hsh.common/src/main/java/common/dal/repository/BaseLastValuesRepository.java
 /home/elf/work/crm-platform/common/hsh.common/src/main/java/common/exceptions/ep/NotImplementedException.java
 /home/elf/work/crm-platform/common/hsh.common/src/main/java/common/ep/mapper/NetworkAuthenticationRequiredExceptionMapper.java
 /home/elf/work/crm-platform/common/hsh.common/src/main/java/common/ep/mapper/ResourceGoneExceptionMapper.java
@@ -50,11 +51,10 @@
 /home/elf/work/crm-platform/common/hsh.common/src/main/java/common/dal/entity/BaseMarkDelete.java
 /home/elf/work/crm-platform/common/hsh.common/src/main/java/common/exceptions/ep/RequestedRangeNotSatisfiableException.java
 /home/elf/work/crm-platform/common/hsh.common/src/main/java/common/ep/mapper/RequestUriTooLongExceptionMapper.java
-/home/elf/work/crm-platform/common/hsh.common/src/main/java/common/dal/repository/BaseCrudRepository.java
+/home/elf/work/crm-platform/common/hsh.common/src/main/java/common/dal/dao/DaoHelper.java
 /home/elf/work/crm-platform/common/hsh.common/src/main/java/common/util/cryptography/digest/DigestUtil.java
 /home/elf/work/crm-platform/common/hsh.common/src/main/java/common/security/Constants.java
 /home/elf/work/crm-platform/common/hsh.common/src/main/java/common/ep/metrics/Metrics.java
-/home/elf/work/crm-platform/common/hsh.common/src/main/java/common/bll/repository/BaseListConditions.java
 /home/elf/work/crm-platform/common/hsh.common/src/main/java/common/dal/converter/TwoLinksConverter.java
 /home/elf/work/crm-platform/common/hsh.common/src/main/java/common/app/AppInitializer.java
 /home/elf/work/crm-platform/common/hsh.common/src/main/java/common/exceptions/ep/GatewayTimeoutException.java
@@ -107,7 +107,6 @@
 /home/elf/work/crm-platform/common/hsh.common/src/main/java/common/ep/mapper/NotFoundExceptionMapper.java
 /home/elf/work/crm-platform/common/hsh.common/src/main/java/common/exceptions/ep/PreconditionRequiredException.java
 /home/elf/work/crm-platform/common/hsh.common/src/main/java/common/web/MimeTypes.java
-/home/elf/work/crm-platform/common/hsh.common/src/main/java/common/ep/facade/BaseCrudFacade.java
 /home/elf/work/crm-platform/common/hsh.common/src/main/java/common/ep/mapper/PaymentRequiredExceptionMapper.java
 /home/elf/work/crm-platform/common/hsh.common/src/main/java/common/ep/mapper/NotAllowedExceptionMapper.java
 /home/elf/work/crm-platform/common/hsh.common/src/main/java/common/ep/mapper/InternalServerErrorExceptionMapper.java

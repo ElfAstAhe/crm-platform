@@ -13,11 +13,11 @@ import common.dto.ExceptionDto;
  */
 public class RsException extends Exception{
     
-    private int statusCode;
-    private String remoteException;
-    private String remoteMessage;
-    private String remoteStackTrace;
-    private final String TO_STRING_FORMAT = "%s, remote: exception [%s] message [%s] stack trace [%s]";
+    private final int statusCode;
+    private final String remoteException;
+    private final String remoteMessage;
+    private final String remoteStackTrace;
+    private static final String TO_STRING_FORMAT = "%s, remote: exception [%s] message [%s] stack trace [%s]";
     
     public RsException(String message,
                        int statusCode,
