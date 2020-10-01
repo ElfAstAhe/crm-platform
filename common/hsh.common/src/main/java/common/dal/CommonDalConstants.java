@@ -4,7 +4,7 @@ package common.dal;
  *
  * @author elf
  */
-public class CommonEntityConstants {
+public class CommonDalConstants {
     // Схема
     public static final String SCHEMA_NAME = "public";
     // Сиквенсы

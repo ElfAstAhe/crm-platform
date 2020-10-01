@@ -39,7 +39,6 @@
 /home/elf/work/crm-platform/common/hsh.common/src/main/java/common/ep/controller/BaseSimpleMetricsController.java
 /home/elf/work/crm-platform/common/hsh.common/src/main/java/common/ep/mapper/ProxyAuthenticationRequiredExceptionMapper.java
 /home/elf/work/crm-platform/common/hsh.common/src/main/java/common/dal/dao/FilterParams.java
-/home/elf/work/crm-platform/common/hsh.common/src/main/java/common/dal/CommonEntityConstants.java
 /home/elf/work/crm-platform/common/hsh.common/src/main/java/common/exceptions/ep/NotImplementedException.java
 /home/elf/work/crm-platform/common/hsh.common/src/main/java/common/ep/mapper/NetworkAuthenticationRequiredExceptionMapper.java
 /home/elf/work/crm-platform/common/hsh.common/src/main/java/common/ep/mapper/ResourceGoneExceptionMapper.java
@@ -54,6 +53,7 @@
 /home/elf/work/crm-platform/common/hsh.common/src/main/java/common/ep/mapper/RequestUriTooLongExceptionMapper.java
 /home/elf/work/crm-platform/common/hsh.common/src/main/java/common/dal/dao/DaoHelper.java
 /home/elf/work/crm-platform/common/hsh.common/src/main/java/common/util/cryptography/digest/DigestUtil.java
+/home/elf/work/crm-platform/common/hsh.common/src/main/java/common/dal/CommonDalConstants.java
 /home/elf/work/crm-platform/common/hsh.common/src/main/java/common/util/audit/LinkFieldInfo.java
 /home/elf/work/crm-platform/common/hsh.common/src/main/java/common/security/Constants.java
 /home/elf/work/crm-platform/common/hsh.common/src/main/java/common/ep/metrics/Metrics.java

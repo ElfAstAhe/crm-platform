@@ -1,6 +1,6 @@
 package common.dal.entity;
 
-import common.dal.CommonEntityConstants;
+import common.dal.CommonDalConstants;
 import common.util.StringUtils;
 
 import javax.persistence.Basic;
@@ -10,7 +10,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
 import javax.persistence.SequenceGenerator;
-import java.io.Serializable;
 import java.util.Objects;
 import java.util.StringJoiner;
 
@@ -25,12 +24,12 @@ public abstract class BaseIdEntity implements IdEntity {
     @Basic(optional = false)
     @Column(name = "id", nullable = false)
     @GeneratedValue(
-            generator = CommonEntityConstants.GENERATOR_OBJECT,
+            generator = CommonDalConstants.GENERATOR_OBJECT,
             strategy = GenerationType.SEQUENCE)
     @SequenceGenerator(
-            name = CommonEntityConstants.GENERATOR_OBJECT,
-            sequenceName = CommonEntityConstants.SEQUENCE_OBJECTS,
-            schema = CommonEntityConstants.SCHEMA_NAME,
+            name = CommonDalConstants.GENERATOR_OBJECT,
+            sequenceName = CommonDalConstants.SEQUENCE_OBJECTS,
+            schema = CommonDalConstants.SCHEMA_NAME,
             allocationSize = 1)
     private Long id;
 
