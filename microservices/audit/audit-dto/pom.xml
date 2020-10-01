@@ -11,6 +11,11 @@
 
     <dependencies>
         <dependency>
+            <groupId>org.hsh</groupId>
+            <artifactId>hsh.common</artifactId>
+            <version>${hsh.common.version}</version>
+        </dependency>
+        <dependency>
             <groupId>com.migesok</groupId>
             <artifactId>jaxb-java-time-adapters</artifactId>
             <version>1.1.3</version>

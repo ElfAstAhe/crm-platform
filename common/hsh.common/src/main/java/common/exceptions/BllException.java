@@ -10,7 +10,6 @@ package common.exceptions;
  * @author elf
  */
 public class BllException extends Exception{
-
     public BllException(String message) {
         super(message);
     }

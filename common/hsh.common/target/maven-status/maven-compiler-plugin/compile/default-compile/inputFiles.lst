@@ -28,6 +28,7 @@
 /home/elf/work/crm-platform/common/hsh.common/src/main/java/common/ep/filter/BaseTotalHttpRequestCountFilter.java
 /home/elf/work/crm-platform/common/hsh.common/src/main/java/common/exceptions/ep/ExpectationFailedException.java
 /home/elf/work/crm-platform/common/hsh.common/src/main/java/common/bll/repository/LastValuesRepository.java
+/home/elf/work/crm-platform/common/hsh.common/src/main/java/common/util/audit/FieldInfo.java
 /home/elf/work/crm-platform/common/hsh.common/src/main/java/common/dal/dao/FilterClassTypeEnum.java
 /home/elf/work/crm-platform/common/hsh.common/src/main/java/common/dto/builder/BaseBuilder.java
 /home/elf/work/crm-platform/common/hsh.common/src/main/java/common/dal/migration/Migrator.java
@@ -53,14 +54,17 @@
 /home/elf/work/crm-platform/common/hsh.common/src/main/java/common/ep/mapper/RequestUriTooLongExceptionMapper.java
 /home/elf/work/crm-platform/common/hsh.common/src/main/java/common/dal/dao/DaoHelper.java
 /home/elf/work/crm-platform/common/hsh.common/src/main/java/common/util/cryptography/digest/DigestUtil.java
+/home/elf/work/crm-platform/common/hsh.common/src/main/java/common/util/audit/LinkFieldInfo.java
 /home/elf/work/crm-platform/common/hsh.common/src/main/java/common/security/Constants.java
 /home/elf/work/crm-platform/common/hsh.common/src/main/java/common/ep/metrics/Metrics.java
 /home/elf/work/crm-platform/common/hsh.common/src/main/java/common/dal/converter/TwoLinksConverter.java
 /home/elf/work/crm-platform/common/hsh.common/src/main/java/common/app/AppInitializer.java
 /home/elf/work/crm-platform/common/hsh.common/src/main/java/common/exceptions/ep/GatewayTimeoutException.java
+/home/elf/work/crm-platform/common/hsh.common/src/main/java/common/util/audit/AuditUtils.java
 /home/elf/work/crm-platform/common/hsh.common/src/main/java/common/dal/dao/BaseListConditions.java
 /home/elf/work/crm-platform/common/hsh.common/src/main/java/common/bll/timer/BasePeriodicTimer.java
 /home/elf/work/crm-platform/common/hsh.common/src/main/java/common/util/serialization/JsonSerializerHelper.java
+/home/elf/work/crm-platform/common/hsh.common/src/main/java/common/exceptions/audit/AuditException.java
 /home/elf/work/crm-platform/common/hsh.common/src/main/java/common/dal/converter/SimpleConverter.java
 /home/elf/work/crm-platform/common/hsh.common/src/main/java/common/ep/mapper/BadGatewayExceptionMapper.java
 /home/elf/work/crm-platform/common/hsh.common/src/main/java/common/ep/mapper/RequestTimeoutExceptionMapper.java
@@ -93,6 +97,7 @@
 /home/elf/work/crm-platform/common/hsh.common/src/main/java/common/ep/mapper/HttpVersionNotSupportedExceptionMapper.java
 /home/elf/work/crm-platform/common/hsh.common/src/main/java/common/dal/entity/IdEntity.java
 /home/elf/work/crm-platform/common/hsh.common/src/main/java/common/dal/migration/SqlMigrationHelper.java
+/home/elf/work/crm-platform/common/hsh.common/src/main/java/common/util/audit/ClassInfo.java
 /home/elf/work/crm-platform/common/hsh.common/src/main/java/common/util/cryptography/CryptoUtil.java
 /home/elf/work/crm-platform/common/hsh.common/src/main/java/common/util/cryptography/Encryptor.java
 /home/elf/work/crm-platform/common/hsh.common/src/main/java/common/bll/model/BusinessModel.java
@@ -105,6 +110,7 @@
 /home/elf/work/crm-platform/common/hsh.common/src/main/java/common/exceptions/ep/RequestEntityTooLargeException.java
 /home/elf/work/crm-platform/common/hsh.common/src/main/java/common/exceptions/ep/RequestUriTooLongException.java
 /home/elf/work/crm-platform/common/hsh.common/src/main/java/common/ep/mapper/NotFoundExceptionMapper.java
+/home/elf/work/crm-platform/common/hsh.common/src/main/java/common/util/audit/ObjectId.java
 /home/elf/work/crm-platform/common/hsh.common/src/main/java/common/exceptions/ep/PreconditionRequiredException.java
 /home/elf/work/crm-platform/common/hsh.common/src/main/java/common/web/MimeTypes.java
 /home/elf/work/crm-platform/common/hsh.common/src/main/java/common/ep/mapper/PaymentRequiredExceptionMapper.java
