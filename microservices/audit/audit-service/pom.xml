@@ -25,6 +25,11 @@
 <!--            <version>${decstra.audit.dto.version}</version>-->
 <!--        </dependency>-->
         <dependency>
+            <groupId>org.hsh</groupId>
+            <artifactId>audit-dto</artifactId>
+            <version>${crm.platform.audit.dto.version}</version>
+        </dependency>
+        <dependency>
             <groupId>org.flywaydb</groupId>
             <artifactId>flyway-core</artifactId>
             <version>6.4.2</version>

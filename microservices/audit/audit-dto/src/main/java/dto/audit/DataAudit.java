@@ -18,6 +18,10 @@ import java.util.List;
 public class DataAudit implements Serializable {
     private static final long serialVersionUID = 1;
 
+    @XmlElement(name = "id")
+    @JsonbProperty(value = "id")
+    private Long id;
+
     @XmlJavaTypeAdapter(OffsetDateTimeXmlAdapter.class)
     @XmlElement(name = "date")
     @JsonbProperty(value = "date")
@@ -62,6 +66,14 @@ public class DataAudit implements Serializable {
 
     public DataAudit() {
         // default constructor
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public OffsetDateTime getDate() {
