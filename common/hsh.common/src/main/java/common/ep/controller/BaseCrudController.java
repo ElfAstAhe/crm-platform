@@ -17,30 +17,23 @@ import java.util.List;
  * @param <Dto>
  */
 public abstract class BaseCrudController<Dto> {
-
     @GET
     @Path("{id}")
     @Produces({MimeTypes.Application.JSON, MimeTypes.Application.XML})
     public Response getInstance(
             @PathParam("id") String id) {
         try {
-            // Параметры
-            long _id;
-            try {
-                _id = Long.parseUnsignedLong(id);
-            } catch (NumberFormatException ex) {
-//                return Response.status(Response.Status.BAD_REQUEST).build();
-                throw new BadRequestException();
-            }
-
+            
+            
             // Обработка
-            Dto result = getCrudFacade().getInstance(_id);
+            Dto result = getCrudFacade().getInstance(getIdParam(id));
 
             // Не нашли
             if (result == null)
                 return Response.noContent().build();
 
-            return Response.ok(result).build();
+            return Response.ok(result)
+                    .build();
         } catch (WebApplicationException ex) {
             throw ex;
         } catch (Throwable ex) {
@@ -106,12 +99,13 @@ public abstract class BaseCrudController<Dto> {
         try {
             Dto result = getCrudFacade().createInstance(instance);
 
-            URI uri = getUriInfo()
-                    .getAbsolutePathBuilder()
+            URI uri = getUriInfo().getAbsolutePathBuilder()
                     .path(getDtoId(result).toString())
                     .build((Object) null);
 
-            return Response.created(uri).entity(result).build();
+            return Response.created(uri)
+                    .entity(result)
+                    .build();
         } catch (Throwable ex) {
             return Response
                     .serverError()
@@ -132,7 +126,8 @@ public abstract class BaseCrudController<Dto> {
                 throw new BadRequestException();
             }
 
-            return Response.ok(getCrudFacade().editInstance(getDtoId(instance), instance)).build();
+            return Response.ok(getCrudFacade().editInstance(getDtoId(instance), instance))
+                    .build();
         } catch (WebApplicationException ex) {
             throw ex;
         } catch (Throwable ex) {
@@ -149,18 +144,11 @@ public abstract class BaseCrudController<Dto> {
     public Response removeInstance(
             @PathParam("id") String id) {
         try {
-            // Параметры
-            long paramId;
-            try {
-                paramId = Long.parseUnsignedLong(id);
-            } catch (NumberFormatException ex) {
-//                return Response.status(Response.Status.BAD_REQUEST).build();
-                throw new BadRequestException();
-            }
-
             // Удаление
-            getCrudFacade().removeInstance(paramId);
-            return Response.noContent().build();
+            getCrudFacade().removeInstance(getIdParam(id));
+
+            return Response.noContent()
+                    .build();
         } catch (WebApplicationException ex) {
             throw ex;
         } catch (Throwable ex) {
@@ -178,4 +166,12 @@ public abstract class BaseCrudController<Dto> {
     protected abstract Long getDtoId(Dto instance);
 
     protected abstract GenericEntity<List<Dto>> getGenericEntity(List<Dto> list);
+
+    private Long getIdParam(String id) {
+        try {
+            return Long.parseUnsignedLong(id);
+        } catch (NumberFormatException ex) {
+            throw new BadRequestException();
+        }
+    }
 }
