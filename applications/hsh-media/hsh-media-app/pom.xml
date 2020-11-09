@@ -10,7 +10,7 @@
     <description>hsh media app</description>
 
     <properties>
-        <decstra.baseDir>${project.basedir}/../../..</decstra.baseDir>
+        <decstra.baseDir>${project.basedir}/../..</decstra.baseDir>
     </properties>
 
     <dependencies>
