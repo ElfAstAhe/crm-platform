@@ -4,18 +4,22 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>applications</artifactId>
+    <artifactId>hsh-media</artifactId>
     <version>1.0</version>
     <modules>
-        <module>test-app-video-player</module>
-        <module>hsh-media</module>
+        <module>hsh-media-app</module>
+        <module>hsh-media-files</module>
     </modules>
     <packaging>pom</packaging>
     <properties>
         <crm.platform.baseDir>${project.basedir}/..</crm.platform.baseDir>
+        <hsh-media-app-version>1.0.0${crm.platform.version.suffix}</hsh-media-app-version>
+        <hsh-media-files-service-version>1.0.0${crm.platform.version.suffix}</hsh-media-files-service-version>
+        <hsh-media-files-dto-version>1.0.0${crm.platform.version.suffix}</hsh-media-files-dto-version>
+        <hsh-media-files-client-version>1.0.0${crm.platform.version.suffix}</hsh-media-files-client-version>
     </properties>
     <parent>
-        <artifactId>crm-platform</artifactId>
+        <artifactId>applications</artifactId>
         <groupId>org.hsh</groupId>
         <version>1.0</version>
         <relativePath>../pom.xml</relativePath>

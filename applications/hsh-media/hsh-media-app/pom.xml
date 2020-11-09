@@ -4,10 +4,10 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>test-app-video-player</artifactId>
-    <version>1.0</version>
+    <artifactId>hsh-media-app</artifactId>
+    <version>${hsh-media-app-version}</version>
     <packaging>war</packaging>
-    <description>Test web video player app</description>
+    <description>hsh media app</description>
 
     <properties>
         <decstra.baseDir>${project.basedir}/../../..</decstra.baseDir>
@@ -20,19 +20,19 @@
             <version>3.9</version>
         </dependency>
         <!-- https://mvnrepository.com/artifact/org.primefaces/primefaces -->
-<!--
         <dependency>
             <groupId>org.primefaces</groupId>
             <artifactId>primefaces</artifactId>
             <version>8.0</version>
         </dependency>
-        -->
         <!-- https://mvnrepository.com/artifact/net.bootsfaces/bootsfaces -->
+<!--
         <dependency>
             <groupId>net.bootsfaces</groupId>
             <artifactId>bootsfaces</artifactId>
             <version>1.5.0</version>
         </dependency>
+        -->
         <!-- https://mvnrepository.com/artifact/org.omnifaces/omnifaces -->
         <dependency>
             <groupId>org.omnifaces</groupId>
@@ -58,7 +58,7 @@
     <parent>
         <groupId>org.hsh</groupId>
         <version>1.0</version>
-        <artifactId>applications</artifactId>
+        <artifactId>hsh-media</artifactId>
         <relativePath>../pom.xml</relativePath>
     </parent>
 </project>
