@@ -13,6 +13,9 @@ import java.nio.charset.StandardCharsets;
  * @author elf
  */
 public class XmlSerializerHelper {
+    private XmlSerializerHelper() {
+        // hide constructor
+    }
 
     public static String serializeOrThrow(Object source) throws JAXBException {
         JAXBContext ctx = JAXBContext.newInstance(source.getClass());
@@ -68,5 +71,10 @@ public class XmlSerializerHelper {
         } catch(Exception ex) {
             return null;
         }
+    }
+
+    @SuppressWarnings("unchecked")
+    public static <T> T clone(T instance) {
+        return (T) deserialize(serialize(instance), instance.getClass());
     }
 }

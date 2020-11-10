@@ -116,6 +116,7 @@
 /home/elf/work/crm-platform/common/hsh.common/src/main/java/common/ep/mapper/PaymentRequiredExceptionMapper.java
 /home/elf/work/crm-platform/common/hsh.common/src/main/java/common/ep/mapper/NotAllowedExceptionMapper.java
 /home/elf/work/crm-platform/common/hsh.common/src/main/java/common/ep/mapper/InternalServerErrorExceptionMapper.java
+/home/elf/work/crm-platform/common/hsh.common/src/main/java/common/bll/timer/BaseTimer.java
 /home/elf/work/crm-platform/common/hsh.common/src/main/java/common/dto/HealthStatus.java
 /home/elf/work/crm-platform/common/hsh.common/src/main/java/common/exceptions/ep/TooManyRequestsException.java
 /home/elf/work/crm-platform/common/hsh.common/src/main/java/common/util/collections/ReverseIterator.java

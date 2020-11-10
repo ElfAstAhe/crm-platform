@@ -9,6 +9,10 @@ import javax.json.bind.JsonbBuilder;
  * @author elf
  */
 public class JsonSerializerHelper {
+    private JsonSerializerHelper() {
+        // hide constructor
+    }
+
     public static String serialize(Object source) {
         Jsonb builder = JsonbBuilder.create();
         return builder.toJson(source);
@@ -24,7 +28,8 @@ public class JsonSerializerHelper {
         return builder.fromJson(data, clazz);
     }
 
-    private JsonSerializerHelper() {
-        // hide constructor
+    @SuppressWarnings("unchecked")
+    public static <T> T clone(Object instance) {
+        return (T) deserialize(serialize(instance), instance.getClass());
     }
 }
