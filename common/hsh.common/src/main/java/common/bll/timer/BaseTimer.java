@@ -9,8 +9,11 @@ import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+/**
+ * base periodic or scheduled timer service
+ */
 public abstract class BaseTimer implements TimedObject {
-    protected static final long WAIT_TIME = 500L;
+    protected static final long WAIT_TIME_MILLIS = DateUtils.MILLIS_PER_SECOND;
     protected static final long DEFAULT_START_DELAY_MILLIS = 5L * DateUtils.MILLIS_PER_SECOND;
     protected static final long DEFAULT_PERIODIC_INTERVAL_MILLIS = 5 * DateUtils.MILLIS_PER_MINUTE;
 
@@ -143,9 +146,9 @@ public abstract class BaseTimer implements TimedObject {
      */
     @SuppressWarnings("BusyWait")
     protected void waitForStop() {
-        while (isTimerStarted() && isEventFired())
+        while (isTimerStarted() || isEventFired() || isTaskExecuting())
             try {
-                Thread.sleep(WAIT_TIME);
+                Thread.sleep(WAIT_TIME_MILLIS);
             } catch (Exception ex) {
                 // nothing
             }
