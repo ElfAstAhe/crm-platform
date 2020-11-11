@@ -26,6 +26,11 @@
         <!--        </dependency>-->
         <dependency>
             <groupId>org.hsh</groupId>
+            <artifactId>hsh-media-files-dto</artifactId>
+            <version>${hsh-media-files-dto-version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.hsh</groupId>
             <artifactId>audit-dto</artifactId>
             <version>${crm.platform.audit.dto.version}</version>
         </dependency>

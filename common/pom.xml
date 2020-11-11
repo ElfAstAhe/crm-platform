@@ -9,10 +9,13 @@
     <packaging>pom</packaging>
     <modules>
         <module>hsh.common</module>
+        <module>hsh-dto-common</module>
     </modules>
+
     <properties>
         <crm.platform.baseDir>${project.basedir}/..</crm.platform.baseDir>
     </properties>
+
     <parent>
         <artifactId>crm-platform</artifactId>
         <groupId>org.hsh</groupId>

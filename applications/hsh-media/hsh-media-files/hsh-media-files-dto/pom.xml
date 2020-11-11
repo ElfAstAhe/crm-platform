@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <artifactId>hsh-media-files-dto</artifactId>
+    <version>${hsh-media-files-dto-version}</version>
+    <packaging>jar</packaging>
+    <description>audit microservice dto</description>
+
+    <properties>
+        <decstra.baseDir>${project.basedir}/../../..</decstra.baseDir>
+    </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.hsh</groupId>
+            <artifactId>hsh.common</artifactId>
+            <version>${hsh.common.version}</version>
+        </dependency>
+        <!--        <dependency>-->
+        <!--            <groupId>org.hsh</groupId>-->
+        <!--            <artifactId>audit.dto</artifactId>-->
+        <!--            <version>${decstra.audit.dto.version}</version>-->
+        <!--        </dependency>-->
+        <dependency>
+            <groupId>com.migesok</groupId>
+            <artifactId>jaxb-java-time-adapters</artifactId>
+            <version>1.1.3</version>
+        </dependency>
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter</artifactId>
+            <version>5.6.0</version>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+
+    <parent>
+        <groupId>org.hsh</groupId>
+        <version>1.0</version>
+        <artifactId>hsh-media-files</artifactId>
+        <relativePath>../pom.xml</relativePath>
+    </parent>
+</project>

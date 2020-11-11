@@ -8,6 +8,7 @@
     <version>1.0</version>
     <modules>
         <module>hsh-media-files-service</module>
+        <module>hsh-media-files-dto</module>
     </modules>
     <packaging>pom</packaging>
     <properties>
