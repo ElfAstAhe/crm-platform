@@ -1,9 +1,9 @@
 package common.dal.dao;
 
 public enum SortOrderEnum {
-    UNSORTED("asc"),
-    ASCENDING("asc"),
-    DESCENDING("desc");
+    UNSORTED(DaoUtils.SQL_ASC),
+    ASCENDING(DaoUtils.SQL_ASC),
+    DESCENDING(DaoUtils.SQL_DESC);
 
     private final String sql;
 

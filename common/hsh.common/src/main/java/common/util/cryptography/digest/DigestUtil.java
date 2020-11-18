@@ -17,6 +17,10 @@ public class DigestUtil {
     public static final String DIGEST_SHA512_224 = "SHA-512/224";
     public static final String DIGEST_SHA512_256 = "SHA-512/256";
 
+    private DigestUtil() {
+        // hide constructor
+    }
+
     public static String encodeMD2(String data) throws NoSuchAlgorithmException {
         return Base64.getEncoder()
                 .encodeToString(encodeDigest(data.getBytes(StandardCharsets.UTF_8), DIGEST_MD2));
@@ -70,9 +74,5 @@ public class DigestUtil {
     public static byte[] encodeDigest(byte[] data, String algorithm) throws NoSuchAlgorithmException {
         MessageDigest messageDigest = MessageDigest.getInstance(algorithm);
         return messageDigest.digest(data);
-    }
-
-    private DigestUtil() {
-        // hide constructor
     }
 }

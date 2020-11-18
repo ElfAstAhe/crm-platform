@@ -47,6 +47,7 @@
 /home/elf/work/crm-platform/common/hsh.common/src/main/java/common/dal/dao/DaoUtils.java
 /home/elf/work/crm-platform/common/hsh.common/src/main/java/common/exceptions/ep/PreconditionFailedException.java
 /home/elf/work/crm-platform/common/hsh.common/src/main/java/common/util/cryptography/Decryptor.java
+/home/elf/work/crm-platform/common/hsh.common/src/main/java/common/util/audit/ObjectName.java
 /home/elf/work/crm-platform/common/hsh.common/src/main/java/common/ep/mapper/GatewayTimeoutExceptionMapper.java
 /home/elf/work/crm-platform/common/hsh.common/src/main/java/common/dal/entity/BaseMarkDelete.java
 /home/elf/work/crm-platform/common/hsh.common/src/main/java/common/exceptions/ep/RequestedRangeNotSatisfiableException.java

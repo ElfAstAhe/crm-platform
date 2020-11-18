@@ -19,6 +19,10 @@ public class DesCryptoUtil implements CryptoUtil {
 
     private final String algorithm;
 
+    private DesCryptoUtil(String algorithm) {
+        this.algorithm = algorithm;
+    }
+
     public static CryptoUtil getDesInstance() {
         return new DesCryptoUtil(DesCryptoUtil.ALGORITHM_DES);
     }
@@ -67,10 +71,6 @@ public class DesCryptoUtil implements CryptoUtil {
         } catch (Throwable ex) {
             throw new CryptoUtilException("Error encrypting data", ex);
         }
-    }
-
-    private DesCryptoUtil(String algorithm) {
-        this.algorithm = algorithm;
     }
 
     private KeySpec buildKeySpec(String algorithm, byte[] key) throws InvalidKeyException, NoSuchAlgorithmException {

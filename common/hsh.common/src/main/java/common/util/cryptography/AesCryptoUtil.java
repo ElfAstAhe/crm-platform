@@ -24,6 +24,10 @@ public class AesCryptoUtil implements CryptoUtil {
 
     private final String algorithm;
 
+    private AesCryptoUtil(String algorithm) {
+        this.algorithm = algorithm;
+    }
+
     public static CryptoUtil getAesCbcInstance() {
         return new AesCryptoUtil(AesCryptoUtil.ALGORITHM_AES_CBC_PKCS5);
     }
@@ -70,10 +74,6 @@ public class AesCryptoUtil implements CryptoUtil {
         } catch (Throwable ex) {
             throw new CryptoUtilException("Error encrypting data", ex);
         }
-    }
-
-    private AesCryptoUtil(String algorithm) {
-        this.algorithm = algorithm;
     }
 
     private void initCipher(Cipher cipher, int mode, SecretKeySpec secretKeySpec)

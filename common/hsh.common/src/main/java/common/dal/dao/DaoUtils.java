@@ -14,6 +14,9 @@ import java.util.List;
 import java.util.Map;
 
 public class DaoUtils {
+    public static final String SQL_ASC = "asc";
+    public static final String SQL_DESC = "desc";
+
     private DaoUtils() {
         // hide constructor
     }
@@ -46,7 +49,7 @@ public class DaoUtils {
     public static <Entity extends IdEntity> String getEntityIdFieldName(Class<Entity> entityClass) {
         try {
             Field[] fields = entityClass.getDeclaredFields();
-            for(Field field : fields) {
+            for (Field field : fields) {
                 EmbeddedId[] embeddedIds = field.getAnnotationsByType(EmbeddedId.class);
                 if (embeddedIds.length > 0) {
                     return field.getName();
