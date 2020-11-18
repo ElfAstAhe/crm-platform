@@ -2,9 +2,10 @@ package common.util.serialization;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
+import test.TestSerializeClass;
 
 public class YamlSerializerHelperTest {
-    // !!common.util.serialization.TestSerializeClass {id: 1, name: test}
+    // !!test.TestSerializeClass {id: 1, name: test}
 
     @Test
     public void serialize_passInstance_shouldReturnString() {
@@ -49,7 +50,7 @@ public class YamlSerializerHelperTest {
     @Test
     public void deserialize_passString_shouldReturnInstance() {
         // prepare
-        String data = "!!common.util.serialization.TestSerializeClass {id: 1, name: test}";
+        String data = "!!test.TestSerializeClass {id: 1, name: test}";
         int expectedId = 1;
         String expectedName = "test";
         // act

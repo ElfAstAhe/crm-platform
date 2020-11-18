@@ -52,8 +52,12 @@ public class ExceptionDtoHelper {
      * @return stack trace
      */
     private static String getStackTrace(Throwable ex) {
+        if (ex == null)
+            return null;
+
         StringWriter sw = new StringWriter();
         ex.printStackTrace(new PrintWriter(sw));
+
         return sw.toString();
     }
 }

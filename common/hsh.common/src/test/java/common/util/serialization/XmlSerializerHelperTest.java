@@ -2,6 +2,7 @@ package common.util.serialization;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
+import test.TestSerializeClass;
 
 public class XmlSerializerHelperTest {
     // <?xml version="1.0" encoding="UTF-8" standalone="yes"?><testSerializeClass><id>1</id><name>test</name></testSerializeClass>

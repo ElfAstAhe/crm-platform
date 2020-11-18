@@ -2,6 +2,7 @@ package common.util.serialization;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
+import test.TestSerializeClass;
 
 class JsonSerializerHelperTest {
     // common

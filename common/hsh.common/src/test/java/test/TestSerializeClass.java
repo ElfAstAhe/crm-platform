@@ -1,4 +1,4 @@
-package common.util.serialization;
+package test;
 
 import javax.json.bind.annotation.JsonbProperty;
 import javax.json.bind.annotation.JsonbPropertyOrder;
