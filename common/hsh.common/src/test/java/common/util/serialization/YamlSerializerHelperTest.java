@@ -3,6 +3,7 @@ package common.util.serialization;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import test.TestSerializeClass;
+import test.TestStandUtils;
 
 public class YamlSerializerHelperTest {
     // !!test.TestSerializeClass {id: 1, name: test}
@@ -10,7 +11,7 @@ public class YamlSerializerHelperTest {
     @Test
     public void serialize_passInstance_shouldReturnString() {
         // prepare
-        TestSerializeClass data = buildInstance();
+        TestSerializeClass data = TestStandUtils.buildSimpleInstance();
         // act
         String actual = YamlSerializerHelper.serialize(data);
         // assert
@@ -29,7 +30,7 @@ public class YamlSerializerHelperTest {
     @Test
     public void serializeForHuman_passInstance_shouldReturnSerializedString() {
         // prepare
-        TestSerializeClass data = buildInstance();
+        TestSerializeClass data = TestStandUtils.buildSimpleInstance();
         // act
         String actual = YamlSerializerHelper.serializeForHuman(data);
         String[] actualStrings = actual.split("\n");
@@ -72,7 +73,7 @@ public class YamlSerializerHelperTest {
     @Test
     public void clone_passInstance_shouldReturnInstance() {
         // prepare
-        TestSerializeClass expected = buildInstance();
+        TestSerializeClass expected = TestStandUtils.buildSimpleInstance();
         // act
         TestSerializeClass actual = YamlSerializerHelper.clone(expected);
         // assert
@@ -87,12 +88,5 @@ public class YamlSerializerHelperTest {
         // act
         // assert
         Assertions.assertNull(YamlSerializerHelper.clone(null));
-    }
-
-    private TestSerializeClass buildInstance() {
-        TestSerializeClass result = new TestSerializeClass();
-        result.setId(1);
-        result.setName("test");
-        return result;
     }
 }

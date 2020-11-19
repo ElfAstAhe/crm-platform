@@ -2,6 +2,7 @@ package common.dto.helper;
 
 import common.dto.ExceptionDto;
 import common.web.MimeTypes;
+import org.jooq.tools.StringUtils;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -9,6 +10,7 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
+import test.TestStandUtils;
 
 import javax.servlet.http.HttpServletRequest;
 import java.lang.reflect.InvocationTargetException;
@@ -30,11 +32,11 @@ class ExceptionDtoHelperTest {
     }
 
     @ParameterizedTest
-    @ValueSource(strings = {"shitData", "<null>"})
+    @ValueSource(strings = {"shitData", TestStandUtils.NULL_VALUE})
     public void getCorrectContentType_useShitDataOrNull_shouldReturnJsonContentType(String contentType) {
         // prepare
         String prepParam = contentType;
-        if ("<null>".equals(prepParam))
+        if (StringUtils.equals(TestStandUtils.NULL_VALUE, prepParam))
             prepParam = null;
         HttpServletRequest request = Mockito.mock(HttpServletRequest.class);
         Mockito.doReturn(prepParam).when(request).getHeader(Mockito.anyString());

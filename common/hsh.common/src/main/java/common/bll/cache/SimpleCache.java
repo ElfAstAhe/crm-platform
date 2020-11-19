@@ -2,6 +2,7 @@ package common.bll.cache;
 
 import java.util.List;
 import java.util.concurrent.Future;
+import java.util.function.Function;
 
 /**
  * Интерфейс кэша последних значений
@@ -56,6 +57,22 @@ public interface SimpleCache<Key, Value> {
      * @param value значение
      */
     void putAsync(Key key, Value value);
+
+    /**
+     * Добавить или заменить все значения
+     *
+     * @param values значения
+     * @param keyBuilder билдер ключа
+     */
+    void putAll(List<Value> values, Function<Value, Key> keyBuilder);
+
+    /**
+     * Добавить или заменить все значения
+     *
+     * @param values значения
+     * @param keyBuilder билдер ключа
+     */
+    void putAllAsync(List<Value> values, Function<Value, Key> keyBuilder);
 
     /**
      * Удалить

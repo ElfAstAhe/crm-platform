@@ -22,7 +22,7 @@ import java.util.concurrent.Future;
  */
 public abstract class BaseLastValueCache<Key extends BusinessModelKey, Model extends BusinessModel<Key>> extends BaseSimpleCache<Key, Model> {
     @Override
-    public synchronized void put(Key key, Model model) {
+    public void put(Key key, Model model) {
         if (key == null || model == null)
             return;
 

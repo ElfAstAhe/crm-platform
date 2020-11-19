@@ -3,6 +3,7 @@ package common.util.serialization;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import test.TestSerializeClass;
+import test.TestStandUtils;
 
 class JsonSerializerHelperTest {
     // common
@@ -17,7 +18,7 @@ class JsonSerializerHelperTest {
     @Test
     public void serialize_passInstance_shouldReturnSerializedString() {
         // prepare
-        TestSerializeClass data = buildInstance();
+        TestSerializeClass data = TestStandUtils.buildSimpleInstance();
         // act
         String actual = JsonSerializerHelper.serialize(data);
         // assert
@@ -36,7 +37,7 @@ class JsonSerializerHelperTest {
     @Test
     public void serializeForHuman_passInstance_shouldReturnSerializedString() {
         // prepare
-        TestSerializeClass data = buildInstance();
+        TestSerializeClass data = TestStandUtils.buildSimpleInstance();
         // act
         String actual = JsonSerializerHelper.serializeForHuman(data);
         String[] actualStrings = actual.split("\n");
@@ -79,7 +80,7 @@ class JsonSerializerHelperTest {
     @Test
     public void clone_passInstance_shouldReturnClone() {
         // prepare
-        TestSerializeClass expected = buildInstance();
+        TestSerializeClass expected = TestStandUtils.buildSimpleInstance();
         // act
         TestSerializeClass actual = JsonSerializerHelper.clone(expected);
         // assert
@@ -94,12 +95,5 @@ class JsonSerializerHelperTest {
         // act
         // assert
         Assertions.assertNull(JsonSerializerHelper.clone(null));
-    }
-
-    private TestSerializeClass buildInstance() {
-        TestSerializeClass inst = new TestSerializeClass();
-        inst.setId(1);
-        inst.setName("test");
-        return inst;
     }
 }
