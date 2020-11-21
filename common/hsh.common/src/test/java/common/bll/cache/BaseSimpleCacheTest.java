@@ -12,6 +12,7 @@ import test.TestStandUtils;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Future;
@@ -166,4 +167,121 @@ class BaseSimpleCacheTest {
         MatcherAssert.assertThat(actual, Matchers.hasSize(2));
         MatcherAssert.assertThat(actual, Matchers.containsInAnyOrder(expected.get(0), expected.get(1)));
     }
+
+    @Test
+    public void putAll_useNull_ShouldDoNothing() {
+        // prepare
+        TestBaseSimpleCache cache = new TestBaseSimpleCache();
+        // act
+        cache.putAll(null, TestSerializeClass::getId);
+        List<TestSerializeClass> actual = cache.getAll();
+        // assert
+        Assertions.assertNotNull(actual);
+        MatcherAssert.assertThat(actual, Matchers.empty());
+    }
+
+    @Test
+    public void putAllAsync_shouldPutAllValues() {
+        // prepare
+        TestBaseSimpleCache cache = new TestBaseSimpleCache();
+        List<TestSerializeClass> expected = TestStandUtils.buildInstanceList();
+        // act
+        cache.putAllAsync(expected, TestSerializeClass::getId);
+        List<TestSerializeClass> actual = cache.getAll();
+        // assert
+        Assertions.assertNotNull(actual);
+        MatcherAssert.assertThat(actual, Matchers.not(Matchers.empty()));
+        MatcherAssert.assertThat(actual, Matchers.hasSize(2));
+        MatcherAssert.assertThat(actual, Matchers.containsInAnyOrder(expected.get(0), expected.get(1)));
+    }
+
+    @Test
+    public void remove_valueExists_shouldRemoveValue() {
+        // prepare
+        TestBaseSimpleCache cache = new TestBaseSimpleCache();
+        TestSerializeClass data = TestStandUtils.buildSimpleInstance();
+        cache.put(data.getId(), data);
+        // act
+        cache.remove(data.getId());
+        List<TestSerializeClass> actual = cache.getAll();
+        // assert
+        Assertions.assertNotNull(actual);
+        MatcherAssert.assertThat(actual, Matchers.empty());
+    }
+
+    @Test
+    public void remove_valueNotExists_shouldDoNothing() {
+        // prepare
+        TestBaseSimpleCache cache = new TestBaseSimpleCache();
+        TestSerializeClass data = TestStandUtils.buildSimpleInstance();
+        TestSerializeClass data2 = TestStandUtils.buildSimpleInstance2();
+        cache.put(data.getId(), data);
+        // act
+        cache.remove(data2.getId());
+        List<TestSerializeClass> actual = cache.getAll();
+        // assert
+        Assertions.assertNotNull(actual);
+        MatcherAssert.assertThat(actual, Matchers.hasSize(1));
+    }
+
+    @Test
+    public void remove_emptyKey_shouldDoNothing() {
+        // prepare
+        TestBaseSimpleCache cache = new TestBaseSimpleCache();
+        TestSerializeClass data = TestStandUtils.buildSimpleInstance();
+        cache.put(data.getId(), data);
+        // act
+        cache.remove(null);
+        List<TestSerializeClass> actual = cache.getAll();
+        // assert
+        Assertions.assertNotNull(actual);
+        MatcherAssert.assertThat(actual, Matchers.hasSize(1));
+    }
+
+    @Test
+    public void removeAsync_shouldRemoveValue() {
+        // prepare
+        TestBaseSimpleCache cache = new TestBaseSimpleCache();
+        TestSerializeClass data1 = TestStandUtils.buildSimpleInstance();
+        TestSerializeClass data2 = TestStandUtils.buildSimpleInstance2();
+        cache.putAll(Arrays.asList(data1, data2), TestSerializeClass::getId);
+        // act
+        cache.removeAsync(data1.getId());
+        List<TestSerializeClass> actual = cache.getAll();
+        // assert
+        Assertions.assertNotNull(actual);
+        MatcherAssert.assertThat(actual, Matchers.not(Matchers.empty()));
+        MatcherAssert.assertThat(actual, Matchers.not(Matchers.hasItem(data1)));
+    }
+
+    @Test
+    public void clear_shouldClearValues() {
+        // prepare
+        TestBaseSimpleCache cache = new TestBaseSimpleCache();
+        TestSerializeClass data1 = TestStandUtils.buildSimpleInstance();
+        TestSerializeClass data2 = TestStandUtils.buildSimpleInstance2();
+        cache.putAll(Arrays.asList(data1, data2), TestSerializeClass::getId);
+        // act
+        cache.clear();
+        List<TestSerializeClass> actual = cache.getAll();
+        // assert
+        Assertions.assertNotNull(actual);
+        MatcherAssert.assertThat(actual, Matchers.empty());
+    }
+
+    @Test
+    public void clearAsync_shouldClearValues() {
+        // prepare
+        TestBaseSimpleCache cache = new TestBaseSimpleCache();
+        TestSerializeClass data1 = TestStandUtils.buildSimpleInstance();
+        TestSerializeClass data2 = TestStandUtils.buildSimpleInstance2();
+        cache.putAll(Arrays.asList(data1, data2), TestSerializeClass::getId);
+        // act
+        cache.clearAsync();
+        List<TestSerializeClass> actual = cache.getAll();
+        // assert
+        Assertions.assertNotNull(actual);
+        MatcherAssert.assertThat(actual, Matchers.empty());
+    }
+
 }
