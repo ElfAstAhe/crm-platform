@@ -1,7 +1,6 @@
 package common.bll.repository;
 
 import common.bll.settings.Settings;
-import org.apache.commons.lang3.StringUtils;
 
 import javax.ejb.AsyncResult;
 import javax.ejb.Asynchronous;
@@ -29,14 +28,14 @@ public abstract class BaseSettingsRepository<TSettings extends Settings> impleme
     @Override
     public String getStringValue(TSettings setting, String defaultValue) {
         String value = getFromSource(setting);
-        if (StringUtils.isEmpty(value))
+        if (value == null)
             return defaultValue;
         return value;
     }
 
     @Override
     public void setStringValue(TSettings setting, String value) {
-        setToSource(setting, StringUtils.isEmpty(value) ? null : value);
+        setToSource(setting, value == null ? String.valueOf(setting.getDefaultValue()) : value);
     }
 
     @Override
