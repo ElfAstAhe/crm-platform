@@ -9,35 +9,71 @@ class BaseSettingsRepositoryTest {
     @Test
     public void getStringValue_valueExists_shouldReturnValue() {
         // prepare
-        TestBaseSettingsRepository repo = new TestBaseSettingsRepository();
+        MockBaseSettingsRepository repo = new MockBaseSettingsRepository();
         repo.setReturnNulls(false);
         // act
-        String actual = repo.getStringValue(TestSettingsEnum.DUMMY1);
+        String actual = repo.getStringValue(MockSettingsEnum.DUMMY1);
         // assert
         Assertions.assertNotNull(actual);
-        Assertions.assertEquals(TestBaseSettingsRepository.EXPECTED_DATA_1, actual);
+        Assertions.assertEquals(MockBaseSettingsRepository.EXPECTED_DATA_1, actual);
     }
 
     @Test
     public void getStringValue_valueNotExists_shouldReturnDefaultValue() {
         // prepare
-        TestBaseSettingsRepository repo = new TestBaseSettingsRepository();
+        MockBaseSettingsRepository repo = new MockBaseSettingsRepository();
         repo.setReturnNulls(true);
         // act
-        String actual = repo.getStringValue(TestSettingsEnum.DUMMY1);
+        String actual = repo.getStringValue(MockSettingsEnum.DUMMY1);
         // assert
         Assertions.assertNotNull(actual);
-        Assertions.assertEquals(TestBaseSettingsRepository.EXPECTED_DEFAULT_DATA_1, actual);
+        Assertions.assertEquals(MockBaseSettingsRepository.EXPECTED_DEFAULT_DATA_1, actual);
     }
 
     @Test
     public void getStringValueAsync_shouldReturnValue() {
         // prepare
-        TestBaseSettingsRepository repo = new TestBaseSettingsRepository();
+        MockBaseSettingsRepository repo = new MockBaseSettingsRepository();
         repo.setReturnNulls(false);
         // act
-        Future<String> actual = repo.getStringValueAsync(TestSettingsEnum.DUMMY1);
+        Future<String> actual = repo.getStringValueAsync(MockSettingsEnum.DUMMY1);
         // assert
         Assertions.assertNotNull(actual);
+    }
+
+    @Test
+    public void getStringValueAsync_shouldReturnValue2() {
+        // prepare
+        MockBaseSettingsRepository repo = new MockBaseSettingsRepository();
+        repo.setReturnNulls(false);
+        // act
+        Future<String> actual = repo.getStringValueAsync(MockSettingsEnum.DUMMY1, null);
+        // assert
+        Assertions.assertNotNull(actual);
+    }
+
+    @Test
+    public void setStringValue_useValue_shouldSetValue() {
+        // prepare
+        MockBaseSettingsRepository repo = new MockBaseSettingsRepository();
+        String expected = "TestExpected";
+        // act
+        repo.setStringValue(MockSettingsEnum.DUMMY1, expected);
+        String actual = repo.getStringValue(MockSettingsEnum.DUMMY1);
+        // assert
+        Assertions.assertNotNull(actual);
+        Assertions.assertEquals(expected, actual);
+    }
+
+    @Test
+    public void setStringValue_useNull_shouldSetDefaultValue() {
+        // prepare
+        MockBaseSettingsRepository repo = new MockBaseSettingsRepository();
+        // act
+        repo.setStringValue(MockSettingsEnum.DUMMY1, null);
+        String actual = repo.getStringValue(MockSettingsEnum.DUMMY1);
+        // assert
+        Assertions.assertNotNull(actual);
+        Assertions.assertEquals(MockSettingsEnum.DUMMY1.getDefaultValue(), actual);
     }
 }

@@ -35,7 +35,7 @@ public abstract class BaseSettingsRepository<TSettings extends Settings> impleme
 
     @Override
     public void setStringValue(TSettings setting, String value) {
-        setToSource(setting, value == null ? String.valueOf(setting.getDefaultValue()) : value);
+        setToSource(setting, value == null ? valueOrNull(setting.getDefaultValue()) : value);
     }
 
     @Override
@@ -66,12 +66,15 @@ public abstract class BaseSettingsRepository<TSettings extends Settings> impleme
 
     @Override
     public Integer getIntegerValue(TSettings setting, Integer defaultValue) {
-        return Integer.parseInt(getStringValue(setting, defaultValue.toString()));
+        String value = getStringValue(setting, valueOrNull(defaultValue));
+        if (value == null)
+            return defaultValue;
+        return Integer.parseInt(value);
     }
 
     @Override
     public void setIntegerValue(TSettings setting, Integer value) {
-        setStringValue(setting, value == null ? null : value.toString());
+        setStringValue(setting, value == null ? valueOrNull(setting.getDefaultValue()) : value.toString());
     }
 
     @Override
@@ -102,12 +105,17 @@ public abstract class BaseSettingsRepository<TSettings extends Settings> impleme
 
     @Override
     public OffsetDateTime getOffsetDateTimeValue(TSettings setting, OffsetDateTime defaultValue) {
-        return OffsetDateTime.parse(getStringValue(setting, defaultValue.format(DateTimeFormatter.ISO_OFFSET_DATE_TIME)), DateTimeFormatter.ISO_OFFSET_DATE_TIME);
+        String value = getStringValue(setting, valueOrNull(defaultValue));
+        if (value == null)
+            return null;
+        return OffsetDateTime.parse(value, DateTimeFormatter.ISO_OFFSET_DATE_TIME);
     }
 
     @Override
     public void setOffsetDateTimeValue(TSettings setting, OffsetDateTime value) {
-        setStringValue(setting, value == null ? null : value.format(DateTimeFormatter.ISO_OFFSET_DATE_TIME));
+        setStringValue(setting, value == null ?
+                valueOrNull(setting.getDefaultValue()) :
+                value.format(DateTimeFormatter.ISO_OFFSET_DATE_TIME));
     }
 
     @Override
@@ -138,12 +146,15 @@ public abstract class BaseSettingsRepository<TSettings extends Settings> impleme
 
     @Override
     public Boolean getBooleanValue(TSettings setting, Boolean defaultValue) {
-        return Boolean.parseBoolean(getStringValue(setting, defaultValue.toString()));
+        String value = getStringValue(setting, defaultValue == null ? null : defaultValue.toString());
+        if (value == null)
+            return null;
+        return Boolean.parseBoolean(value);
     }
 
     @Override
     public void setBooleanValue(TSettings setting, Boolean value) {
-        setStringValue(setting, value == null ? null : value.toString());
+        setStringValue(setting, value == null ? valueOrNull(setting.getDefaultValue()) : value.toString());
     }
 
     @Override
@@ -174,12 +185,15 @@ public abstract class BaseSettingsRepository<TSettings extends Settings> impleme
 
     @Override
     public BigDecimal getBigDecimalValue(TSettings setting, BigDecimal defaultValue) {
-        return new BigDecimal(getStringValue(setting, defaultValue.toString()));
+        String value = getStringValue(setting, valueOrNull(defaultValue));
+        if (value == null)
+            return null;
+        return new BigDecimal(value);
     }
 
     @Override
     public void setBigDecimalValue(TSettings setting, BigDecimal value) {
-        setStringValue(setting, value == null ? null : value.toString());
+        setStringValue(setting, value == null ? valueOrNull(setting.getDefaultValue()) : value.toString());
     }
 
     @Override
@@ -203,4 +217,14 @@ public abstract class BaseSettingsRepository<TSettings extends Settings> impleme
     protected abstract String getFromSource(TSettings setting);
 
     protected abstract void setToSource(TSettings setting, String value);
+
+    protected <V> String valueOrNull(V value) {
+        if (value == null)
+            return null;
+
+        if (value instanceof OffsetDateTime)
+            return ((OffsetDateTime) value).format(DateTimeFormatter.ISO_OFFSET_DATE_TIME);
+
+        return String.valueOf(value);
+    }
 }

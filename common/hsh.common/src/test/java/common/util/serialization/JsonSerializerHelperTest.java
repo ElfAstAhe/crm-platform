@@ -2,7 +2,7 @@ package common.util.serialization;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-import test.TestSerializeClass;
+import test.MockDtoEntity;
 import test.TestStandUtils;
 
 class JsonSerializerHelperTest {
@@ -18,7 +18,7 @@ class JsonSerializerHelperTest {
     @Test
     public void serialize_passInstance_shouldReturnSerializedString() {
         // prepare
-        TestSerializeClass data = TestStandUtils.buildSimpleInstance();
+        MockDtoEntity data = TestStandUtils.buildSimpleInstance();
         // act
         String actual = JsonSerializerHelper.serialize(data);
         // assert
@@ -37,7 +37,7 @@ class JsonSerializerHelperTest {
     @Test
     public void serializeForHuman_passInstance_shouldReturnSerializedString() {
         // prepare
-        TestSerializeClass data = TestStandUtils.buildSimpleInstance();
+        MockDtoEntity data = TestStandUtils.buildSimpleInstance();
         // act
         String actual = JsonSerializerHelper.serializeForHuman(data);
         String[] actualStrings = actual.split("\n");
@@ -62,7 +62,7 @@ class JsonSerializerHelperTest {
         int expectedId = 1;
         String expectedName = "test";
         // act
-        TestSerializeClass actual = JsonSerializerHelper.deserialize(data, TestSerializeClass.class);
+        MockDtoEntity actual = JsonSerializerHelper.deserialize(data, MockDtoEntity.class);
         // assert
         Assertions.assertNotNull(actual);
         Assertions.assertEquals(expectedId, actual.getId());
@@ -74,15 +74,15 @@ class JsonSerializerHelperTest {
         // prepare
         // act
         // assert
-        Assertions.assertNull(JsonSerializerHelper.deserialize(null, TestSerializeClass.class));
+        Assertions.assertNull(JsonSerializerHelper.deserialize(null, MockDtoEntity.class));
     }
 
     @Test
     public void clone_passInstance_shouldReturnClone() {
         // prepare
-        TestSerializeClass expected = TestStandUtils.buildSimpleInstance();
+        MockDtoEntity expected = TestStandUtils.buildSimpleInstance();
         // act
-        TestSerializeClass actual = JsonSerializerHelper.clone(expected);
+        MockDtoEntity actual = JsonSerializerHelper.clone(expected);
         // assert
         Assertions.assertNotNull(actual);
         Assertions.assertNotSame(expected, actual);

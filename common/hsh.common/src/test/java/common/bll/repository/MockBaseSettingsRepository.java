@@ -3,20 +3,20 @@ package common.bll.repository;
 import java.util.HashMap;
 import java.util.Map;
 
-public class TestBaseSettingsRepository extends BaseSettingsRepository<TestSettingsEnum>{
+public class MockBaseSettingsRepository extends BaseSettingsRepository<MockSettingsEnum>{
     public static final String EXPECTED_DATA_1 = "TestData";
     public static final Integer EXPECTED_DATA_2 = 54321;
 
     public static final String EXPECTED_DEFAULT_DATA_1 = "Test";
     public static final Integer EXPECTED_DEFAULT_DATA_2 = 12345;
 
-    private final Map<TestSettingsEnum, Object> data;
+    private final Map<MockSettingsEnum, Object> data;
     private boolean returnNulls = false;
 
     {
         data = new HashMap<>();
-        data.put(TestSettingsEnum.DUMMY1, EXPECTED_DATA_1);
-        data.put(TestSettingsEnum.DUMMY2, EXPECTED_DATA_2);
+        data.put(MockSettingsEnum.DUMMY1, EXPECTED_DATA_1);
+        data.put(MockSettingsEnum.DUMMY2, EXPECTED_DATA_2);
     }
 
     public boolean isReturnNulls() {
@@ -28,19 +28,14 @@ public class TestBaseSettingsRepository extends BaseSettingsRepository<TestSetti
     }
 
     @Override
-    protected String getFromSource(TestSettingsEnum setting) {
+    protected String getFromSource(MockSettingsEnum setting) {
         if (returnNulls)
             return null;
         return String.valueOf(data.getOrDefault(setting, setting.getDefaultValue()));
     }
 
     @Override
-    protected void setToSource(TestSettingsEnum setting, String value) {
+    protected void setToSource(MockSettingsEnum setting, String value) {
         data.put(setting, value);
     }
-
-//    @Override
-//    public String getStringValue(TestSettingsEnum setting) {
-//        return getFromSource(setting);
-//    }
 }

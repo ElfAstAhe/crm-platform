@@ -13,7 +13,7 @@ import java.util.Objects;
 @XmlRootElement(name = "testSerializeClass")
 @XmlAccessorType(XmlAccessType.FIELD)
 @JsonbPropertyOrder(PropertyOrderStrategy.ANY)
-public class TestSerializeClass implements Serializable {
+public class MockDtoEntity implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @XmlElement(name = "id")
@@ -24,7 +24,7 @@ public class TestSerializeClass implements Serializable {
     @JsonbProperty(value = "name")
     private String name;
 
-    public TestSerializeClass() {
+    public MockDtoEntity() {
         // ..
     }
 
@@ -53,9 +53,9 @@ public class TestSerializeClass implements Serializable {
     public boolean equals(Object obj) {
         if (obj == null)
             return false;
-        if (!(obj instanceof TestSerializeClass))
+        if (!(obj instanceof MockDtoEntity))
             return false;
-        TestSerializeClass other = (TestSerializeClass)obj;
+        MockDtoEntity other = (MockDtoEntity)obj;
         return Objects.equals(this.id, other.id) &&
                 Objects.equals(this.name, other.name);
     }
