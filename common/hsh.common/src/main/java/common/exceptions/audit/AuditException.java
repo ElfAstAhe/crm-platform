@@ -9,13 +9,6 @@ public class AuditException extends Exception{
         super(message, cause);
     }
 
-    public AuditException(String message,
-                        String remoteException,
-                        String remoteMessage,
-                        String remoteStackTrace) {
-        super(message);
-    }
-
     protected AuditException(String message, Throwable cause,
                            boolean enableSuppression,
                            boolean writableStackTrace) {

@@ -19,6 +19,8 @@
         <hsh-dto-common-version>1.0.0${crm.platform.version.suffix}</hsh-dto-common-version>
 
         <!-- microservices -->
+        <hsh-ms-common-version>1.0.0${crm.platform.version.suffix}</hsh-ms-common-version>
+
         <crm.platform.audit.service.version>1.0.0${crm.platform.version.suffix}</crm.platform.audit.service.version>
         <crm.platform.audit.dto.version>1.0.0${crm.platform.version.suffix}</crm.platform.audit.dto.version>
         <crm.platform.audit.client.version>1.0.0${crm.platform.version.suffix}</crm.platform.audit.client.version>

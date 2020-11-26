@@ -1,18 +1,19 @@
-package common.dal.dao;
+package microservice.common.dal.dao;
 
-import common.dal.entity.BaseIdEntity;
+import common.dal.entity.IdEntity;
 
+import java.io.Serializable;
 import java.util.List;
 import java.util.concurrent.Future;
 
 /**
- * Интерфейс репозитория актуальных значений
+ * Интерфейс dao крайних(актуальных) значений
  *
- * @param <Key>
- * @param <Entity>
+ * @param <Key>    search key
+ * @param <Entity> entity class
  * @author elf
  */
-public interface LastValuesDao<Key, Entity extends BaseIdEntity> {
+public interface LastValuesDao<Entity extends IdEntity, Key extends Serializable> {
     /**
      * Получить 1 последнее значение по ключу
      *
@@ -32,7 +33,7 @@ public interface LastValuesDao<Key, Entity extends BaseIdEntity> {
     /**
      * Получить список последних значений
      *
-     * @param key ключ
+     * @param key      ключ
      * @param rowCount кол-во строк
      * @return список последних значений
      */
@@ -41,7 +42,7 @@ public interface LastValuesDao<Key, Entity extends BaseIdEntity> {
     /**
      * Получить список последних значений (async)
      *
-     * @param key ключ
+     * @param key      ключ
      * @param rowCount кол-во строк
      * @return список последних значений
      */

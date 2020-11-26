@@ -31,31 +31,31 @@ public class DataAuditValuesBuilder {
     private List<DataAuditValue> build(Object beforeInstance, Object afterInstance) {
         switch (EventCondition.getCondition(beforeInstance, afterInstance)) {
             case CREATED:
-                return AuditUtils.buildAllAnnotatedFieldList(afterInstance)
+                return AuditUtils.buildAllAnnotatedElementList(afterInstance)
                         .stream()
-                        .map(f -> DataAuditValueBuilder.get()
-                                .setName(f.getName())
-                                .setDescription(AuditUtils.fieldDescription(f))
-                                .setAfter(AuditUtils.valueOrNull(afterInstance, f))
+                        .map(ae -> DataAuditValueBuilder.get()
+                                .setName(AuditUtils.elementName(ae))
+                                .setDescription(AuditUtils.fieldDescription(ae))
+                                .setAfter(AuditUtils.valueOrNull(afterInstance, ae))
                                 .build())
                         .collect(Collectors.toList());
             case MODIFIED:
-                return AuditUtils.buildAllAnnotatedFieldList(afterInstance)
+                return AuditUtils.buildAllAnnotatedElementList(afterInstance)
                         .stream()
-                        .map(f -> DataAuditValueBuilder.get()
-                                .setName(f.getName())
-                                .setDescription(AuditUtils.fieldDescription(f))
-                                .setBefore(AuditUtils.valueOrNull(beforeInstance, f))
-                                .setAfter(AuditUtils.valueOrNull(afterInstance, f))
+                        .map(ae -> DataAuditValueBuilder.get()
+                                .setName(AuditUtils.elementName(ae))
+                                .setDescription(AuditUtils.fieldDescription(ae))
+                                .setBefore(AuditUtils.valueOrNull(beforeInstance, ae))
+                                .setAfter(AuditUtils.valueOrNull(afterInstance, ae))
                                 .build())
                         .collect(Collectors.toList());
             case REMOVED:
-                return AuditUtils.buildAllAnnotatedFieldList(beforeInstance)
+                return AuditUtils.buildAllAnnotatedElementList(beforeInstance)
                         .stream()
-                        .map(f -> DataAuditValueBuilder.get()
-                                .setName(f.getName())
-                                .setDescription(AuditUtils.fieldDescription(f))
-                                .setBefore(AuditUtils.valueOrNull(beforeInstance, f))
+                        .map(ae -> DataAuditValueBuilder.get()
+                                .setName(AuditUtils.elementName(ae))
+                                .setDescription(AuditUtils.fieldDescription(ae))
+                                .setBefore(AuditUtils.valueOrNull(beforeInstance, ae))
                                 .build())
                         .collect(Collectors.toList());
             default:

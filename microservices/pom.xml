@@ -12,6 +12,7 @@
         <module>users</module>
         <module>auth</module>
         <module>audit</module>
+        <module>ms-common</module>
     </modules>
     <properties>
         <crm.platform.baseDir>${project.basedir}/..</crm.platform.baseDir>
