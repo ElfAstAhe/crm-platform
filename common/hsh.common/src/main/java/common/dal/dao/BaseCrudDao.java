@@ -129,6 +129,27 @@ public abstract class BaseCrudDao<Entity extends IdEntity, Key extends Serializa
     }
 
     @Override
+    public boolean exists(Object id) {
+        try {
+            return getEntityManager().createQuery("select 1 from " +
+                    DaoUtils.getEntityName(entityClass) + " e " +
+                    "where e." + DaoUtils.getEntityIdFieldName(entityClass) + " = :id", Long.class)
+                    .setParameter("id", id)
+                    .setLockMode(LockModeType.NONE)
+                    .setMaxResults(1)
+                    .getSingleResult() != null;
+        } catch (Exception ex) {
+            return false;
+        }
+    }
+
+    @Override
+    @Asynchronous
+    public Future<Boolean> existsAsync(Object id) {
+        return new AsyncResult<>(exists(id));
+    }
+
+    @Override
     @Asynchronous
     public Future<Long> countAsync() {
         return new AsyncResult<>(this.count());

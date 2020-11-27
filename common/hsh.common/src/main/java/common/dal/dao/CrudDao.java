@@ -62,6 +62,9 @@ public interface CrudDao<Entity extends IdEntity, Key> {
      */
     Future<List<Entity>> listFilteredAsync(FilterParams params);
 
+    boolean exists(Object id);
+    Future<Boolean> existsAsync(Object id);
+
     /**
      * insert entity
      * @param entity entity

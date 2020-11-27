@@ -5,6 +5,7 @@ package common.web;
  *
  * @author @markwhitaker markwhitaker
  */
+@SuppressWarnings("unused")
 public final class MimeTypes
 {
     public static final class Application

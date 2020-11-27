@@ -14,6 +14,8 @@ import java.util.List;
 import java.util.Map;
 
 public class DaoUtils {
+    private static final String TEMPLATE_PROXY_CLASS_NAME = "%s_";
+
     public static final String SQL_ASC = "asc";
     public static final String SQL_DESC = "desc";
 
@@ -22,7 +24,7 @@ public class DaoUtils {
     }
 
     @SuppressWarnings("unchecked")
-    public static <Entity extends IdEntity, Key> SingularAttribute<Entity, Key> getEntityIdField(Class<Entity> entityClass) {
+    public static <Entity extends IdEntity, Key> SingularAttribute<Entity, Key> getEntityIdAttribute(Class<Entity> entityClass) {
         String idFieldName = getEntityIdFieldName(entityClass);
         if (StringUtils.isBlank(idFieldName))
             return null;
@@ -30,7 +32,7 @@ public class DaoUtils {
             Class<?> proxyClass = getEntityProxyClass(entityClass);
             if (proxyClass == null)
                 return null;
-            Field attribute = null;
+            Field attribute;
             attribute = proxyClass.getField(idFieldName);
             Class<?> type = attribute.getType();
             if (type == SingularAttribute.class) {
@@ -46,30 +48,34 @@ public class DaoUtils {
         return null;
     }
 
-    public static <Entity extends IdEntity> String getEntityIdFieldName(Class<Entity> entityClass) {
+    public static Field getEntityIdField(Class<?> entityClass) {
         try {
             Field[] fields = entityClass.getDeclaredFields();
-            for (Field field : fields) {
-                EmbeddedId[] embeddedIds = field.getAnnotationsByType(EmbeddedId.class);
-                if (embeddedIds.length > 0) {
-                    return field.getName();
-                }
-
-                Id[] ids = field.getAnnotationsByType(Id.class);
-                if (ids.length > 0) {
-                    return field.getName();
-                }
+            for(Field field : fields) {
+                if (field.isAnnotationPresent(Id.class) || field.isAnnotationPresent(EmbeddedId.class))
+                    return field;
             }
-        } catch (SecurityException ex) {
+        } catch (Exception ex) {
             // nothing
         }
+        if (entityClass.getSuperclass() == null)
+            return null;
 
-        return null;
+        return getEntityIdField(entityClass.getSuperclass());
+    }
+
+    public static <Entity extends IdEntity> String getEntityIdFieldName(Class<Entity> entityClass) {
+        Field field = getEntityIdField(entityClass);
+        return field == null ? null : field.getName();
+    }
+
+    public static String getEntityName(Class<?> entityClass) {
+        return entityClass == null ? null : entityClass.getSimpleName();
     }
 
     public static <Entity extends IdEntity> Class<?> getEntityProxyClass(Class<Entity> entityClass) {
         try {
-            return Class.forName(entityClass.getName() + "_");
+            return Class.forName(String.format(TEMPLATE_PROXY_CLASS_NAME, entityClass.getName()));
         } catch (ClassNotFoundException ex) {
             return null;
         }
@@ -97,6 +103,7 @@ public class DaoUtils {
             return join;
         }
 
+        @SuppressWarnings("unused")
         public Class<?> getRoot() {
             return root;
         }

@@ -17,6 +17,7 @@ import java.util.*;
  *
  * @param <Entity>
  */
+@SuppressWarnings("unused")
 public class DaoHelper<Entity extends IdEntity> {
     private final Class<Entity> entityClass;
     private final boolean usePath;
@@ -75,8 +76,7 @@ public class DaoHelper<Entity extends IdEntity> {
                                 return CriteriaConditionBuilder.buildCommon(cb, key, pathFilter, value);
                         }
                     } else if (StringUtils.endsWith(key, "<>") && value instanceof String) {
-                        Path<?> pathFilter = null;  // <==== getPathInternal
-
+                        Path<?> pathFilter = createPathConditioning(root, joins, key);  // <==== getPathInternal
                         return CriteriaConditionBuilder.buildString(cb, key, pathFilter, (String) value);
                     }
 
@@ -190,6 +190,6 @@ public class DaoHelper<Entity extends IdEntity> {
             ex.printStackTrace();
         }
 
-        return root.get(DaoUtils.getEntityIdField(entityClass));
+        return root.get(DaoUtils.getEntityIdAttribute(entityClass));
     }
 }
