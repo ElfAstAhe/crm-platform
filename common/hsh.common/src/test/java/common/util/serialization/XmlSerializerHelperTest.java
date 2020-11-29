@@ -2,7 +2,7 @@ package common.util.serialization;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-import test.MockDtoEntity;
+import test.MockSimpleEntity;
 import test.TestStandUtils;
 
 public class XmlSerializerHelperTest {
@@ -11,7 +11,7 @@ public class XmlSerializerHelperTest {
     @Test
     public void serialize_passInstance_shouldReturnString() {
         // prepare
-        MockDtoEntity data = TestStandUtils.buildSimpleInstance();
+        MockSimpleEntity data = TestStandUtils.buildSimpleInstance();
         // act
         String actual = XmlSerializerHelper.serialize(data);
         // assert
@@ -30,7 +30,7 @@ public class XmlSerializerHelperTest {
     @Test
     public void serializeForHuman_passInstance_shouldReturnSerializedString() {
         // prepare
-        MockDtoEntity data = TestStandUtils.buildSimpleInstance();
+        MockSimpleEntity data = TestStandUtils.buildSimpleInstance();
         // act
         String actual = XmlSerializerHelper.serializeForHuman(data);
         String[] actualStrings = actual.split("\n");
@@ -55,7 +55,7 @@ public class XmlSerializerHelperTest {
         int expectedId = 1;
         String expectedName = "test";
         // act
-        MockDtoEntity actual = XmlSerializerHelper.deserialize(data, MockDtoEntity.class);
+        MockSimpleEntity actual = XmlSerializerHelper.deserialize(data, MockSimpleEntity.class);
         // assert
         Assertions.assertNotNull(actual);
         Assertions.assertEquals(expectedId, actual.getId());
@@ -67,15 +67,15 @@ public class XmlSerializerHelperTest {
         // prepare
         // act
         // assert
-        Assertions.assertNull(XmlSerializerHelper.deserialize(null, MockDtoEntity.class));
+        Assertions.assertNull(XmlSerializerHelper.deserialize(null, MockSimpleEntity.class));
     }
 
     @Test
     public void clone_passInstance_shouldReturnInstance() {
         // prepare
-        MockDtoEntity expected = TestStandUtils.buildSimpleInstance();
+        MockSimpleEntity expected = TestStandUtils.buildSimpleInstance();
         // act
-        MockDtoEntity actual = XmlSerializerHelper.clone(expected);
+        MockSimpleEntity actual = XmlSerializerHelper.clone(expected);
         // assert
         Assertions.assertNotNull(actual);
         Assertions.assertNotSame(expected, actual);

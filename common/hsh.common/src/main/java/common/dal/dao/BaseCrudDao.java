@@ -99,7 +99,7 @@ public abstract class BaseCrudDao<Entity extends IdEntity, Key extends Serializa
         CriteriaQuery<Entity> cq = cb.createQuery(entityClass);
         Root<Entity> root = cq.from(entityClass);
         List<DaoUtils.JoinTable> joins = daoHelper.getJoins(root);
-        setFetchings(root);
+        setFetches(root);
 
         cq.select(root);
 
@@ -245,6 +245,7 @@ public abstract class BaseCrudDao<Entity extends IdEntity, Key extends Serializa
         return entityClass;
     }
 
+    @SuppressWarnings("unused")
     protected DaoHelper<Entity> getDaoHelper() {
         return daoHelper;
     }
@@ -255,6 +256,7 @@ public abstract class BaseCrudDao<Entity extends IdEntity, Key extends Serializa
      * @param root root
      * @return expression
      */
+    @SuppressWarnings("unused")
     protected Expression<?> countByField(Root<Entity> root) {
         return null;
     }
@@ -264,7 +266,8 @@ public abstract class BaseCrudDao<Entity extends IdEntity, Key extends Serializa
      *
      * @param root root
      */
-    protected void setFetchings(Root<Entity> root) {
+    @SuppressWarnings("unused")
+    protected void setFetches(Root<Entity> root) {
         // nothing
     }
 

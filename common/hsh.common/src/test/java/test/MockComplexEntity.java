@@ -3,6 +3,8 @@ package test;
 import javax.json.bind.annotation.JsonbProperty;
 import javax.json.bind.annotation.JsonbPropertyOrder;
 import javax.json.bind.config.PropertyOrderStrategy;
+import javax.persistence.EmbeddedId;
+import javax.persistence.Entity;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
@@ -10,29 +12,36 @@ import javax.xml.bind.annotation.XmlRootElement;
 import java.io.Serializable;
 import java.util.Objects;
 
-@XmlRootElement(name = "testSerializeClass")
+@Entity
+@XmlRootElement(name = "mockComplexEntity")
 @XmlAccessorType(XmlAccessType.FIELD)
 @JsonbPropertyOrder(PropertyOrderStrategy.ANY)
-public class MockDtoEntity implements Serializable {
+public class MockComplexEntity implements Serializable {
     private static final long serialVersionUID = 1L;
 
+    @EmbeddedId
     @XmlElement(name = "id")
     @JsonbProperty(value = "id")
-    private Integer id;
+    private MockComplexKey id;
 
     @XmlElement(name = "name")
     @JsonbProperty(value = "name")
     private String name;
 
-    public MockDtoEntity() {
-        // ..
+    public MockComplexEntity() {
+        // default
     }
 
-    public Integer getId() {
+    public MockComplexEntity(MockComplexKey id, String name) {
+        this.id = id;
+        this.name = name;
+    }
+
+    public MockComplexKey getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(MockComplexKey id) {
         this.id = id;
     }
 
@@ -46,17 +55,18 @@ public class MockDtoEntity implements Serializable {
 
     @Override
     public int hashCode() {
-        return Objects.hash(this.id, this.name);
+        return Objects.hash(id);
     }
 
     @Override
     public boolean equals(Object obj) {
         if (obj == null)
             return false;
-        if (!(obj instanceof MockDtoEntity))
+        if (!(obj instanceof MockComplexEntity))
             return false;
-        MockDtoEntity other = (MockDtoEntity)obj;
-        return Objects.equals(this.id, other.id) &&
-                Objects.equals(this.name, other.name);
+
+        MockComplexEntity other = (MockComplexEntity) obj;
+
+        return Objects.equals(this.id, other.id);
     }
 }

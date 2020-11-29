@@ -1,6 +1,5 @@
 package common.bll.cache;
 
-import org.hamcrest.Matcher;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.jooq.tools.StringUtils;
@@ -8,8 +7,7 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
-import org.mockito.Mock;
-import test.MockDtoEntity;
+import test.MockSimpleEntity;
 import test.TestStandUtils;
 
 import java.lang.reflect.InvocationTargetException;
@@ -25,7 +23,7 @@ class BaseSimpleCacheTest {
         // prepare
         MockBaseSimpleCache cache = new MockBaseSimpleCache();
         // act
-        List<MockDtoEntity> actual = cache.initCache();
+        List<MockSimpleEntity> actual = cache.initCache();
         // assert
         Assertions.assertNotNull(actual);
         MatcherAssert.assertThat(actual, Matchers.empty());
@@ -35,10 +33,9 @@ class BaseSimpleCacheTest {
     public void postConstruct_shouldInitCacheEmptyValues() {
         // prepare
         MockBaseSimpleCache cache = new MockBaseSimpleCache();
-        cache.putAll(TestStandUtils.buildInstanceList());
         // act
         cache.postConstruct();
-        List<MockDtoEntity> actual = cache.getAll();
+        List<MockSimpleEntity> actual = cache.getAll();
         // assert
         Assertions.assertNotNull(actual);
         MatcherAssert.assertThat(actual, Matchers.empty());
@@ -51,7 +48,7 @@ class BaseSimpleCacheTest {
         cache.putAll(TestStandUtils.buildInstanceList());
         // act
         cache.preDestroy();
-        List<MockDtoEntity> actual = cache.getAll();
+        List<MockSimpleEntity> actual = cache.getAll();
         // assert
         Assertions.assertNotNull(actual);
         MatcherAssert.assertThat(actual, Matchers.empty());
@@ -73,13 +70,13 @@ class BaseSimpleCacheTest {
     public void get_valueNotExists_shouldReturnNull(String key) {
         // prepare
         MockBaseSimpleCache cache = new MockBaseSimpleCache();
-        Integer prepKey;
+        Long prepKey;
         if (StringUtils.equals(TestStandUtils.NULL_VALUE, key))
             prepKey = null;
         else
-            prepKey = Integer.parseInt(key);
+            prepKey = Long.parseLong(key);
         // act
-        MockDtoEntity actual = cache.get(prepKey);
+        MockSimpleEntity actual = cache.get(prepKey);
         // assert
         Assertions.assertNull(actual);
     }
@@ -88,10 +85,10 @@ class BaseSimpleCacheTest {
     public void get_valueExists_shouldReturnValue() {
         // prepare
         MockBaseSimpleCache cache = new MockBaseSimpleCache();
-        MockDtoEntity expected = TestStandUtils.buildSimpleInstance();
+        MockSimpleEntity expected = TestStandUtils.buildSimpleInstance();
         cache.put(expected.getId(), expected);
         // act
-        MockDtoEntity actual = cache.get(expected.getId());
+        MockSimpleEntity actual = cache.get(expected.getId());
         // assert
         Assertions.assertNotNull(actual);
         Assertions.assertEquals(expected, actual);
@@ -104,7 +101,7 @@ class BaseSimpleCacheTest {
         MockBaseSimpleCache cache = new MockBaseSimpleCache();
         // cache.putAll(TestStandUtils.buildInstanceList(), TestSerializeClass::getId);
         // act
-        List<MockDtoEntity> actual = cache.getAll();
+        List<MockSimpleEntity> actual = cache.getAll();
         // assert
         Assertions.assertNotNull(actual);
         MatcherAssert.assertThat(actual, Matchers.empty());
@@ -116,7 +113,7 @@ class BaseSimpleCacheTest {
         MockBaseSimpleCache cache = new MockBaseSimpleCache();
         cache.putAll(TestStandUtils.buildInstanceList());
         // act
-        List<MockDtoEntity> actual = cache.getAll();
+        List<MockSimpleEntity> actual = cache.getAll();
         // assert
         Assertions.assertNotNull(actual);
         MatcherAssert.assertThat(actual, Matchers.not(Matchers.empty()));
@@ -128,7 +125,7 @@ class BaseSimpleCacheTest {
         MockBaseSimpleCache cache = new MockBaseSimpleCache();
         cache.putAll(TestStandUtils.buildInstanceList());
         // act
-        Future<MockDtoEntity> actual = cache.getAsync(1);
+        Future<MockSimpleEntity> actual = cache.getAsync(1L);
         // assert
         Assertions.assertNotNull(actual);
         Assertions.assertEquals(1, actual.get().getId());
@@ -139,7 +136,7 @@ class BaseSimpleCacheTest {
         // prepare
         MockBaseSimpleCache cache = new MockBaseSimpleCache();
         // act
-        Future<List<MockDtoEntity>> actual = cache.getAllAsync();
+        Future<List<MockSimpleEntity>> actual = cache.getAllAsync();
         // assert
         Assertions.assertNotNull(actual);
         Assertions.assertNotNull(actual.get());
@@ -149,10 +146,10 @@ class BaseSimpleCacheTest {
     public void put_shouldPutValue() {
         // prepare
         MockBaseSimpleCache cache = new MockBaseSimpleCache();
-        MockDtoEntity data = TestStandUtils.buildSimpleInstance();
+        MockSimpleEntity data = TestStandUtils.buildSimpleInstance();
         // act
         cache.put(data.getId(), data);
-        List<MockDtoEntity> actual = cache.getAll();
+        List<MockSimpleEntity> actual = cache.getAll();
         // assert
         Assertions.assertNotNull(actual);
         Assertions.assertEquals(actual.size(), 1);
@@ -164,15 +161,15 @@ class BaseSimpleCacheTest {
     public void put_useEmptyData_shouldDoNothing(String flag) {
         // prepare
         MockBaseSimpleCache cache = new MockBaseSimpleCache();
-        Integer key = null;
-        MockDtoEntity value = TestStandUtils.buildSimpleInstance();
+        Long key = null;
+        MockSimpleEntity value = TestStandUtils.buildSimpleInstance();
         if (StringUtils.equals(TestStandUtils.NULL_VALUE, flag)) {
-            key = 1;
+            key = 1L;
             value = null;
         }
         // act
         cache.put(key, value);
-        List<MockDtoEntity> actual = cache.getAll();
+        List<MockSimpleEntity> actual = cache.getAll();
         // assert
         Assertions.assertNotNull(actual);
         MatcherAssert.assertThat(actual, Matchers.empty());
@@ -182,10 +179,10 @@ class BaseSimpleCacheTest {
     public void putAsync_shouldPutValue() {
         // prepare
         MockBaseSimpleCache cache = new MockBaseSimpleCache();
-        MockDtoEntity data = TestStandUtils.buildSimpleInstance();
+        MockSimpleEntity data = TestStandUtils.buildSimpleInstance();
         // act
         cache.putAsync(data.getId(), data);
-        List<MockDtoEntity> actual = cache.getAll();
+        List<MockSimpleEntity> actual = cache.getAll();
         // assert
         Assertions.assertNotNull(actual);
         MatcherAssert.assertThat(actual, Matchers.hasSize(1));
@@ -196,10 +193,10 @@ class BaseSimpleCacheTest {
     public void putAll_useValues_shouldPutAllValues() {
         // prepare
         MockBaseSimpleCache cache = new MockBaseSimpleCache();
-        List<MockDtoEntity> expected = TestStandUtils.buildInstanceList();
+        List<MockSimpleEntity> expected = TestStandUtils.buildInstanceList();
         // act
         cache.putAll(expected);
-        List<MockDtoEntity> actual = cache.getAll();
+        List<MockSimpleEntity> actual = cache.getAll();
         // assert
         Assertions.assertNotNull(actual);
         MatcherAssert.assertThat(actual, Matchers.not(Matchers.empty()));
@@ -212,8 +209,8 @@ class BaseSimpleCacheTest {
         // prepare
         MockBaseSimpleCache cache = new MockBaseSimpleCache();
         // act
-        cache.putAll((List<MockDtoEntity>)null);
-        List<MockDtoEntity> actual = cache.getAll();
+        cache.putAll((List<MockSimpleEntity>)null);
+        List<MockSimpleEntity> actual = cache.getAll();
         // assert
         Assertions.assertNotNull(actual);
         MatcherAssert.assertThat(actual, Matchers.empty());
@@ -223,10 +220,10 @@ class BaseSimpleCacheTest {
     public void putAllAsync_shouldPutAllValues() {
         // prepare
         MockBaseSimpleCache cache = new MockBaseSimpleCache();
-        List<MockDtoEntity> expected = TestStandUtils.buildInstanceList();
+        List<MockSimpleEntity> expected = TestStandUtils.buildInstanceList();
         // act
         cache.putAllAsync(expected);
-        List<MockDtoEntity> actual = cache.getAll();
+        List<MockSimpleEntity> actual = cache.getAll();
         // assert
         Assertions.assertNotNull(actual);
         MatcherAssert.assertThat(actual, Matchers.not(Matchers.empty()));
@@ -238,11 +235,11 @@ class BaseSimpleCacheTest {
     public void remove_valueExists_shouldRemoveValue() {
         // prepare
         MockBaseSimpleCache cache = new MockBaseSimpleCache();
-        MockDtoEntity data = TestStandUtils.buildSimpleInstance();
+        MockSimpleEntity data = TestStandUtils.buildSimpleInstance();
         cache.put(data.getId(), data);
         // act
         cache.remove(data.getId());
-        List<MockDtoEntity> actual = cache.getAll();
+        List<MockSimpleEntity> actual = cache.getAll();
         // assert
         Assertions.assertNotNull(actual);
         MatcherAssert.assertThat(actual, Matchers.empty());
@@ -252,12 +249,12 @@ class BaseSimpleCacheTest {
     public void remove_valueNotExists_shouldDoNothing() {
         // prepare
         MockBaseSimpleCache cache = new MockBaseSimpleCache();
-        MockDtoEntity data = TestStandUtils.buildSimpleInstance();
-        MockDtoEntity data2 = TestStandUtils.buildSimpleInstance2();
+        MockSimpleEntity data = TestStandUtils.buildSimpleInstance();
+        MockSimpleEntity data2 = TestStandUtils.buildSimpleInstance2();
         cache.put(data.getId(), data);
         // act
         cache.remove(data2.getId());
-        List<MockDtoEntity> actual = cache.getAll();
+        List<MockSimpleEntity> actual = cache.getAll();
         // assert
         Assertions.assertNotNull(actual);
         MatcherAssert.assertThat(actual, Matchers.hasSize(1));
@@ -267,11 +264,11 @@ class BaseSimpleCacheTest {
     public void remove_emptyKey_shouldDoNothing() {
         // prepare
         MockBaseSimpleCache cache = new MockBaseSimpleCache();
-        MockDtoEntity data = TestStandUtils.buildSimpleInstance();
+        MockSimpleEntity data = TestStandUtils.buildSimpleInstance();
         cache.put(data.getId(), data);
         // act
         cache.remove(null);
-        List<MockDtoEntity> actual = cache.getAll();
+        List<MockSimpleEntity> actual = cache.getAll();
         // assert
         Assertions.assertNotNull(actual);
         MatcherAssert.assertThat(actual, Matchers.hasSize(1));
@@ -281,12 +278,12 @@ class BaseSimpleCacheTest {
     public void removeAsync_shouldRemoveValue() {
         // prepare
         MockBaseSimpleCache cache = new MockBaseSimpleCache();
-        MockDtoEntity data1 = TestStandUtils.buildSimpleInstance();
-        MockDtoEntity data2 = TestStandUtils.buildSimpleInstance2();
+        MockSimpleEntity data1 = TestStandUtils.buildSimpleInstance();
+        MockSimpleEntity data2 = TestStandUtils.buildSimpleInstance2();
         cache.putAll(Arrays.asList(data1, data2));
         // act
         cache.removeAsync(data1.getId());
-        List<MockDtoEntity> actual = cache.getAll();
+        List<MockSimpleEntity> actual = cache.getAll();
         // assert
         Assertions.assertNotNull(actual);
         MatcherAssert.assertThat(actual, Matchers.not(Matchers.empty()));
@@ -297,12 +294,12 @@ class BaseSimpleCacheTest {
     public void clear_shouldClearValues() {
         // prepare
         MockBaseSimpleCache cache = new MockBaseSimpleCache();
-        MockDtoEntity data1 = TestStandUtils.buildSimpleInstance();
-        MockDtoEntity data2 = TestStandUtils.buildSimpleInstance2();
+        MockSimpleEntity data1 = TestStandUtils.buildSimpleInstance();
+        MockSimpleEntity data2 = TestStandUtils.buildSimpleInstance2();
         cache.putAll(Arrays.asList(data1, data2));
         // act
         cache.clear();
-        List<MockDtoEntity> actual = cache.getAll();
+        List<MockSimpleEntity> actual = cache.getAll();
         // assert
         Assertions.assertNotNull(actual);
         MatcherAssert.assertThat(actual, Matchers.empty());
@@ -312,12 +309,12 @@ class BaseSimpleCacheTest {
     public void clearAsync_shouldClearValues() {
         // prepare
         MockBaseSimpleCache cache = new MockBaseSimpleCache();
-        MockDtoEntity data1 = TestStandUtils.buildSimpleInstance();
-        MockDtoEntity data2 = TestStandUtils.buildSimpleInstance2();
+        MockSimpleEntity data1 = TestStandUtils.buildSimpleInstance();
+        MockSimpleEntity data2 = TestStandUtils.buildSimpleInstance2();
         cache.putAll(Arrays.asList(data1, data2));
         // act
         cache.clearAsync();
-        List<MockDtoEntity> actual = cache.getAll();
+        List<MockSimpleEntity> actual = cache.getAll();
         // assert
         Assertions.assertNotNull(actual);
         MatcherAssert.assertThat(actual, Matchers.empty());

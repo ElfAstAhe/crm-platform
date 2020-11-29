@@ -1,11 +1,11 @@
 package common.bll.cache;
 
-import test.MockDtoEntity;
+import test.MockSimpleEntity;
 
-public class MockBaseSimpleCache extends BaseSimpleCache<Integer, MockDtoEntity> {
+public class MockBaseSimpleCache extends BaseSimpleCache<Long, MockSimpleEntity> {
 
     @Override
-    public Integer buildKey(MockDtoEntity value) {
+    public Long buildKey(MockSimpleEntity value) {
         return value.getId();
     }
 }
