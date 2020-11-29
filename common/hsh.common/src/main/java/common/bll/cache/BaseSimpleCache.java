@@ -1,13 +1,16 @@
 package common.bll.cache;
 
+import javax.annotation.PostConstruct;
+import javax.annotation.PreDestroy;
 import javax.ejb.AsyncResult;
 import javax.ejb.Asynchronous;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.Future;
-import java.util.function.Function;
+import java.util.stream.Collectors;
 
 /**
  * Базовый класс простого кэша на основе HashMap класса
@@ -17,8 +20,20 @@ import java.util.function.Function;
  * @param <Key>
  * @param <Value>
  */
-public class BaseSimpleCache<Key, Value> implements SimpleCache<Key, Value>{
+public abstract class BaseSimpleCache<Key, Value> implements SimpleCache<Key, Value>{
     private final Map<Key, Value> cacheValues = new ConcurrentHashMap<>();
+
+    @PostConstruct
+    public void postConstruct() {
+        List<Value> values = initCache();
+        if (values != null)
+            values.forEach(v -> cacheValues.put(buildKey(v), v));
+    }
+
+    @PreDestroy
+    public void preDestroy() {
+        cacheValues.clear();
+    }
 
     @Override
     public Value get(Key key) {
@@ -60,17 +75,32 @@ public class BaseSimpleCache<Key, Value> implements SimpleCache<Key, Value>{
     }
 
     @Override
-    public void putAll(List<Value> values, Function<Value, Key> keyBuilder) {
-        if (values == null || values.isEmpty() || keyBuilder == null)
+    public void putAll(List<Value> values) {
+        if (values == null)
             return;
 
-        values.forEach(v -> put(keyBuilder.apply(v), v));
+        putAll(values.stream()
+                .collect(Collectors.toMap(this::buildKey, v -> v)));
+    }
+
+    @Override
+    public void putAll(Map<Key, Value> values) {
+        if (values == null || values.isEmpty())
+            return;
+
+        values.forEach(this::put);
     }
 
     @Override
     @Asynchronous
-    public void putAllAsync(List<Value> values, Function<Value, Key> keyBuilder) {
-        putAll(values, keyBuilder);
+    public void putAllAsync(Map<Key, Value> values) {
+        putAll(values);
+    }
+
+    @Override
+    @Asynchronous
+    public void putAllAsync(List<Value> values) {
+        putAll(values);
     }
 
     @Override
@@ -98,7 +128,18 @@ public class BaseSimpleCache<Key, Value> implements SimpleCache<Key, Value>{
         clear();
     }
 
+    /**
+     * for override
+     *
+     * @return initable list of cache values
+     */
+    protected List<Value> initCache() {
+        return Collections.emptyList();
+    }
+
     protected Map<Key, Value> getCacheValues() {
         return cacheValues;
     }
+
+    protected abstract Key buildKey(Value value);
 }

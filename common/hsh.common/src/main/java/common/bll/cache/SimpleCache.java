@@ -1,6 +1,7 @@
 package common.bll.cache;
 
 import java.util.List;
+import java.util.Map;
 import java.util.concurrent.Future;
 import java.util.function.Function;
 
@@ -62,18 +63,17 @@ public interface SimpleCache<Key, Value> {
      * Добавить или заменить все значения
      *
      * @param values значения
-     * @param keyBuilder билдер ключа
      */
-    void putAll(List<Value> values, Function<Value, Key> keyBuilder);
+    void putAll(List<Value> values);
+    void putAll(Map<Key, Value> values);
 
     /**
      * Добавить или заменить все значения
      *
      * @param values значения
-     * @param keyBuilder билдер ключа
      */
-    void putAllAsync(List<Value> values, Function<Value, Key> keyBuilder);
-
+    void putAllAsync(List<Value> values);
+    void putAllAsync(Map<Key, Value> values);
     /**
      * Удалить
      *

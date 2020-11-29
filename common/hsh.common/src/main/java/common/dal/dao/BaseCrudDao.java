@@ -7,6 +7,7 @@ import javax.ejb.AsyncResult;
 import javax.ejb.Asynchronous;
 import javax.persistence.EntityManager;
 import javax.persistence.LockModeType;
+import javax.persistence.NoResultException;
 import javax.persistence.TypedQuery;
 import javax.persistence.criteria.*;
 import java.io.Serializable;
@@ -14,6 +15,8 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.Future;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * base crud dao, все наследники должны быть ejb
@@ -24,6 +27,8 @@ import java.util.concurrent.Future;
  */
 public abstract class BaseCrudDao<Entity extends IdEntity, Key extends Serializable>
         implements CrudDao<Entity, Key> {
+    private static final Logger logger = Logger.getLogger(BaseCrudDao.class.getName());
+
     private final Class<Entity> entityClass;
     private final DaoHelper<Entity> daoHelper;
 
@@ -138,7 +143,10 @@ public abstract class BaseCrudDao<Entity extends IdEntity, Key extends Serializa
                     .setLockMode(LockModeType.NONE)
                     .setMaxResults(1)
                     .getSingleResult() != null;
+        } catch (NoResultException ex) {
+            return false;
         } catch (Exception ex) {
+            logger.log(Level.SEVERE, "Error check entity instance existence", ex);
             return false;
         }
     }
