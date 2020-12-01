@@ -42,17 +42,17 @@ public abstract class BaseCrudDao<Entity extends IdEntity, Key extends Serializa
     }
 
     @Override
-    @Asynchronous
-    public Future<Entity> findAsync(Object id) {
-        return new AsyncResult<>(this.find(id));
-    }
-
-    @Override
     public Entity find(Object id) {
         if (id == null)
             return null;
 
         return getEntityManager().find(entityClass, id);
+    }
+
+    @Override
+    @Asynchronous
+    public Future<Entity> findAsync(Object id) {
+        return new AsyncResult<>(this.find(id));
     }
 
     @Override
@@ -70,31 +70,19 @@ public abstract class BaseCrudDao<Entity extends IdEntity, Key extends Serializa
     }
 
     @Override
+    public List<Entity> listAll() {
+        return getEntityManager().createQuery("select e from " + DaoUtils.getEntityName(entityClass) + " e", entityClass)
+                .getResultList();
+    }
+
+    @Override
     @Asynchronous
     public Future<List<Entity>> listAllAsync() {
         return new AsyncResult<>(this.listAll());
     }
 
     @Override
-    public List<Entity> listAll() {
-//        CriteriaQuery<Entity> cq = getEntityManager().getCriteriaBuilder()
-//                .createQuery(entityClass);
-//        cq = cq.select(cq.from(entityClass));
-//        return getEntityManager().createQuery(cq)
-//                .getResultList();
-        return getEntityManager().createQuery("select e from " + entityClass.getSimpleName() + " e", entityClass)
-                .getResultList();
-    }
-
-    @Override
     public List<Entity> listFiltered(FilterParams params) {
-//        CriteriaQuery<Entity> cq = getEntityManager().getCriteriaBuilder()
-//                .createQuery(entityClass);
-//        cq.select(cq.from(entityClass));
-//        TypedQuery<Entity> q = getEntityManager().createQuery(cq);
-//        q.setMaxResults(params.getRowCount() - params.getFromRow() + 1);
-//        q.setFirstResult(params.getFromRow());
-//        return q.getResultList();
         CriteriaBuilder cb = getEntityManager().getCriteriaBuilder();
         CriteriaQuery<Entity> cq = cb.createQuery(entityClass);
         Root<Entity> root = cq.from(entityClass);
@@ -158,12 +146,6 @@ public abstract class BaseCrudDao<Entity extends IdEntity, Key extends Serializa
     }
 
     @Override
-    @Asynchronous
-    public Future<Long> countAsync() {
-        return new AsyncResult<>(this.count());
-    }
-
-    @Override
     public Long count() {
 //
 //        CriteriaQuery<Long> cq = getEntityManager().getCriteriaBuilder()
@@ -177,6 +159,12 @@ public abstract class BaseCrudDao<Entity extends IdEntity, Key extends Serializa
                 DaoUtils.createFilterSet(Collections.emptyMap()),
                 SortOrderEnum.UNSORTED,
                 null));
+    }
+
+    @Override
+    @Asynchronous
+    public Future<Long> countAsync() {
+        return new AsyncResult<>(this.count());
     }
 
     @Override
@@ -194,12 +182,6 @@ public abstract class BaseCrudDao<Entity extends IdEntity, Key extends Serializa
     }
 
     @Override
-    @Asynchronous
-    public Future<Entity> createAsync(Entity entity) {
-        return new AsyncResult<>(this.create(entity));
-    }
-
-    @Override
     public Entity create(Entity entity) {
         if (entity == null)
             return null;
@@ -210,8 +192,8 @@ public abstract class BaseCrudDao<Entity extends IdEntity, Key extends Serializa
 
     @Override
     @Asynchronous
-    public Future<Entity> editAsync(Entity entity) {
-        return new AsyncResult<>(this.edit(entity));
+    public Future<Entity> createAsync(Entity entity) {
+        return new AsyncResult<>(this.create(entity));
     }
 
     @Override
@@ -224,21 +206,21 @@ public abstract class BaseCrudDao<Entity extends IdEntity, Key extends Serializa
 
     @Override
     @Asynchronous
-    public void removeAsync(Entity entity) {
-        this.remove(entity);
+    public Future<Entity> editAsync(Entity entity) {
+        return new AsyncResult<>(this.edit(entity));
     }
 
     @Override
     public void remove(Entity entity) {
-//        if (entity == null)
-//            return;
-//        Entity _entity = entity;
-//        if (!getEntityManager().contains(entity))
-//            _entity = getEntityManager().merge(entity);
-//        getEntityManager().remove(_entity);
-        getEntityManager().createQuery("delete from " + entityClass.getSimpleName() + " e where " + DaoUtils.getEntityIdFieldName(entityClass) + " = :id")
+        getEntityManager().createQuery("delete from " + DaoUtils.getEntityName(entityClass) + " e where e." + DaoUtils.getEntityIdFieldName(entityClass) + " = :id")
                 .setParameter("id", entity.getId())
                 .executeUpdate();
+    }
+
+    @Override
+    @Asynchronous
+    public void removeAsync(Entity entity) {
+        this.remove(entity);
     }
 
     protected Class<Entity> getEntityClass() {
