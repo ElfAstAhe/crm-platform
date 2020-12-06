@@ -2,10 +2,10 @@ package common.bll.cache;
 
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
-import org.jooq.tools.StringUtils;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.NullSource;
 import org.junit.jupiter.params.provider.ValueSource;
 import test.MockSimpleEntity;
 import test.TestStandUtils;
@@ -66,17 +66,13 @@ class BaseSimpleCacheTest {
     }
 
     @ParameterizedTest
-    @ValueSource(strings = {"1", TestStandUtils.NULL_VALUE})
-    public void get_valueNotExists_shouldReturnNull(String key) {
+    @ValueSource(longs = {1L})
+    @NullSource()
+    public void get_valueNotExists_shouldReturnNull(Long key) {
         // prepare
         MockBaseSimpleCache cache = new MockBaseSimpleCache();
-        Long prepKey;
-        if (StringUtils.equals(TestStandUtils.NULL_VALUE, key))
-            prepKey = null;
-        else
-            prepKey = Long.parseLong(key);
         // act
-        MockSimpleEntity actual = cache.get(prepKey);
+        MockSimpleEntity actual = cache.get(key);
         // assert
         Assertions.assertNull(actual);
     }
@@ -157,16 +153,14 @@ class BaseSimpleCacheTest {
     }
 
     @ParameterizedTest
-    @ValueSource(strings = {"data", TestStandUtils.NULL_VALUE})
-    public void put_useEmptyData_shouldDoNothing(String flag) {
+    @ValueSource(longs = {1L})
+    @NullSource
+    public void put_useEmptyData_shouldDoNothing(Long key) {
         // prepare
         MockBaseSimpleCache cache = new MockBaseSimpleCache();
-        Long key = null;
-        MockSimpleEntity value = TestStandUtils.buildSimpleInstance();
-        if (StringUtils.equals(TestStandUtils.NULL_VALUE, flag)) {
-            key = 1L;
-            value = null;
-        }
+        MockSimpleEntity value = null;
+        if (key == null)
+            value = TestStandUtils.buildSimpleInstance();
         // act
         cache.put(key, value);
         List<MockSimpleEntity> actual = cache.getAll();

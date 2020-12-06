@@ -83,6 +83,9 @@ public abstract class BaseCrudDao<Entity extends IdEntity, Key extends Serializa
 
     @Override
     public List<Entity> listFiltered(FilterParams params) {
+        if (params == null)
+            return Collections.emptyList();
+
         CriteriaBuilder cb = getEntityManager().getCriteriaBuilder();
         CriteriaQuery<Entity> cq = cb.createQuery(entityClass);
         Root<Entity> root = cq.from(entityClass);
@@ -123,6 +126,9 @@ public abstract class BaseCrudDao<Entity extends IdEntity, Key extends Serializa
 
     @Override
     public boolean exists(Object id) {
+        if (id == null)
+            return false;
+
         try {
             return getEntityManager().createQuery("select 1 from " +
                     DaoUtils.getEntityName(entityClass) + " e " +
@@ -169,6 +175,8 @@ public abstract class BaseCrudDao<Entity extends IdEntity, Key extends Serializa
 
     @Override
     public Long count(FilterParams params) {
+        if (params == null)
+            return 0L;
         boolean isFieldBlank = StringUtils.isBlank(params.getField());
         return countInternal(isFieldBlank ? null : params.getField(),
                 params.getFilterSet(),
@@ -212,6 +220,9 @@ public abstract class BaseCrudDao<Entity extends IdEntity, Key extends Serializa
 
     @Override
     public void remove(Entity entity) {
+        if (entity == null)
+            return;
+
         getEntityManager().createQuery("delete from " + DaoUtils.getEntityName(entityClass) + " e where e." + DaoUtils.getEntityIdFieldName(entityClass) + " = :id")
                 .setParameter("id", entity.getId())
                 .executeUpdate();
