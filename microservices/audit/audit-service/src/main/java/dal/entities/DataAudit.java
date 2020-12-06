@@ -1,11 +1,13 @@
 package dal.entities;
 
 import common.dal.entity.BaseIdEntity;
+import common.util.StringUtils;
 
 import javax.persistence.*;
 import java.io.Serializable;
 import java.time.OffsetDateTime;
 import java.util.Objects;
+import java.util.StringJoiner;
 
 @Entity
 @Table(name = "data_audit")
@@ -14,6 +16,9 @@ public class DataAudit extends BaseIdEntity implements Serializable {
 
     @Column(name = "event_date")
     private OffsetDateTime eventDate;
+
+    @Column(name = "source")
+    private String source;
 
     @Column(name = "request_id")
     private String requestId;
@@ -31,12 +36,12 @@ public class DataAudit extends BaseIdEntity implements Serializable {
     @Column(name = "object_id")
     private String objectId;
 
+    @Column(name = "object_name")
+    private String objectName;
+
     @Lob
     @Column(name = "values")
     private String values;
-
-    @Column(name = "source")
-    private String source;
 
     @Column(name = "user")
     private String user;
@@ -129,11 +134,6 @@ public class DataAudit extends BaseIdEntity implements Serializable {
     }
 
     @Override
-    public int hashCode() {
-        return Objects.hash(getId());
-    }
-
-    @Override
     public boolean equals(Object object) {
         if (object == null) {
             return false;
@@ -148,6 +148,10 @@ public class DataAudit extends BaseIdEntity implements Serializable {
 
     @Override
     public String toString() {
-        return "dal.entities.DataAudit[ id=" + this.getId() + " ]";
+        return new StringJoiner(StringUtils.DELIMITER, StringUtils.buildPrefix(this), StringUtils.SUFFIX)
+                .add(StringUtils.buildKeyValue("id", StringUtils.toNullString(getId())))
+                .add(StringUtils.buildKeyValue("event", StringUtils.toNullString(event)))
+                .add(StringUtils.buildKeyValue("className", StringUtils.toNullString(className)))
+                .toString();
     }
 }
