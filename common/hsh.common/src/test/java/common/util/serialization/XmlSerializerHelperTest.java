@@ -36,8 +36,6 @@ public class XmlSerializerHelperTest {
         String[] actualStrings = actual.split("\n");
         // assert
         Assertions.assertNotNull(actual);
-//        Assertions.assertTrue(actualStrings.length > 1);
-//        System.out.println(actual);
     }
 
     @Test
@@ -51,7 +49,7 @@ public class XmlSerializerHelperTest {
     @Test
     public void deserialize_passString_shouldReturnInstance() {
         // prepare
-        String data = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?><testSerializeClass><id>1</id><name>test</name></testSerializeClass>";
+        String data = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?><mockSimpleEntity><id>1</id><name>test</name></mockSimpleEntity>";
         int expectedId = 1;
         String expectedName = "test";
         // act
