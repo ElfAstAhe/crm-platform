@@ -11,6 +11,10 @@ import org.jooq.util.mysql.MySQLDataType;
  * @author elf
  */
 public class SqlMigrationHelper {
+    private SqlMigrationHelper() {
+        // hide constructor
+    }
+
     // JOOQ не умеет генерировать MySql longtext тип
     public static DataType<String> serverSpecificDataTypeLongText(SQLDialect sqlDialect) {
         if (SQLDialect.MYSQL.equals(sqlDialect))
@@ -154,9 +158,5 @@ public class SqlMigrationHelper {
         private Script() {
             // hide constructor
         }
-    }
-
-    private SqlMigrationHelper() {
-        // hide constructor
     }
 }
