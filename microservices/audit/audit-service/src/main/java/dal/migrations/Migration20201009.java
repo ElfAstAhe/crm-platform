@@ -20,7 +20,7 @@ import java.util.logging.Logger;
 public class Migration20201009 extends BaseSqlMigration {
     private static final Logger logger = Logger.getLogger(Migration20201009.class.getName());
     private static final String VERSION = "1.0";
-    private static final int CHECK_SUM = 1;
+    private static final int CHECK_SUM = 0;
     private static final String DESCRIPTION = "Initial";
 
     private static final String TABLE_DATA_AUDIT = "data_audit";
@@ -97,7 +97,7 @@ public class Migration20201009 extends BaseSqlMigration {
             }
             {
                 // Коментарии
-                script = create.commentOnTable(DSL.name(SqlMigrationHelper.Table.SETTINGS))
+                script = create.commentOnTable(DSL.name(TABLE_DATA_AUDIT))
                         .is("data audit")
                         .getSQL();
                 logger.info(String.format(SqlMigrationHelper.LogTemplate.COMMENT_SCRIPT, script));

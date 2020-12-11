@@ -2,6 +2,7 @@ package dto.audit.builders;
 
 import common.dto.builder.BaseBuilder;
 import common.util.audit.AuditUtils;
+import dto.audit.AuditStatusEnum;
 import dto.audit.DataAudit;
 import dto.audit.DataAuditEventEnum;
 import dto.audit.DataAuditValue;
@@ -20,6 +21,11 @@ public class DataAuditBuilder extends BaseBuilder<DataAudit> {
 
     public DataAuditBuilder setDate(OffsetDateTime date) {
         getInstance().setDate(date);
+        return this;
+    }
+
+    public DataAuditBuilder setSource(String source) {
+        getInstance().setSource(source);
         return this;
     }
 
@@ -48,13 +54,13 @@ public class DataAuditBuilder extends BaseBuilder<DataAudit> {
         return this;
     }
 
-    public DataAuditBuilder setValues(List<DataAuditValue> values) {
-        getInstance().setValues(values);
+    public DataAuditBuilder setObjectName(String objectName) {
+        getInstance().setObjectName(objectName);
         return this;
     }
 
-    public DataAuditBuilder setSource(String source) {
-        getInstance().setSource(source);
+    public DataAuditBuilder setValues(List<DataAuditValue> values) {
+        getInstance().setValues(values);
         return this;
     }
 
@@ -68,11 +74,17 @@ public class DataAuditBuilder extends BaseBuilder<DataAudit> {
         return this;
     }
 
+    public DataAuditBuilder setStatus(AuditStatusEnum status) {
+        getInstance().setStatus(status);
+        return this;
+    }
+
     public DataAuditBuilder setCreatedInstance(Object created) {
         getInstance().setEvent(DataAuditEventEnum.CREATED);
         getInstance().setClassName(created.getClass().getName());
         getInstance().setClassName(AuditUtils.classDescription(created));
         getInstance().setObjectId(AuditUtils.objectIdValue(created));
+        getInstance().setObjectName(AuditUtils.objectNameValue(created));
         getInstance().setValues(DataAuditValuesBuilder.get()
                 .buildCreated(created));
         return this;
@@ -83,6 +95,7 @@ public class DataAuditBuilder extends BaseBuilder<DataAudit> {
         getInstance().setClassName(after.getClass().getName());
         getInstance().setClassName(AuditUtils.classDescription(after));
         getInstance().setObjectId(AuditUtils.objectIdValue(after));
+        getInstance().setObjectName(AuditUtils.objectNameValue(after));
         getInstance().setValues(DataAuditValuesBuilder.get()
                 .buildModified(before, after));
         return this;
@@ -93,6 +106,7 @@ public class DataAuditBuilder extends BaseBuilder<DataAudit> {
         getInstance().setClassName(removed.getClass().getName());
         getInstance().setClassName(AuditUtils.classDescription(removed));
         getInstance().setObjectId(AuditUtils.objectIdValue(removed));
+        getInstance().setObjectName(AuditUtils.objectNameValue(removed));
         getInstance().setValues(DataAuditValuesBuilder.get()
                 .buildRemoved(removed));
         return this;

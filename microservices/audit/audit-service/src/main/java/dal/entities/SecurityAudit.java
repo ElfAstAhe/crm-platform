@@ -10,9 +10,9 @@ import java.util.Objects;
 import java.util.StringJoiner;
 
 @Entity
-@Table(name = "data_audit")
+@Table(name = "security_audit")
 @Cacheable(false)
-public class DataAudit extends BaseIdEntity implements Serializable {
+public class SecurityAudit extends BaseIdEntity implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Column(name = "event_date")
@@ -26,36 +26,17 @@ public class DataAudit extends BaseIdEntity implements Serializable {
 
     @Enumerated(EnumType.STRING)
     @Column(name = "event")
-    private DataAuditEventEnum event;
-
-    @Column(name = "class_name")
-    private String className;
-
-    @Column(name = "class_description")
-    private String classDescription;
-
-    @Column(name = "object_id")
-    private String objectId;
-
-    @Column(name = "object_name")
-    private String objectName;
-
-    @Lob
-    @Column(name = "values")
-    private String values;
+    private SecurityAuditEventEnum event;
 
     @Column(name = "user")
     private String user;
-
-    @Column(name = "run_as_user")
-    private String runAsUser;
 
     @Enumerated(EnumType.STRING)
     @Column(name = "status")
     private AuditStatusEnum status;
 
-    public DataAudit() {
-        // default constructor
+    public SecurityAudit() {
+        // default
     }
 
     public OffsetDateTime getEventDate() {
@@ -66,54 +47,6 @@ public class DataAudit extends BaseIdEntity implements Serializable {
         this.eventDate = eventDate;
     }
 
-    public String getRequestId() {
-        return requestId;
-    }
-
-    public void setRequestId(String requestId) {
-        this.requestId = requestId;
-    }
-
-    public DataAuditEventEnum getEvent() {
-        return event;
-    }
-
-    public void setEvent(DataAuditEventEnum event) {
-        this.event = event;
-    }
-
-    public String getClassName() {
-        return className;
-    }
-
-    public void setClassName(String className) {
-        this.className = className;
-    }
-
-    public String getClassDescription() {
-        return classDescription;
-    }
-
-    public void setClassDescription(String classDescription) {
-        this.classDescription = classDescription;
-    }
-
-    public String getObjectId() {
-        return objectId;
-    }
-
-    public void setObjectId(String objectId) {
-        this.objectId = objectId;
-    }
-
-    public String getValues() {
-        return values;
-    }
-
-    public void setValues(String values) {
-        this.values = values;
-    }
-
     public String getSource() {
         return source;
     }
@@ -122,28 +55,28 @@ public class DataAudit extends BaseIdEntity implements Serializable {
         this.source = source;
     }
 
+    public String getRequestId() {
+        return requestId;
+    }
+
+    public void setRequestId(String requestId) {
+        this.requestId = requestId;
+    }
+
+    public SecurityAuditEventEnum getEvent() {
+        return event;
+    }
+
+    public void setEvent(SecurityAuditEventEnum event) {
+        this.event = event;
+    }
+
     public String getUser() {
         return user;
     }
 
     public void setUser(String user) {
         this.user = user;
-    }
-
-    public String getRunAsUser() {
-        return runAsUser;
-    }
-
-    public void setRunAsUser(String runAsUser) {
-        this.runAsUser = runAsUser;
-    }
-
-    public String getObjectName() {
-        return objectName;
-    }
-
-    public void setObjectName(String objectName) {
-        this.objectName = objectName;
     }
 
     public AuditStatusEnum getStatus() {
@@ -159,10 +92,10 @@ public class DataAudit extends BaseIdEntity implements Serializable {
         if (object == null) {
             return false;
         }
-        if (!(object instanceof DataAudit)) {
+        if (!(object instanceof SecurityAudit)) {
             return false;
         }
-        DataAudit other = (DataAudit) object;
+        SecurityAudit other = (SecurityAudit) object;
 
         return Objects.equals(this.getId(), other.getId());
     }
@@ -172,7 +105,7 @@ public class DataAudit extends BaseIdEntity implements Serializable {
         return new StringJoiner(StringUtils.DELIMITER, StringUtils.buildPrefix(this), StringUtils.SUFFIX)
                 .add(StringUtils.buildKeyValue("id", StringUtils.toNullString(getId())))
                 .add(StringUtils.buildKeyValue("event", StringUtils.toNullString(event)))
-                .add(StringUtils.buildKeyValue("className", StringUtils.toNullString(className)))
+                .add(StringUtils.buildKeyValue("user", StringUtils.toNullString(user)))
                 .toString();
     }
 }
