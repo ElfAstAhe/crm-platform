@@ -5,11 +5,15 @@ import dal.entities.Setting;
 
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 @SuppressWarnings({"JpaQueryApiInspection"})
 @Stateless
 public class SettingDaoImpl extends BaseCrudDao<Setting, String> implements SettingDao{
+    private static final Logger logger = Logger.getLogger(SettingDaoImpl.class.getName());
     @PersistenceContext(unitName = "audit.PU")
     private EntityManager em;
 
@@ -24,7 +28,10 @@ public class SettingDaoImpl extends BaseCrudDao<Setting, String> implements Sett
                     .setParameter("code", key)
                     .setMaxResults(1)
                     .getSingleResult();
+        } catch (NoResultException ex) {
+            return null;
         } catch (Exception ex) {
+            logger.log(Level.SEVERE, "error fetch data", ex);
             return null;
         }
     }

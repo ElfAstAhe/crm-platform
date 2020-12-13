@@ -18,21 +18,21 @@ public class SecurityAudit extends BaseIdEntity implements Serializable {
     @Column(name = "event_date")
     private OffsetDateTime eventDate;
 
-    @Column(name = "source")
+    @Column(name = "source", length = 100)
     private String source;
 
-    @Column(name = "request_id")
+    @Column(name = "request_id", length = 50)
     private String requestId;
 
     @Enumerated(EnumType.STRING)
-    @Column(name = "event")
+    @Column(name = "event", length = 50)
     private SecurityAuditEventEnum event;
 
-    @Column(name = "user")
+    @Column(name = "user", length = 100)
     private String user;
 
     @Enumerated(EnumType.STRING)
-    @Column(name = "status")
+    @Column(name = "status", length = 50)
     private AuditStatusEnum status;
 
     public SecurityAudit() {

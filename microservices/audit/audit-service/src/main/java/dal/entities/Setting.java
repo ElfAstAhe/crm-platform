@@ -17,6 +17,7 @@ import java.util.Objects;
 @NamedQuery(lockMode = LockModeType.NONE, name = "Setting.findById", query = "SELECT s FROM Setting s WHERE s.id = :id")
 @NamedQuery(lockMode = LockModeType.NONE, name = "Setting.findByCode", query = "select s from Setting s where s.code = :code")
 @NamedQuery(lockMode = LockModeType.NONE, name = "Setting.findByName", query = "select s from Setting s where s.name = :name")
+@Cacheable(false)
 public class Setting extends BaseIdEntity implements Serializable {
     private static final long serialVersionUID = 1L;
 

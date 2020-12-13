@@ -1,5 +1,6 @@
 package common.dal.migration;
 
+import common.exceptions.DalException;
 import common.util.ExceptionMessages;
 import org.flywaydb.core.Flyway;
 import org.flywaydb.core.api.configuration.Configuration;
@@ -19,14 +20,14 @@ public final class DatabaseMigrator implements Migrator {
     private final DataSource dataSource;
     private final String[] migrationLocations;
 
-    public static void up(DataSource dataSource, String... migrationLocations) {
+    public static void up(DataSource dataSource, String... migrationLocations) throws DalException {
         Migrator migrator = new DatabaseMigrator(dataSource, migrationLocations);
         migrator.initialize();
         if (migrator.isInitialized())
             migrator.migrateUp();
     }
 
-    public static void down(DataSource dataSource, String... migrationLocations) {
+    public static void down(DataSource dataSource, String... migrationLocations) throws DalException {
         Migrator migrator = new DatabaseMigrator(dataSource, migrationLocations);
         migrator.initialize();
         if (migrator.isInitialized())
@@ -45,38 +46,41 @@ public final class DatabaseMigrator implements Migrator {
     }
 
     @Override
-    public void migrateUp() {
+    public void migrateUp() throws DalException {
         logger.entering(this.getClass().getName(), "migrateUp");
         try {
             flyway.migrate();
         } catch (Exception ex) {
             logger.severe(String.format(ExceptionMessages.FMT_MIGRATION_EXCEPTION, ex.getClass().getName(), ex.getMessage()));
+            throw new DalException("error migrate up",ex);
         } finally {
             logger.exiting(this.getClass().getName(), "migrateUp");
         }
     }
 
     @Override
-    public void migrateDown() {
+    public void migrateDown() throws DalException {
         logger.entering(this.getClass().getName(), "migrateDown");
         try {
             flyway.undo();
         } catch (Exception ex) {
             logger.severe(String.format(ExceptionMessages.FMT_MIGRATION_EXCEPTION, ex.getClass().getName(), ex.getMessage()));
+            throw new DalException("error migrate down", ex);
         } finally {
             logger.exiting(this.getClass().getName(), "migrateDown");
         }
     }
 
     @Override
-    public void clean() {
-        logger.entering(this.getClass().getName(), "migrateDown");
+    public void clean() throws DalException {
+        logger.entering(this.getClass().getName(), "clean");
         try {
             flyway.clean();
         } catch (Exception ex) {
             logger.severe(String.format(ExceptionMessages.FMT_MIGRATION_EXCEPTION, ex.getClass().getName(), ex.getMessage()));
+            throw new DalException("error clean", ex);
         } finally {
-            logger.exiting(this.getClass().getName(), "migrateDown");
+            logger.exiting(this.getClass().getName(), "clean");
         }
     }
 

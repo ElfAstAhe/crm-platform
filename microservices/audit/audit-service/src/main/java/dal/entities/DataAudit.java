@@ -18,40 +18,40 @@ public class DataAudit extends BaseIdEntity implements Serializable {
     @Column(name = "event_date")
     private OffsetDateTime eventDate;
 
-    @Column(name = "source")
+    @Column(name = "source", length = 100)
     private String source;
 
-    @Column(name = "request_id")
+    @Column(name = "request_id", length = 50)
     private String requestId;
 
     @Enumerated(EnumType.STRING)
-    @Column(name = "event")
+    @Column(name = "event", length = 50)
     private DataAuditEventEnum event;
 
-    @Column(name = "class_name")
+    @Column(name = "class_name", length = 512)
     private String className;
 
-    @Column(name = "class_description")
+    @Column(name = "class_description", length = 512)
     private String classDescription;
 
-    @Column(name = "object_id")
+    @Column(name = "object_id", length = 50)
     private String objectId;
 
-    @Column(name = "object_name")
+    @Column(name = "object_name", length = 100)
     private String objectName;
 
     @Lob
     @Column(name = "values")
     private String values;
 
-    @Column(name = "user")
+    @Column(name = "user", length = 100)
     private String user;
 
-    @Column(name = "run_as_user")
+    @Column(name = "run_as_user", length = 100)
     private String runAsUser;
 
     @Enumerated(EnumType.STRING)
-    @Column(name = "status")
+    @Column(name = "status", length = 50)
     private AuditStatusEnum status;
 
     public DataAudit() {

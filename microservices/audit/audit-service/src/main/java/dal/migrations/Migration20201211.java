@@ -4,6 +4,8 @@ import common.dal.migration.BaseSqlMigration;
 import common.dal.migration.SqlMigrationHelper;
 import common.exceptions.DalException;
 import org.flywaydb.core.api.migration.Context;
+import org.jooq.AlterTableAddStep;
+import org.jooq.AlterTableStep;
 import org.jooq.CreateTableColumnStep;
 import org.jooq.DSLContext;
 import org.jooq.conf.StatementType;
@@ -39,17 +41,19 @@ public class Migration20201211 extends BaseSqlMigration {
         try {
             DSLContext create = DSL.using(context.getConnection());
             // Конфигурируем
-            create.settings().setStatementType(StatementType.STATIC_STATEMENT);
+            create.settings()
+                    .setStatementType(StatementType.STATIC_STATEMENT);
             // Генерируем таблицу
             String script;
             try (CreateTableColumnStep ctcs = create.createTableIfNotExists(DSL.name(TABLE_SECURITY_AUDIT))) {
                 script = ctcs
                         .column(DSL.name(SqlMigrationHelper.Field.ID), SQLDataType.BIGINT.nullable(false))
                         .column(DSL.name("event_date"), SQLDataType.OFFSETDATETIME.nullable(false).defaultValue(OffsetDateTime.now()))
-                        .column(DSL.name("source"), SQLDataType.VARCHAR(100).nullable(true))
-                        .column(DSL.name("request_id"), SQLDataType.VARCHAR(50).nullable(true))
-                        .column(DSL.name("event"), SQLDataType.VARCHAR(50).nullable(true))
-                        .column(DSL.name("user"), SQLDataType.VARCHAR(100).nullable(true))
+                        .column(DSL.name(SqlMigrationHelper.Field.SOURCE), SQLDataType.VARCHAR(100).nullable(true))
+                        .column(DSL.name(SqlMigrationHelper.Field.REQUEST_ID), SQLDataType.VARCHAR(50).nullable(true))
+                        .column(DSL.name(SqlMigrationHelper.Field.EVENT), SQLDataType.VARCHAR(50).nullable(true))
+                        .column(DSL.name(SqlMigrationHelper.Field.USER), SQLDataType.VARCHAR(100).nullable(true))
+                        .column(DSL.name(SqlMigrationHelper.Field.STATUS), SQLDataType.VARCHAR(50).nullable(true))
                         .constraints(
                                 DSL.constraint(DSL.name(SqlMigrationHelper.buildPkConstraintName(TABLE_SECURITY_AUDIT)))
                                         .primaryKey(DSL.name(SqlMigrationHelper.Field.ID)))
@@ -73,7 +77,28 @@ public class Migration20201211 extends BaseSqlMigration {
         }
     }
 
-    private void alterTableDataAudit(Context context) {
-        // ..
+    private void alterTableDataAudit(Context context) throws DalException {
+        logger.entering(this.getClass().getName(), "alterTableDataAudit ..");
+        try {
+            DSLContext dsl = DSL.using(context.getConnection());
+            // Конфигурируем
+            dsl.settings()
+                    .setStatementType(StatementType.STATIC_STATEMENT);
+            // Генерируем таблицу
+            String script;
+            {
+                // обавляем колонку
+                script = dsl.alterTableIfExists(DSL.name(TABLE_DATA_AUDIT))
+                        .add(DSL.name(SqlMigrationHelper.Field.STATUS), SQLDataType.VARCHAR(50).nullable(true))
+                        .getSQL();
+                logger.info(String.format(SqlMigrationHelper.LogTemplate.TABLE_SCRIPT, script));
+                dsl.execute(script);
+            }
+        } catch (Exception ex) {
+            logger.log(Level.SEVERE, "alterTableDataAudit error", ex);
+            throw new DalException("alterTableDataAudit error", ex);
+        } finally {
+            logger.exiting(this.getClass().getName(), "alterTableDataAudit done");
+        }
     }
 }

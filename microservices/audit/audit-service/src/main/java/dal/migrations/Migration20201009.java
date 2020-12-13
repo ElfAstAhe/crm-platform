@@ -78,15 +78,15 @@ public class Migration20201009 extends BaseSqlMigration {
                 script = ctcs
                         .column(DSL.name(SqlMigrationHelper.Field.ID), SQLDataType.BIGINT.nullable(false))
                         .column(DSL.name("event_date"), SQLDataType.OFFSETDATETIME.nullable(false).defaultValue(OffsetDateTime.now()))
-                        .column(DSL.name("source"), SQLDataType.VARCHAR(100).nullable(true))
-                        .column(DSL.name("request_id"), SQLDataType.VARCHAR(50).nullable(true))
-                        .column(DSL.name("event"), SQLDataType.VARCHAR(50).nullable(true))
+                        .column(DSL.name(SqlMigrationHelper.Field.SOURCE), SQLDataType.VARCHAR(100).nullable(true))
+                        .column(DSL.name(SqlMigrationHelper.Field.REQUEST_ID), SQLDataType.VARCHAR(50).nullable(true))
+                        .column(DSL.name(SqlMigrationHelper.Field.EVENT), SQLDataType.VARCHAR(50).nullable(true))
                         .column(DSL.name("class_name"), SQLDataType.VARCHAR(512).nullable(true))
                         .column(DSL.name("class_description"), SQLDataType.VARCHAR(512).nullable(true))
-                        .column(DSL.name("object_Id"), SQLDataType.VARCHAR(50).nullable(true))
+                        .column(DSL.name("object_id"), SQLDataType.VARCHAR(50).nullable(true))
                         .column(DSL.name("object_name"), SQLDataType.VARCHAR(100).nullable(true))
                         .column(DSL.name("values"), SqlMigrationHelper.serverSpecificDataTypeLongText(create.dialect()).nullable(true))
-                        .column(DSL.name("user"), SQLDataType.VARCHAR(100).nullable(true))
+                        .column(DSL.name(SqlMigrationHelper.Field.USER), SQLDataType.VARCHAR(100).nullable(true))
                         .column(DSL.name("run_as_user"), SQLDataType.VARCHAR(100).nullable(true))
                         .constraints(
                                 DSL.constraint(DSL.name(SqlMigrationHelper.buildPkConstraintName(TABLE_DATA_AUDIT)))
@@ -122,10 +122,10 @@ public class Migration20201009 extends BaseSqlMigration {
             try (CreateTableColumnStep ctcs = create.createTableIfNotExists(DSL.name(SqlMigrationHelper.Table.SETTINGS))) {
                 script = ctcs
                         .column(DSL.name(SqlMigrationHelper.Field.ID), SQLDataType.BIGINT.nullable(false))
+                        .column(DSL.name(SqlMigrationHelper.Field.VERSION), SQLDataType.BIGINT.nullable(false))
                         .column(DSL.name(SqlMigrationHelper.Field.CODE), SQLDataType.VARCHAR(50).nullable(false))
                         .column(DSL.name(SqlMigrationHelper.Field.NAME), SQLDataType.VARCHAR(100).nullable(true))
                         .column(DSL.name(SqlMigrationHelper.Field.VALUE), SQLDataType.VARCHAR(1024).nullable(true))
-                        .column(DSL.name(SqlMigrationHelper.Field.VERSION), SQLDataType.BIGINT.nullable(false))
                         .constraints(
                                 DSL.constraint(DSL.name(SqlMigrationHelper.buildPkConstraintName(SqlMigrationHelper.Table.SETTINGS)))
                                         .primaryKey(DSL.name(SqlMigrationHelper.Field.ID)),

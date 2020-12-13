@@ -1,5 +1,7 @@
 package common.dal.migration;
 
+import common.exceptions.DalException;
+
 /**
  * Интерфейс мигратор
  *
@@ -14,17 +16,17 @@ public interface Migrator {
     /**
      * Миграция вверх
      */
-    void migrateUp();
+    void migrateUp() throws DalException;
 
     /**
      * Миграция вниз
      */
-    void migrateDown();
+    void migrateDown() throws DalException;
 
     /**
      * Очистка
      */
-    void clean();
+    void clean() throws DalException;
 
     boolean isInitialized();
 }
