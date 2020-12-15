@@ -1,9 +1,7 @@
 package ep.config;
 
 import common.ep.mapper.ExceptionMapperHelper;
-import ep.controller.HealthController;
-import ep.controller.MetricsController;
-import ep.controller.ReadyController;
+import ep.controller.*;
 
 import javax.ws.rs.ApplicationPath;
 import javax.ws.rs.core.Application;
@@ -22,6 +20,9 @@ public class RsConfig extends Application {
         classList.add(ReadyController.class);
         classList.add(HealthController.class);
         classList.add(MetricsController.class);
+
+        classList.add(DataAuditController.class);
+        classList.add(AuditController.class);
 
         classList.addAll(ExceptionMapperHelper.getMapperProviderClassList());
 

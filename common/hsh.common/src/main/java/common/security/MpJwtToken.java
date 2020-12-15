@@ -140,8 +140,8 @@ public class MpJwtToken {
         jsonObject.put("iss", iss);
         jsonObject.put("aud", aud);
         jsonObject.put("jti", jti);
-        jsonObject.put("exp", exp / 1000);
-        jsonObject.put("iat", iat / 1000);
+        jsonObject.put("exp", exp / 1000L);
+        jsonObject.put("iat", iat / 1000L);
         jsonObject.put("sub", sub);
         jsonObject.put("upn", upn);
         jsonObject.put("preferred_username", preferredUsername);

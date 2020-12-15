@@ -8,6 +8,7 @@ import org.apache.commons.lang3.StringUtils;
 import javax.servlet.http.HttpServletRequest;
 import java.io.PrintWriter;
 import java.io.StringWriter;
+import java.util.Arrays;
 
 /**
  *
@@ -15,6 +16,10 @@ import java.io.StringWriter;
  */
 public class ExceptionDtoHelper {
     private static final String HEADER_ACCEPT = "Accept";
+    private static final String[] ACCEPTABLE_CONTENT_TYPES = new String[] {MimeTypes.Application.JSON,
+            MimeTypes.Application.XML,
+            MimeTypes.Application.YAML};
+    private static final String DEFAULT_CONTENT_TYPE = MimeTypes.Application.JSON;
 
     /**
      * получить корректный content-type
@@ -25,9 +30,7 @@ public class ExceptionDtoHelper {
         String accept = request.getHeader(HEADER_ACCEPT);
         return StringUtils.containsAny(
                 accept,
-                MimeTypes.Application.JSON,
-                MimeTypes.Application.XML,
-                MimeTypes.Application.YAML) ? accept : MimeTypes.Application.JSON;
+                ACCEPTABLE_CONTENT_TYPES) ? accept : DEFAULT_CONTENT_TYPE;
     }
 
     /**

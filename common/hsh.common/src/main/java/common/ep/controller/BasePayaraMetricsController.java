@@ -48,7 +48,7 @@ public abstract class BasePayaraMetricsController extends BaseSimpleMetricsContr
                 .connectTimeout(CONNECT_TIME_OUT, TimeUnit.MILLISECONDS)
                 .readTimeout(READ_TIME_OUT, TimeUnit.MILLISECONDS)
                 .hostnameVerifier((s, sslSession) -> false)
-                .executorService(getExecutor())
+                .executorService(getExecutorService())
                 .build();
 
         if (getRequest() != null) {
@@ -97,7 +97,7 @@ public abstract class BasePayaraMetricsController extends BaseSimpleMetricsContr
 
     protected abstract HttpServletRequest getRequest();
 
-    protected abstract ExecutorService getExecutor();
+    protected abstract ExecutorService getExecutorService();
 
     private InputStream getLocalSystemMetrics() {
         try (Response response = target.path(PATH_SYSTEM)

@@ -16,17 +16,17 @@ public interface Migrator {
     /**
      * Миграция вверх
      */
-    void migrateUp() throws DalException;
+    void migrateUp();
 
     /**
      * Миграция вниз
      */
-    void migrateDown() throws DalException;
+    void migrateDown();
 
     /**
      * Очистка
      */
-    void clean() throws DalException;
+    void clean();
 
     boolean isInitialized();
 }

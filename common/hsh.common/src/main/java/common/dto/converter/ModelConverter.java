@@ -3,10 +3,10 @@ package common.dto.converter;
 /**
  *
  * @author elf
- * @param <Dto>
- * @param <Model>
+ * @param <Dto> dto class
+ * @param <Model> model
  */
-public interface Converter<Dto, Model> {
+public interface ModelConverter<Dto, Model> {
     
     /**
      * Преобразовать модель в dto

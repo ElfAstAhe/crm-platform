@@ -25,7 +25,7 @@ public class MetricsController extends BasePayaraMetricsController {
     private HttpServletRequest request;
 
     @Resource
-    private ManagedExecutorService executor;
+    private ManagedExecutorService executorService;
 
     @Override
     protected HttpServletRequest getRequest() {
@@ -33,7 +33,7 @@ public class MetricsController extends BasePayaraMetricsController {
     }
 
     @Override
-    protected ExecutorService getExecutor() {
-        return executor;
+    protected ExecutorService getExecutorService() {
+        return executorService;
     }
 }

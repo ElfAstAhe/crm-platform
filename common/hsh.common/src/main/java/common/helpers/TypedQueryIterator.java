@@ -9,7 +9,6 @@ import java.util.function.Function;
  * реализация iterator для TypedQuery
  *
  * @param <T>
- *
  * @author elf
  */
 public class TypedQueryIterator<T> implements Iterator<T> {
@@ -21,7 +20,7 @@ public class TypedQueryIterator<T> implements Iterator<T> {
     /**
      * Уницифированый констрктор
      *
-     * @param query typed query
+     * @param query                        typed query
      * @param nextIterationConditionSetter next iteration condition
      */
     public TypedQueryIterator(TypedQuery<T> query, NextIterationConditionSetter<T> nextIterationConditionSetter) {
@@ -31,9 +30,9 @@ public class TypedQueryIterator<T> implements Iterator<T> {
 
     public static <T> TypedQueryIterator<T> createSimpleIterator(TypedQuery<T> query,
                                                                  String paramName,
-                                                                 Function<T,Object> nextIterationConditionGetter,
+                                                                 Function<T, Object> nextIterationConditionGetter,
                                                                  Object startCondition) {
-        return new TypedQueryIterator<>(query, (q,p,f) -> q.setParameter(paramName, f ? startCondition : nextIterationConditionGetter.apply(p)));
+        return new TypedQueryIterator<>(query, (q, p, f) -> q.setParameter(paramName, f ? startCondition : nextIterationConditionGetter.apply(p)));
     }
 
     @Override

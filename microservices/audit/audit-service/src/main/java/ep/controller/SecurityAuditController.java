@@ -2,8 +2,8 @@ package ep.controller;
 
 import common.ep.controller.BaseCrudController;
 import common.ep.facade.CrudFacade;
-import dto.audit.DataAudit;
-import ep.controller.facade.DataAuditFacade;
+import dto.audit.SecurityAudit;
+import ep.controller.facade.SecurityAuditFacade;
 
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
@@ -13,20 +13,17 @@ import javax.ws.rs.core.GenericEntity;
 import javax.ws.rs.core.UriInfo;
 import java.util.List;
 
-/**
- * crud dataAudit
- */
 @RequestScoped
-@Path("dataAudit")
-public class DataAuditController extends BaseCrudController<DataAudit> {
+@Path("securityAudit")
+public class SecurityAuditController extends BaseCrudController<SecurityAudit> {
     @Context
     private UriInfo uriInfo;
 
     @Inject
-    private DataAuditFacade facade;
+    private SecurityAuditFacade facade;
 
     @Override
-    protected CrudFacade<DataAudit> getCrudFacade() {
+    protected CrudFacade<SecurityAudit> getCrudFacade() {
         return facade;
     }
 
@@ -36,12 +33,12 @@ public class DataAuditController extends BaseCrudController<DataAudit> {
     }
 
     @Override
-    protected Long getDtoId(DataAudit instance) {
+    protected Long getDtoId(SecurityAudit instance) {
         return instance.getId();
     }
 
     @Override
-    protected GenericEntity<List<DataAudit>> getGenericEntity(List<DataAudit> list) {
-        return new GenericEntity<List<DataAudit>>(list){};
+    protected GenericEntity<List<SecurityAudit>> getGenericEntity(List<SecurityAudit> list) {
+        return new GenericEntity<List<SecurityAudit>>(list){};
     }
 }

@@ -38,7 +38,7 @@
         <mvn.plugin.war.version>3.2.3</mvn.plugin.war.version>
         <mvn.plugin.ear.version>3.0.2</mvn.plugin.ear.version>
         <mvn.plugin.ejb.version>3.0.1</mvn.plugin.ejb.version>
-        <mvn.plugin.test.version>3.0.0-M4</mvn.plugin.test.version>
+        <mvn.plugin.test.version>3.0.0-M5</mvn.plugin.test.version>
         <!--mvn.plugin.processor.version>2.0.5</mvn.plugin.processor.version-->
         <mvn.plugin.processor.version>3.3.3</mvn.plugin.processor.version>
         <mvn.plugin.deploy.version>3.0.0-M1</mvn.plugin.deploy.version>

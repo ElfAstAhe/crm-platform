@@ -9,10 +9,9 @@ import java.util.function.Consumer;
  * реализация iterable для TypedQuery
  *
  * @param <T>
- *
  * @author elf
  */
-public class TypedQueryIterable<T> implements Iterable<T>{
+public class TypedQueryIterable<T> implements Iterable<T> {
     private final TypedQueryIterator<T> iterator;
 
     public TypedQueryIterable(TypedQuery<T> query, TypedQueryIterator.NextIterationConditionSetter<T> nextIterationConditionSetter) {

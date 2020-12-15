@@ -6,6 +6,10 @@ package common.ep.metrics;
  * @author elf
  */
 public class Metrics {
+    private Metrics() {
+        // hide constructor
+    }
+
     public static class Metrica {
         public static final String TOTAL_HTTP_REQUEST = "app_total_http_request";
         public static final String ACTIVE_HTTP_REQUEST = "app_active_http_request";
@@ -26,9 +30,5 @@ public class Metrics {
         public static final String STATUS = "status";
         public static final String PATH_URI = "path_uri";
         public static final String METHOD = "method";
-    }
-
-    private Metrics() {
-        // hide constructor
     }
 }

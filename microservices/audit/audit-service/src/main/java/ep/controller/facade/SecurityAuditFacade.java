@@ -1,37 +1,32 @@
 package ep.controller.facade;
 
 import common.ep.facade.CrudFacade;
-import dal.dao.DataAuditDao;
-import dto.audit.DataAudit;
+import dto.audit.SecurityAudit;
 
-import javax.ejb.EJB;
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Named;
 import java.util.List;
 
 @RequestScoped
 @Named
-public class DataAuditFacade implements CrudFacade<DataAudit> {
-    @EJB
-    private DataAuditDao daoDataAudit;
-
+public class SecurityAuditFacade implements CrudFacade<SecurityAudit> {
     @Override
-    public DataAudit getInstance(Object id) {
+    public SecurityAudit getInstance(Object id) {
         return null;
     }
 
     @Override
-    public List<DataAudit> listAllInstances() {
+    public List<SecurityAudit> listAllInstances() {
         return null;
     }
 
     @Override
-    public DataAudit createInstance(DataAudit instance) {
+    public SecurityAudit createInstance(SecurityAudit instance) {
         return null;
     }
 
     @Override
-    public DataAudit editInstance(Object id, DataAudit instance) {
+    public SecurityAudit editInstance(Object id, SecurityAudit instance) {
         return null;
     }
 

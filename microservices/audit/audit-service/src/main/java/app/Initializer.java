@@ -2,7 +2,6 @@ package app;
 
 import common.app.AppInitializer;
 import common.dal.migration.DatabaseMigrator;
-import common.exceptions.DalException;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.Resource;
@@ -19,7 +18,7 @@ public class Initializer implements AppInitializer {
     private boolean ready = false;
 
     @PostConstruct
-    public void postConstruct() throws DalException {
+    public void postConstruct() throws RuntimeException {
         DatabaseMigrator.up(dataSource, "dal/migrations");
         ready = true;
     }
