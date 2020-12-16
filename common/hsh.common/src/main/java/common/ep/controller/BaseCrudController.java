@@ -20,25 +20,22 @@ public abstract class BaseCrudController<Dto> {
     @GET
     @Path("{id}")
     @Produces({MimeTypes.Application.JSON, MimeTypes.Application.XML})
-    public Response getInstance(
-            @PathParam("id") String id) {
+    public Response getInstance(@PathParam("id") String id) {
         try {
-            
-            
             // Обработка
             Dto result = getCrudFacade().getInstance(getIdParam(id));
 
             // Не нашли
             if (result == null)
-                return Response.noContent().build();
+                return Response.noContent()
+                        .build();
 
             return Response.ok(result)
                     .build();
         } catch (WebApplicationException ex) {
             throw ex;
         } catch (Throwable ex) {
-            return Response
-                    .serverError()
+            return Response.serverError()
                     .entity(ExceptionDtoHelper.toDto(ex))
                     .build();
         }
@@ -53,8 +50,7 @@ public abstract class BaseCrudController<Dto> {
                     .ok(getGenericEntity(getCrudFacade().listAllInstances()))
                     .build();
         } catch (Throwable ex) {
-            return Response
-                    .serverError()
+            return Response.serverError()
                     .entity(ExceptionDtoHelper.toDto(ex))
                     .build();
         }
@@ -107,8 +103,7 @@ public abstract class BaseCrudController<Dto> {
                     .entity(result)
                     .build();
         } catch (Throwable ex) {
-            return Response
-                    .serverError()
+            return Response.serverError()
                     .entity(ExceptionDtoHelper.toDto(ex))
                     .build();
         }
@@ -118,8 +113,7 @@ public abstract class BaseCrudController<Dto> {
     @Path("{id}")
     @Consumes({MimeTypes.Application.JSON, MimeTypes.Application.XML})
     @Produces({MimeTypes.Application.JSON, MimeTypes.Application.XML})
-    public Response editInstance(
-            @PathParam("id") String id, Dto instance) {
+    public Response editInstance(@PathParam("id") String id, Dto instance) {
         try {
             // Параметры
             if (instance == null || StringUtils.isBlank(id)) {
@@ -131,8 +125,7 @@ public abstract class BaseCrudController<Dto> {
         } catch (WebApplicationException ex) {
             throw ex;
         } catch (Throwable ex) {
-            return Response
-                    .serverError()
+            return Response.serverError()
                     .entity(ExceptionDtoHelper.toDto(ex))
                     .build();
         }
@@ -141,8 +134,7 @@ public abstract class BaseCrudController<Dto> {
     @DELETE
     @Path("{id}")
     @Produces({MimeTypes.Application.JSON, MimeTypes.Application.XML})
-    public Response removeInstance(
-            @PathParam("id") String id) {
+    public Response removeInstance(@PathParam("id") String id) {
         try {
             // Удаление
             getCrudFacade().removeInstance(getIdParam(id));
@@ -152,8 +144,7 @@ public abstract class BaseCrudController<Dto> {
         } catch (WebApplicationException ex) {
             throw ex;
         } catch (Throwable ex) {
-            return Response
-                    .serverError()
+            return Response.serverError()
                     .entity(ExceptionDtoHelper.toDto(ex))
                     .build();
         }
