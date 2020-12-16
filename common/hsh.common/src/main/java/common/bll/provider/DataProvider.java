@@ -3,13 +3,11 @@ package common.bll.provider;
 import java.util.concurrent.Future;
 
 /**
- * data provider layer
+ * data provider abstraction layer
  *
- * @param <TResult>
+ * @param <Result> data result
  * @author elf
  */
-public interface DataProvider<TResult> {
-    TResult getData();
-
-    Future<TResult> getDataAsync();
+public interface DataProvider<Result> {
+    Result getData();
 }

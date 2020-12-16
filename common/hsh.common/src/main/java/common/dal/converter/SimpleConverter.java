@@ -2,6 +2,7 @@ package common.dal.converter;
 
 import common.bll.model.BusinessModel;
 import common.bll.model.BusinessModelKey;
+import common.bll.provider.FilteredDataProvider;
 import common.dal.entity.IdEntity;
 
 /**
@@ -20,5 +21,5 @@ public interface SimpleConverter<Entity extends IdEntity,
     
     Entity toEntity(Model model, Entity entity);
 
-    Entity toEntity(Model model, EntityLoaderFunc<Entity> loader);
+    Entity toEntity(Model model, EntityLoader<Entity> loader);
 }

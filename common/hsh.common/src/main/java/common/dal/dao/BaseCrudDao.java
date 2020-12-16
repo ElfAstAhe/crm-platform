@@ -219,19 +219,34 @@ public abstract class BaseCrudDao<Entity extends IdEntity, Key extends Serializa
     }
 
     @Override
-    public void remove(Entity entity) {
-        if (entity == null)
+    public void remove(Object id) {
+        if (id == null)
             return;
 
-        getEntityManager().createQuery("delete from " + DaoUtils.getEntityName(entityClass) + " e where e." + DaoUtils.getEntityIdFieldName(entityClass) + " = :id")
-                .setParameter("id", entity.getId())
+        getEntityManager().createQuery("delete from " + DaoUtils.getEntityName(entityClass) +
+                " e where e." + DaoUtils.getEntityIdFieldName(entityClass) + " = :id")
+                .setParameter("id", id)
                 .executeUpdate();
     }
 
     @Override
     @Asynchronous
+    public void removeAsync(Object id) {
+        this.remove(id);
+    }
+
+    @Override
+    public void remove(Entity entity) {
+        if (entity == null)
+            return;
+
+        getEntityManager().remove(entity);
+    }
+
+    @Override
+    @Asynchronous
     public void removeAsync(Entity entity) {
-        this.remove(entity);
+        remove(entity);
     }
 
     protected Class<Entity> getEntityClass() {

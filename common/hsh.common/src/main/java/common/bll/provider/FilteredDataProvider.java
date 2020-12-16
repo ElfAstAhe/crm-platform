@@ -1,16 +1,12 @@
 package common.bll.provider;
 
-import java.util.concurrent.Future;
-
 /**
- * data provider layer with filter
+ * data provider abstraction layer with filter
  *
- * @param <TResult>
- * @param <TFilter>
+ * @param <Filter> filter conditions
+ * @param <Result> data result
  * @author elf
  */
-public interface FilteredDataProvider<TResult, TFilter> {
-    TResult getFilteredData(TFilter filter);
-
-    Future<TResult> getFilteredDataAsync(TFilter filter);
+public interface FilteredDataProvider<Filter, Result> {
+    Result getFilteredData(Filter filter);
 }

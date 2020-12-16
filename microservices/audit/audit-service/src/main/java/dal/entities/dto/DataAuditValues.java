@@ -29,7 +29,8 @@ public class DataAuditValues implements Serializable {
     }
 
     public DataAuditValues(List<DataAuditValue> values) {
-        this.values = values;
+        if (values != null)
+            this.values = values;
     }
 
     public List<DataAuditValue> getValues() {

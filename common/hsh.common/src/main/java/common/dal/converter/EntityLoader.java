@@ -1,5 +1,6 @@
 package common.dal.converter;
 
+import common.bll.provider.FilteredDataProvider;
 import common.dal.entity.IdEntity;
 
 /**
@@ -8,6 +9,5 @@ import common.dal.entity.IdEntity;
  * @author elf
  * @param <Entity> тип entity
  */
-public interface EntityLoaderFunc<Entity extends IdEntity> {
-    Entity find(Long id);
+public interface EntityLoader<Entity extends IdEntity> extends FilteredDataProvider<Object, Entity> {
 }

@@ -93,14 +93,17 @@ public interface CrudDao<Entity extends IdEntity, Key> {
 
     /**
      * remove entity
-     * @param entity entity
+     * @param id entity id key
      */
-    void remove(Entity entity);
+    void remove(Object id);
 
     /**
      * remove entity async
-     * @param entity entity
+     * @param id entity id key
      */
+    void removeAsync(Object id);
+
+    void remove(Entity entity);
     void removeAsync(Entity entity);
 
     /**

@@ -19,10 +19,12 @@ public abstract class BaseMarkDeleteDao<Entity extends MarkDelete, Key extends S
     }
     
     @Override
-    public void remove(Entity entity) {
-        if (entity == null)
+    public void remove(Object id) {
+        if (id == null)
             throw new NullPointerException();
-        
+        Entity entity = find(id);
+        if (entity == null)
+            return;
         entity.setDeleteFlag(1);
         
         getEntityManager().merge(entity);

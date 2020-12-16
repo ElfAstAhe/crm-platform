@@ -19,6 +19,11 @@ public class DataAuditBuilder extends BaseBuilder<DataAudit> {
         return new DataAuditBuilder();
     }
 
+    public DataAuditBuilder setId(Long id) {
+        getInstance().setId(id);
+        return this;
+    }
+
     public DataAuditBuilder setDate(OffsetDateTime date) {
         getInstance().setDate(date);
         return this;
