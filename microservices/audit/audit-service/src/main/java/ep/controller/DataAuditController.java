@@ -10,6 +10,7 @@ import javax.inject.Inject;
 import javax.ws.rs.Path;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.GenericEntity;
+import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
 import java.util.List;
 
@@ -24,6 +25,12 @@ public class DataAuditController extends BaseCrudController<DataAudit> {
 
     @Inject
     private DataAuditFacade facade;
+
+    @Override
+    public Response listAllInstances() {
+        return Response.noContent()
+                .build();
+    }
 
     @Override
     protected CrudFacade<DataAudit> getCrudFacade() {
