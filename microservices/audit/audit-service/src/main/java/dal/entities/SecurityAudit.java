@@ -28,8 +28,8 @@ public class SecurityAudit extends BaseIdEntity implements Serializable {
     @Column(name = "event", length = 50)
     private SecurityAuditEventEnum event;
 
-    @Column(name = "user", length = 100)
-    private String user;
+    @Column(name = "user_login", length = 100)
+    private String userLogin;
 
     @Enumerated(EnumType.STRING)
     @Column(name = "status", length = 50)
@@ -71,12 +71,12 @@ public class SecurityAudit extends BaseIdEntity implements Serializable {
         this.event = event;
     }
 
-    public String getUser() {
-        return user;
+    public String getUserLogin() {
+        return userLogin;
     }
 
-    public void setUser(String user) {
-        this.user = user;
+    public void setUserLogin(String userLogin) {
+        this.userLogin = userLogin;
     }
 
     public AuditStatusEnum getStatus() {
@@ -105,7 +105,7 @@ public class SecurityAudit extends BaseIdEntity implements Serializable {
         return new StringJoiner(StringUtils.DELIMITER, StringUtils.buildPrefix(this), StringUtils.SUFFIX)
                 .add(StringUtils.buildKeyValue("id", StringUtils.toNullString(getId())))
                 .add(StringUtils.buildKeyValue("event", StringUtils.toNullString(event)))
-                .add(StringUtils.buildKeyValue("user", StringUtils.toNullString(user)))
+                .add(StringUtils.buildKeyValue("user", StringUtils.toNullString(userLogin)))
                 .toString();
     }
 }

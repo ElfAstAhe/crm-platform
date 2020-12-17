@@ -16,6 +16,11 @@ public class SecurityAuditBuilder extends BaseBuilder<SecurityAudit> {
         return new SecurityAuditBuilder();
     }
 
+    public SecurityAuditBuilder setId(Long id) {
+        getInstance().setId(id);
+        return this;
+    }
+
     public SecurityAuditBuilder setDate(OffsetDateTime date) {
         getInstance().setDate(date);
         return this;

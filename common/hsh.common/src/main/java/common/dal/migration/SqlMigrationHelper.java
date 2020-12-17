@@ -102,7 +102,7 @@ public class SqlMigrationHelper {
         public static final String REQUEST_ID = "request_id";
         public static final String CURRENCY = "currency";
         public static final String SOURCE = "source";
-        public static final String USER = "user";
+        public static final String USER_LOGIN = "user_login";
 
         public static final String QUOTE_DATE = "quote_date";
         public static final String CRYPTO_CURRENCY = "crypto_currency";

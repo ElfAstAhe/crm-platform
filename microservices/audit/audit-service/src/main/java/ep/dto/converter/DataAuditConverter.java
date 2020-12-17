@@ -31,7 +31,7 @@ public class DataAuditConverter{
                 .setObjectId(entity.getObjectId())
                 .setObjectName(entity.getObjectName())
                 .setValues(values != null ? values.getValues() : Collections.emptyList())
-                .setUser(entity.getUser())
+                .setUser(entity.getUserLogin())
                 .setRunAsUser(entity.getRunAsUser())
                 .setStatus(AuditStatusEnum.valueOf(entity.getStatus().toString()))
                 .build();
@@ -76,7 +76,7 @@ public class DataAuditConverter{
         entity.setObjectId(dto.getObjectId());
         entity.setObjectName(dto.getObjectName());
         entity.setValues(JsonSerializerHelper.serialize(new DataAuditValues(dto.getValues())));
-        entity.setUser(dto.getUser());
+        entity.setUserLogin(dto.getUser());
         entity.setRunAsUser(dto.getRunAsUser());
         entity.setStatus(dal.entities.AuditStatusEnum.valueOf(dto.getStatus().toString()));
         return entity;

@@ -28,7 +28,7 @@ public class DataAuditController extends BaseCrudController<DataAudit> {
 
     @Override
     public Response listAllInstances() {
-        return Response.noContent()
+        return Response.status(Response.Status.GONE)
                 .build();
     }
 

@@ -10,6 +10,7 @@ import javax.inject.Inject;
 import javax.ws.rs.Path;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.GenericEntity;
+import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
 import java.util.List;
 
@@ -21,6 +22,12 @@ public class SecurityAuditController extends BaseCrudController<SecurityAudit> {
 
     @Inject
     private SecurityAuditFacade facade;
+
+    @Override
+    public Response listAllInstances() {
+        return Response.status(Response.Status.GONE)
+                .build();
+    }
 
     @Override
     protected CrudFacade<SecurityAudit> getCrudFacade() {

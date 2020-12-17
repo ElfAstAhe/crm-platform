@@ -44,8 +44,8 @@ public class DataAudit extends BaseIdEntity implements Serializable {
     @Column(name = "values")
     private String values;
 
-    @Column(name = "user", length = 100)
-    private String user;
+    @Column(name = "user_login", length = 100)
+    private String userLogin;
 
     @Column(name = "run_as_user", length = 100)
     private String runAsUser;
@@ -122,12 +122,12 @@ public class DataAudit extends BaseIdEntity implements Serializable {
         this.source = source;
     }
 
-    public String getUser() {
-        return user;
+    public String getUserLogin() {
+        return userLogin;
     }
 
-    public void setUser(String user) {
-        this.user = user;
+    public void setUserLogin(String userLogin) {
+        this.userLogin = userLogin;
     }
 
     public String getRunAsUser() {
