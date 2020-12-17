@@ -86,7 +86,7 @@ public class Migration20201009 extends BaseSqlMigration {
                         .column(DSL.name("object_id"), SQLDataType.VARCHAR(50).nullable(true))
                         .column(DSL.name("object_name"), SQLDataType.VARCHAR(100).nullable(true))
                         .column(DSL.name("values"), SqlMigrationHelper.serverSpecificDataTypeLongText(create.dialect()).nullable(true))
-                        .column(DSL.name(SqlMigrationHelper.Field.USER), SQLDataType.VARCHAR(100).nullable(true))
+                        .column(DSL.name(SqlMigrationHelper.Field.USER_LOGIN), SQLDataType.VARCHAR(100).nullable(true))
                         .column(DSL.name("run_as_user"), SQLDataType.VARCHAR(100).nullable(true))
                         .constraints(
                                 DSL.constraint(DSL.name(SqlMigrationHelper.buildPkConstraintName(TABLE_DATA_AUDIT)))
