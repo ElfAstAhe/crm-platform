@@ -25,8 +25,9 @@ public class SecurityAuditController extends BaseCrudController<SecurityAudit> {
 
     @Override
     public Response listAllInstances() {
-        return Response.status(Response.Status.GONE)
-                .build();
+//        return Response.status(Response.Status.GONE)
+//                .build();
+        return super.listAllInstances();
     }
 
     @Override

@@ -1,6 +1,6 @@
 package dto.audit.builders;
 
-import common.dto.builder.BaseBuilder;
+import common.helpers.builder.BaseBuilder;
 import common.util.audit.AuditUtils;
 import dto.audit.AuditStatusEnum;
 import dto.audit.DataAudit;

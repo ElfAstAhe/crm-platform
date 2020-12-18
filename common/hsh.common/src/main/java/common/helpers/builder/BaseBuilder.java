@@ -1,7 +1,7 @@
-package common.dto.builder;
+package common.helpers.builder;
 
 /**
- * Базовый класс билдера dto
+ * Базовый класс билдера
  *
  * @param <Clazz>
  *

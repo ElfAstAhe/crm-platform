@@ -1,4 +1,4 @@
-package common.dto.builder;
+package common.helpers.builder;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;

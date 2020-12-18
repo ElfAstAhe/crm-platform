@@ -1,4 +1,4 @@
-package common.dto.builder;
+package common.helpers.builder;
 
 import test.MockSimpleEntity;
 

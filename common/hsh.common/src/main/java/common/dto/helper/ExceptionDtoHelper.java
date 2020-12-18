@@ -1,14 +1,13 @@
 package common.dto.helper;
 
 import common.dto.ExceptionDto;
-import common.dto.builder.ExceptionDtoBuilder;
+import common.helpers.builder.ExceptionDtoBuilder;
 import common.web.MimeTypes;
 import org.apache.commons.lang3.StringUtils;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.PrintWriter;
 import java.io.StringWriter;
-import java.util.Arrays;
 
 /**
  *

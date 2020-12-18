@@ -22,6 +22,7 @@ public class RsConfig extends Application {
         classList.add(MetricsController.class);
 
         classList.add(DataAuditController.class);
+        classList.add(SecurityAuditController.class);
         classList.add(AuditController.class);
 
         classList.addAll(ExceptionMapperHelper.getMapperProviderClassList());
