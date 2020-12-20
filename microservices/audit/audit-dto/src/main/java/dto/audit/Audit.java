@@ -1,18 +1,55 @@
-package bll.model;
+package dto.audit;
 
+import com.migesok.jaxb.adapter.javatime.OffsetDateTimeXmlAdapter;
+
+import javax.json.bind.annotation.JsonbProperty;
+import javax.json.bind.annotation.JsonbPropertyOrder;
+import javax.json.bind.config.PropertyOrderStrategy;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
+import java.io.Serializable;
 import java.time.OffsetDateTime;
 
-/**
- * Модель для сводного отчёта
- */
-public class Audit {
+@XmlRootElement(name = "audit")
+@XmlAccessorType(XmlAccessType.FIELD)
+@JsonbPropertyOrder(PropertyOrderStrategy.ANY)
+public class Audit implements Serializable {
+    private static final long serialVersionUID = 1L;
+
+    @XmlElement(name = "id")
+    @JsonbProperty(value = "id")
     private Long id;
+
+    @XmlJavaTypeAdapter(OffsetDateTimeXmlAdapter.class)
+    @XmlElement(name = "eventDate")
+    @JsonbProperty(value = "eventDate")
     private OffsetDateTime eventDate;
+
+    @XmlElement(name = "event")
+    @JsonbProperty(value = "event")
     private String event;
+
+    @XmlElement(name = "source")
+    @JsonbProperty(value = "source")
     private String source;
+
+    @XmlElement(name = "requestId")
+    @JsonbProperty(value = "requestId")
     private String requestId;
+
+    @XmlElement(name = "user")
+    @JsonbProperty(value = "user")
     private String user;
+
+    @XmlElement(name = "status")
+    @JsonbProperty(value = "status")
     private String status;
+
+    @XmlElement(name = "additional")
+    @JsonbProperty(value = "additional")
     private String additional;
 
     public Audit() {
