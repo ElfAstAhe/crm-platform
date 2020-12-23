@@ -1,7 +1,7 @@
 package common.ep.mapper;
 
 import common.dto.helper.ExceptionDtoHelper;
-import common.exceptions.ep.ConflictException;
+import common.exceptions.runtime.ep.ConflictException;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.ws.rs.core.Context;

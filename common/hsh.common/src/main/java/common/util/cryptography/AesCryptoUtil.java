@@ -1,6 +1,6 @@
 package common.util.cryptography;
 
-import common.exceptions.cryptography.CryptoUtilException;
+import common.exceptions.CryptoUtilException;
 import common.util.cryptography.digest.DigestUtil;
 import org.jooq.tools.StringUtils;
 

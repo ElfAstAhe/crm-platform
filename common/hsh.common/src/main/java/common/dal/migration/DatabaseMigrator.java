@@ -1,6 +1,6 @@
 package common.dal.migration;
 
-import common.exceptions.MigrationRuntimeException;
+import common.exceptions.runtime.MigrationException;
 import common.util.ExceptionMessages;
 import org.flywaydb.core.Flyway;
 import org.flywaydb.core.api.configuration.Configuration;
@@ -52,7 +52,7 @@ public final class DatabaseMigrator implements Migrator {
             flyway.migrate();
         } catch (Exception ex) {
             logger.severe(String.format(ExceptionMessages.FMT_MIGRATION_EXCEPTION, ex.getClass().getName(), ex.getMessage()));
-            throw new MigrationRuntimeException("error migrate up",ex);
+            throw new MigrationException("error migrate up",ex);
         } finally {
             logger.exiting(this.getClass().getName(), "migrateUp");
         }
@@ -65,7 +65,7 @@ public final class DatabaseMigrator implements Migrator {
             flyway.undo();
         } catch (Exception ex) {
             logger.severe(String.format(ExceptionMessages.FMT_MIGRATION_EXCEPTION, ex.getClass().getName(), ex.getMessage()));
-            throw new MigrationRuntimeException("error migrate down", ex);
+            throw new MigrationException("error migrate down", ex);
         } finally {
             logger.exiting(this.getClass().getName(), "migrateDown");
         }
@@ -78,7 +78,7 @@ public final class DatabaseMigrator implements Migrator {
             flyway.clean();
         } catch (Exception ex) {
             logger.severe(String.format(ExceptionMessages.FMT_MIGRATION_EXCEPTION, ex.getClass().getName(), ex.getMessage()));
-            throw new MigrationRuntimeException("error clean", ex);
+            throw new MigrationException("error clean", ex);
         } finally {
             logger.exiting(this.getClass().getName(), "clean");
         }

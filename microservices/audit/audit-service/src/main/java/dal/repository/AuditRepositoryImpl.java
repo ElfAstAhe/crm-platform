@@ -13,6 +13,7 @@ import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Objects;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Future;
 import java.util.stream.Collectors;
@@ -35,6 +36,7 @@ public class AuditRepositoryImpl implements AuditRepository {
                     securityAuditList.get()
                         .stream()
                         .map(SecurityAuditConverter::toAudit))
+                .filter(Objects::nonNull)
                 .sorted(Comparator.comparing(Audit::getEventDate))
                 .collect(Collectors.toList());
     }

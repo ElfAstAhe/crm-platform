@@ -2,7 +2,7 @@ package dal.migrations;
 
 import common.dal.migration.BaseSqlMigration;
 import common.dal.migration.SqlMigrationHelper;
-import common.exceptions.DalException;
+import common.exceptions.base.DalException;
 import dal.DalConstants;
 import org.flywaydb.core.api.migration.Context;
 import org.jooq.CreateSequenceFlagsStep;

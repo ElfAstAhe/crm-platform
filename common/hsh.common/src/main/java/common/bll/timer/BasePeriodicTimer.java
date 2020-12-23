@@ -1,6 +1,6 @@
 package common.bll.timer;
 
-import common.exceptions.RsException;
+import common.exceptions.base.RsException;
 
 import javax.ejb.Timeout;
 import javax.ejb.Timer;

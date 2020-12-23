@@ -1,5 +1,6 @@
 package common.helpers.builder;
 
+import common.helpers.builder.base.BaseBuilder;
 import test.MockSimpleEntity;
 
 public class MockSimpleEntityBuilder extends BaseBuilder<MockSimpleEntity> {

@@ -1,7 +1,7 @@
 package common.ep.client;
 
 import common.dto.ExceptionDto;
-import common.exceptions.RsException;
+import common.exceptions.base.RsException;
 import common.util.StringUtils;
 
 import javax.net.ssl.HostnameVerifier;

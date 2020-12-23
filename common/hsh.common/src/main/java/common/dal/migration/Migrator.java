@@ -1,7 +1,5 @@
 package common.dal.migration;
 
-import common.exceptions.DalException;
-
 /**
  * Интерфейс мигратор
  *

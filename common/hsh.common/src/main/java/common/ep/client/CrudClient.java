@@ -1,6 +1,6 @@
 package common.ep.client;
 
-import common.exceptions.RsException;
+import common.exceptions.base.RsException;
 import java.util.List;
 import java.util.concurrent.Future;
 

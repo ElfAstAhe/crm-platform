@@ -1,6 +1,6 @@
 package dto.audit.builders;
 
-import common.helpers.builder.BaseBuilder;
+import common.helpers.builder.base.BaseBuilder;
 import dto.audit.DataAuditValue;
 
 public class DataAuditValueBuilder extends BaseBuilder<DataAuditValue> {

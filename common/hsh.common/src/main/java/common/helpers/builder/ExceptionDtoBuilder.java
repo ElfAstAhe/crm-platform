@@ -1,6 +1,7 @@
 package common.helpers.builder;
 
 import common.dto.ExceptionDto;
+import common.helpers.builder.base.BaseBuilder;
 
 public class ExceptionDtoBuilder extends BaseBuilder<ExceptionDto> {
     private ExceptionDtoBuilder() {

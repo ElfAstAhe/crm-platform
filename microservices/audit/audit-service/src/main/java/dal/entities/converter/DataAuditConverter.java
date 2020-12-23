@@ -20,6 +20,7 @@ public final class DataAuditConverter {
                 .setRequestId(entity.getRequestId())
                 .setUser(entity.getUserLogin())
                 .setAdditional(toAuditAdditional(entity))
+                .setStatus(entity.getStatus().toString())
                 .build();
     }
 
