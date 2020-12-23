@@ -1,4 +1,4 @@
-package common.dal.migration;
+package common.dal.migration.base;
 
 import org.flywaydb.core.api.MigrationVersion;
 import org.flywaydb.core.api.migration.Context;
@@ -47,7 +47,4 @@ public abstract class BaseSqlMigration implements JavaMigration {
     public boolean canExecuteInTransaction() {
         return false;
     }
-
-    @Override
-    abstract public void migrate(Context context) throws Exception;
 }

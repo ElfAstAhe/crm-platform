@@ -19,7 +19,7 @@ public class Initializer implements AppInitializer {
 
     @PostConstruct
     public void postConstruct() throws RuntimeException {
-        DatabaseMigrator.up(dataSource, "dal/migrations");
+        DatabaseMigrator.up(dataSource);
         ready = true;
     }
 

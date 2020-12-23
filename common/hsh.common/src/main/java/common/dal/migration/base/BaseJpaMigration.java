@@ -1,4 +1,4 @@
-package common.dal.migration;
+package common.dal.migration.base;
 
 import org.flywaydb.core.api.migration.Context;
 

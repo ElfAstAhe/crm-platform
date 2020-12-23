@@ -1,6 +1,6 @@
 package dal.migrations;
 
-import common.dal.migration.BaseSqlMigration;
+import common.dal.migration.base.BaseSqlMigration;
 import common.dal.migration.SqlMigrationHelper;
 import common.exceptions.base.DalException;
 import dal.DalConstants;
