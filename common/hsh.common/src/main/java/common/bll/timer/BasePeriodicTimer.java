@@ -1,6 +1,6 @@
 package common.bll.timer;
 
-import common.exceptions.base.RsException;
+import common.exceptions.base.ClientException;
 
 import javax.ejb.Timeout;
 import javax.ejb.Timer;
@@ -41,7 +41,7 @@ public abstract class BasePeriodicTimer {
             long defaultTimeMills = getDefaultTimerDurationSetting();
             try {
                 fireTimerEvent();
-            } catch (ExecutionException | InterruptedException | RsException ex) {
+            } catch (ExecutionException | InterruptedException | ClientException ex) {
                 logger.log(Level.SEVERE, "Error timer event trigger", ex);
             } finally {
                 // Пересоздаём timer
@@ -70,7 +70,7 @@ public abstract class BasePeriodicTimer {
         return finished;
     }
 
-    protected abstract void fireTimerEvent() throws ExecutionException,InterruptedException, RsException;
+    protected abstract void fireTimerEvent() throws ExecutionException,InterruptedException, ClientException;
     protected abstract Future<Integer> getTimerDurationSettingAsync();
     protected abstract Integer getTimerDurationSetting();
     protected abstract long getDefaultTimerDurationSetting();

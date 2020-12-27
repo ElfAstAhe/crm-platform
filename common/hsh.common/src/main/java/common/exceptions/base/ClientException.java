@@ -3,11 +3,11 @@ package common.exceptions.base;
 import common.dto.ExceptionDto;
 
 /**
- * Ошибка сервиса
+ * Ошибка rest клиента
  *
  * @author elf
  */
-public class RsException extends Exception {
+public class ClientException extends Exception {
     private static final long serialVersionUID = 1L;
 
     private final int statusCode;
@@ -16,11 +16,11 @@ public class RsException extends Exception {
     private final String remoteStackTrace;
     private static final String TO_STRING_FORMAT = "%s, remote: exception [%s] message [%s] stack trace [%s]";
 
-    public RsException(String message,
-                       int statusCode,
-                       String remoteException,
-                       String remoteMessage,
-                       String remoteStackTrace) {
+    public ClientException(String message,
+                           int statusCode,
+                           String remoteException,
+                           String remoteMessage,
+                           String remoteStackTrace) {
         super(message);
         this.statusCode = statusCode;
         this.remoteException = remoteException;
@@ -28,9 +28,9 @@ public class RsException extends Exception {
         this.remoteStackTrace = remoteStackTrace;
     }
 
-    public RsException(String message,
-                       int statusCode,
-                       ExceptionDto remoteException) {
+    public ClientException(String message,
+                           int statusCode,
+                           ExceptionDto remoteException) {
         super(message);
         this.statusCode = statusCode;
         this.remoteException = remoteException.getException();

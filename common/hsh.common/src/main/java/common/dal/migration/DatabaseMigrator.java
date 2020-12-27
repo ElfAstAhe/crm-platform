@@ -33,7 +33,7 @@ public final class DatabaseMigrator implements Migrator {
             migrator.migrateUp();
             return;
         }
-        throw new MigrationException("Error initialize migrator");
+        throw new MigrationException("Error migrate up process");
     }
 
     public static void up(DataSource dataSource) {
@@ -47,16 +47,11 @@ public final class DatabaseMigrator implements Migrator {
             migrator.migrateDown();
             return;
         }
-        throw new MigrationException("Error initialize migrator");
+        throw new MigrationException("Error migrate down process");
     }
 
     public static void down(DataSource dataSource) {
         down(dataSource, defaultMigrationLocations());
-    }
-
-    public DatabaseMigrator(DataSource dataSource) {
-        this.dataSource = dataSource;
-        this.migrationLocations = defaultMigrationLocations();
     }
 
     public DatabaseMigrator(DataSource dataSource, String... migrationLocations) {

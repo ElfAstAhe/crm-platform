@@ -3,6 +3,7 @@ package dal.migrations;
 import common.dal.migration.base.BaseSqlMigration;
 import common.dal.migration.SqlMigrationHelper;
 import common.exceptions.base.DalException;
+import common.exceptions.runtime.MigrationException;
 import dal.DalConstants;
 import org.flywaydb.core.api.migration.Context;
 import org.jooq.CreateSequenceFlagsStep;
@@ -39,7 +40,7 @@ public class Migration20201009 extends BaseSqlMigration {
         createSequenceObjects(context);
     }
 
-    private void createSequenceObjects(Context context) throws DalException {
+    private void createSequenceObjects(Context context) {
         logger.entering(this.getClass().getName(), "createSequenceObjects ..");
         try {
             DSLContext create = DSL.using(context.getConnection());
@@ -60,13 +61,13 @@ public class Migration20201009 extends BaseSqlMigration {
             }
         } catch (Exception ex) {
             logger.log(Level.SEVERE, "createSequenceObjects error", ex);
-            throw new DalException("createSequenceObjects error", ex);
+            throw new MigrationException("createSequenceObjects error", ex);
         } finally {
             logger.exiting(this.getClass().getName(), "createSequenceObjects done");
         }
     }
 
-    private void createTableDataAudit(Context context) throws DalException {
+    private void createTableDataAudit(Context context) {
         logger.entering(this.getClass().getName(), "createTableDataAudit ..");
         try {
             DSLContext create = DSL.using(context.getConnection());
@@ -105,13 +106,13 @@ public class Migration20201009 extends BaseSqlMigration {
             }
         } catch (Exception ex) {
             logger.log(Level.SEVERE, "createTableDataAudit error", ex);
-            throw new DalException("createTableDataAudit error", ex);
+            throw new MigrationException("createTableDataAudit error", ex);
         } finally {
             logger.exiting(this.getClass().getName(), "createTableDataAudit done");
         }
     }
 
-    private void createTableSettings(Context context) throws DalException {
+    private void createTableSettings(Context context) {
         logger.entering(this.getClass().getName(), "createTableSettings ..");
         try {
             DSLContext create = DSL.using(context.getConnection());
@@ -145,7 +146,7 @@ public class Migration20201009 extends BaseSqlMigration {
             }
         } catch (Exception ex) {
             logger.log(Level.SEVERE, "createTableSettings error", ex);
-            throw new DalException("createTableSettings error", ex);
+            throw new MigrationException("createTableSettings error", ex);
         } finally {
             logger.exiting(this.getClass().getName(), "createTableSettings done");
         }

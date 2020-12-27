@@ -1,7 +1,8 @@
 package common.ep.client;
 
 import common.dto.ExceptionDto;
-import common.exceptions.base.RsException;
+import common.exceptions.base.ClientException;
+import common.exceptions.runtime.base.ClientRuntimeException;
 import common.util.StringUtils;
 
 import javax.net.ssl.HostnameVerifier;
@@ -24,14 +25,27 @@ import java.util.logging.Logger;
  * @author elf
  */
 public abstract class BaseCrudClient<Dto> extends BaseClient implements CrudClient<Dto> {
-    private static final String TEMPLATE_AUTH_VALUE = "Bearer %s";
+    protected static final String PATH_URI = "api/v1";
+    protected static final String TEMPLATE_AUTH_BEARER = "Bearer %s";
+    protected static final String PATH_GET_INSTANCE = "/{id}";
+    protected static final String PATH_GET_INSTANCE_BY_KEY = "";
+    protected static final String PATH_LIST_ALL = "/list/all";
+    protected static final String PATH_LIST = "/list";
+    protected static final String PATH_CREATE_INSTANCE = "";
+    protected static final String PATH_EDIT_INSTANCE = "/{id}";
+    protected static final String PATH_REMOVE_INSTANCE = "/{id}";
+
+    public static final String PATH_PARAM_ID = "id";
+    public static final String QUERY_PARAM_KEY = "key";
+    public static final String QUERY_PARAM_FROM_ROW = "fromRow";
+    public static final String QUERY_PARAM_ROW_COUNT = "rowCount";
 
     private final Class<? extends Dto> dtoClass;
     private final WebTarget target;
 
     private String jwtToken;
 
-    private static final Logger logger = Logger.getLogger(BaseCrudClient.class.getName());
+    protected static final Logger logger = Logger.getLogger(BaseCrudClient.class.getName());
 
     public BaseCrudClient(String baseUri,
                           String resourcePath,
@@ -47,7 +61,7 @@ public abstract class BaseCrudClient<Dto> extends BaseClient implements CrudClie
     }
 
     @Override
-    public Dto getInstance(Object id) throws RsException {
+    public Dto getInstance(Object id){
         String responseBody = null;
         try (Response resp = buildRequest(target.path(PATH_GET_INSTANCE).resolveTemplate(PATH_PARAM_ID, id))
                 .accept(getMediaType())
@@ -59,7 +73,7 @@ public abstract class BaseCrudClient<Dto> extends BaseClient implements CrudClie
             // ..
             // Если ошибка
             if (resp.getStatus() >= Response.Status.BAD_REQUEST.getStatusCode())
-                throw new RsException(Messages.REMOTE_EXCEPTION,
+                throw new ClientRuntimeException(Messages.REMOTE_EXCEPTION,
                         resp.getStatus(),
                         resp.readEntity(ExceptionDto.class));
             // Если ничего
@@ -67,7 +81,7 @@ public abstract class BaseCrudClient<Dto> extends BaseClient implements CrudClie
                 return null;
 
             return resp.readEntity(dtoClass);
-        } catch (Throwable ex) {
+        } catch (Exception ex) {
             logger.log(Level.SEVERE, "error getInstance", ex);
             logger.log(Level.INFO, StringUtils.formatNull("response body [%s]", responseBody));
             throw ex;
@@ -75,7 +89,7 @@ public abstract class BaseCrudClient<Dto> extends BaseClient implements CrudClie
     }
 
     @Override
-    public List<Dto> listAllInstances() throws RsException {
+    public List<Dto> listAllInstances() throws ClientException {
         String responseBody = null;
         try (Response resp = buildRequest(target.path(PATH_LIST_ALL))
                 .accept(getMediaType())
@@ -86,7 +100,7 @@ public abstract class BaseCrudClient<Dto> extends BaseClient implements CrudClie
             // Проверки
             // Если ошибка
             if (resp.getStatus() >= Response.Status.BAD_REQUEST.getStatusCode())
-                throw new RsException(Messages.REMOTE_EXCEPTION,
+                throw new ClientRuntimeException(Messages.REMOTE_EXCEPTION,
                         resp.getStatus(),
                         resp.readEntity(ExceptionDto.class));
 
@@ -99,7 +113,7 @@ public abstract class BaseCrudClient<Dto> extends BaseClient implements CrudClie
     }
 
     @Override
-    public Dto createInstance(Dto instance) throws RsException {
+    public Dto createInstance(Dto instance) {
         String responseBody = null;
         try (Response resp = buildRequest(target.path(PATH_CREATE_INSTANCE))
                 .accept(getMediaType())
@@ -110,7 +124,7 @@ public abstract class BaseCrudClient<Dto> extends BaseClient implements CrudClie
             // Проверки
             // Если ошибка
             if (resp.getStatus() >= Response.Status.BAD_REQUEST.getStatusCode())
-                throw new RsException(Messages.REMOTE_EXCEPTION,
+                throw new ClientException(Messages.REMOTE_EXCEPTION,
                         resp.getStatus(),
                         resp.readEntity(ExceptionDto.class));
 
@@ -123,7 +137,7 @@ public abstract class BaseCrudClient<Dto> extends BaseClient implements CrudClie
     }
 
     @Override
-    public Dto editInstance(Dto instance) throws RsException {
+    public Dto editInstance(Dto instance) {
         String responseBody = null;
         try (Response resp = buildRequest(target.path(PATH_EDIT_INSTANCE).resolveTemplate(PATH_PARAM_ID, getId(instance)))
                 .accept(getMediaType())
@@ -135,7 +149,7 @@ public abstract class BaseCrudClient<Dto> extends BaseClient implements CrudClie
             // ..
             // Если ошибка
             if (resp.getStatus() >= Response.Status.BAD_REQUEST.getStatusCode())
-                throw new RsException(Messages.REMOTE_EXCEPTION,
+                throw new ClientException(Messages.REMOTE_EXCEPTION,
                         resp.getStatus(),
                         resp.readEntity(ExceptionDto.class));
             // Если ничего
@@ -151,7 +165,7 @@ public abstract class BaseCrudClient<Dto> extends BaseClient implements CrudClie
     }
 
     @Override
-    public void removeInstance(Object id) throws RsException {
+    public void removeInstance(Object id) {
         String responseBody = null;
         try (Response resp = buildRequest(target.path(PATH_REMOVE_INSTANCE).resolveTemplate(PATH_PARAM_ID, id))
                 .accept(getMediaType())
@@ -162,7 +176,7 @@ public abstract class BaseCrudClient<Dto> extends BaseClient implements CrudClie
             // Проверки
             // Если ошибка
             if (resp.getStatus() >= Response.Status.BAD_REQUEST.getStatusCode())
-                throw new RsException(Messages.REMOTE_EXCEPTION,
+                throw new ClientException(Messages.REMOTE_EXCEPTION,
                         resp.getStatus(),
                         resp.readEntity(ExceptionDto.class));
         } catch (Throwable ex) {
@@ -194,16 +208,10 @@ public abstract class BaseCrudClient<Dto> extends BaseClient implements CrudClie
 
     @Override
     public Future<?> removeInstanceAsync(Object id) {
-        return getExecutorService().submit(() -> {
-            try {
-                this.removeInstance(id);
-            } catch (RsException ex) {
-                //Logger.getLogger(BaseCrudClient.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        });
+        return getExecutorService().submit(() -> this.removeInstance(id));
     }
 
-    public CrudClient<Dto> withJwtToken(String jwtToken) {
+    public BaseCrudClient<Dto> withJwtToken(String jwtToken) {
         setJwtToken(jwtToken);
         return this;
     }
@@ -224,7 +232,7 @@ public abstract class BaseCrudClient<Dto> extends BaseClient implements CrudClie
         return dtoClass;
     }
 
-    protected Invocation.Builder buildRequest(WebTarget webTarget) {
+    protected Invocation.Builder buildDefaultRequest(WebTarget webTarget) {
         // Без авторизации
         if (org.apache.commons.lang3.StringUtils.isBlank(jwtToken))
             return webTarget.request();
@@ -233,11 +241,13 @@ public abstract class BaseCrudClient<Dto> extends BaseClient implements CrudClie
         return webTarget.request().header(HttpHeaders.AUTHORIZATION, buildAuthBearer(jwtToken));
     }
 
+    protected abstract Invocation.Builder buildRequest(WebTarget target);
+
     protected abstract Long getId(Dto instance);
 
     protected abstract GenericType<List<Dto>> getListGenericType();
 
-    private String buildAuthBearer(String jwtToken) {
-        return String.format(TEMPLATE_AUTH_VALUE, jwtToken);
+    protected String buildAuthBearer(String jwtToken) {
+        return String.format(TEMPLATE_AUTH_BEARER, jwtToken);
     }
 }

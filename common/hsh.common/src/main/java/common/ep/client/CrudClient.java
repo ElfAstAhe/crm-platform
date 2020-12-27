@@ -1,6 +1,6 @@
 package common.ep.client;
 
-import common.exceptions.base.RsException;
+import common.exceptions.base.ClientException;
 import java.util.List;
 import java.util.concurrent.Future;
 
@@ -12,21 +12,20 @@ import java.util.concurrent.Future;
 public interface CrudClient<Dto> {
 
     // Синхронные методы
-    Dto getInstance(Object id) throws RsException;
+    Dto getInstance(Object id);
 
-    List<Dto> listAllInstances() throws RsException;
+    List<Dto> listAllInstances();
 
-    Dto createInstance(Dto instance) throws RsException;
-    Dto editInstance(Dto instance) throws RsException;
+    Dto createInstance(Dto instance);
+    Dto editInstance(Dto instance);
     
-    void removeInstance(Object id) throws RsException;
+    void removeInstance(Object id);
     
     // Асинхронные методы
     Future<Dto> getInstanceAsync(Object id);
 
     Future<List<Dto>> listAllAsync();
-    Future<List<Dto>> listInstancesAsync(int fromRow, int rowCount);
-    
+
     Future<Dto> createInstanceAsync(Dto instance);
     Future<Dto> editInstanceAsync(Dto instance);
     

@@ -3,6 +3,7 @@ package dal.migrations;
 import common.dal.migration.base.BaseSqlMigration;
 import common.dal.migration.SqlMigrationHelper;
 import common.exceptions.base.DalException;
+import common.exceptions.runtime.MigrationException;
 import org.flywaydb.core.api.migration.Context;
 import org.jooq.CreateTableColumnStep;
 import org.jooq.DSLContext;
@@ -34,7 +35,7 @@ public class Migration20201211 extends BaseSqlMigration {
         alterTableDataAudit(context);
     }
 
-    private void createTableSecurityAudit(Context context) throws DalException {
+    private void createTableSecurityAudit(Context context) {
         logger.entering(this.getClass().getName(), "createTableSecurityAudit ..");
         try {
             DSLContext create = DSL.using(context.getConnection());
@@ -69,7 +70,7 @@ public class Migration20201211 extends BaseSqlMigration {
             }
         } catch (Exception ex) {
             logger.log(Level.SEVERE, "createTableSecurityAudit error", ex);
-            throw new DalException("createTableSecurityAudit error", ex);
+            throw new MigrationException("createTableSecurityAudit error", ex);
         } finally {
             logger.exiting(this.getClass().getName(), "createTableSecurityAudit done");
         }
@@ -94,7 +95,7 @@ public class Migration20201211 extends BaseSqlMigration {
             }
         } catch (Exception ex) {
             logger.log(Level.SEVERE, "alterTableDataAudit error", ex);
-            throw new DalException("alterTableDataAudit error", ex);
+            throw new MigrationException("alterTableDataAudit error", ex);
         } finally {
             logger.exiting(this.getClass().getName(), "alterTableDataAudit done");
         }

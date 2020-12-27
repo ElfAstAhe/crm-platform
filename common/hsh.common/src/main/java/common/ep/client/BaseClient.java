@@ -13,20 +13,8 @@ import java.util.concurrent.TimeUnit;
  * @author elf
  */
 public abstract class BaseClient implements AutoCloseable {
-
-    protected final String PATH_URI = "api/v1";
-    protected final String PATH_GET_INSTANCE = "/{id}";
-    protected final String PATH_GET_INSTANCE_BY_KEY = "";
-    protected final String PATH_LIST_ALL = "/list/all";
-    protected final String PATH_LIST = "/list";
-    protected final String PATH_CREATE_INSTANCE = "";
-    protected final String PATH_EDIT_INSTANCE = "/{id}";
-    protected final String PATH_REMOVE_INSTANCE = "/{id}";
-
-    protected final String PATH_PARAM_ID = "id";
-    protected final String QUERY_PARAM_KEY = "key";
-    protected final String QUERY_PARAM_FROM_ROW = "fromRow";
-    protected final String QUERY_PARAM_ROW_COUNT = "rowCount";
+    protected static final long DEFAULT_CONNECT_TIMEOUT_MILLISECONDS = 3000L;
+    protected static final long DEFAULT_READ_TIMEOUT_MILLISECONDS = 2000L;
 
     private final Client client;
     private String mediaType;
