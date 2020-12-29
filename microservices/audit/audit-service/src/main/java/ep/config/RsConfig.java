@@ -25,7 +25,7 @@ public class RsConfig extends Application {
         classList.add(SecurityAuditController.class);
         classList.add(AuditController.class);
 
-        classList.addAll(ExceptionMapperHelper.getMapperProviderClassList());
+        classList.addAll(ExceptionMapperHelper.buildMapperProviderClassList());
 
         classes = Collections.unmodifiableSet(classList);
     }

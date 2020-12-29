@@ -49,6 +49,8 @@ public abstract class BaseCrudController<Dto> {
             return Response
                     .ok(getGenericEntity(getCrudFacade().listAllInstances()))
                     .build();
+        } catch (WebApplicationException ex) {
+            throw ex;
         } catch (Throwable ex) {
             return Response.serverError()
                     .entity(ExceptionDtoHelper.toDto(ex))
@@ -102,6 +104,8 @@ public abstract class BaseCrudController<Dto> {
             return Response.created(uri)
                     .entity(result)
                     .build();
+        } catch (WebApplicationException ex) {
+            throw ex;
         } catch (Throwable ex) {
             return Response.serverError()
                     .entity(ExceptionDtoHelper.toDto(ex))

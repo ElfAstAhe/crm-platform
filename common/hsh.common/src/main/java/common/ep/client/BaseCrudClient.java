@@ -89,7 +89,7 @@ public abstract class BaseCrudClient<Dto> extends BaseClient implements CrudClie
     }
 
     @Override
-    public List<Dto> listAllInstances() throws ClientException {
+    public List<Dto> listAllInstances() {
         String responseBody = null;
         try (Response resp = buildRequest(target.path(PATH_LIST_ALL))
                 .accept(getMediaType())
@@ -132,7 +132,7 @@ public abstract class BaseCrudClient<Dto> extends BaseClient implements CrudClie
         } catch (Throwable ex) {
             logger.log(Level.SEVERE, "error createInstance", ex);
             logger.log(Level.INFO, StringUtils.formatNull("response body [%s]", responseBody));
-            throw ex;
+            return null;
         }
     }
 
@@ -160,7 +160,7 @@ public abstract class BaseCrudClient<Dto> extends BaseClient implements CrudClie
         } catch (Throwable ex) {
             logger.log(Level.SEVERE, "error editInstance", ex);
             logger.log(Level.INFO, StringUtils.formatNull("response body [%s]", responseBody));
-            throw ex;
+            return null;
         }
     }
 
@@ -182,7 +182,6 @@ public abstract class BaseCrudClient<Dto> extends BaseClient implements CrudClie
         } catch (Throwable ex) {
             logger.log(Level.SEVERE, "error removeInstance", ex);
             logger.log(Level.INFO, StringUtils.formatNull("response body [%s]", responseBody));
-            throw ex;
         }
     }
 

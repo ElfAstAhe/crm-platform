@@ -31,6 +31,6 @@ public class DataAuditClient extends BaseClient {
                            HostnameVerifier sslHostnameVerifier,
                            ExecutorService executorService) {
         super(connectTimeoutMilliseconds, readTimeoutMilliseconds, mediaType, sslHostnameVerifier, executorService);
-        webTarget = getClient().target(baseUri).path(PATH_URI).path(resourcePath);
+        webTarget = getClient().target(baseUri).path("path uri:: refactor this!").path(resourcePath);
     }
 }

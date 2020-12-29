@@ -1,6 +1,7 @@
 package common.dal.migration.base;
 
 import org.flywaydb.core.api.migration.Context;
+import org.jooq.DSLContext;
 
 /**
  * Базовый класс миграции на основе JPA entity
@@ -17,7 +18,7 @@ public class BaseJpaMigration extends BaseSqlMigration {
     }
 
     @Override
-    public void migrate(Context context) throws Exception {
+    protected void migrate(DSLContext context) {
         // реализуем когда-нибудь в будующем ... :-)
     }
 }

@@ -4,7 +4,11 @@ import java.util.Arrays;
 import java.util.List;
 
 public class ExceptionMapperHelper {
-    public static List<Class<?>> getMapperProviderClassList() {
+    private ExceptionMapperHelper() {
+        // hide constructor
+    }
+
+    public static List<Class<?>> buildMapperProviderClassList() {
         return Arrays.asList(
                 // 400
                 BadRequestExceptionMapper.class,
@@ -27,9 +31,9 @@ public class ExceptionMapperHelper {
                 // 409
                 ConflictExceptionMapper.class,
                 // 410
-                LengthRequiredExceptionMapper.class,
-                // 411
                 ResourceGoneExceptionMapper.class,
+                // 411
+                LengthRequiredExceptionMapper.class,
                 // 412
                 PreconditionFailedExceptionMapper.class,
                 // 413
@@ -62,9 +66,5 @@ public class ExceptionMapperHelper {
                 HttpVersionNotSupportedExceptionMapper.class,
                 // 511
                 NetworkAuthenticationRequiredExceptionMapper.class);
-    }
-
-    private ExceptionMapperHelper() {
-        // hide constructor
     }
 }

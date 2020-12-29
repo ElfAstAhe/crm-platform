@@ -1,6 +1,7 @@
 package ep.controller.facade;
 
 import common.ep.facade.CrudFacade;
+import common.exceptions.runtime.ep.ResourceGoneException;
 import dal.dao.SecurityAuditDao;
 import dto.audit.SecurityAudit;
 import ep.dto.converter.SecurityAuditConverter;
@@ -24,10 +25,11 @@ public class SecurityAuditFacade implements CrudFacade<SecurityAudit> {
 
     @Override
     public List<SecurityAudit> listAllInstances() {
-        return daoSecurityAudit.listAll()
-                .stream()
-                .map(SecurityAuditConverter::toDto)
-                .collect(Collectors.toList());
+//        return daoSecurityAudit.listAll()
+//                .stream()
+//                .map(SecurityAuditConverter::toDto)
+//                .collect(Collectors.toList());
+        throw new ResourceGoneException("not implemented");
     }
 
     @Override

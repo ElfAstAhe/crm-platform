@@ -2,6 +2,7 @@ package ep.controller;
 
 import common.ep.controller.BaseCrudController;
 import common.ep.facade.CrudFacade;
+import common.exceptions.runtime.ep.ResourceGoneException;
 import dto.audit.DataAudit;
 import ep.controller.facade.DataAuditFacade;
 
@@ -25,12 +26,6 @@ public class DataAuditController extends BaseCrudController<DataAudit> {
 
     @Inject
     private DataAuditFacade facade;
-
-    @Override
-    public Response listAllInstances() {
-        return Response.status(Response.Status.GONE)
-                .build();
-    }
 
     @Override
     protected CrudFacade<DataAudit> getCrudFacade() {
