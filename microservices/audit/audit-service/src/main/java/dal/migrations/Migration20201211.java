@@ -11,7 +11,7 @@ import org.jooq.impl.SQLDataType;
 import java.time.OffsetDateTime;
 import java.util.logging.Logger;
 
-@SuppressWarnings({"unused"})
+@SuppressWarnings({"unused", "DuplicatedCode"})
 public class Migration20201211 extends BaseSqlMigration {
     private final Logger logger = Logger.getLogger(Migration20201211.class.getName());
     private static final String VERSION = "1.1";

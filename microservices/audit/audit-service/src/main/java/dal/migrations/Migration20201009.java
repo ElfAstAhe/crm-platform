@@ -13,7 +13,7 @@ import java.time.OffsetDateTime;
 import java.util.Objects;
 import java.util.logging.Logger;
 
-@SuppressWarnings("unused")
+@SuppressWarnings({"unused", "DuplicatedCode"})
 public class Migration20201009 extends BaseSqlMigration {
     private final Logger logger = Logger.getLogger(Migration20201009.class.getName());
     private static final String VERSION = "1.0";
