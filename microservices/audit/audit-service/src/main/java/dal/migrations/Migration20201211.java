@@ -5,6 +5,7 @@ import common.dal.migration.SqlMigrationHelper;
 import org.jooq.AlterTableStep;
 import org.jooq.CreateTableColumnStep;
 import org.jooq.DSLContext;
+import org.jooq.Query;
 import org.jooq.impl.DSL;
 import org.jooq.impl.SQLDataType;
 
@@ -34,7 +35,7 @@ public class Migration20201211 extends BaseSqlMigration {
                 .alterTable(context, TABLE_DATA_AUDIT, this::buildTableDataAuditScript);
     }
 
-    private String buildTableSecurityAuditScript(CreateTableColumnStep ctcs) {
+    private Query buildTableSecurityAuditScript(CreateTableColumnStep ctcs) {
         return ctcs.column(DSL.name(SqlMigrationHelper.Field.ID), SQLDataType.BIGINT.nullable(false))
                 .column(DSL.name("event_date"), SQLDataType.OFFSETDATETIME.nullable(false).defaultValue(OffsetDateTime.now()))
                 .column(DSL.name(SqlMigrationHelper.Field.SOURCE), SQLDataType.VARCHAR(100).nullable(true))
@@ -44,12 +45,10 @@ public class Migration20201211 extends BaseSqlMigration {
                 .column(DSL.name(SqlMigrationHelper.Field.STATUS), SQLDataType.VARCHAR(50).nullable(true))
                 .constraints(
                         DSL.constraint(DSL.name(SqlMigrationHelper.buildPkConstraintName(TABLE_SECURITY_AUDIT)))
-                                .primaryKey(DSL.name(SqlMigrationHelper.Field.ID)))
-                .getSQL();
+                                .primaryKey(DSL.name(SqlMigrationHelper.Field.ID)));
     }
 
-    private String buildTableDataAuditScript(AlterTableStep ats) {
-        return ats.add(DSL.name(SqlMigrationHelper.Field.STATUS), SQLDataType.VARCHAR(50).nullable(true))
-                .getSQL();
+    private Query buildTableDataAuditScript(AlterTableStep ats) {
+        return ats.add(DSL.name(SqlMigrationHelper.Field.STATUS), SQLDataType.VARCHAR(50).nullable(true));
     }
 }

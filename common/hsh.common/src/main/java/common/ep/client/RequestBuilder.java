@@ -4,12 +4,16 @@ import org.jooq.tools.StringUtils;
 
 import javax.ws.rs.client.Invocation;
 import javax.ws.rs.client.WebTarget;
+import javax.ws.rs.core.HttpHeaders;
 import java.util.List;
 import java.util.Map;
-import java.util.Objects;
 
 public class RequestBuilder {
+    private static final String TEMPLATE_AUTH_BEARER = "Bearer %s";
     private WebTarget target;
+
+    private String jwt;
+    private String mediaType;
 
     public RequestBuilder(WebTarget target) {
         if (target == null)
@@ -27,24 +31,13 @@ public class RequestBuilder {
         return this;
     }
 
-    public RequestBuilder withPathTemplate(String pathTemplate, Object value) {
-        setPathTemplate(pathTemplate, value);
+    public RequestBuilder withTemplate(String name, Object value) {
+        setTemplate(name, value);
         return this;
     }
 
-    public RequestBuilder withPathTemplates(Map<String, Object> pathTemplates) {
-        pathTemplates.forEach(this::setPathTemplate);
-        return this;
-    }
-
-    public RequestBuilder withPathAndTemplates(Map<String, Object> pathAndTemplates) {
-        pathAndTemplates.forEach((key, value) -> {
-            if (value == null) {
-                setPath(key);
-            } else {
-                setPathTemplate(key, value);
-            }
-        });
+    public RequestBuilder withTemplates(Map<String, Object> templates) {
+        templates.forEach(this::setTemplate);
         return this;
     }
 
@@ -68,8 +61,30 @@ public class RequestBuilder {
         return this;
     }
 
+    public RequestBuilder withMediaType(String mediaType) {
+        this.mediaType = mediaType;
+        return this;
+    }
+
+    public RequestBuilder withJwt(String jwt) {
+        this.jwt = jwt;
+        return this;
+    }
+
     public Invocation.Builder build() {
-        return target.request();
+        Invocation.Builder request = target.request();
+        // определяем media type
+        if (!StringUtils.isBlank(mediaType))
+            request = request.accept(mediaType);
+        // определяем jwt token
+        if (!StringUtils.isBlank(jwt))
+            request = request.header(HttpHeaders.AUTHORIZATION, buildAuthBearer(jwt));
+
+        return request;
+    }
+
+    protected String buildAuthBearer(String jwtToken) {
+        return String.format(TEMPLATE_AUTH_BEARER, jwtToken);
     }
 
     private void setPath(String path) {
@@ -79,13 +94,13 @@ public class RequestBuilder {
         target = target.path(path);
     }
 
-    private void setPathTemplate(String pathTemplate, Object value) {
-        if (StringUtils.isBlank(pathTemplate))
-            throw new IllegalArgumentException("empty path template");
+    private void setTemplate(String name, Object value) {
+        if (StringUtils.isBlank(name))
+            throw new IllegalArgumentException("empty template");
         if (value == null)
-            throw new IllegalArgumentException("nullable path template value");
+            throw new IllegalArgumentException("nullable template value");
 
-        target = target.resolveTemplate(pathTemplate, value);
+        target = target.resolveTemplate(name, value);
     }
 
     private void setQueryParam(String param, Object value) {

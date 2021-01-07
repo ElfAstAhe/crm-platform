@@ -4,13 +4,13 @@ import common.dto.ExceptionDto;
 import common.exceptions.runtime.base.ClientRuntimeException;
 
 import javax.net.ssl.HostnameVerifier;
+import javax.ws.rs.client.Entity;
 import javax.ws.rs.client.WebTarget;
 import javax.ws.rs.core.Response;
-import java.util.Map;
 import java.util.concurrent.ExecutorService;
 
 public class BaseRestClient extends BaseClient {
-    private final WebTarget target;
+    private final WebTarget webTarget;
 
     public BaseRestClient(String baseUri,
                           long connectTimeoutMilliseconds,
@@ -23,19 +23,14 @@ public class BaseRestClient extends BaseClient {
                 mediaType,
                 sslHostnameVerifier,
                 executorService);
-        target = getClient().target(baseUri);
+        webTarget = getClient().target(baseUri);
     }
 
-    public Response get(Map<String, Object> pathsAndTemplates,
-                        Map<String, Object> queryParams) {
+    protected Response get(RequestBuilder requestBuilder) {
         Response result = null;
         try {
             // запрос
-            result = new RequestBuilder(target)
-                    .withPathAndTemplates(pathsAndTemplates)
-                    .withQueryParams(queryParams)
-                    .build()
-                    .accept(getMediaType())
+            result = requestBuilder.build()
                     .get();
             // фиксируем буфер
             result.bufferEntity();
@@ -53,15 +48,70 @@ public class BaseRestClient extends BaseClient {
         }
     }
 
-    public Response post() {
-        return null;
+    protected Response post(RequestBuilder requestBuilder, Object instance) {
+        Response result = null;
+        try  {
+            result = requestBuilder.build()
+                    .post(Entity.entity(instance, getMediaType()));
+            // Фиксируем буфер
+            result.bufferEntity();
+            // Если ошибка
+            if (result.getStatus() >= Response.Status.BAD_REQUEST.getStatusCode())
+                throw new ClientRuntimeException(Messages.REMOTE_EXCEPTION,
+                        result.getStatus(),
+                        result.readEntity(ExceptionDto.class));
+
+            return result;
+        } catch (ClientRuntimeException ex) {
+            if (result != null)
+                result.close();
+            throw ex;
+        }
     }
 
-    public Response put() {
-        return null;
+    protected Response put(RequestBuilder requestBuilder, Object instance) {
+        Response result = null;
+        try  {
+            result = requestBuilder.build()
+                    .put(Entity.entity(instance, getMediaType()));
+            // Фиксируем буфер
+            result.bufferEntity();
+            // Если ошибка
+            if (result.getStatus() >= Response.Status.BAD_REQUEST.getStatusCode())
+                throw new ClientRuntimeException(Messages.REMOTE_EXCEPTION,
+                        result.getStatus(),
+                        result.readEntity(ExceptionDto.class));
+
+            return result;
+        } catch (ClientRuntimeException ex) {
+            if (result != null)
+                result.close();
+            throw ex;
+        }
     }
 
-    public Response delete() {
-        return null;
+    protected Response delete(RequestBuilder requestBuilder) {
+        Response result = null;
+        try  {
+            result = requestBuilder.build()
+                    .delete();
+            // Фиксируем буфер
+            result.bufferEntity();
+            // Если ошибка
+            if (result.getStatus() >= Response.Status.BAD_REQUEST.getStatusCode())
+                throw new ClientRuntimeException(Messages.REMOTE_EXCEPTION,
+                        result.getStatus(),
+                        result.readEntity(ExceptionDto.class));
+
+            return result;
+        } catch (ClientRuntimeException ex) {
+            if (result != null)
+                result.close();
+            throw ex;
+        }
+    }
+
+    protected WebTarget getWebTarget() {
+        return webTarget;
     }
 }

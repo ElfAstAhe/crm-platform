@@ -1,6 +1,5 @@
 package common.dal.migration;
 
-import common.exceptions.runtime.MigrationException;
 import org.jooq.*;
 import org.jooq.conf.StatementType;
 import org.jooq.impl.DSL;
@@ -8,9 +7,7 @@ import org.jooq.impl.SQLDataType;
 import org.jooq.tools.StringUtils;
 import org.jooq.util.mysql.MySQLDataType;
 
-import java.util.Objects;
 import java.util.function.Function;
-import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
@@ -91,7 +88,7 @@ public class SqlMigrationHelper {
 
         public static void createTable(DSLContext context,
                                        String tableName,
-                                       Function<CreateTableColumnStep, String> columnsBuilder,
+                                       Function<CreateTableColumnStep, Query> columnsBuilder,
                                        String tableDescription) {
             logger.entering(SqlMigrationHelper.class.getName(), String.format("createTable [%s] ..", tableName));
             if (context == null)
@@ -105,7 +102,7 @@ public class SqlMigrationHelper {
                     .setStatementType(StatementType.STATIC_STATEMENT);
             // Таблица
             try (CreateTableColumnStep ctcs = context.createTableIfNotExists(DSL.name(tableName))) {
-                String script = columnsBuilder.apply(ctcs);
+                String script = columnsBuilder.apply(ctcs).getSQL();
                 logger.info(String.format(LogTemplate.TABLE_SCRIPT, script));
                 context.execute(script);
             }
@@ -120,7 +117,7 @@ public class SqlMigrationHelper {
             logger.exiting(SqlMigrationHelper.class.getName(), String.format("createTable [%s] done", tableName));
         }
 
-        public static void createSequence(DSLContext context, String sequenceName, Function<CreateSequenceFlagsStep, String> sequenceBuilder) {
+        public static void createSequence(DSLContext context, String sequenceName, Function<CreateSequenceFlagsStep, Query> sequenceBuilder) {
             logger.entering(SqlMigrationHelper.class.getName(), String.format("createSequence [%s] ..", sequenceName));
             if (context == null)
                 throw new IllegalArgumentException("context not assigned");
@@ -133,20 +130,20 @@ public class SqlMigrationHelper {
                     .setStatementType(StatementType.STATIC_STATEMENT);
             // сиквенс
             try (CreateSequenceFlagsStep csfs = context.createSequenceIfNotExists(DSL.sequence(DSL.name(sequenceName), SQLDataType.BIGINT))) {
-                String script = sequenceBuilder.apply(csfs);
+                String script = sequenceBuilder.apply(csfs).getSQL();
                 logger.info(String.format(LogTemplate.SEQUENCE_SCRIPT, script));
                 context.execute(script);
             }
             logger.exiting(SqlMigrationHelper.class.getName(), String.format("createSequenceObjects [%s] done", sequenceName));
         }
 
-        public static void alterTable(DSLContext context, String tableName, Function<AlterTableStep, String> columnsBuilder) {
+        public static void alterTable(DSLContext context, String tableName, Function<AlterTableStep, Query> columnsBuilder) {
             logger.entering(SqlMigrationHelper.class.getName(), String.format("alterTable [%s] ..", tableName));
             // Конфигурируем
             context.settings()
                     .setStatementType(StatementType.STATIC_STATEMENT);
             // изменяем таблицу
-            String script = columnsBuilder.apply(context.alterTableIfExists(DSL.name(tableName)));
+            String script = columnsBuilder.apply(context.alterTableIfExists(DSL.name(tableName))).getSQL();
             logger.info(String.format(LogTemplate.TABLE_SCRIPT, script));
             context.execute(script);
 

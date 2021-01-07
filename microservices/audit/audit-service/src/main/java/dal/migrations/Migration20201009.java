@@ -6,6 +6,7 @@ import dal.DalConstants;
 import org.jooq.CreateSequenceFlagsStep;
 import org.jooq.CreateTableColumnStep;
 import org.jooq.DSLContext;
+import org.jooq.Query;
 import org.jooq.impl.DSL;
 import org.jooq.impl.SQLDataType;
 
@@ -39,16 +40,15 @@ public class Migration20201009 extends BaseSqlMigration {
                 .createSequence(context, DalConstants.SEQUENCE_OBJECTS, this::buildSequenceObjectsScript);
     }
 
-    private String buildSequenceObjectsScript(CreateSequenceFlagsStep csfs) {
+    private Query buildSequenceObjectsScript(CreateSequenceFlagsStep csfs) {
         return csfs.incrementBy(DSL.val(new Long(1)))
                 .minvalue(DSL.val(new Long(1)))
                 .startWith(DSL.val(new Long(1)))
                 .cache(DSL.val(new Long(1)))
-                .noCycle()
-                .getSQL();
+                .noCycle();
     }
 
-    private String buildTableDataAuditScript(CreateTableColumnStep ctcs) {
+    private Query buildTableDataAuditScript(CreateTableColumnStep ctcs) {
         return ctcs.column(DSL.name(SqlMigrationHelper.Field.ID), SQLDataType.BIGINT.nullable(false))
                 .column(DSL.name("event_date"), SQLDataType.OFFSETDATETIME.nullable(false).defaultValue(OffsetDateTime.now()))
                 .column(DSL.name(SqlMigrationHelper.Field.SOURCE), SQLDataType.VARCHAR(100).nullable(true))
@@ -62,11 +62,10 @@ public class Migration20201009 extends BaseSqlMigration {
                 .column(DSL.name(SqlMigrationHelper.Field.USER_LOGIN), SQLDataType.VARCHAR(100).nullable(true))
                 .column(DSL.name("run_as_user"), SQLDataType.VARCHAR(100).nullable(true))
                 .constraints(DSL.constraint(DSL.name(SqlMigrationHelper.buildPkConstraintName(TABLE_DATA_AUDIT)))
-                        .primaryKey(DSL.name(SqlMigrationHelper.Field.ID)))
-                .getSQL();
+                        .primaryKey(DSL.name(SqlMigrationHelper.Field.ID)));
     }
 
-    private String buildTableSettingsScript(CreateTableColumnStep ctcs) {
+    private Query buildTableSettingsScript(CreateTableColumnStep ctcs) {
         return ctcs.column(DSL.name(SqlMigrationHelper.Field.ID), SQLDataType.BIGINT.nullable(false))
                 .column(DSL.name(SqlMigrationHelper.Field.VERSION), SQLDataType.BIGINT.nullable(false))
                 .column(DSL.name(SqlMigrationHelper.Field.CODE), SQLDataType.VARCHAR(50).nullable(false))
@@ -75,7 +74,6 @@ public class Migration20201009 extends BaseSqlMigration {
                 .constraints(DSL.constraint(DSL.name(SqlMigrationHelper.buildPkConstraintName(SqlMigrationHelper.Table.SETTINGS)))
                                 .primaryKey(DSL.name(SqlMigrationHelper.Field.ID)),
                         DSL.constraint(DSL.name(SqlMigrationHelper.buildUkConstraintName(SqlMigrationHelper.Table.SETTINGS)))
-                                .unique(DSL.name(SqlMigrationHelper.Field.CODE)))
-                .getSQL();
+                                .unique(DSL.name(SqlMigrationHelper.Field.CODE)));
     }
 }
