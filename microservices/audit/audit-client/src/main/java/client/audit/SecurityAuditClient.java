@@ -2,21 +2,22 @@ package client.audit;
 
 import common.ep.client.BaseCrudClient;
 import dto.audit.DataAudit;
+import dto.audit.SecurityAudit;
 
 import javax.net.ssl.HostnameVerifier;
 import javax.ws.rs.core.GenericType;
 import java.util.List;
 import java.util.concurrent.ExecutorService;
 
-public class DataAuditClient extends BaseCrudClient<DataAudit> {
+public class SecurityAuditClient extends BaseCrudClient<SecurityAudit> {
     private static final String defaultMimeType = "application/json";
-    private static final String resourcePath = "dataAudit";
+    private static final String resourcePath = "securityAudit";
 
-    public DataAuditClient(String baseUri) {
+    public SecurityAuditClient(String baseUri) {
         this(baseUri, null);
     }
 
-    public DataAuditClient(String baseUri, ExecutorService executorService) {
+    public SecurityAuditClient(String baseUri, ExecutorService executorService) {
         this(baseUri,
                 DEFAULT_CONNECT_TIMEOUT_MILLISECONDS,
                 DEFAULT_READ_TIMEOUT_MILLISECONDS,
@@ -25,7 +26,7 @@ public class DataAuditClient extends BaseCrudClient<DataAudit> {
                 executorService);
     }
 
-    public DataAuditClient(String baseUri,
+    public SecurityAuditClient(String baseUri,
                            long connectTimeoutMilliseconds,
                            long readTimeoutMilliseconds,
                            String mediaType,
@@ -38,21 +39,21 @@ public class DataAuditClient extends BaseCrudClient<DataAudit> {
                 mediaType,
                 sslHostnameVerifier,
                 executorService,
-                DataAudit.class);
+                SecurityAudit.class);
     }
 
     @Override
-    protected Long getId(DataAudit instance) {
+    protected Long getId(SecurityAudit instance) {
         return instance.getId();
+    }
+
+    @Override
+    protected GenericType<List<SecurityAudit>> getListGenericType() {
+        return new GenericType<List<SecurityAudit>>(){};
     }
 
     @Override
     protected String getJwt() {
         return null;
-    }
-
-    @Override
-    protected GenericType<List<DataAudit>> getListGenericType() {
-        return new GenericType<List<DataAudit>>(){};
     }
 }

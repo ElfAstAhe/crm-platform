@@ -16,6 +16,16 @@
             <version>${hsh.common.version}</version>
             <scope>compile</scope>
         </dependency>
+        <dependency>
+            <groupId>org.hsh</groupId>
+            <artifactId>audit-dto</artifactId>
+            <version>${crm.platform.audit.dto.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.hsh</groupId>
+            <artifactId>audit-client</artifactId>
+            <version>${crm.platform.audit.client.version}</version>
+        </dependency>
     </dependencies>
 
     <properties>

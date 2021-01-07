@@ -1,5 +1,7 @@
 package common.ep.client;
 
+import common.exceptions.runtime.base.ClientRuntimeException;
+
 import javax.net.ssl.HostnameVerifier;
 import javax.ws.rs.client.WebTarget;
 import javax.ws.rs.core.GenericType;
@@ -27,7 +29,7 @@ public abstract class BaseCrudClient<Dto> extends BaseRestClient implements Crud
     public static final String PATH_PARAM_ID = "id";
 
     private final Class<? extends Dto> dtoClass;
-    private final WebTarget target;
+    private final WebTarget resourceTarget;
 
     protected static final Logger logger = Logger.getLogger(BaseCrudClient.class.getName());
 
@@ -45,7 +47,7 @@ public abstract class BaseCrudClient<Dto> extends BaseRestClient implements Crud
                 mediaType,
                 sslHostnameVerifier,
                 executorService);
-        target = getWebTarget().path(PATH_URI).path(resourcePath);
+        resourceTarget = getBaseTarget().path(PATH_URI).path(resourcePath);
         this.dtoClass = dtoClass;
     }
 
@@ -59,6 +61,8 @@ public abstract class BaseCrudClient<Dto> extends BaseRestClient implements Crud
             return resp.readEntity(dtoClass);
         } catch (RuntimeException ex) {
             logger.log(Level.SEVERE, "error getInstance", ex);
+            if (ex instanceof ClientRuntimeException)
+                logger.log(Level.SEVERE, String.format("response body [%s]", ((ClientRuntimeException)ex).getResponseBody()));
             throw ex;
         }
     }
@@ -69,6 +73,8 @@ public abstract class BaseCrudClient<Dto> extends BaseRestClient implements Crud
             return resp.readEntity(getListGenericType());
         } catch (RuntimeException ex) {
             logger.log(Level.SEVERE, "error listAllInstances", ex);
+            if (ex instanceof ClientRuntimeException)
+                logger.log(Level.SEVERE, String.format("response body [%s]", ((ClientRuntimeException)ex).getResponseBody()));
             throw ex;
         }
     }
@@ -79,6 +85,8 @@ public abstract class BaseCrudClient<Dto> extends BaseRestClient implements Crud
             return resp.readEntity(dtoClass);
         } catch (RuntimeException ex) {
             logger.log(Level.SEVERE, "error createInstance", ex);
+            if (ex instanceof ClientRuntimeException)
+                logger.log(Level.SEVERE, String.format("response body [%s]", ((ClientRuntimeException)ex).getResponseBody()));
             throw ex;
         }
     }
@@ -93,6 +101,8 @@ public abstract class BaseCrudClient<Dto> extends BaseRestClient implements Crud
             return resp.readEntity(dtoClass);
         } catch (RuntimeException ex) {
             logger.log(Level.SEVERE, "error editInstance", ex);
+            if (ex instanceof ClientRuntimeException)
+                logger.log(Level.SEVERE, String.format("response body [%s]", ((ClientRuntimeException)ex).getResponseBody()));
             throw ex;
         }
     }
@@ -103,6 +113,8 @@ public abstract class BaseCrudClient<Dto> extends BaseRestClient implements Crud
             // nothing
         } catch (Exception ex) {
             logger.log(Level.SEVERE, "error removeInstance", ex);
+            if (ex instanceof ClientRuntimeException)
+                logger.log(Level.SEVERE, String.format("response body [%s]", ((ClientRuntimeException)ex).getResponseBody()));
             throw ex;
         }
     }
@@ -132,8 +144,8 @@ public abstract class BaseCrudClient<Dto> extends BaseRestClient implements Crud
         return getExecutorService().submit(() -> this.removeInstance(id));
     }
 
-    protected WebTarget getTarget() {
-        return target;
+    protected WebTarget getResourceTarget() {
+        return resourceTarget;
     }
 
     protected Class<? extends Dto> getDtoClass() {
@@ -147,7 +159,7 @@ public abstract class BaseCrudClient<Dto> extends BaseRestClient implements Crud
     protected abstract String getJwt();
 
     private RequestBuilder buildGet(Object id) {
-        return new RequestBuilder(target)
+        return new RequestBuilder(resourceTarget)
                 .withPath(PATH_GET_INSTANCE)
                 .withTemplate(PATH_PARAM_ID, id)
                 .withMediaType(getMediaType())
@@ -155,21 +167,21 @@ public abstract class BaseCrudClient<Dto> extends BaseRestClient implements Crud
     }
 
     private RequestBuilder buildListAll() {
-        return new RequestBuilder(target)
+        return new RequestBuilder(resourceTarget)
                 .withPath(PATH_LIST_ALL)
                 .withMediaType(getMediaType())
                 .withJwt(getJwt());
     }
 
     private RequestBuilder buildCreate() {
-        return new RequestBuilder(target)
+        return new RequestBuilder(resourceTarget)
                 .withPath(PATH_CREATE_INSTANCE)
                 .withMediaType(getMediaType())
                 .withJwt(getJwt());
     }
 
     private RequestBuilder buildEdit(Object id) {
-        return new RequestBuilder(target)
+        return new RequestBuilder(resourceTarget)
                 .withPath(PATH_EDIT_INSTANCE)
                 .withTemplate(PATH_PARAM_ID, id)
                 .withMediaType(getMediaType())
@@ -177,7 +189,7 @@ public abstract class BaseCrudClient<Dto> extends BaseRestClient implements Crud
     }
 
     private RequestBuilder buildRemove(Object id) {
-        return new RequestBuilder(target)
+        return new RequestBuilder(resourceTarget)
                 .withPath(PATH_REMOVE_INSTANCE)
                 .withTemplate(PATH_PARAM_ID, id)
                 .withMediaType(getMediaType())

@@ -1,6 +1,5 @@
 package common.ep.client;
 
-import common.dto.ExceptionDto;
 import common.exceptions.runtime.base.ClientRuntimeException;
 
 import javax.net.ssl.HostnameVerifier;
@@ -10,7 +9,7 @@ import javax.ws.rs.core.Response;
 import java.util.concurrent.ExecutorService;
 
 public class BaseRestClient extends BaseClient {
-    private final WebTarget webTarget;
+    private final WebTarget baseTarget;
 
     public BaseRestClient(String baseUri,
                           long connectTimeoutMilliseconds,
@@ -23,7 +22,7 @@ public class BaseRestClient extends BaseClient {
                 mediaType,
                 sslHostnameVerifier,
                 executorService);
-        webTarget = getClient().target(baseUri);
+        baseTarget = getClient().target(baseUri);
     }
 
     protected Response get(RequestBuilder requestBuilder) {
@@ -38,7 +37,7 @@ public class BaseRestClient extends BaseClient {
             if (result.getStatus() >= Response.Status.BAD_REQUEST.getStatusCode())
                 throw new ClientRuntimeException(Messages.REMOTE_EXCEPTION,
                         result.getStatus(),
-                        result.readEntity(ExceptionDto.class));
+                        result.readEntity(String.class));
 
             return result;
         } catch (ClientRuntimeException ex) {
@@ -59,7 +58,7 @@ public class BaseRestClient extends BaseClient {
             if (result.getStatus() >= Response.Status.BAD_REQUEST.getStatusCode())
                 throw new ClientRuntimeException(Messages.REMOTE_EXCEPTION,
                         result.getStatus(),
-                        result.readEntity(ExceptionDto.class));
+                        result.readEntity(String.class));
 
             return result;
         } catch (ClientRuntimeException ex) {
@@ -80,7 +79,7 @@ public class BaseRestClient extends BaseClient {
             if (result.getStatus() >= Response.Status.BAD_REQUEST.getStatusCode())
                 throw new ClientRuntimeException(Messages.REMOTE_EXCEPTION,
                         result.getStatus(),
-                        result.readEntity(ExceptionDto.class));
+                        result.readEntity(String.class));
 
             return result;
         } catch (ClientRuntimeException ex) {
@@ -101,7 +100,7 @@ public class BaseRestClient extends BaseClient {
             if (result.getStatus() >= Response.Status.BAD_REQUEST.getStatusCode())
                 throw new ClientRuntimeException(Messages.REMOTE_EXCEPTION,
                         result.getStatus(),
-                        result.readEntity(ExceptionDto.class));
+                        result.readEntity(String.class));
 
             return result;
         } catch (ClientRuntimeException ex) {
@@ -111,7 +110,7 @@ public class BaseRestClient extends BaseClient {
         }
     }
 
-    protected WebTarget getWebTarget() {
-        return webTarget;
+    protected WebTarget getBaseTarget() {
+        return baseTarget;
     }
 }
