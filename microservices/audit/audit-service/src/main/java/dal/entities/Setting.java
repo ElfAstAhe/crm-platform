@@ -1,7 +1,7 @@
 package dal.entities;
 
 import common.dal.entity.BaseIdEntity;
-import dal.DalConstants;
+import dal.AuditDalConstants;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -12,7 +12,7 @@ import java.util.Objects;
  * @author elf
  */
 @Entity
-@Table(name = "settings", schema = DalConstants.SCHEMA_NAME)
+@Table(name = "settings", schema = AuditDalConstants.SCHEMA_NAME)
 @NamedQuery(lockMode = LockModeType.NONE, name = "Setting.findAll", query = "SELECT s FROM Setting s")
 @NamedQuery(lockMode = LockModeType.NONE, name = "Setting.findById", query = "SELECT s FROM Setting s WHERE s.id = :id")
 @NamedQuery(lockMode = LockModeType.NONE, name = "Setting.findByCode", query = "select s from Setting s where s.code = :code")

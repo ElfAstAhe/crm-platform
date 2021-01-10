@@ -16,7 +16,7 @@ import java.util.logging.Logger;
  * @author elf
  */
 @SuppressWarnings("unused")
-public class SqlMigrationHelper {
+public final class SqlMigrationHelper {
     private static final Logger logger = Logger.getLogger(SqlMigrationHelper.class.getName());
 
     private SqlMigrationHelper() {
@@ -81,15 +81,15 @@ public class SqlMigrationHelper {
         return String.format(Script.DROP_RULE, ruleName, tableName);
     }
 
-    public static class Ddl {
+    public static final class Ddl {
         private Ddl() {
             // hide
         }
 
         public static void createTable(DSLContext context,
                                        String tableName,
-                                       Function<CreateTableColumnStep, Query> columnsBuilder,
-                                       String tableDescription) {
+                                       String tableDescription,
+                                       Function<CreateTableColumnStep, Query> columnsBuilder) {
             logger.entering(SqlMigrationHelper.class.getName(), String.format("createTable [%s] ..", tableName));
             if (context == null)
                 throw new IllegalArgumentException("context not assigned");
@@ -149,13 +149,56 @@ public class SqlMigrationHelper {
 
             logger.exiting(SqlMigrationHelper.class.getName(), String.format("alterTable [%s] done", tableName));
         }
+
+        public static void createDefaultSequenceObjects(DSLContext dslContext) {
+            createSequence(dslContext, Sequence.OBJECTS, Builder::buildDefaultSequenceObjects);
+        }
+
+        public static void createDefaultSettingsTable(DSLContext dslContext) {
+            createTable(dslContext, Table.SETTINGS, Table.SETTINGS_DESCRIPTION, Builder::buildDefaultSettingsTable);
+        }
+    }
+
+    public static final class Builder {
+        public static Query buildDefaultSequenceObjects(CreateSequenceFlagsStep csfs) {
+            return csfs.incrementBy(DSL.val(1L))
+                    .minvalue(DSL.val(1L))
+                    .startWith(DSL.val(1L))
+                    .cache(DSL.val(1L))
+                    .noCycle();
+        }
+
+        public static Query buildDefaultSettingsTable(CreateTableColumnStep ctcs) {
+            return ctcs.column(DSL.name(SqlMigrationHelper.Field.ID), SQLDataType.BIGINT.nullable(false))
+                    .column(DSL.name(SqlMigrationHelper.Field.VERSION), SQLDataType.BIGINT.nullable(false))
+                    .column(DSL.name(SqlMigrationHelper.Field.CODE), SQLDataType.VARCHAR(50).nullable(false))
+                    .column(DSL.name(SqlMigrationHelper.Field.NAME), SQLDataType.VARCHAR(100).nullable(true))
+                    .column(DSL.name(SqlMigrationHelper.Field.VALUE), SQLDataType.VARCHAR(1024).nullable(true))
+                    .constraints(DSL.constraint(DSL.name(SqlMigrationHelper.buildPkConstraintName(SqlMigrationHelper.Table.SETTINGS)))
+                                    .primaryKey(DSL.name(SqlMigrationHelper.Field.ID)),
+                            DSL.constraint(DSL.name(SqlMigrationHelper.buildUkConstraintName(SqlMigrationHelper.Table.SETTINGS)))
+                                    .unique(DSL.name(SqlMigrationHelper.Field.CODE)));
+        }
+    }
+
+    /**
+     * Typical sequence names
+     */
+    public static final class Sequence {
+        public static final String OBJECTS = "seq_objects";
+
+        private Sequence() {
+            // hide
+        }
     }
 
     /**
      * Typical table names
      */
-    public static class Table {
+    public static final class Table {
         public static final String SETTINGS = "settings";
+
+        public static final String SETTINGS_DESCRIPTION = "microservice changeable settings";
 
         private Table() {
             // hide constructor
@@ -165,7 +208,7 @@ public class SqlMigrationHelper {
     /**
      * Typical field names
      */
-    public static class Field {
+    public static final class Field {
         public static final String ID = "id";
         public static final String TYPE = "type";
         public static final String KIND = "kind";
@@ -177,6 +220,7 @@ public class SqlMigrationHelper {
         public static final String DELETE_FLAG = "delete_flag";
         public static final String VALUE = "value";
         public static final String STATUS = "status";
+        public static final String STATE = "state";
         public static final String EVENT = "event";
         public static final String REQUEST_ID = "request_id";
         public static final String CURRENCY = "currency";
@@ -198,7 +242,7 @@ public class SqlMigrationHelper {
     /**
      * Log message templates
      */
-    public static class LogTemplate {
+    public static final class LogTemplate {
         public static final String TABLE_SCRIPT = "table script: [%s]";
         public static final String COMMENT_SCRIPT = "comment script: [%s]";
         public static final String INDEX_SCRIPT = "index script: [%s]";
@@ -214,7 +258,7 @@ public class SqlMigrationHelper {
     /**
      * Naming templates
      */
-    public static class Naming {
+    public static final class Naming {
         public static final String INDEX = "idx_%s_%s";
         public static final String PK_CONSTRAINT = "%s_pk";
         public static final String FK_CONSTRAINT = "%s_fk_%s";
@@ -230,7 +274,7 @@ public class SqlMigrationHelper {
         }
     }
 
-    public static class Script {
+    public static final class Script {
         public static final String CREATE_PARTITION_TABLE = "create table if not exists %s (constraint %s check(%s = '%s'), constraint %s primary key(%s)) inherits (%s)";
 
         public static final String CREATE_PARTITION_INSERT_RULE = "create rule %s as on insert to %s where %s do instead insert into %s values(new.*)";

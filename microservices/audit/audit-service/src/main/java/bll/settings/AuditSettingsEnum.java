@@ -1,15 +1,14 @@
-package common.bll.repository;
+package bll.settings;
 
 import common.bll.settings.Settings;
 
-public enum MockSettingsEnum implements Settings {
-    DUMMY1("Test", false),
-    DUMMY2(12345, false);
+public enum AuditSettingsEnum implements Settings {
+    DUMMY("nothing", false);
 
     private final Object defaultValue;
     private final boolean encrypted;
 
-    MockSettingsEnum(Object defaultValue, boolean isEncrypted) {
+    AuditSettingsEnum(Object defaultValue, boolean isEncrypted) {
         this.defaultValue = defaultValue;
         this.encrypted = isEncrypted;
     }
@@ -23,6 +22,4 @@ public enum MockSettingsEnum implements Settings {
     public boolean isEncrypted() {
         return encrypted;
     }
-
-
 }

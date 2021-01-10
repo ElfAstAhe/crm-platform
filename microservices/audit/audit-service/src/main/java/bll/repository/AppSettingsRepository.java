@@ -1,10 +1,10 @@
 package bll.repository;
 
-import bll.settings.AppSettingsEnum;
+import bll.settings.AuditSettingsEnum;
 import common.bll.repository.SettingsRepository;
 
 import javax.ejb.Local;
 
 @Local
-public interface AppSettingsRepository extends SettingsRepository<AppSettingsEnum> {
+public interface AppSettingsRepository extends SettingsRepository<AuditSettingsEnum> {
 }

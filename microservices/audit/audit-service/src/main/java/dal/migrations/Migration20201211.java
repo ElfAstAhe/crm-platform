@@ -10,11 +10,8 @@ import org.jooq.impl.DSL;
 import org.jooq.impl.SQLDataType;
 
 import java.time.OffsetDateTime;
-import java.util.logging.Logger;
 
-@SuppressWarnings({"unused", "DuplicatedCode"})
 public class Migration20201211 extends BaseSqlMigration {
-    private final Logger logger = Logger.getLogger(Migration20201211.class.getName());
     private static final String VERSION = "1.1";
     private static final int CHECK_SUM = 1;
     private static final String DESCRIPTION = "Security audit table";
@@ -27,15 +24,15 @@ public class Migration20201211 extends BaseSqlMigration {
     }
 
     @Override
-    protected void migrate(DSLContext context) {
+    protected void migrate(DSLContext dslContext) {
         SqlMigrationHelper.Ddl
-                .createTable(context, TABLE_SECURITY_AUDIT, this::buildTableSecurityAuditScript, "security audit");
+                .createTable(dslContext, TABLE_SECURITY_AUDIT, "security audit", this::buildTableSecurityAudit);
 
         SqlMigrationHelper.Ddl
-                .alterTable(context, TABLE_DATA_AUDIT, this::buildTableDataAuditScript);
+                .alterTable(dslContext, TABLE_DATA_AUDIT, this::buildTableDataAudit);
     }
 
-    private Query buildTableSecurityAuditScript(CreateTableColumnStep ctcs) {
+    private Query buildTableSecurityAudit(CreateTableColumnStep ctcs) {
         return ctcs.column(DSL.name(SqlMigrationHelper.Field.ID), SQLDataType.BIGINT.nullable(false))
                 .column(DSL.name("event_date"), SQLDataType.OFFSETDATETIME.nullable(false).defaultValue(OffsetDateTime.now()))
                 .column(DSL.name(SqlMigrationHelper.Field.SOURCE), SQLDataType.VARCHAR(100).nullable(true))
@@ -48,7 +45,7 @@ public class Migration20201211 extends BaseSqlMigration {
                                 .primaryKey(DSL.name(SqlMigrationHelper.Field.ID)));
     }
 
-    private Query buildTableDataAuditScript(AlterTableStep ats) {
+    private Query buildTableDataAudit(AlterTableStep ats) {
         return ats.add(DSL.name(SqlMigrationHelper.Field.STATUS), SQLDataType.VARCHAR(50).nullable(true));
     }
 }

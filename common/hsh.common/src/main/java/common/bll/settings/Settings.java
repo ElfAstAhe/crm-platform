@@ -7,4 +7,5 @@ package common.bll.settings;
  */
 public interface Settings {
     Object getDefaultValue();
+    boolean isEncrypted();
 }
