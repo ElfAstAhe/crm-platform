@@ -22,11 +22,9 @@ public class Migration20210110 extends BaseSqlMigration {
 
     @Override
     protected void migrate(DSLContext dslContext) {
-        SqlMigrationHelper.Ddl
-                .createDefaultSequenceObjects(dslContext);
+        SqlMigrationHelper.createDefaultSequenceObjects(dslContext);
 
-        SqlMigrationHelper.Ddl
-                .createDefaultSettingsTable(dslContext);
+        SqlMigrationHelper.createDefaultTableSettings(dslContext);
 
         SqlMigrationHelper.Ddl
                 .createTable(dslContext, TABLE_USERS, "system users", this::buildTableUsers);
@@ -46,9 +44,9 @@ public class Migration20210110 extends BaseSqlMigration {
                 .column(DSL.name("e_mail"), SQLDataType.VARCHAR(1024).nullable(true))
                 .column(DSL.name("cell_phone"), SQLDataType.VARCHAR(50).nullable(true))
                 .column(DSL.name(SqlMigrationHelper.Field.STATE), SQLDataType.VARCHAR(50).nullable(false).defaultValue("DRAFT"))
-                .constraints(DSL.constraint(DSL.name(SqlMigrationHelper.buildPkConstraintName(TABLE_USERS)))
+                .constraints(DSL.constraint(DSL.name(SqlMigrationHelper.Builder.buildPkConstraintName(TABLE_USERS)))
                                 .primaryKey(DSL.name(SqlMigrationHelper.Field.ID)),
-                        DSL.constraint(DSL.name(SqlMigrationHelper.buildUkConstraintName(TABLE_USERS)))
+                        DSL.constraint(DSL.name(SqlMigrationHelper.Builder.buildUkConstraintName(TABLE_USERS)))
                                 .unique(DSL.name("username")));
     }
 
@@ -57,9 +55,9 @@ public class Migration20210110 extends BaseSqlMigration {
                 .column(DSL.name(SqlMigrationHelper.Field.CODE), SQLDataType.VARCHAR(50).nullable(false))
                 .column(DSL.name(SqlMigrationHelper.Field.NAME), SQLDataType.VARCHAR(100).nullable(true))
                 .column(DSL.name(SqlMigrationHelper.Field.DESCRIPTION), SQLDataType.VARCHAR(512).nullable(true))
-                .constraints(DSL.constraint(DSL.name(SqlMigrationHelper.buildPkConstraintName(TABLE_ROLES)))
+                .constraints(DSL.constraint(DSL.name(SqlMigrationHelper.Builder.buildPkConstraintName(TABLE_ROLES)))
                                 .primaryKey(DSL.name(SqlMigrationHelper.Field.ID)),
-                        DSL.constraint(DSL.name(SqlMigrationHelper.buildUkConstraintName(TABLE_ROLES)))
+                        DSL.constraint(DSL.name(SqlMigrationHelper.Builder.buildUkConstraintName(TABLE_ROLES)))
                                 .unique(DSL.name(SqlMigrationHelper.Field.CODE)));
     }
 }

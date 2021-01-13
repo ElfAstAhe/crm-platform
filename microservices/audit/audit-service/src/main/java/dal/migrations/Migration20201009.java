@@ -24,11 +24,9 @@ public class Migration20201009 extends BaseSqlMigration {
 
     @Override
     protected void migrate(DSLContext dslContext) {
-        SqlMigrationHelper.Ddl
-                .createDefaultSequenceObjects(dslContext);
+        SqlMigrationHelper.createDefaultSequenceObjects(dslContext);
 
-        SqlMigrationHelper.Ddl
-                .createDefaultSettingsTable(dslContext);
+        SqlMigrationHelper.createDefaultTableSettings(dslContext);
 
         // ToDo: elf: доработать с учётом шардирования
         SqlMigrationHelper.Ddl
@@ -48,7 +46,7 @@ public class Migration20201009 extends BaseSqlMigration {
                 .column(DSL.name("values"), SqlMigrationHelper.serverSpecificDataTypeLongText(Objects.requireNonNull(ctcs.configuration()).dialect()).nullable(true))
                 .column(DSL.name(SqlMigrationHelper.Field.USER_LOGIN), SQLDataType.VARCHAR(100).nullable(true))
                 .column(DSL.name("run_as_user"), SQLDataType.VARCHAR(100).nullable(true))
-                .constraints(DSL.constraint(DSL.name(SqlMigrationHelper.buildPkConstraintName(TABLE_DATA_AUDIT)))
+                .constraints(DSL.constraint(DSL.name(SqlMigrationHelper.Builder.buildPkConstraintName(TABLE_DATA_AUDIT)))
                         .primaryKey(DSL.name(SqlMigrationHelper.Field.ID)));
     }
 }

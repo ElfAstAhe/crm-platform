@@ -3,10 +3,11 @@ package common.dal.migration;
 import org.jooq.*;
 import org.jooq.conf.StatementType;
 import org.jooq.impl.DSL;
+import org.jooq.impl.DefaultDataType;
 import org.jooq.impl.SQLDataType;
 import org.jooq.tools.StringUtils;
-import org.jooq.util.mysql.MySQLDataType;
 
+import java.sql.Date;
 import java.util.function.Function;
 import java.util.logging.Logger;
 
@@ -18,67 +19,52 @@ import java.util.logging.Logger;
 @SuppressWarnings("unused")
 public final class SqlMigrationHelper {
     private static final Logger logger = Logger.getLogger(SqlMigrationHelper.class.getName());
+    private static final String ERROR_CONTEXT_NOT_ASSIGNED = "context not assigned";
+    private static final String ERROR_TABLE_NAME_IS_EMPTY = "tableName is empty";
+    private static final String ERROR_BUILDER_NOT_ASSIGNED = "builder not assigned";
+
+    public static final DataType<String> MYSQL_TINYTEXT = new DefaultDataType<>(SQLDialect.MYSQL, SQLDataType.CLOB, "tinytext", "char");
+    public static final DataType<String> MYSQL_MEDIUMTEXT = new DefaultDataType<>(SQLDialect.MYSQL, SQLDataType.CLOB, "mediumtext", "char");
+    public static final DataType<String> MYSQL_LONGTEXT = new DefaultDataType<>(SQLDialect.MYSQL, SQLDataType.CLOB, "longtext", "char");
+    public static final DataType<String> MYSQL_ENUM = new DefaultDataType<>(SQLDialect.MYSQL, SQLDataType.VARCHAR, "enum", "char");
+    public static final DataType<String> MYSQL_SET = new DefaultDataType<>(SQLDialect.MYSQL, SQLDataType.VARCHAR, "set", "char");
+    public static final DataType<byte[]> MYSQL_TINYBLOB = new DefaultDataType<>(SQLDialect.MYSQL, SQLDataType.BLOB, "tinyblob", "binary");
+    public static final DataType<byte[]> MYSQL_MEDIUMBLOB = new DefaultDataType<>(SQLDialect.MYSQL, SQLDataType.BLOB, "mediumblob", "binary");
+    public static final DataType<byte[]> MYSQL_LONGBLOB = new DefaultDataType<>(SQLDialect.MYSQL, SQLDataType.BLOB, "longblob", "binary");
+    public static final DataType<Date>   MYSQL_YEAR = new DefaultDataType<>(SQLDialect.MYSQL, SQLDataType.DATE, "year", "date");
+    public static final DataType<JSON>   MYSQL_JSON = new DefaultDataType<>(SQLDialect.MYSQL, SQLDataType.JSON, "json");
 
     private SqlMigrationHelper() {
         // hide constructor
     }
 
     // JOOQ не умеет генерировать MySql longtext тип
-    @SuppressWarnings("deprecation")
     public static DataType<String> serverSpecificDataTypeLongText(SQLDialect sqlDialect) {
         if (SQLDialect.MYSQL.equals(sqlDialect))
-            return MySQLDataType.LONGTEXT;
+            return MYSQL_LONGTEXT;
         return SQLDataType.CLOB;
     }
 
-    public static String buildPkConstraintName(String tableName) {
-        return String.format(Naming.PK_CONSTRAINT, tableName);
+    public static void createDefaultSequenceObjects(DSLContext dslContext) {
+        Ddl.createSequence(dslContext, Sequence.OBJECTS,
+                csfs -> csfs.incrementBy(DSL.val(1L))
+                        .minvalue(DSL.val(1L))
+                        .startWith(DSL.val(1L))
+                        .cache(DSL.val(1L))
+                        .noCycle());
     }
 
-    public static String buildFkConstraintName(String tableName, String suffix) {
-        return String.format(Naming.FK_CONSTRAINT, tableName, suffix);
-    }
-
-    public static String buildUkConstraintName(String tableName) {
-        return String.format(Naming.UK_BK_CONSTRAINT, tableName);
-    }
-
-    public static String buildUkConstraintName(String tableName, String suffix) {
-        return String.format(Naming.UK_CONSTRAINT, tableName, suffix);
-    }
-
-    public static String buildChSimpleConstraintName(String tableName, String fieldName) {
-        return String.format(Naming.CH_CONSTRAINT_SIMPLE, tableName, fieldName);
-    }
-
-    public static String buildChConstraintName(String tableName, String fieldName, String suffixName) {
-        return String.format(Naming.CH_CONSTRAINT, tableName, fieldName, suffixName);
-    }
-
-    public static String buildIndexName(String tableName, String suffix) {
-        return String.format(Naming.INDEX, tableName, suffix);
-    }
-
-    public static String buildPartitionTableName(String tableName, String suffix) {
-        return String.format(Naming.PARTITION_TABLE, tableName, suffix);
-    }
-
-    public static String buildPostgresRuleName(String tableName, String suffix1, String suffix2) {
-        return String.format(Naming.POSTGRES_RULE, tableName, suffix1, suffix2);
-    }
-
-    public static String buildPostgresPartitionTableScript(String tableName, String partitionTableName, String pkFieldName, String chFieldName, String partitionValue) {
-        String chConstraintName = buildChSimpleConstraintName(partitionTableName, chFieldName);
-        String pkConstraintName = buildPkConstraintName(partitionTableName);
-        return String.format(Script.CREATE_PARTITION_TABLE, partitionTableName, chConstraintName, chFieldName, partitionValue, pkConstraintName, pkFieldName, tableName);
-    }
-
-    public static String buildPostgresCreateInsertRuleScript(String tableName, String partitionTableName, String ruleName, String condition) {
-        return String.format(Script.CREATE_PARTITION_INSERT_RULE, ruleName, tableName, condition, partitionTableName);
-    }
-
-    public static String buildPostgresDropRule(String tableName, String ruleName) {
-        return String.format(Script.DROP_RULE, ruleName, tableName);
+    public static void createDefaultTableSettings(DSLContext dslContext) {
+        Ddl.createTable(dslContext, Table.SETTINGS, Table.SETTINGS_DESCRIPTION,
+                ctcs -> ctcs.column(DSL.name(SqlMigrationHelper.Field.ID), SQLDataType.BIGINT.nullable(false))
+                        .column(DSL.name(SqlMigrationHelper.Field.VERSION), SQLDataType.BIGINT.nullable(false))
+                        .column(DSL.name(SqlMigrationHelper.Field.CODE), SQLDataType.VARCHAR(50).nullable(false))
+                        .column(DSL.name(SqlMigrationHelper.Field.NAME), SQLDataType.VARCHAR(100).nullable(true))
+                        .column(DSL.name(SqlMigrationHelper.Field.VALUE), SQLDataType.VARCHAR(1024).nullable(true))
+                        .constraints(DSL.constraint(DSL.name(SqlMigrationHelper.Builder.buildPkConstraintName(Table.SETTINGS)))
+                                        .primaryKey(DSL.name(SqlMigrationHelper.Field.ID)),
+                                DSL.constraint(DSL.name(SqlMigrationHelper.Builder.buildUkConstraintName(Table.SETTINGS)))
+                                        .unique(DSL.name(SqlMigrationHelper.Field.CODE))));
     }
 
     public static final class Ddl {
@@ -92,11 +78,11 @@ public final class SqlMigrationHelper {
                                        Function<CreateTableColumnStep, Query> columnsBuilder) {
             logger.entering(SqlMigrationHelper.class.getName(), String.format("createTable [%s] ..", tableName));
             if (context == null)
-                throw new IllegalArgumentException("context not assigned");
+                throw new IllegalArgumentException(ERROR_CONTEXT_NOT_ASSIGNED);
             if (StringUtils.isBlank(tableName))
-                throw new IllegalArgumentException("tableName is empty");
+                throw new IllegalArgumentException(ERROR_TABLE_NAME_IS_EMPTY);
             if (columnsBuilder == null)
-                throw new IllegalArgumentException("columnsBuilder not assigned");
+                throw new IllegalArgumentException(ERROR_BUILDER_NOT_ASSIGNED);
             // Настраиваем
             context.settings()
                     .setStatementType(StatementType.STATIC_STATEMENT);
@@ -120,11 +106,11 @@ public final class SqlMigrationHelper {
         public static void createSequence(DSLContext context, String sequenceName, Function<CreateSequenceFlagsStep, Query> sequenceBuilder) {
             logger.entering(SqlMigrationHelper.class.getName(), String.format("createSequence [%s] ..", sequenceName));
             if (context == null)
-                throw new IllegalArgumentException("context not assigned");
+                throw new IllegalArgumentException(ERROR_CONTEXT_NOT_ASSIGNED);
             if (StringUtils.isBlank(sequenceName))
                 throw new IllegalArgumentException("sequenceName is empty");
             if (sequenceBuilder == null)
-                throw new IllegalArgumentException("sequenceBuilder not assigned");
+                throw new IllegalArgumentException(ERROR_BUILDER_NOT_ASSIGNED);
             // стройки
             context.settings()
                     .setStatementType(StatementType.STATIC_STATEMENT);
@@ -139,45 +125,74 @@ public final class SqlMigrationHelper {
 
         public static void alterTable(DSLContext context, String tableName, Function<AlterTableStep, Query> columnsBuilder) {
             logger.entering(SqlMigrationHelper.class.getName(), String.format("alterTable [%s] ..", tableName));
+            if (context == null)
+                throw new IllegalArgumentException(ERROR_CONTEXT_NOT_ASSIGNED);
+            if (StringUtils.isBlank(tableName))
+                throw new IllegalArgumentException(ERROR_TABLE_NAME_IS_EMPTY);
+            if (columnsBuilder == null)
+                throw new IllegalArgumentException(ERROR_BUILDER_NOT_ASSIGNED);
             // Конфигурируем
             context.settings()
                     .setStatementType(StatementType.STATIC_STATEMENT);
             // изменяем таблицу
-            String script = columnsBuilder.apply(context.alterTableIfExists(DSL.name(tableName))).getSQL();
+            String script = columnsBuilder.apply(context.alterTableIfExists(DSL.name(tableName)))
+                    .getSQL();
             logger.info(String.format(LogTemplate.TABLE_SCRIPT, script));
             context.execute(script);
 
             logger.exiting(SqlMigrationHelper.class.getName(), String.format("alterTable [%s] done", tableName));
         }
-
-        public static void createDefaultSequenceObjects(DSLContext dslContext) {
-            createSequence(dslContext, Sequence.OBJECTS, Builder::buildDefaultSequenceObjects);
-        }
-
-        public static void createDefaultSettingsTable(DSLContext dslContext) {
-            createTable(dslContext, Table.SETTINGS, Table.SETTINGS_DESCRIPTION, Builder::buildDefaultSettingsTable);
-        }
     }
 
     public static final class Builder {
-        public static Query buildDefaultSequenceObjects(CreateSequenceFlagsStep csfs) {
-            return csfs.incrementBy(DSL.val(1L))
-                    .minvalue(DSL.val(1L))
-                    .startWith(DSL.val(1L))
-                    .cache(DSL.val(1L))
-                    .noCycle();
+        public static String buildPkConstraintName(String tableName) {
+            return String.format(Naming.PK_CONSTRAINT, tableName);
         }
 
-        public static Query buildDefaultSettingsTable(CreateTableColumnStep ctcs) {
-            return ctcs.column(DSL.name(SqlMigrationHelper.Field.ID), SQLDataType.BIGINT.nullable(false))
-                    .column(DSL.name(SqlMigrationHelper.Field.VERSION), SQLDataType.BIGINT.nullable(false))
-                    .column(DSL.name(SqlMigrationHelper.Field.CODE), SQLDataType.VARCHAR(50).nullable(false))
-                    .column(DSL.name(SqlMigrationHelper.Field.NAME), SQLDataType.VARCHAR(100).nullable(true))
-                    .column(DSL.name(SqlMigrationHelper.Field.VALUE), SQLDataType.VARCHAR(1024).nullable(true))
-                    .constraints(DSL.constraint(DSL.name(SqlMigrationHelper.buildPkConstraintName(SqlMigrationHelper.Table.SETTINGS)))
-                                    .primaryKey(DSL.name(SqlMigrationHelper.Field.ID)),
-                            DSL.constraint(DSL.name(SqlMigrationHelper.buildUkConstraintName(SqlMigrationHelper.Table.SETTINGS)))
-                                    .unique(DSL.name(SqlMigrationHelper.Field.CODE)));
+        public static String buildFkConstraintName(String tableName, String suffix) {
+            return String.format(Naming.FK_CONSTRAINT, tableName, suffix);
+        }
+
+        public static String buildUkConstraintName(String tableName) {
+            return String.format(Naming.UK_BK_CONSTRAINT, tableName);
+        }
+
+        public static String buildUkConstraintName(String tableName, String suffix) {
+            return String.format(Naming.UK_CONSTRAINT, tableName, suffix);
+        }
+
+        public static String buildChSimpleConstraintName(String tableName, String fieldName) {
+            return String.format(Naming.CH_CONSTRAINT_SIMPLE, tableName, fieldName);
+        }
+
+        public static String buildChConstraintName(String tableName, String fieldName, String suffixName) {
+            return String.format(Naming.CH_CONSTRAINT, tableName, fieldName, suffixName);
+        }
+
+        public static String buildIndexName(String tableName, String suffix) {
+            return String.format(Naming.INDEX, tableName, suffix);
+        }
+
+        public static String buildPartitionTableName(String tableName, String suffix) {
+            return String.format(Naming.PARTITION_TABLE, tableName, suffix);
+        }
+
+        public static String buildPostgresRuleName(String tableName, String suffix1, String suffix2) {
+            return String.format(Naming.POSTGRES_RULE, tableName, suffix1, suffix2);
+        }
+
+        public static String buildPostgresPartitionTableScript(String tableName, String partitionTableName, String pkFieldName, String chFieldName, String partitionValue) {
+            String chConstraintName = buildChSimpleConstraintName(partitionTableName, chFieldName);
+            String pkConstraintName = buildPkConstraintName(partitionTableName);
+            return String.format(Script.CREATE_PARTITION_TABLE, partitionTableName, chConstraintName, chFieldName, partitionValue, pkConstraintName, pkFieldName, tableName);
+        }
+
+        public static String buildPostgresCreateInsertRuleScript(String tableName, String partitionTableName, String ruleName, String condition) {
+            return String.format(Script.CREATE_PARTITION_INSERT_RULE, ruleName, tableName, condition, partitionTableName);
+        }
+
+        public static String buildPostgresDropRule(String tableName, String ruleName) {
+            return String.format(Script.DROP_RULE, ruleName, tableName);
         }
     }
 
