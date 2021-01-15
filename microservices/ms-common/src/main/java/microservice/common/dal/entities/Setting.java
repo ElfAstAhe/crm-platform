@@ -1,18 +1,19 @@
-package dal.entities;
+package microservice.common.dal.entities;
 
 import common.dal.entity.BaseIdEntity;
-import dal.AuditDalConstants;
+import common.util.StringUtils;
 
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Objects;
+import java.util.StringJoiner;
 
 /**
  *
  * @author elf
  */
 @Entity
-@Table(name = "settings", schema = AuditDalConstants.SCHEMA_NAME)
+@Table(name = "settings")
 @NamedQuery(lockMode = LockModeType.NONE, name = "Setting.findAll", query = "SELECT s FROM Setting s")
 @NamedQuery(lockMode = LockModeType.NONE, name = "Setting.findById", query = "SELECT s FROM Setting s WHERE s.id = :id")
 @NamedQuery(lockMode = LockModeType.NONE, name = "Setting.findByCode", query = "select s from Setting s where s.code = :code")
@@ -20,6 +21,11 @@ import java.util.Objects;
 @Cacheable(false)
 public class Setting extends BaseIdEntity implements Serializable {
     private static final long serialVersionUID = 1L;
+
+    @Version
+    @Column(name = "version", nullable = false)
+    @SuppressWarnings("FieldMayBeFinal")
+    private long version;
 
     @Basic(optional = false)
     @Column(name = "code", nullable = false, length = 50)
@@ -30,11 +36,6 @@ public class Setting extends BaseIdEntity implements Serializable {
 
     @Column(length = 1024)
     private String value;
-
-    @Version
-    @Column(name = "version", nullable = false)
-    @SuppressWarnings("FieldMayBeFinal")
-    private long version;
 
     public Setting(){
         super();
@@ -105,6 +106,12 @@ public class Setting extends BaseIdEntity implements Serializable {
 
     @Override
     public String toString() {
-        return "dal.entities.Setting[ id=" + this.getId() + " ]";
+        return new StringJoiner(StringUtils.DELIMITER, StringUtils.buildPrefix(this), StringUtils.SUFFIX)
+                .add(StringUtils.buildKeyValue("id", StringUtils.toNullString(getId())))
+                .add(StringUtils.buildKeyValue("version", StringUtils.toNullString(version)))
+                .add(StringUtils.buildKeyValue("code", StringUtils.toNullString(code)))
+                .add(StringUtils.buildKeyValue("name", StringUtils.toNullString(name)))
+                .add(StringUtils.buildKeyValue("value", StringUtils.toNullString(value)))
+                .toString();
     }
 }

@@ -6,5 +6,5 @@ import common.bll.repository.SettingsRepository;
 import javax.ejb.Local;
 
 @Local
-public interface AppSettingsRepository extends SettingsRepository<AuditSettingsEnum> {
+public interface AuditSettingsRepository extends SettingsRepository<AuditSettingsEnum> {
 }

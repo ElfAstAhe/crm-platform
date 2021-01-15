@@ -1,7 +1,7 @@
 package dal.dao;
 
 import common.dal.dao.BaseCrudDao;
-import dal.entities.Setting;
+import microservice.common.dal.entities.Setting;
 
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -12,7 +12,7 @@ import java.util.logging.Logger;
 
 @SuppressWarnings({"JpaQueryApiInspection"})
 @Stateless
-public class SettingDaoImpl extends BaseCrudDao<Setting, String> implements SettingDao{
+public class SettingDaoImpl extends BaseCrudDao<Setting, String> implements SettingDao {
     private static final Logger logger = Logger.getLogger(SettingDaoImpl.class.getName());
     @PersistenceContext(unitName = "audit.PU")
     private EntityManager em;

@@ -5,6 +5,8 @@ import common.util.StringUtils;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 import java.util.StringJoiner;
 
@@ -13,6 +15,11 @@ import java.util.StringJoiner;
 @Cacheable(false)
 public class User extends BaseIdEntity implements Serializable {
     private static final long serialVersionUID = 1L;
+
+    @Version
+    @Column(name = "version", nullable = false)
+    @SuppressWarnings("FieldMayBeFinal")
+    private long version;
 
     @Column(name = "username", length = 100, nullable = false)
     private String username;
@@ -42,14 +49,31 @@ public class User extends BaseIdEntity implements Serializable {
     @Enumerated(EnumType.STRING)
     private UserStateEnum state;
 
+    @OneToMany(fetch = FetchType.EAGER)
+    @JoinTable(name = "user_roles",
+    joinColumns = {@JoinColumn(name = "user_id", referencedColumnName = "id")},
+    inverseJoinColumns = {@JoinColumn(name = "role_id", referencedColumnName = "id")})
+    private List<Role> roles = new ArrayList<>();
+
     // default
     public User() {
-        // default
+        super();
+        this.version = 0L;
     }
 
     // full
-    public User(Long id, String username, String password, String passwordEncrypted, String privateKey, String publicKey, String person, String eMail, String cellPhone) {
+    public User(Long id,
+                String username,
+                String password,
+                String passwordEncrypted,
+                String privateKey,
+                String publicKey,
+                String person,
+                String eMail,
+                String cellPhone,
+                List<Role> roles) {
         super(id);
+        this.version = 0L;
         this.username = username;
         this.password = password;
         this.passwordEncrypted = passwordEncrypted;
@@ -58,6 +82,11 @@ public class User extends BaseIdEntity implements Serializable {
         this.person = person;
         this.eMail = eMail;
         this.cellPhone = cellPhone;
+        this.roles = roles;
+    }
+
+    public long getVersion() {
+        return version;
     }
 
     public String getUsername() {
@@ -140,6 +169,14 @@ public class User extends BaseIdEntity implements Serializable {
         return UserStateEnum.BLOCKED.equals(this.state);
     }
 
+    public List<Role> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(List<Role> roles) {
+        this.roles = roles;
+    }
+
     @Override
     public boolean equals(Object object) {
         if (object == null) {
@@ -157,6 +194,7 @@ public class User extends BaseIdEntity implements Serializable {
     public String toString() {
         return new StringJoiner(StringUtils.DELIMITER, StringUtils.buildPrefix(this), StringUtils.SUFFIX)
                 .add(StringUtils.buildKeyValue("id", StringUtils.toNullString(getId())))
+                .add(StringUtils.buildKeyValue("version", StringUtils.toNullString(version)))
                 .add(StringUtils.buildKeyValue("username", StringUtils.toNullString(username)))
                 .add(StringUtils.buildKeyValue("person", StringUtils.toNullString(person)))
                 .add(StringUtils.buildKeyValue("state", state))

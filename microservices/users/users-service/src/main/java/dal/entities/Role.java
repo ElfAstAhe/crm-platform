@@ -6,6 +6,7 @@ import common.util.StringUtils;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
+import javax.persistence.Version;
 import java.io.Serializable;
 import java.util.Objects;
 import java.util.StringJoiner;
@@ -14,6 +15,11 @@ import java.util.StringJoiner;
 @Table(name = "roles")
 public class Role extends BaseIdEntity implements Serializable {
     private static final long serialVersionUID = 1L;
+
+    @Version
+    @Column(name = "version", nullable = false)
+    @SuppressWarnings("FieldMayBeFinal")
+    private long version;
 
     @Column(name = "code", length = 50, nullable = false)
     private String code;
@@ -26,15 +32,21 @@ public class Role extends BaseIdEntity implements Serializable {
 
     // default
     public Role() {
-        // default
+        super();
+        this.version = 0L;
     }
 
     // full
     public Role(Long id, String code, String name, String description) {
         super(id);
+        this.version = 0L;
         this.code = code;
         this.name = name;
         this.description = description;
+    }
+
+    public long getVersion() {
+        return version;
     }
 
     public String getCode() {
@@ -78,6 +90,7 @@ public class Role extends BaseIdEntity implements Serializable {
     public String toString() {
         return new StringJoiner(StringUtils.DELIMITER, StringUtils.buildPrefix(this), StringUtils.SUFFIX)
                 .add(StringUtils.buildKeyValue("id", StringUtils.toNullString(getId())))
+                .add(StringUtils.buildKeyValue("version", StringUtils.toNullString(version)))
                 .add(StringUtils.buildKeyValue("code", StringUtils.toNullString(code)))
                 .add(StringUtils.buildKeyValue("name", StringUtils.toNullString(name)))
                 .add(StringUtils.buildKeyValue("description", StringUtils.toNullString(description)))

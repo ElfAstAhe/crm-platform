@@ -1,7 +1,7 @@
 package dal.dao;
 
 import common.dal.dao.CrudDao;
-import dal.entities.Setting;
+import microservice.common.dal.entities.Setting;
 
 import javax.ejb.Local;
 

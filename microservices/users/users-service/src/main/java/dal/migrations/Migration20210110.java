@@ -8,6 +8,7 @@ import org.jooq.Query;
 import org.jooq.impl.DSL;
 import org.jooq.impl.SQLDataType;
 
+@SuppressWarnings("unused")
 public class Migration20210110 extends BaseSqlMigration {
     private static final String VERSION = "1.0";
     private static final int CHECK_SUM = 0;

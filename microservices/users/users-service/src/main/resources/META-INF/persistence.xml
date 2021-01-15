@@ -7,8 +7,8 @@
     <persistence-unit name="audit.PU" transaction-type="JTA">
         <jta-data-source>jdbc/audit</jta-data-source>
         <class>microservice.common.dal.entities.Setting</class>
-        <class>dal.entities.DataAudit</class>
-        <class>dal.entities.SecurityAudit</class>
+        <class>dal.entities.User</class>
+        <class>dal.entities.Role</class>
         <exclude-unlisted-classes>true</exclude-unlisted-classes>
         <properties/>
     </persistence-unit>

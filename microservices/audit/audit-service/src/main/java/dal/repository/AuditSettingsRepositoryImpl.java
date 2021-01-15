@@ -1,18 +1,18 @@
 package dal.repository;
 
-import bll.repository.AppSettingsRepository;
+import bll.repository.AuditSettingsRepository;
 import bll.settings.AuditSettingsEnum;
 import common.bll.repository.BaseSettingsRepository;
 import dal.dao.SettingDao;
-import dal.entities.Setting;
+import microservice.common.dal.entities.Setting;
 
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 
 @Stateless
-public class AppSettingsRepositoryImpl
+public class AuditSettingsRepositoryImpl
         extends BaseSettingsRepository<AuditSettingsEnum>
-        implements AppSettingsRepository
+        implements AuditSettingsRepository
 {
     @EJB
     private SettingDao daoSetting;
