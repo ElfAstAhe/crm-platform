@@ -1,6 +1,7 @@
 package dal.dao;
 
 import common.dal.dao.BaseCrudDao;
+import dal.DalConstants;
 import microservice.common.dal.entities.Setting;
 
 import javax.ejb.Stateless;
@@ -14,7 +15,7 @@ import java.util.logging.Logger;
 @Stateless
 public class SettingDaoImpl extends BaseCrudDao<Setting, String> implements SettingDao {
     private static final Logger logger = Logger.getLogger(SettingDaoImpl.class.getName());
-    @PersistenceContext(unitName = "audit.PU")
+    @PersistenceContext(unitName = DalConstants.PERSISTENCE_UNIT)
     private EntityManager em;
 
     public SettingDaoImpl() {

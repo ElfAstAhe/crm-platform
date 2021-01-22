@@ -6,10 +6,12 @@ import common.dal.dao.DaoHelper;
 import common.dal.entity.IdEntity;
 import dto.audit.builders.DataAuditBuilder;
 
+import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
 import javax.annotation.Resource;
 import javax.enterprise.concurrent.ManagedExecutorService;
 import java.io.Serializable;
+import java.util.concurrent.ExecutorService;
 
 /**
  * базовый crud dao с функциональностью аудита
@@ -18,19 +20,20 @@ import java.io.Serializable;
  * @param <Key> key class
  */
 public abstract class BaseAuditableCrudDao<Entity extends IdEntity, Key extends Serializable> extends BaseCrudDao<Entity, Key> {
-    @Resource
-    private ManagedExecutorService executorService;
+    private DataAuditClient dataAuditClient;
 
-    private final DataAuditClient dataAuditClient;
-
-    public BaseAuditableCrudDao(Class<Entity> entityClass, String auditClientBaseUri) {
+    public BaseAuditableCrudDao(Class<Entity> entityClass) {
         super(entityClass);
-        dataAuditClient = new DataAuditClient(auditClientBaseUri, executorService);
     }
 
     public BaseAuditableCrudDao(Class<Entity> entityClass, DaoHelper<Entity> daoHelper, String auditClientBaseUri) {
         super(entityClass, daoHelper);
-        dataAuditClient = new DataAuditClient(auditClientBaseUri, executorService);
+        dataAuditClient = new DataAuditClient(getAuditUri(), getExecutorService());
+    }
+
+    @PostConstruct
+    public void postConstruct() {
+        dataAuditClient = new DataAuditClient(getAuditUri(), getExecutorService());
     }
 
     @PreDestroy
@@ -70,4 +73,7 @@ public abstract class BaseAuditableCrudDao<Entity extends IdEntity, Key extends 
                 .setRemovedInstance(before)
                 .build());
     }
+
+    protected abstract String getAuditUri();
+    protected abstract ExecutorService getExecutorService();
 }

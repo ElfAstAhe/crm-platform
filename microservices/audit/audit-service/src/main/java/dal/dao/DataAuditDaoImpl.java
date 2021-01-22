@@ -1,6 +1,7 @@
 package dal.dao;
 
 import common.dal.dao.BaseCrudDao;
+import dal.DalConstants;
 import dal.entities.DataAudit;
 
 import javax.ejb.Stateless;
@@ -9,7 +10,7 @@ import javax.persistence.PersistenceContext;
 
 @Stateless
 public class DataAuditDaoImpl extends BaseCrudDao<DataAudit, Long> implements DataAuditDao {
-    @PersistenceContext(unitName = "audit.PU")
+    @PersistenceContext(unitName = DalConstants.PERSISTENCE_UNIT)
     private EntityManager em;
 
     public DataAuditDaoImpl() {

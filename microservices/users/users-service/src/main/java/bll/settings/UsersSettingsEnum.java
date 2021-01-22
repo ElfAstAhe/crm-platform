@@ -3,6 +3,7 @@ package bll.settings;
 import common.bll.settings.Settings;
 
 public enum UsersSettingsEnum implements Settings {
+    DUMMY("nothing", false),
     AUDIT_SERVICE("http://localhost:8080/audit", false);
 
     private final Object defaultValue;

@@ -1,7 +1,7 @@
 package dal.dao;
 
 import common.dal.dao.BaseCrudDao;
-import dal.entities.DataAudit;
+import dal.DalConstants;
 import dal.entities.SecurityAudit;
 
 import javax.ejb.Stateless;
@@ -10,7 +10,7 @@ import javax.persistence.PersistenceContext;
 
 @Stateless
 public class SecurityAuditDaoImpl extends BaseCrudDao<SecurityAudit, Long> implements SecurityAuditDao {
-    @PersistenceContext(unitName = "audit.PU")
+    @PersistenceContext(unitName = DalConstants.PERSISTENCE_UNIT)
     private EntityManager em;
 
     public SecurityAuditDaoImpl() {
