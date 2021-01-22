@@ -21,6 +21,7 @@ public class RsConfig extends Application {
         classList.add(HealthController.class);
         classList.add(MetricsController.class);
 
+        classList.add(UserController.class);
         classList.add(RoleController.class);
 
         classList.addAll(ExceptionMapperHelper.buildMapperProviderClassList());

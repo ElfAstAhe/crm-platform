@@ -2,8 +2,8 @@ package ep.controller;
 
 import common.ep.controller.BaseCrudController;
 import common.ep.facade.CrudFacade;
-import dto.users.Role;
-import ep.controller.facade.RoleFacade;
+import dto.users.User;
+import ep.controller.facade.UserFacade;
 
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
@@ -14,16 +14,16 @@ import javax.ws.rs.core.UriInfo;
 import java.util.List;
 
 @RequestScoped
-@Path("/role")
-public class RoleController extends BaseCrudController<Role> {
+@Path("/user")
+public class UserController extends BaseCrudController<User> {
     @Context
     private UriInfo uriInfo;
 
     @Inject
-    private RoleFacade facade;
+    private UserFacade facade;
 
     @Override
-    protected CrudFacade<Role> getCrudFacade() {
+    protected CrudFacade<User> getCrudFacade() {
         return facade;
     }
 
@@ -33,12 +33,12 @@ public class RoleController extends BaseCrudController<Role> {
     }
 
     @Override
-    protected Long getDtoId(Role instance) {
+    protected Long getDtoId(User instance) {
         return null;
     }
 
     @Override
-    protected GenericEntity<List<Role>> getGenericEntity(List<Role> list) {
-        return new GenericEntity<List<Role>>(list){};
+    protected GenericEntity<List<User>> getGenericEntity(List<User> list) {
+        return new GenericEntity<List<User>>(list){};
     }
 }
