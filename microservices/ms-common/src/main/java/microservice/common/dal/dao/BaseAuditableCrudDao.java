@@ -8,8 +8,6 @@ import dto.audit.builders.DataAuditBuilder;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
-import javax.annotation.Resource;
-import javax.enterprise.concurrent.ManagedExecutorService;
 import java.io.Serializable;
 import java.util.concurrent.ExecutorService;
 

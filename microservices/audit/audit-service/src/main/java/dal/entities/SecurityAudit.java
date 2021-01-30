@@ -88,19 +88,6 @@ public class SecurityAudit extends BaseIdEntity implements Serializable {
     }
 
     @Override
-    public boolean equals(Object object) {
-        if (object == null) {
-            return false;
-        }
-        if (!(object instanceof SecurityAudit)) {
-            return false;
-        }
-        SecurityAudit other = (SecurityAudit) object;
-
-        return Objects.equals(this.getId(), other.getId());
-    }
-
-    @Override
     public String toString() {
         return new StringJoiner(StringUtils.DELIMITER, StringUtils.buildPrefix(this), StringUtils.SUFFIX)
                 .add(StringUtils.buildKeyValue("id", StringUtils.toNullString(getId())))

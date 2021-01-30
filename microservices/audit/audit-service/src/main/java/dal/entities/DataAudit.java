@@ -6,7 +6,6 @@ import common.util.StringUtils;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.time.OffsetDateTime;
-import java.util.Objects;
 import java.util.StringJoiner;
 
 @Entity
@@ -152,19 +151,6 @@ public class DataAudit extends BaseIdEntity implements Serializable {
 
     public void setStatus(AuditStatusEnum status) {
         this.status = status;
-    }
-
-    @Override
-    public boolean equals(Object object) {
-        if (object == null) {
-            return false;
-        }
-        if (!(object instanceof DataAudit)) {
-            return false;
-        }
-        DataAudit other = (DataAudit) object;
-
-        return Objects.equals(this.getId(), other.getId());
     }
 
     @Override

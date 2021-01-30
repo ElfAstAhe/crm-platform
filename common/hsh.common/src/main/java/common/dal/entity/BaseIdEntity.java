@@ -41,11 +41,6 @@ public abstract class BaseIdEntity implements IdEntity {
     }
 
     @Override
-    public int hashCode() {
-        return Objects.hash(id);
-    }
-
-    @Override
     public Long getId() {
         return this.id;
     }
@@ -55,9 +50,27 @@ public abstract class BaseIdEntity implements IdEntity {
     }
 
     @Override
+    public int hashCode() {
+        return Objects.hash(id);
+    }
+
+    @Override
+    public boolean equals(Object object) {
+        if (object == null) {
+            return false;
+        }
+        if (!(object instanceof BaseIdEntity)) {
+            return false;
+        }
+        BaseIdEntity other = (BaseIdEntity) object;
+
+        return Objects.equals(this.getId(), other.getId());
+    }
+
+    @Override
     public String toString() {
-        return new StringJoiner(",", "common.dal.entity.BaseIdentity[", "]")
-                .add(StringUtils.buildKeyValue("id", id))
+        return new StringJoiner(StringUtils.DELIMITER, StringUtils.buildPrefix(this), StringUtils.SUFFIX)
+                .add(StringUtils.buildKeyValue("id", StringUtils.toNullString(getId())))
                 .toString();
     }
 }
