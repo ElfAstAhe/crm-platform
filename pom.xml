@@ -33,6 +33,10 @@
         <crm.platform.users.dto.version>1.0.0${crm.platform.version.suffix}</crm.platform.users.dto.version>
         <crm.platform.users.client.version>1.0.0${crm.platform.version.suffix}</crm.platform.users.client.version>
 
+        <!-- study -->
+        <crm.platform.study.non-persistence-service.version>1.0.0${crm.platform.version.suffix}</crm.platform.study.non-persistence-service.version>
+        <crm.platform.study.persistence-service.version>1.0.0${crm.platform.version.suffix}</crm.platform.study.persistence-service.version>
+
         <!-- maven -->
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.source>1.8</maven.compiler.source>

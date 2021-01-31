@@ -4,22 +4,17 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>microservices</artifactId>
+    <artifactId>study</artifactId>
     <version>1.0</version>
     <packaging>pom</packaging>
     <modules>
-        <module>dicts.common</module>
-        <module>users</module>
-        <module>auth</module>
-        <module>audit</module>
-        <module>ms-common</module>
-        <module>study</module>
+        <module>non-persistent-service</module>
     </modules>
     <properties>
-        <crm.platform.baseDir>${project.basedir}/..</crm.platform.baseDir>
+        <crm.platform.baseDir>${project.basedir}/../..</crm.platform.baseDir>
     </properties>
     <parent>
-        <artifactId>crm-platform</artifactId>
+        <artifactId>microservices</artifactId>
         <groupId>org.hsh</groupId>
         <version>1.0</version>
         <relativePath>../pom.xml</relativePath>
