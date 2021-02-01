@@ -103,6 +103,12 @@ public final class SqlMigrationHelper {
             logger.exiting(SqlMigrationHelper.class.getName(), String.format("createTable [%s] done", tableName));
         }
 
+        public static void createTable(DSLContext context,
+                                       String tableName,
+                                       Function<CreateTableColumnStep, Query> columnsBuilder) {
+            createTable(context, tableName, null, columnsBuilder);
+        }
+
         public static void createSequence(DSLContext context, String sequenceName, Function<CreateSequenceFlagsStep, Query> sequenceBuilder) {
             logger.entering(SqlMigrationHelper.class.getName(), String.format("createSequence [%s] ..", sequenceName));
             if (context == null)

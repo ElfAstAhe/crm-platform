@@ -9,6 +9,7 @@
     <packaging>pom</packaging>
     <modules>
         <module>non-persistent-service</module>
+        <module>persistent-service</module>
     </modules>
     <properties>
         <crm.platform.baseDir>${project.basedir}/../..</crm.platform.baseDir>
