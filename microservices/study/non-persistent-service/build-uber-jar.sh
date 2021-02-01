@@ -1,0 +1,1 @@
+java -jar /home/elf/Downloads/payara-micro-5.2020.7.jar --deploy target/non-persistent-service-1.0.0-SNAPSHOT.war:nps --port 8080 --sslPort 8181 --outputUberJar target/nps.jar
