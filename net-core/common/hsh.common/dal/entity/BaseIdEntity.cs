@@ -1,7 +1,7 @@
 using System;
 using System.Text;
 
-namespace hsh_common.dal.entity
+namespace hsh.common.dal.entity
 {
     public class BaseIdEntity : IIdEntity
     {

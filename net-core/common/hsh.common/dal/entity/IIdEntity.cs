@@ -1,4 +1,4 @@
-namespace hsh_common.dal.entity
+namespace hsh.common.dal.entity
 {
     /// <summary>
     /// Базовый интерфейс entity с id
