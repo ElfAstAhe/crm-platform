@@ -1,7 +1,7 @@
 package dto.audit.builders;
 
-import common.util.audit.AuditUtils;
 import dto.audit.DataAuditValue;
+import org.hsh.common.util.audit.AuditUtils;
 
 import java.util.ArrayList;
 import java.util.List;

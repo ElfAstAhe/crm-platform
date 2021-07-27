@@ -1,10 +1,10 @@
 package ep.config;
 
-import common.ep.mapper.ExceptionMapperHelper;
 import ep.controller.HealthController;
 import ep.controller.MetricsController;
 import ep.controller.ReadyController;
 import ep.controller.TestController;
+import org.hsh.ms.common.ep.mapper.ExceptionMapperHelper;
 
 import javax.ws.rs.ApplicationPath;
 import javax.ws.rs.core.Application;

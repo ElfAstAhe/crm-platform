@@ -1,9 +1,9 @@
 package dto.audit.builders;
 
-import common.helpers.builder.base.BaseBuilder;
 import dto.audit.AuditStatusEnum;
 import dto.audit.SecurityAudit;
 import dto.audit.SecurityAuditEventEnum;
+import org.hsh.common.helpers.builder.BaseBuilder;
 
 import java.time.OffsetDateTime;
 

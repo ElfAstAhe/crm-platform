@@ -1,12 +1,11 @@
 package dal.entities;
 
-import common.dal.entity.BaseIdEntity;
-import common.util.StringUtils;
+import org.hsh.common.util.HshStringUtils;
+import org.hsh.ms.common.dal.entity.BaseIdEntity;
 
 import javax.persistence.*;
 import java.io.Serializable;
 import java.time.OffsetDateTime;
-import java.util.Objects;
 import java.util.StringJoiner;
 
 @Entity
@@ -89,10 +88,10 @@ public class SecurityAudit extends BaseIdEntity implements Serializable {
 
     @Override
     public String toString() {
-        return new StringJoiner(StringUtils.DELIMITER, StringUtils.buildPrefix(this), StringUtils.SUFFIX)
-                .add(StringUtils.buildKeyValue("id", StringUtils.toNullString(getId())))
-                .add(StringUtils.buildKeyValue("event", StringUtils.toNullString(event)))
-                .add(StringUtils.buildKeyValue("user", StringUtils.toNullString(userLogin)))
+        return new StringJoiner(HshStringUtils.DELIMITER, HshStringUtils.buildPrefix(this), HshStringUtils.SUFFIX)
+                .add(HshStringUtils.buildKeyValue("id", HshStringUtils.toNullString(getId())))
+                .add(HshStringUtils.buildKeyValue("event", HshStringUtils.toNullString(event)))
+                .add(HshStringUtils.buildKeyValue("user", HshStringUtils.toNullString(userLogin)))
                 .toString();
     }
 }

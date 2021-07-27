@@ -15,11 +15,11 @@
         <crm.platform.baseDir>${project.basedir}</crm.platform.baseDir>
 
         <!-- common libraries -->
-        <hsh.common.version>2.0.0${crm.platform.version.suffix}</hsh.common.version>
-        <hsh-dto-common-version>1.0.0${crm.platform.version.suffix}</hsh-dto-common-version>
+        <hsh.common.version>2.2.0${crm.platform.version.suffix}</hsh.common.version>
 
         <!-- microservices -->
-        <hsh-ms-common-version>1.0.0${crm.platform.version.suffix}</hsh-ms-common-version>
+        <hsh.ms.common.version>1.0.0${crm.platform.version.suffix}</hsh.ms.common.version>
+        <crm.ms.common.version>1.0.0${crm.platform.version.suffix}</crm.ms.common.version>
 
         <crm.platform.audit.service.version>1.0.0${crm.platform.version.suffix}</crm.platform.audit.service.version>
         <crm.platform.audit.dto.version>1.0.0${crm.platform.version.suffix}</crm.platform.audit.dto.version>

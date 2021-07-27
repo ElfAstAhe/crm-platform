@@ -16,7 +16,7 @@
     <dependencies>
         <dependency>
             <groupId>org.hsh</groupId>
-            <artifactId>hsh.common</artifactId>
+            <artifactId>hsh-common</artifactId>
             <version>${hsh.common.version}</version>
         </dependency>
         <!--        <dependency>-->

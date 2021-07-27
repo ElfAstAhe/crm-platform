@@ -1,6 +1,6 @@
 package ep.controller;
 
-import common.app.AppInitializer;
+import org.hsh.common.app.AppInitializer;
 
 import javax.ejb.EJB;
 import javax.enterprise.context.RequestScoped;

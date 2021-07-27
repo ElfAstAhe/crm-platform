@@ -1,7 +1,7 @@
 package bll.model.builder;
 
 import bll.model.Audit;
-import common.helpers.builder.base.BaseBuilder;
+import org.hsh.common.helpers.builder.BaseBuilder;
 
 import java.time.OffsetDateTime;
 

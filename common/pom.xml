@@ -8,8 +8,6 @@
     <version>1.0</version>
     <packaging>pom</packaging>
     <modules>
-        <module>hsh.common</module>
-        <module>hsh-dto-common</module>
     </modules>
 
     <properties>

@@ -1,6 +1,6 @@
 package bll.settings;
 
-import common.bll.settings.Settings;
+import org.hsh.common.bll.settings.Settings;
 
 public enum AuditSettingsEnum implements Settings {
     DUMMY("nothing", false);

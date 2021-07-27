@@ -1,11 +1,11 @@
 package dto.audit.builders;
 
-import common.helpers.builder.base.BaseBuilder;
-import common.util.audit.AuditUtils;
 import dto.audit.AuditStatusEnum;
 import dto.audit.DataAudit;
 import dto.audit.DataAuditEventEnum;
 import dto.audit.DataAuditValue;
+import org.hsh.common.helpers.builder.BaseBuilder;
+import org.hsh.common.util.audit.AuditUtils;
 
 import java.time.OffsetDateTime;
 import java.util.List;

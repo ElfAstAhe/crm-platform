@@ -1,6 +1,6 @@
 package ep.filter;
 
-import common.ep.filter.BaseEndToEndRequestIdFilter;
+import org.hsh.ms.common.ep.filter.BaseEndToEndRequestIdFilter;
 
 import javax.servlet.annotation.WebFilter;
 

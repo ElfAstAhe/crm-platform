@@ -1,6 +1,6 @@
 package ep.filter;
 
-import common.ep.filter.BaseTotalHttpRequestCountFilter;
+import org.hsh.ms.common.ep.filter.BaseTotalHttpRequestCountFilter;
 
 import javax.servlet.annotation.WebFilter;
 

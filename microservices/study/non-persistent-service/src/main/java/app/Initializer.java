@@ -1,6 +1,6 @@
 package app;
 
-import common.app.AppInitializer;
+import org.hsh.common.app.AppInitializer;
 
 import javax.annotation.PostConstruct;
 import javax.ejb.Singleton;

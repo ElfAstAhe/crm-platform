@@ -1,7 +1,7 @@
 package ep.controller;
 
-import common.web.MimeTypes;
 import ep.dto.TestDto;
+import org.hsh.ms.common.web.MimeTypes;
 
 import javax.enterprise.context.RequestScoped;
 import javax.ws.rs.GET;

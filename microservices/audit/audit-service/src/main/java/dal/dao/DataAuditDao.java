@@ -1,7 +1,7 @@
 package dal.dao;
 
-import common.dal.dao.CrudDao;
 import dal.entities.DataAudit;
+import org.hsh.common.dal.dao.CrudDao;
 
 import javax.ejb.Local;
 

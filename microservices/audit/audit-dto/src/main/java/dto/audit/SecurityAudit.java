@@ -1,7 +1,7 @@
 package dto.audit;
 
 import com.migesok.jaxb.adapter.javatime.OffsetDateTimeXmlAdapter;
-import common.util.StringUtils;
+import org.hsh.common.util.HshStringUtils;
 
 import javax.json.bind.annotation.JsonbProperty;
 import javax.json.bind.annotation.JsonbPropertyOrder;
@@ -130,8 +130,8 @@ public class SecurityAudit implements Serializable {
 
     @Override
     public String toString() {
-        return new StringJoiner(StringUtils.DELIMITER, StringUtils.buildPrefix(this), StringUtils.SUFFIX)
-                .add(StringUtils.buildKeyValue("id", id))
+        return new StringJoiner(HshStringUtils.DELIMITER, HshStringUtils.buildPrefix(this), HshStringUtils.SUFFIX)
+                .add(HshStringUtils.buildKeyValue("id", id))
                 .toString();
     }
 }

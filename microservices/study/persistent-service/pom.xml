@@ -16,8 +16,13 @@
     <dependencies>
         <dependency>
             <groupId>org.hsh</groupId>
-            <artifactId>hsh.common</artifactId>
+            <artifactId>hsh-common</artifactId>
             <version>${hsh.common.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.hsh</groupId>
+            <artifactId>hsh-ms-common</artifactId>
+            <version>${hsh.ms.common.version}</version>
         </dependency>
         <!--        <dependency>-->
         <!--            <groupId>org.hsh</groupId>-->
@@ -53,12 +58,6 @@
             <groupId>org.jooq</groupId>
             <artifactId>jooq</artifactId>
             <version>3.14.3</version>
-        </dependency>
-        <dependency>
-            <groupId>org.hsh</groupId>
-            <artifactId>ms-common</artifactId>
-            <version>${hsh-ms-common-version}</version>
-            <scope>compile</scope>
         </dependency>
     </dependencies>
 
