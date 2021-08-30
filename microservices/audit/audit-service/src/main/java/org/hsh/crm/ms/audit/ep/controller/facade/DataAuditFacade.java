@@ -1,0 +1,48 @@
+package org.hsh.crm.ms.audit.ep.controller.facade;
+
+import common.ep.facade.CrudFacade;
+import common.exceptions.runtime.ep.ResourceGoneException;
+import org.hsh.crm.ms.audit.dal.dao.DataAuditDao;
+import dto.audit.DataAudit;
+import org.hsh.crm.ms.audit.ep.dto.converter.DataAuditConverter;
+
+import javax.ejb.EJB;
+import javax.enterprise.context.RequestScoped;
+import javax.inject.Named;
+import java.util.List;
+
+@RequestScoped
+@Named
+public class DataAuditFacade implements CrudFacade<DataAudit> {
+    @EJB
+    private DataAuditDao daoDataAudit;
+
+    @Override
+    public DataAudit getInstance(Object id) {
+        return DataAuditConverter.toDto(daoDataAudit.find(id));
+    }
+
+    @Override
+    public List<DataAudit> listAllInstances() {
+//        return daoDataAudit.listAll()
+//                .stream()
+//                .map(DataAuditConverter::toDto)
+//                .collect(Collectors.toList());
+        throw new ResourceGoneException("not implemented");
+    }
+
+    @Override
+    public DataAudit createInstance(DataAudit instance) {
+        return DataAuditConverter.toDto(daoDataAudit.create(DataAuditConverter.toEntity(instance, null)));
+    }
+
+    @Override
+    public DataAudit editInstance(Object id, DataAudit instance) {
+        return DataAuditConverter.toDto(daoDataAudit.edit(DataAuditConverter.toEntity(instance, daoDataAudit::find)));
+    }
+
+    @Override
+    public void removeInstance(Object id) {
+        daoDataAudit.remove(id);
+    }
+}

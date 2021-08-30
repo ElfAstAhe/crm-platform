@@ -6,9 +6,9 @@
         xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_2.xsd">
     <persistence-unit name="audit.PU" transaction-type="JTA">
         <jta-data-source>jdbc/audit</jta-data-source>
-        <class>microservice.common.dal.entities.Setting</class>
-        <class>dal.entities.DataAudit</class>
-        <class>dal.entities.SecurityAudit</class>
+        <class>org.hsh.crm.ms.common.entities.Setting</class>
+        <class>org.hsh.crm.ms.audit.dal.entities.DataAudit</class>
+        <class>org.hsh.crm.ms.audit.dal.entities.SecurityAudit</class>
         <exclude-unlisted-classes>true</exclude-unlisted-classes>
         <properties/>
     </persistence-unit>

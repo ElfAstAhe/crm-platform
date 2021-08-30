@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE payara-web-app PUBLIC "-//Payara.fish//DTD Payara Server 4 Servlet 3.0//EN" "https://raw.githubusercontent.com/payara/Payara-Server-Documentation/master/schemas/payara-web-app_4.dtd">
-<payara-web-app>
+<!DOCTYPE payara-web-org.hsh.crm.ms.audit.app PUBLIC "-//Payara.fish//DTD Payara Server 4 Servlet 3.0//EN" "https://raw.githubusercontent.com/payara/Payara-Server-Documentation/master/schemas/payara-web-app_4.dtd">
+<payara-web-org.hsh.crm.ms.audit.app>
     <class-loader delegate="true"/>
 <!--
     <property name="default-role-mapping" value="true">
@@ -9,5 +9,5 @@
     <scanning-exclude>*</scanning-exclude>
     <scanning-include>Webinar*</scanning-include>
     -->
-    <context-root>/hsh-media-app</context-root>
-</payara-web-app>
+    <context-root>/hsh-media-org.hsh.crm.ms.audit.app</context-root>
+</payara-web-org.hsh.crm.ms.audit.app>
