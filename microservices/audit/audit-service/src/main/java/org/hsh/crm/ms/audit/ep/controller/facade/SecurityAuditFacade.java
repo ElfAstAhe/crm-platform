@@ -1,10 +1,9 @@
 package org.hsh.crm.ms.audit.ep.controller.facade;
 
-import common.ep.facade.CrudFacade;
-import common.exceptions.runtime.ep.ResourceGoneException;
 import org.hsh.crm.ms.audit.dal.dao.SecurityAuditDao;
-import dto.audit.SecurityAudit;
+import org.hsh.crm.ms.audit.dto.SecurityAudit;
 import org.hsh.crm.ms.audit.ep.dto.converter.SecurityAuditConverter;
+import org.hsh.ms.common.ep.facade.CrudFacade;
 
 import javax.ejb.EJB;
 import javax.enterprise.context.RequestScoped;

@@ -1,7 +1,7 @@
 package org.hsh.crm.ms.audit.ep.controller.facade;
 
 import org.hsh.crm.ms.audit.bll.repository.AuditRepository;
-import dto.audit.Audit;
+import org.hsh.crm.ms.audit.dto.Audit;
 import org.hsh.crm.ms.audit.ep.dto.converter.AuditConverter;
 
 import javax.ejb.EJB;

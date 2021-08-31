@@ -1,4 +1,4 @@
-package dto.audit;
+package org.hsh.crm.ms.audit.dto;
 
 import com.migesok.jaxb.adapter.javatime.OffsetDateTimeXmlAdapter;
 

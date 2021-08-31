@@ -1,6 +1,6 @@
-package dto.audit.builders;
+package org.hsh.crm.ms.audit.dto.builders;
 
-import dto.audit.Audit;
+import org.hsh.crm.ms.audit.dto.Audit;
 import org.hsh.common.helpers.builder.BaseBuilder;
 
 import java.time.OffsetDateTime;

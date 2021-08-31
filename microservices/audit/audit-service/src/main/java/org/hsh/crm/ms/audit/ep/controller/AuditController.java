@@ -1,9 +1,9 @@
 package org.hsh.crm.ms.audit.ep.controller;
 
-import common.dto.helper.ExceptionDtoHelper;
-import common.web.MimeTypes;
-import dto.audit.Audit;
+import org.hsh.crm.ms.audit.dto.Audit;
 import org.hsh.crm.ms.audit.ep.controller.facade.AuditFacade;
+import org.hsh.ms.common.dto.ExceptionDtoHelper;
+import org.hsh.ms.common.web.MimeTypes;
 
 import javax.inject.Inject;
 import javax.ws.rs.GET;

@@ -7,12 +7,16 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import java.io.Serializable;
 
-public class BaseAuditDaoImpl<E extends IdEntity,I extends Serializable> extends BaseCrudDao<E, I> {
-    @PersistenceContext(unitName = )
+public abstract class BaseAuditDaoImpl<E extends IdEntity,I extends Serializable> extends BaseCrudDao<E, I> {
+    @PersistenceContext(unitName = "audit.PU")
+    private EntityManager em;
 
+    protected BaseAuditDaoImpl(Class<E> entityClass) {
+        super(entityClass);
+    }
 
     @Override
     protected EntityManager getEntityManager() {
-        return null;
+        return em;
     }
 }

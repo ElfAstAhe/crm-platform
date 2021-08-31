@@ -1,9 +1,9 @@
-package dto.audit.builders;
+package org.hsh.crm.ms.audit.dto.builders;
 
-import dto.audit.AuditStatusEnum;
-import dto.audit.DataAudit;
-import dto.audit.DataAuditEventEnum;
-import dto.audit.DataAuditValue;
+import org.hsh.crm.ms.audit.dto.AuditStatusEnum;
+import org.hsh.crm.ms.audit.dto.DataAudit;
+import org.hsh.crm.ms.audit.dto.DataAuditEventEnum;
+import org.hsh.crm.ms.audit.dto.DataAuditValue;
 import org.hsh.common.helpers.builder.BaseBuilder;
 import org.hsh.common.util.audit.AuditUtils;
 

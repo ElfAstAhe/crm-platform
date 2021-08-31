@@ -1,10 +1,10 @@
 package org.hsh.crm.ms.audit.ep.dto.converter;
 
 import common.dal.converter.EntityLoader;
-import dto.audit.AuditStatusEnum;
-import dto.audit.SecurityAudit;
-import dto.audit.SecurityAuditEventEnum;
-import dto.audit.builders.SecurityAuditBuilder;
+import org.hsh.crm.ms.audit.dto.AuditStatusEnum;
+import org.hsh.crm.ms.audit.dto.SecurityAudit;
+import org.hsh.crm.ms.audit.dto.SecurityAuditEventEnum;
+import org.hsh.crm.ms.audit.dto.builders.SecurityAuditBuilder;
 
 public class SecurityAuditConverter {
     private SecurityAuditConverter() {

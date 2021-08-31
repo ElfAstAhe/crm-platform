@@ -1,4 +1,4 @@
-package dto.audit;
+package org.hsh.crm.ms.audit.dto;
 
 import com.migesok.jaxb.adapter.javatime.OffsetDateTimeXmlAdapter;
 import org.hsh.common.util.HshStringUtils;
@@ -6,20 +6,19 @@ import org.hsh.common.util.HshStringUtils;
 import javax.json.bind.annotation.JsonbProperty;
 import javax.json.bind.annotation.JsonbPropertyOrder;
 import javax.json.bind.config.PropertyOrderStrategy;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.*;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 import java.io.Serializable;
 import java.time.OffsetDateTime;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 import java.util.StringJoiner;
 
-@XmlRootElement(name = "securityAudit")
+@XmlRootElement(name = "dataAudit")
 @XmlAccessorType(XmlAccessType.FIELD)
 @JsonbPropertyOrder(PropertyOrderStrategy.ANY)
-public class SecurityAudit implements Serializable {
+public class DataAudit implements Serializable {
     private static final long serialVersionUID = 1;
 
     @XmlElement(name = "id")
@@ -41,18 +40,43 @@ public class SecurityAudit implements Serializable {
 
     @XmlElement(name = "event")
     @JsonbProperty(value = "event")
-    private SecurityAuditEventEnum event;
+    private DataAuditEventEnum event;
+
+    @XmlElement(name = "className")
+    @JsonbProperty(value = "className")
+    private String className;
+
+    @XmlElement(name = "classDescription")
+    @JsonbProperty(value = "classDescription")
+    private String classDescription;
+
+    @XmlElement(name = "objectId")
+    @JsonbProperty(value = "objectId")
+    private String objectId;
+
+    @XmlElement(name = "objectName")
+    @JsonbProperty(value = "objectName")
+    private String objectName;
+
+    @XmlElementWrapper(name = "values")
+    @XmlElement(name = "value")
+    @JsonbProperty(value = "values")
+    private List<DataAuditValue> values = new ArrayList<>();
 
     @XmlElement(name = "user")
     @JsonbProperty(value = "user")
     private String user;
 
+    @XmlElement(name = "runAsUser")
+    @JsonbProperty(value = "runAsUser")
+    private String runAsUser;
+
     @XmlElement(name = "status")
     @JsonbProperty(value = "status")
     private AuditStatusEnum status;
 
-    public SecurityAudit() {
-        // default
+    public DataAudit() {
+        // default constructor
     }
 
     public Long getId() {
@@ -71,14 +95,6 @@ public class SecurityAudit implements Serializable {
         this.date = date;
     }
 
-    public String getSource() {
-        return source;
-    }
-
-    public void setSource(String source) {
-        this.source = source;
-    }
-
     public String getRequestId() {
         return requestId;
     }
@@ -87,12 +103,60 @@ public class SecurityAudit implements Serializable {
         this.requestId = requestId;
     }
 
-    public SecurityAuditEventEnum getEvent() {
+    public DataAuditEventEnum getEvent() {
         return event;
     }
 
-    public void setEvent(SecurityAuditEventEnum event) {
+    public void setEvent(DataAuditEventEnum event) {
         this.event = event;
+    }
+
+    public String getClassName() {
+        return className;
+    }
+
+    public void setClassName(String className) {
+        this.className = className;
+    }
+
+    public String getClassDescription() {
+        return classDescription;
+    }
+
+    public void setClassDescription(String classDescription) {
+        this.classDescription = classDescription;
+    }
+
+    public String getObjectId() {
+        return objectId;
+    }
+
+    public void setObjectId(String objectId) {
+        this.objectId = objectId;
+    }
+
+    public String getObjectName() {
+        return objectName;
+    }
+
+    public void setObjectName(String objectName) {
+        this.objectName = objectName;
+    }
+
+    public List<DataAuditValue> getValues() {
+        return values;
+    }
+
+    public void setValues(List<DataAuditValue> values) {
+        this.values = values;
+    }
+
+    public String getSource() {
+        return source;
+    }
+
+    public void setSource(String source) {
+        this.source = source;
     }
 
     public String getUser() {
@@ -101,6 +165,14 @@ public class SecurityAudit implements Serializable {
 
     public void setUser(String user) {
         this.user = user;
+    }
+
+    public String getRunAsUser() {
+        return runAsUser;
+    }
+
+    public void setRunAsUser(String runAsUser) {
+        this.runAsUser = runAsUser;
     }
 
     public AuditStatusEnum getStatus() {
@@ -120,11 +192,11 @@ public class SecurityAudit implements Serializable {
     public boolean equals(Object obj) {
         if (obj == null)
             return false;
-        if (!((obj instanceof SecurityAudit)))
+        if (!((obj instanceof DataAudit)))
             return false;
         if (obj == this)
             return true;
-        SecurityAudit other = (SecurityAudit) obj;
+        DataAudit other = (DataAudit) obj;
         return Objects.equals(this.id, other.id);
     }
 

@@ -1,6 +1,6 @@
 package org.hsh.crm.ms.audit.dal.entities.dto;
 
-import dto.audit.DataAuditValue;
+import org.hsh.crm.ms.audit.dto.DataAuditValue;
 
 import javax.json.bind.annotation.JsonbProperty;
 import javax.json.bind.annotation.JsonbPropertyOrder;

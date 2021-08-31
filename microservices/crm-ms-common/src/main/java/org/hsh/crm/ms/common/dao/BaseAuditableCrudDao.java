@@ -1,6 +1,6 @@
 package org.hsh.crm.ms.common.dao;
 
-import dto.audit.builders.DataAuditBuilder;
+import org.hsh.crm.ms.audit.dto.builders.DataAuditBuilder;
 import org.hsh.common.dal.entity.IdEntity;
 import org.hsh.ms.common.dal.dao.BaseCrudDao;
 

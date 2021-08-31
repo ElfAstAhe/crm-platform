@@ -1,8 +1,8 @@
-package dto.audit.builders;
+package org.hsh.crm.ms.audit.dto.builders;
 
-import dto.audit.AuditStatusEnum;
-import dto.audit.SecurityAudit;
-import dto.audit.SecurityAuditEventEnum;
+import org.hsh.crm.ms.audit.dto.AuditStatusEnum;
+import org.hsh.crm.ms.audit.dto.SecurityAudit;
+import org.hsh.crm.ms.audit.dto.SecurityAuditEventEnum;
 import org.hsh.common.helpers.builder.BaseBuilder;
 
 import java.time.OffsetDateTime;

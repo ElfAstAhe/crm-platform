@@ -1,10 +1,10 @@
 package org.hsh.crm.ms.audit.ep.controller.facade;
 
-import common.ep.facade.CrudFacade;
-import common.exceptions.runtime.ep.ResourceGoneException;
 import org.hsh.crm.ms.audit.dal.dao.DataAuditDao;
-import dto.audit.DataAudit;
+import org.hsh.crm.ms.audit.dto.DataAudit;
 import org.hsh.crm.ms.audit.ep.dto.converter.DataAuditConverter;
+import org.hsh.ms.common.ep.facade.CrudFacade;
+import org.hsh.ms.common.exceptions.runtime.ep.ResourceGoneException;
 
 import javax.ejb.EJB;
 import javax.enterprise.context.RequestScoped;
@@ -18,12 +18,12 @@ public class DataAuditFacade implements CrudFacade<DataAudit> {
     private DataAuditDao daoDataAudit;
 
     @Override
-    public DataAudit getInstance(Object id) {
+    public DataAudit get(Object id) {
         return DataAuditConverter.toDto(daoDataAudit.find(id));
     }
 
     @Override
-    public List<DataAudit> listAllInstances() {
+    public List<DataAudit> listAll() {
 //        return daoDataAudit.listAll()
 //                .stream()
 //                .map(DataAuditConverter::toDto)
@@ -32,17 +32,17 @@ public class DataAuditFacade implements CrudFacade<DataAudit> {
     }
 
     @Override
-    public DataAudit createInstance(DataAudit instance) {
+    public DataAudit create(DataAudit instance) {
         return DataAuditConverter.toDto(daoDataAudit.create(DataAuditConverter.toEntity(instance, null)));
     }
 
     @Override
-    public DataAudit editInstance(Object id, DataAudit instance) {
+    public DataAudit edit(Object id, DataAudit instance) {
         return DataAuditConverter.toDto(daoDataAudit.edit(DataAuditConverter.toEntity(instance, daoDataAudit::find)));
     }
 
     @Override
-    public void removeInstance(Object id) {
+    public void remove(Object id) {
         daoDataAudit.remove(id);
     }
 }

@@ -3,10 +3,10 @@ package org.hsh.crm.ms.audit.ep.dto.converter;
 import common.dal.converter.EntityLoader;
 import common.util.serialization.JsonSerializerHelper;
 import org.hsh.crm.ms.audit.dal.entities.dto.DataAuditValues;
-import dto.audit.AuditStatusEnum;
-import dto.audit.DataAudit;
-import dto.audit.DataAuditEventEnum;
-import dto.audit.builders.DataAuditBuilder;
+import org.hsh.crm.ms.audit.dto.AuditStatusEnum;
+import org.hsh.crm.ms.audit.dto.DataAudit;
+import org.hsh.crm.ms.audit.dto.DataAuditEventEnum;
+import org.hsh.crm.ms.audit.dto.builders.DataAuditBuilder;
 
 import java.util.Collections;
 

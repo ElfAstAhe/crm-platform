@@ -9,7 +9,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
 @Stateless
-public class DataAuditDaoImpl extends BaseCrudDao<DataAudit, Long> implements DataAuditDao {
+public class DataAuditDaoImpl extends BaseAuditDaoImpl<DataAudit, Long> implements DataAuditDao {
     @PersistenceContext(unitName = DalConstants.PERSISTENCE_UNIT)
     private EntityManager em;
 

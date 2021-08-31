@@ -1,6 +1,6 @@
-package dto.audit.builders;
+package org.hsh.crm.ms.audit.dto.builders;
 
-import dto.audit.DataAuditValue;
+import org.hsh.crm.ms.audit.dto.DataAuditValue;
 import org.hsh.common.util.audit.AuditUtils;
 
 import java.util.ArrayList;

@@ -1,7 +1,7 @@
 package org.hsh.crm.ms.audit.ep.dto.converter;
 
-import dto.audit.Audit;
-import dto.audit.builders.AuditBuilder;
+import org.hsh.crm.ms.audit.dto.Audit;
+import org.hsh.crm.ms.audit.dto.builders.AuditBuilder;
 
 public class AuditConverter {
     private AuditConverter() {

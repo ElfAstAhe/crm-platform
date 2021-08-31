@@ -1,10 +1,9 @@
 package org.hsh.crm.ms.audit.ep.controller;
 
-import common.ep.controller.BaseCrudController;
-import common.ep.facade.CrudFacade;
-import common.exceptions.runtime.ep.ResourceGoneException;
-import dto.audit.DataAudit;
+import org.hsh.crm.ms.audit.dto.DataAudit;
 import org.hsh.crm.ms.audit.ep.controller.facade.DataAuditFacade;
+import org.hsh.ms.common.ep.controller.BaseCrudController;
+import org.hsh.ms.common.ep.facade.CrudFacade;
 
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;

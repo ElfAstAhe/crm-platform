@@ -1,4 +1,4 @@
-package dto.audit;
+package org.hsh.crm.ms.audit.dto;
 
 import javax.json.bind.annotation.JsonbProperty;
 import javax.json.bind.annotation.JsonbPropertyOrder;
