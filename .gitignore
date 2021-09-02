@@ -4,3 +4,8 @@
 **/obj/
 **/bin/
 **/.gradle/
+**/.project
+**/.settings/
+**/.apt_generated_tests/
+**/.classpath
+**/.factorypath
