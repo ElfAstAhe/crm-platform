@@ -1,6 +1,6 @@
 package org.hsh.crm.ms.audit.dal.dao;
 
-import common.dal.dao.CrudDao;
+import org.hsh.common.dal.dao.CrudDao;
 import org.hsh.crm.ms.audit.dal.entities.SecurityAudit;
 
 import javax.ejb.Local;

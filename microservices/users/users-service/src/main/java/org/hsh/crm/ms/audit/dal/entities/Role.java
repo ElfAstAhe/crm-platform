@@ -1,7 +1,7 @@
 package org.hsh.crm.ms.audit.dal.entities;
 
-import common.dal.entity.BaseIdEntity;
-import common.util.StringUtils;
+import org.hsh.common.util.HshStringUtils;
+import org.hsh.ms.common.dal.entity.BaseIdEntity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -88,12 +88,13 @@ public class Role extends BaseIdEntity implements Serializable {
 
     @Override
     public String toString() {
-        return new StringJoiner(StringUtils.DELIMITER, StringUtils.buildPrefix(this), StringUtils.SUFFIX)
-                .add(StringUtils.buildKeyValue("id", StringUtils.toNullString(getId())))
-                .add(StringUtils.buildKeyValue("version", StringUtils.toNullString(version)))
-                .add(StringUtils.buildKeyValue("code", StringUtils.toNullString(code)))
-                .add(StringUtils.buildKeyValue("name", StringUtils.toNullString(name)))
-                .add(StringUtils.buildKeyValue("description", StringUtils.toNullString(description)))
-                .toString();
+        return new StringJoiner(HshStringUtils.DELIMITER,
+                                HshStringUtils.buildPrefix(this),
+                                HshStringUtils.SUFFIX).add(HshStringUtils.buildKeyValue("id", HshStringUtils.toNullString(getId())))
+                                                      .add(HshStringUtils.buildKeyValue("version", HshStringUtils.toNullString(version)))
+                                                      .add(HshStringUtils.buildKeyValue("code", HshStringUtils.toNullString(code)))
+                                                      .add(HshStringUtils.buildKeyValue("name", HshStringUtils.toNullString(name)))
+                                                      .add(HshStringUtils.buildKeyValue("description", HshStringUtils.toNullString(description)))
+                                                      .toString();
     }
 }

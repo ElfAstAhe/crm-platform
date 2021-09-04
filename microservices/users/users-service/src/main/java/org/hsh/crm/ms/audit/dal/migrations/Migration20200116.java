@@ -1,7 +1,7 @@
 package org.hsh.crm.ms.audit.dal.migrations;
 
-import common.dal.migration.SqlMigrationHelper;
-import common.dal.migration.base.BaseSqlMigration;
+import org.hsh.common.dal.migration.SqlMigrationHelper;
+import org.hsh.common.dal.migration.base.BaseSqlMigration;
 import org.jooq.CreateTableColumnStep;
 import org.jooq.DSLContext;
 import org.jooq.Query;
@@ -28,7 +28,7 @@ public class Migration20200116 extends BaseSqlMigration {
     @Override
     protected void migrate(DSLContext dslContext) {
         SqlMigrationHelper.Ddl
-                .createTable(dslContext, TABLE_USER_ROLES, "user roles", this::buildTableUserRoles);
+                          .createTable(dslContext, TABLE_USER_ROLES, "user roles", this::buildTableUserRoles);
     }
 
     private Query buildTableUserRoles(CreateTableColumnStep ctcs) {

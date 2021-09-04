@@ -1,7 +1,8 @@
 package org.hsh.crm.ms.audit.ep.config;
 
-import common.ep.mapper.ExceptionMapperHelper;
 import org.hsh.crm.ms.audit.ep.controller.*;
+import org.hsh.ms.common.ep.EpCommon;
+import org.hsh.ms.common.ep.mapper.ExceptionMapperHelper;
 
 import javax.ws.rs.ApplicationPath;
 import javax.ws.rs.core.Application;
@@ -10,7 +11,7 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
-@ApplicationPath("api/v1")
+@ApplicationPath(EpCommon.RsApi.V1)
 public class RsConfig extends Application {
     private final Set<Class<?>> classes;
 

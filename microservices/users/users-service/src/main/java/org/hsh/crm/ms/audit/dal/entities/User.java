@@ -1,7 +1,7 @@
 package org.hsh.crm.ms.audit.dal.entities;
 
-import common.dal.entity.BaseIdEntity;
-import common.util.StringUtils;
+import org.hsh.common.util.HshStringUtils;
+import org.hsh.ms.common.dal.entity.BaseIdEntity;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -192,12 +192,13 @@ public class User extends BaseIdEntity implements Serializable {
 
     @Override
     public String toString() {
-        return new StringJoiner(StringUtils.DELIMITER, StringUtils.buildPrefix(this), StringUtils.SUFFIX)
-                .add(StringUtils.buildKeyValue("id", StringUtils.toNullString(getId())))
-                .add(StringUtils.buildKeyValue("version", StringUtils.toNullString(version)))
-                .add(StringUtils.buildKeyValue("username", StringUtils.toNullString(username)))
-                .add(StringUtils.buildKeyValue("person", StringUtils.toNullString(person)))
-                .add(StringUtils.buildKeyValue("state", state))
-                .toString();
+        return new StringJoiner(HshStringUtils.DELIMITER,
+                                HshStringUtils.buildPrefix(this),
+                                HshStringUtils.SUFFIX).add(HshStringUtils.buildKeyValue("id", HshStringUtils.toNullString(getId())))
+                                                      .add(HshStringUtils.buildKeyValue("version", HshStringUtils.toNullString(version)))
+                                                      .add(HshStringUtils.buildKeyValue("username", HshStringUtils.toNullString(username)))
+                                                      .add(HshStringUtils.buildKeyValue("person", HshStringUtils.toNullString(person)))
+                                                      .add(HshStringUtils.buildKeyValue("state", state))
+                                                      .toString();
     }
 }

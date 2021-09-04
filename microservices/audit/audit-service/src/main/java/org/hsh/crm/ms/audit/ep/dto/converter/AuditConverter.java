@@ -10,14 +10,14 @@ public class AuditConverter {
 
     public static Audit toDto(org.hsh.crm.ms.audit.bll.model.Audit model) {
         return AuditBuilder.get()
-                .setId(model.getId())
-                .setEventDate(model.getEventDate())
-                .setEvent(model.getEvent())
-                .setSource(model.getSource())
-                .setRequestId(model.getRequestId())
-                .setUser(model.getUser())
-                .setStatus(model.getStatus())
-                .setAdditional(model.getAdditional())
-                .build();
+                           .setId(model.getId())
+                           .setEventDate(model.getEventDate())
+                           .setEvent(model.getEvent())
+                           .setSource(model.getSource())
+                           .setRequestId(model.getRequestId())
+                           .setUser(model.getUser())
+                           .setStatus(model.getStatus())
+                           .setAdditional(model.getAdditional())
+                           .build();
     }
 }

@@ -15,10 +15,10 @@
         <crm.platform.baseDir>${project.basedir}</crm.platform.baseDir>
 
         <!-- common libraries -->
-        <hsh.common.version>2.2.0${crm.platform.version.suffix}</hsh.common.version>
+        <hsh.common.version>2.2.1${crm.platform.version.suffix}</hsh.common.version>
 
         <!-- microservices -->
-        <hsh.ms.common.version>1.0.0${crm.platform.version.suffix}</hsh.ms.common.version>
+        <hsh.ms.common.version>1.0.1${crm.platform.version.suffix}</hsh.ms.common.version>
         <crm.ms.common.version>1.0.0${crm.platform.version.suffix}</crm.ms.common.version>
 
         <crm.platform.audit.service.version>1.0.0${crm.platform.version.suffix}</crm.platform.audit.service.version>
@@ -73,14 +73,14 @@
         <dependency>
             <groupId>org.eclipse.microprofile</groupId>
             <artifactId>microprofile</artifactId>
-            <version>3.3</version>
+            <version>4.0.1</version>
             <type>pom</type>
             <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter</artifactId>
-            <version>5.7.0</version>
+            <version>5.7.2</version>
             <scope>test</scope>
         </dependency>
         <dependency>
@@ -92,14 +92,14 @@
         <dependency>
             <groupId>org.mockito</groupId>
             <artifactId>mockito-junit-jupiter</artifactId>
-            <version>3.6.28</version>
+            <version>3.12.4</version>
             <scope>test</scope>
         </dependency>
         <!-- https://mvnrepository.com/artifact/org.mockito/mockito-inline -->
         <dependency>
             <groupId>org.mockito</groupId>
             <artifactId>mockito-inline</artifactId>
-            <version>3.6.28</version>
+            <version>3.12.4</version>
             <scope>test</scope>
         </dependency>
         <!-- https://mvnrepository.com/artifact/org.eclipse/yasson -->
@@ -119,7 +119,7 @@
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-api</artifactId>
-            <version>1.7.30</version>
+            <version>1.7.32</version>
             <scope>provided</scope>
         </dependency>
     </dependencies>

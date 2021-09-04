@@ -1,6 +1,6 @@
 package org.hsh.crm.ms.audit.ep.dto.converter;
 
-import common.dal.converter.EntityLoader;
+import org.hsh.common.dal.converter.EntityLoader;
 import org.hsh.crm.ms.audit.dto.AuditStatusEnum;
 import org.hsh.crm.ms.audit.dto.SecurityAudit;
 import org.hsh.crm.ms.audit.dto.SecurityAuditEventEnum;

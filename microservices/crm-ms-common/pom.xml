@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>crm-ms-common</artifactId>
-    <version>${crm-ms-common-version}</version>
+    <version>${crm.ms.common.version}</version>
     <packaging>jar</packaging>
     <description>common library for microservices</description>
 
@@ -13,13 +13,12 @@
         <dependency>
             <groupId>org.hsh</groupId>
             <artifactId>hsh-common</artifactId>
-            <version>2.2.0</version>
-            <scope>compile</scope>
+            <version>${hsh.common.version}</version>
         </dependency>
         <dependency>
             <groupId>org.hsh</groupId>
             <artifactId>hsh-ms-common</artifactId>
-            <version>1.0.0</version>
+            <version>${hsh.ms.common.version}</version>
         </dependency>
         <dependency>
             <groupId>org.hsh</groupId>

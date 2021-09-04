@@ -1,4 +1,4 @@
-package org.hsh.crm.ms.common.entities;
+package org.hsh.crm.ms.common.dal.entities;
 
 import org.hsh.common.util.HshStringUtils;
 import org.hsh.ms.common.dal.entity.BaseIdEntity;

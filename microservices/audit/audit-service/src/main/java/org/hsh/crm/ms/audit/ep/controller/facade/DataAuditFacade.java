@@ -24,10 +24,6 @@ public class DataAuditFacade implements CrudFacade<DataAudit> {
 
     @Override
     public List<DataAudit> listAll() {
-//        return daoDataAudit.listAll()
-//                .stream()
-//                .map(DataAuditConverter::toDto)
-//                .collect(Collectors.toList());
         throw new ResourceGoneException("not implemented");
     }
 

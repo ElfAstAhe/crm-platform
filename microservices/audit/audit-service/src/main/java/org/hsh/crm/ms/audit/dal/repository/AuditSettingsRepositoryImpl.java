@@ -2,9 +2,9 @@ package org.hsh.crm.ms.audit.dal.repository;
 
 import org.hsh.crm.ms.audit.bll.repository.AuditSettingsRepository;
 import org.hsh.crm.ms.audit.bll.settings.AuditSettingsEnum;
-import common.bll.repository.BaseSettingsRepository;
 import org.hsh.crm.ms.audit.dal.dao.SettingDao;
-import microservice.common.dal.entities.Setting;
+import org.hsh.crm.ms.common.dal.entities.Setting;
+import org.hsh.ms.common.bll.repository.BaseSettingsRepository;
 
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
@@ -29,7 +29,7 @@ public class AuditSettingsRepositoryImpl
     protected void setToSource(AuditSettingsEnum setting, String value) {
         Setting entity = daoSetting.findByKey(setting.toString());
         if (entity == null) {
-            entity = new Setting(null,setting.toString(),null, value);
+            entity = new Setting(null, setting.toString(),null, value);
             daoSetting.create(entity);
             return;
         }

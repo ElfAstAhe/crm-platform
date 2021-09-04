@@ -1,6 +1,7 @@
 package org.hsh.crm.ms.audit.app;
 
-import common.app.BaseAppInitializer;
+import org.hsh.ms.common.app.BaseAppInitializer;
+
 import javax.annotation.Resource;
 import javax.ejb.Singleton;
 import javax.ejb.Startup;

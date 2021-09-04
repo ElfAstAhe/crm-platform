@@ -19,8 +19,8 @@ public class AuditFacade {
 
     public List<Audit> listAll() throws ExecutionException, InterruptedException {
         return repoAudit.listAll()
-                .stream()
-                .map(AuditConverter::toDto)
-                .collect(Collectors.toList());
+                        .stream()
+                        .map(AuditConverter::toDto)
+                        .collect(Collectors.toList());
     }
 }

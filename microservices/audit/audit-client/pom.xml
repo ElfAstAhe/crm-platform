@@ -17,6 +17,11 @@
         </dependency>
         <dependency>
             <groupId>org.hsh</groupId>
+            <artifactId>hsh-ms-common</artifactId>
+            <version>${hsh.ms.common.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.hsh</groupId>
             <artifactId>audit-dto</artifactId>
             <version>${crm.platform.audit.dto.version}</version>
         </dependency>

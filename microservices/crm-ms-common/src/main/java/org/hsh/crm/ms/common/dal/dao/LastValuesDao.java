@@ -1,4 +1,4 @@
-package org.hsh.crm.ms.common.dao;
+package org.hsh.crm.ms.common.dal.dao;
 
 import org.hsh.common.dal.entity.IdEntity;
 
