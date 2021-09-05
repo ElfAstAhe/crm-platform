@@ -1,7 +1,6 @@
 package org.hsh.crm.ms.common.bll.services.audit;
 
 import javax.net.ssl.HostnameVerifier;
-import java.util.concurrent.ExecutorService;
 import java.util.function.Supplier;
 
 public class AuditClientParams {
@@ -10,20 +9,17 @@ public class AuditClientParams {
     private final long readTimeoutMillis;
     private final Supplier<String> jwtSupplier;
     private final HostnameVerifier sslHostnameVerifier;
-    private final ExecutorService executorService;
 
     public AuditClientParams(String baseUri,
                              long connectionTimeoutMillis,
                              long readTimeoutMillis,
                              Supplier<String> jwtSupplier,
-                             HostnameVerifier sslHostnameVerifier,
-                             ExecutorService executorService) {
+                             HostnameVerifier sslHostnameVerifier) {
         this.baseUri = baseUri;
         this.connectionTimeoutMillis = connectionTimeoutMillis;
         this.readTimeoutMillis = readTimeoutMillis;
         this.jwtSupplier = jwtSupplier;
         this.sslHostnameVerifier = sslHostnameVerifier;
-        this.executorService = executorService;
     }
 
     public String getBaseUri() {
@@ -44,9 +40,5 @@ public class AuditClientParams {
 
     public HostnameVerifier getSslHostnameVerifier() {
         return sslHostnameVerifier;
-    }
-
-    public ExecutorService getExecutorService() {
-        return executorService;
     }
 }

@@ -1,6 +1,6 @@
-package org.hsh.crm.ms.audit.dal;
+package org.hsh.crm.ms.users.dal;
 
-import common.dal.CommonDalConstants;
+import org.hsh.common.dal.CommonDalConstants;
 
 public class DalConstants extends CommonDalConstants {
     public static final String SCHEMA_NAME = "public";

@@ -1,10 +1,11 @@
 package org.hsh.crm.ms.audit.dal.dao;
 
-import org.hsh.crm.ms.audit.bll.repository.UsersSettingsRepository;
-import org.hsh.crm.ms.audit.bll.settings.UsersSettingsEnum;
 import org.hsh.crm.ms.audit.dal.DalConstants;
-import microservice.common.dal.dao.BaseAuditableCrudDao;
-import microservice.common.dal.entities.Setting;
+import org.hsh.crm.ms.common.dal.dao.BaseAuditableCrudDao;
+import org.hsh.crm.ms.common.dal.entities.Setting;
+import org.hsh.crm.ms.users.bll.repository.UsersSettingsRepository;
+import org.hsh.crm.ms.users.bll.settings.UsersSettingsEnum;
+import org.hsh.crm.ms.users.dal.dao.SettingDao;
 
 import javax.annotation.Resource;
 import javax.ejb.EJB;

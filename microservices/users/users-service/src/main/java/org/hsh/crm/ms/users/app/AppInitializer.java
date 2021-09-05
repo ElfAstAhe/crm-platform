@@ -1,4 +1,4 @@
-package org.hsh.crm.ms.audit.app;
+package org.hsh.crm.ms.users.app;
 
 import org.hsh.ms.common.app.BaseAppInitializer;
 
