@@ -1,4 +1,4 @@
-package org.hsh.crm.ms.audit.dal.migrations;
+package org.hsh.crm.ms.users.dal.migrations;
 
 import org.hsh.common.dal.migration.SqlMigrationHelper;
 import org.hsh.common.dal.migration.base.BaseSqlMigration;
@@ -28,10 +28,10 @@ public class Migration20210110 extends BaseSqlMigration {
         SqlMigrationHelper.createDefaultTableSettings(dslContext);
 
         SqlMigrationHelper.Ddl
-                          .createTable(dslContext, TABLE_USERS, "system users", this::buildTableUsers);
+                .createTable(dslContext, TABLE_USERS, "system users", this::buildTableUsers);
 
         SqlMigrationHelper.Ddl
-                          .createTable(dslContext, TABLE_ROLES, "system roles", this::buildTableRoles);
+                .createTable(dslContext, TABLE_ROLES, "system roles", this::buildTableRoles);
     }
 
     private Query buildTableUsers(CreateTableColumnStep ctcs) {
@@ -53,12 +53,12 @@ public class Migration20210110 extends BaseSqlMigration {
 
     private Query buildTableRoles(CreateTableColumnStep ctcs) {
         return ctcs.column(DSL.name(SqlMigrationHelper.Field.ID), SQLDataType.BIGINT.nullable(false))
-                .column(DSL.name(SqlMigrationHelper.Field.CODE), SQLDataType.VARCHAR(50).nullable(false))
-                .column(DSL.name(SqlMigrationHelper.Field.NAME), SQLDataType.VARCHAR(100).nullable(true))
-                .column(DSL.name(SqlMigrationHelper.Field.DESCRIPTION), SQLDataType.VARCHAR(512).nullable(true))
-                .constraints(DSL.constraint(DSL.name(SqlMigrationHelper.Builder.buildPkConstraintName(TABLE_ROLES)))
-                                .primaryKey(DSL.name(SqlMigrationHelper.Field.ID)),
-                        DSL.constraint(DSL.name(SqlMigrationHelper.Builder.buildUkConstraintName(TABLE_ROLES)))
-                                .unique(DSL.name(SqlMigrationHelper.Field.CODE)));
+                   .column(DSL.name(SqlMigrationHelper.Field.CODE), SQLDataType.VARCHAR(50).nullable(false))
+                   .column(DSL.name(SqlMigrationHelper.Field.NAME), SQLDataType.VARCHAR(100).nullable(true))
+                   .column(DSL.name(SqlMigrationHelper.Field.DESCRIPTION), SQLDataType.VARCHAR(512).nullable(true))
+                   .constraints(DSL.constraint(DSL.name(SqlMigrationHelper.Builder.buildPkConstraintName(TABLE_ROLES)))
+                                   .primaryKey(DSL.name(SqlMigrationHelper.Field.ID)),
+                                DSL.constraint(DSL.name(SqlMigrationHelper.Builder.buildUkConstraintName(TABLE_ROLES)))
+                                   .unique(DSL.name(SqlMigrationHelper.Field.CODE)));
     }
 }

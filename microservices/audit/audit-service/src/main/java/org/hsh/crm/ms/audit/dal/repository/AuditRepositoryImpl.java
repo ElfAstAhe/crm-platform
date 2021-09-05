@@ -31,13 +31,13 @@ public class AuditRepositoryImpl implements AuditRepository {
         Future<List<DataAudit>> dataAuditList = daoDataAudit.listAllAsync();
         Future<List<SecurityAudit>> securityAuditList = daoSecurityAudit.listAllAsync();
         return Stream.concat(dataAuditList.get()
-                        .stream()
-                        .map(DataAuditConverter::toAudit),
-                    securityAuditList.get()
-                        .stream()
-                        .map(SecurityAuditConverter::toAudit))
-                .filter(Objects::nonNull)
-                .sorted(Comparator.comparing(Audit::getEventDate))
-                .collect(Collectors.toList());
+                                          .stream()
+                                          .map(DataAuditConverter::toAudit),
+                             securityAuditList.get()
+                                              .stream()
+                                              .map(SecurityAuditConverter::toAudit))
+                     .filter(Objects::nonNull)
+                     .sorted(Comparator.comparing(Audit::getEventDate))
+                     .collect(Collectors.toList());
     }
 }

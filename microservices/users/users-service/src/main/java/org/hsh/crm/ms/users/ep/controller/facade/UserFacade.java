@@ -1,7 +1,7 @@
 package org.hsh.crm.ms.audit.ep.controller.facade;
 
 import common.ep.facade.CrudFacade;
-import dto.users.User;
+import org.hsh.crm.ms.users.dto.User;
 
 import javax.enterprise.context.RequestScoped;
 import java.util.List;

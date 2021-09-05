@@ -1,4 +1,4 @@
-package dto.users;
+package org.hsh.crm.ms.users.dto;
 
 import javax.json.bind.annotation.JsonbPropertyOrder;
 import javax.json.bind.config.PropertyOrderStrategy;

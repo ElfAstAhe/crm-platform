@@ -16,7 +16,6 @@ import javax.ws.rs.core.Response;
 @RequestScoped
 @Path("ready")
 public class ReadyController {
-
     @EJB
     private AppInitializer initializer;
 
@@ -24,6 +23,7 @@ public class ReadyController {
     public Response getReadyInfo() {
         if (initializer.isReady())
             return Response.ok().build();
+
         return Response.status(Response.Status.BAD_REQUEST).build();
     }
 }

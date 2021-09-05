@@ -18,7 +18,7 @@ public class SettingDaoImpl extends BaseAuditDao<Setting, String> implements Set
                                      .setParameter("code", key)
                                      .setMaxResults(1)
                                      .getSingleResult();
-        } catch (NoResultException ex) {
+        } catch(NoResultException ex) {
             return null;
         }
     }

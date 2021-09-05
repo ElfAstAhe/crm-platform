@@ -2,7 +2,7 @@ package org.hsh.crm.ms.audit.ep.controller;
 
 import common.ep.controller.BaseCrudController;
 import common.ep.facade.CrudFacade;
-import dto.users.User;
+import org.hsh.crm.ms.users.dto.User;
 import org.hsh.crm.ms.audit.ep.controller.facade.UserFacade;
 
 import javax.enterprise.context.RequestScoped;

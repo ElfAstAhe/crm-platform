@@ -1,6 +1,7 @@
-package org.hsh.crm.ms.audit.dal.entities;
+package org.hsh.crm.ms.users.dal.entities;
 
 import org.hsh.common.util.HshStringUtils;
+import org.hsh.crm.ms.audit.dal.entities.UserStateEnum;
 import org.hsh.ms.common.dal.entity.BaseIdEntity;
 
 import javax.persistence.*;
@@ -188,6 +189,11 @@ public class User extends BaseIdEntity implements Serializable {
         User other = (User) object;
 
         return Objects.equals(this.getId(), other.getId());
+    }
+
+    @Override
+    public int hashCode() {
+        return super.hashCode();
     }
 
     @Override

@@ -1,4 +1,4 @@
-package org.hsh.crm.ms.audit.dal.migrations;
+package org.hsh.crm.ms.users.dal.migrations;
 
 import org.hsh.common.dal.migration.SqlMigrationHelper;
 import org.hsh.common.dal.migration.base.BaseSqlMigration;
@@ -28,19 +28,19 @@ public class Migration20200116 extends BaseSqlMigration {
     @Override
     protected void migrate(DSLContext dslContext) {
         SqlMigrationHelper.Ddl
-                          .createTable(dslContext, TABLE_USER_ROLES, "user roles", this::buildTableUserRoles);
+                .createTable(dslContext, TABLE_USER_ROLES, "user roles", this::buildTableUserRoles);
     }
 
     private Query buildTableUserRoles(CreateTableColumnStep ctcs) {
         return ctcs.column(DSL.name(FIELD_USER_ID), SQLDataType.BIGINT.nullable(false))
-                .column(DSL.name(FIELD_ROLE_ID), SQLDataType.BIGINT.nullable(false))
-                .constraints(DSL.constraint(DSL.name(SqlMigrationHelper.Builder.buildFkConstraintName(TABLE_USER_ROLES, "user")))
-                                .foreignKey(DSL.name(FIELD_USER_ID))
-                                .references(DSL.name(TABLE_USERS), DSL.name(SqlMigrationHelper.Field.ID)),
-                        DSL.constraint(DSL.name(SqlMigrationHelper.Builder.buildFkConstraintName(TABLE_USER_ROLES, "role")))
-                                .foreignKey(DSL.name(FIELD_ROLE_ID))
-                                .references(DSL.name(TABLE_ROLES), DSL.name(SqlMigrationHelper.Field.ID)),
-                        DSL.constraint(DSL.name(SqlMigrationHelper.Builder.buildUkConstraintName(TABLE_USER_ROLES)))
-                                .unique(DSL.name(FIELD_USER_ID), DSL.name(FIELD_ROLE_ID)));
+                   .column(DSL.name(FIELD_ROLE_ID), SQLDataType.BIGINT.nullable(false))
+                   .constraints(DSL.constraint(DSL.name(SqlMigrationHelper.Builder.buildFkConstraintName(TABLE_USER_ROLES, "user")))
+                                   .foreignKey(DSL.name(FIELD_USER_ID))
+                                   .references(DSL.name(TABLE_USERS), DSL.name(SqlMigrationHelper.Field.ID)),
+                                DSL.constraint(DSL.name(SqlMigrationHelper.Builder.buildFkConstraintName(TABLE_USER_ROLES, "role")))
+                                   .foreignKey(DSL.name(FIELD_ROLE_ID))
+                                   .references(DSL.name(TABLE_ROLES), DSL.name(SqlMigrationHelper.Field.ID)),
+                                DSL.constraint(DSL.name(SqlMigrationHelper.Builder.buildUkConstraintName(TABLE_USER_ROLES)))
+                                   .unique(DSL.name(FIELD_USER_ID), DSL.name(FIELD_ROLE_ID)));
     }
 }

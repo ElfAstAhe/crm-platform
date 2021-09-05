@@ -1,10 +1,10 @@
-package org.hsh.crm.ms.audit.dal.dao;
+package org.hsh.crm.ms.users.dal.dao;
 
-import common.dal.dao.CrudDao;
+import org.hsh.common.dal.dao.CrudDao;
 import org.hsh.crm.ms.audit.dal.entities.User;
 
 import javax.ejb.Local;
 
 @Local
-public interface UserDao extends CrudDao<User, String> {
+public interface UserDao extends CrudDao<User, Long> {
 }

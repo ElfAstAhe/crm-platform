@@ -4,7 +4,6 @@ import org.hsh.crm.ms.common.bll.services.audit.AuditClientParams;
 import org.hsh.crm.ms.common.bll.services.audit.BaseDataAuditService;
 import org.hsh.crm.ms.users.bll.repository.UsersSettingsRepository;
 import org.hsh.crm.ms.users.bll.settings.UsersSettingsEnum;
-import org.hsh.ms.common.ep.client.BaseRestClient;
 
 import javax.ejb.EJB;
 import javax.ejb.LocalBean;
