@@ -9,9 +9,7 @@ import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import javax.ws.rs.Path;
 import javax.ws.rs.core.Context;
-import javax.ws.rs.core.GenericEntity;
 import javax.ws.rs.core.UriInfo;
-import java.util.List;
 
 /**
  * crud dataAudit
@@ -36,12 +34,7 @@ public class DataAuditController extends BaseCrudController<DataAudit> {
     }
 
     @Override
-    protected Long getDtoId(DataAudit instance) {
-        return instance.getId();
-    }
-
-    @Override
-    protected GenericEntity<List<DataAudit>> getGenericEntity(List<DataAudit> list) {
-        return new GenericEntity<List<DataAudit>>(list){};
+    protected Object getDtoId(DataAudit dto) {
+        return dto.getId();
     }
 }
