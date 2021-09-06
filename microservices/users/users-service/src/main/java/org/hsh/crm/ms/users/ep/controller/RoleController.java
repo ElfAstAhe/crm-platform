@@ -1,9 +1,9 @@
-package org.hsh.crm.ms.audit.ep.controller;
+package org.hsh.crm.ms.users.ep.controller;
 
-import common.ep.controller.BaseCrudController;
-import common.ep.facade.CrudFacade;
 import org.hsh.crm.ms.users.dto.Role;
-import org.hsh.crm.ms.audit.ep.controller.facade.RoleFacade;
+import org.hsh.crm.ms.users.ep.controller.facade.RoleFacade;
+import org.hsh.ms.common.ep.controller.BaseCrudController;
+import org.hsh.ms.common.ep.facade.CrudFacade;
 
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;

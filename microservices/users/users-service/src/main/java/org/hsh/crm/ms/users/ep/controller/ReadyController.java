@@ -1,6 +1,6 @@
-package org.hsh.crm.ms.audit.ep.controller;
+package org.hsh.crm.ms.users.ep.controller;
 
-import common.app.AppInitializer;
+import org.hsh.crm.ms.users.app.AppInitializer;
 
 import javax.ejb.EJB;
 import javax.enterprise.context.RequestScoped;

@@ -1,7 +1,6 @@
 package org.hsh.crm.ms.users.dal.entities;
 
 import org.hsh.common.util.HshStringUtils;
-import org.hsh.crm.ms.audit.dal.entities.UserStateEnum;
 import org.hsh.ms.common.dal.entity.BaseIdEntity;
 
 import javax.persistence.*;

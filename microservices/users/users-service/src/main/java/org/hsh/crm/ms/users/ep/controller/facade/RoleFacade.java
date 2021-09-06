@@ -1,8 +1,8 @@
-package org.hsh.crm.ms.audit.ep.controller.facade;
+package org.hsh.crm.ms.users.ep.controller.facade;
 
-import common.ep.facade.CrudFacade;
-import org.hsh.crm.ms.audit.dal.dao.RoleDao;
+import org.hsh.crm.ms.users.dal.dao.RoleDao;
 import org.hsh.crm.ms.users.dto.Role;
+import org.hsh.ms.common.ep.facade.CrudFacade;
 
 import javax.ejb.EJB;
 import javax.enterprise.context.RequestScoped;

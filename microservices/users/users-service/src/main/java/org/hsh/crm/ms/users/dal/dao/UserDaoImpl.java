@@ -1,6 +1,6 @@
 package org.hsh.crm.ms.users.dal.dao;
 
-import org.hsh.crm.ms.audit.dal.entities.User;
+import org.hsh.crm.ms.users.dal.entities.User;
 
 import javax.ejb.Stateless;
 

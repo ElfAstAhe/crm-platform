@@ -1,7 +1,7 @@
-package org.hsh.crm.ms.audit.ep.controller;
+package org.hsh.crm.ms.common.ep.controller;
 
-import common.ep.controller.BasePayaraMetricsController;
-import common.web.MimeTypes;
+import org.hsh.ms.common.ep.controller.BasePayaraMetricsController;
+import org.hsh.ms.common.web.MimeTypes;
 
 import javax.annotation.Resource;
 import javax.enterprise.concurrent.ManagedExecutorService;
