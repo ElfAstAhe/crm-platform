@@ -12,4 +12,26 @@ import java.io.Serializable;
 @JsonbPropertyOrder(PropertyOrderStrategy.ANY)
 public class User implements Serializable {
     private static final long serialVersionUID = 1L;
+
+    private Long id;
+
+    private String username;
+
+    private String password;
+
+    private String passwordEncrypted;
+
+    private String privateKey;
+
+    private String publicKey;
+
+    private String person;
+
+    private String eMail;
+
+    private String cellPhone;
+
+    public User() {
+
+    }
 }

@@ -1,8 +1,10 @@
 package org.hsh.crm.ms.audit.ep.controller;
 
 import org.hsh.crm.ms.audit.dto.Audit;
+import org.hsh.crm.ms.audit.ep.EpConstants;
 import org.hsh.crm.ms.audit.ep.controller.facade.AuditFacade;
 import org.hsh.ms.common.dto.ExceptionDtoHelper;
+import org.hsh.ms.common.ep.EpCommon;
 import org.hsh.ms.common.web.MimeTypes;
 
 import javax.inject.Inject;
@@ -17,12 +19,12 @@ import java.util.List;
 /**
  * Контроллер отчётов
  */
-@Path("audit")
+@Path(EpConstants.PATH_AUDIT)
 public class AuditController {
     @Inject
     private AuditFacade facade;
 
-    @Path("list/all")
+    @Path(EpCommon.RsPath.LIST_ALL)
     @GET
     @Produces({MimeTypes.Application.JSON, MimeTypes.Application.XML, MimeTypes.Application.YAML})
     public Response listAll() {

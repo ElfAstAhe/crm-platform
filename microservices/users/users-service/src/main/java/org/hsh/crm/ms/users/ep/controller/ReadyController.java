@@ -1,5 +1,6 @@
 package org.hsh.crm.ms.users.ep.controller;
 
+import org.hsh.crm.ms.common.ep.CrmEpCommon;
 import org.hsh.crm.ms.users.app.AppInitializer;
 
 import javax.ejb.EJB;
@@ -14,7 +15,7 @@ import javax.ws.rs.core.Response;
  * @author elf
  */
 @RequestScoped
-@Path("ready")
+@Path(CrmEpCommon.RsPath.READY)
 public class ReadyController {
 
     @EJB

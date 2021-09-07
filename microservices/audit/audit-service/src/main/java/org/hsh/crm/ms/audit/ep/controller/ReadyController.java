@@ -1,6 +1,7 @@
 package org.hsh.crm.ms.audit.ep.controller;
 
 import org.hsh.crm.ms.audit.app.AppInitializer;
+import org.hsh.crm.ms.common.ep.CrmEpCommon;
 
 import javax.ejb.EJB;
 import javax.enterprise.context.RequestScoped;
@@ -14,7 +15,7 @@ import javax.ws.rs.core.Response;
  * @author elf
  */
 @RequestScoped
-@Path("ready")
+@Path(CrmEpCommon.RsPath.READY)
 public class ReadyController {
     @EJB
     private AppInitializer initializer;

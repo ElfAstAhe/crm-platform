@@ -1,5 +1,6 @@
 package org.hsh.crm.ms.common.ep.controller;
 
+import org.hsh.crm.ms.common.ep.CrmEpCommon;
 import org.hsh.ms.common.ep.controller.BaseSimpleHealthController;
 
 import javax.enterprise.context.RequestScoped;
@@ -11,6 +12,6 @@ import javax.ws.rs.Path;
  * @author elf
  */
 @RequestScoped
-@Path("health")
+@Path(CrmEpCommon.RsPath.HEALTH)
 public class HealthController extends BaseSimpleHealthController {
 }

@@ -1,6 +1,7 @@
 package org.hsh.crm.ms.audit.client;
 
 import org.hsh.crm.ms.audit.dto.DataAudit;
+import org.hsh.crm.ms.audit.ep.EpConstants;
 import org.hsh.ms.common.ep.EpCommon;
 import org.hsh.ms.common.ep.client.BaseCrudClient;
 import org.hsh.ms.common.web.MimeTypes;
@@ -12,8 +13,6 @@ import java.util.concurrent.ExecutorService;
 import java.util.function.Supplier;
 
 public class DataAuditClient extends BaseCrudClient<DataAudit> {
-    public static final String RESOURCE_PATH = "dataAudit";
-
     public DataAuditClient(String baseUri,
                            Supplier<String> jwtSupplier,
                            HostnameVerifier sslHostnameVerifier,
@@ -33,7 +32,7 @@ public class DataAuditClient extends BaseCrudClient<DataAudit> {
                            ExecutorService executorService) {
         super(baseUri,
               EpCommon.RsApi.V1,
-              RESOURCE_PATH,
+              EpConstants.PATH_DATA_AUDIT,
               connectionTimeoutMillis,
               readTimeoutMillis,
               MimeTypes.Application.JSON,

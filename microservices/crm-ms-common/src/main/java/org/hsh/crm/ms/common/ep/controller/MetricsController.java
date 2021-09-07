@@ -1,5 +1,6 @@
 package org.hsh.crm.ms.common.ep.controller;
 
+import org.hsh.crm.ms.common.ep.CrmEpCommon;
 import org.hsh.ms.common.ep.controller.BasePayaraMetricsController;
 import org.hsh.ms.common.web.MimeTypes;
 
@@ -18,7 +19,7 @@ import java.util.concurrent.ExecutorService;
  * @author elf
  */
 @RequestScoped
-@Path("metrics")
+@Path(CrmEpCommon.RsPath.METRICS)
 @Produces({MimeTypes.Text.PLAIN})
 public class MetricsController extends BasePayaraMetricsController {
     @Context
