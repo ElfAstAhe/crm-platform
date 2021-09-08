@@ -6,8 +6,8 @@ import org.hsh.crm.ms.audit.dal.dao.DataAuditDao;
 import org.hsh.crm.ms.audit.dal.dao.SecurityAuditDao;
 import org.hsh.crm.ms.audit.dal.entities.DataAudit;
 import org.hsh.crm.ms.audit.dal.entities.SecurityAudit;
-import org.hsh.crm.ms.audit.dal.entities.converter.DataAuditConverter;
-import org.hsh.crm.ms.audit.dal.entities.converter.SecurityAuditConverter;
+import org.hsh.crm.ms.audit.dal.entities.convertor.DataAuditConvertor;
+import org.hsh.crm.ms.audit.dal.entities.convertor.SecurityAuditConvertor;
 
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
@@ -32,10 +32,10 @@ public class AuditRepositoryImpl implements AuditRepository {
         Future<List<SecurityAudit>> securityAuditList = daoSecurityAudit.listAllAsync();
         return Stream.concat(dataAuditList.get()
                                           .stream()
-                                          .map(DataAuditConverter::toAudit),
+                                          .map(DataAuditConvertor::toAudit),
                              securityAuditList.get()
                                               .stream()
-                                              .map(SecurityAuditConverter::toAudit))
+                                              .map(SecurityAuditConvertor::toAudit))
                      .filter(Objects::nonNull)
                      .sorted(Comparator.comparing(Audit::getEventDate))
                      .collect(Collectors.toList());

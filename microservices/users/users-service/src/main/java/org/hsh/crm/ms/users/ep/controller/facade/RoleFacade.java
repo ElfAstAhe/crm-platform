@@ -16,27 +16,27 @@ public class RoleFacade implements CrudFacade<Role> {
     private RoleDao daoRole;
 
     @Override
-    public Role getInstance(Object id) {
+    public Role get(Object o) {
         return null;
     }
 
     @Override
-    public List<Role> listAllInstances() {
+    public List<Role> listAll() {
         return null;
     }
 
     @Override
-    public Role createInstance(Role instance) {
+    public Role create(Role role) {
         return null;
     }
 
     @Override
-    public Role editInstance(Object id, Role instance) {
+    public Role edit(Object o, Role role) {
         return null;
     }
 
     @Override
-    public void removeInstance(Object id) {
+    public void remove(Object o) {
 
     }
 }

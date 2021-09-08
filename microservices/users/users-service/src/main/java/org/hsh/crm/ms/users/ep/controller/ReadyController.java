@@ -17,7 +17,6 @@ import javax.ws.rs.core.Response;
 @RequestScoped
 @Path(CrmEpCommon.RsPath.READY)
 public class ReadyController {
-
     @EJB
     private AppInitializer initializer;
 

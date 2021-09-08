@@ -1,6 +1,6 @@
-package org.hsh.crm.ms.audit.ep.listener;
+package org.hsh.crm.ms.users.ep.listener;
 
-import common.ep.listener.BaseActiveHttpRequestCountListener;
+import org.hsh.ms.common.ep.listener.BaseActiveHttpRequestCountListener;
 
 import javax.servlet.annotation.WebListener;
 

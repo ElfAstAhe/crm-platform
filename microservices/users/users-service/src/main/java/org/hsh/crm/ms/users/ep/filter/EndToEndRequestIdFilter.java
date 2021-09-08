@@ -1,6 +1,6 @@
-package org.hsh.crm.ms.audit.ep.filter;
+package org.hsh.crm.ms.users.ep.filter;
 
-import common.ep.filter.BaseEndToEndRequestIdFilter;
+import org.hsh.ms.common.ep.filter.BaseEndToEndRequestIdFilter;
 
 import javax.servlet.annotation.WebFilter;
 

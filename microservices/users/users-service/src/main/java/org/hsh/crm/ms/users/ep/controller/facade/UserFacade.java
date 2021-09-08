@@ -9,27 +9,27 @@ import java.util.List;
 @RequestScoped
 public class UserFacade implements CrudFacade<User> {
     @Override
-    public User getInstance(Object id) {
+    public User get(Object o) {
         return null;
     }
 
     @Override
-    public List<User> listAllInstances() {
+    public List<User> listAll() {
         return null;
     }
 
     @Override
-    public User createInstance(User instance) {
+    public User create(User user) {
         return null;
     }
 
     @Override
-    public User editInstance(Object id, User instance) {
+    public User edit(Object o, User user) {
         return null;
     }
 
     @Override
-    public void removeInstance(Object id) {
+    public void remove(Object o) {
 
     }
 }

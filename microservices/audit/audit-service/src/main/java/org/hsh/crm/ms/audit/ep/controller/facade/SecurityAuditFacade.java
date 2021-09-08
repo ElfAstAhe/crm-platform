@@ -2,7 +2,7 @@ package org.hsh.crm.ms.audit.ep.controller.facade;
 
 import org.hsh.crm.ms.audit.dal.dao.SecurityAuditDao;
 import org.hsh.crm.ms.audit.dto.SecurityAudit;
-import org.hsh.crm.ms.audit.ep.dto.converter.SecurityAuditConverter;
+import org.hsh.crm.ms.audit.ep.dto.convertor.SecurityAuditConvertor;
 import org.hsh.ms.common.ep.facade.CrudFacade;
 import org.hsh.ms.common.exceptions.runtime.ep.ResourceGoneException;
 
@@ -19,7 +19,7 @@ public class SecurityAuditFacade implements CrudFacade<SecurityAudit> {
 
     @Override
     public SecurityAudit get(Object id) {
-        return SecurityAuditConverter.toDto(daoSecurityAudit.find(id));
+        return SecurityAuditConvertor.toDto(daoSecurityAudit.find(id));
     }
 
     @Override
@@ -29,12 +29,12 @@ public class SecurityAuditFacade implements CrudFacade<SecurityAudit> {
 
     @Override
     public SecurityAudit create(SecurityAudit instance) {
-        return SecurityAuditConverter.toDto(daoSecurityAudit.create(SecurityAuditConverter.toEntity(instance, null)));
+        return SecurityAuditConvertor.toDto(daoSecurityAudit.create(SecurityAuditConvertor.toEntity(instance, null)));
     }
 
     @Override
     public SecurityAudit edit(Object id, SecurityAudit instance) {
-        return SecurityAuditConverter.toDto(daoSecurityAudit.edit(SecurityAuditConverter.toEntity(instance, daoSecurityAudit::find)));
+        return SecurityAuditConvertor.toDto(daoSecurityAudit.edit(SecurityAuditConvertor.toEntity(instance, daoSecurityAudit::find)));
     }
 
     @Override

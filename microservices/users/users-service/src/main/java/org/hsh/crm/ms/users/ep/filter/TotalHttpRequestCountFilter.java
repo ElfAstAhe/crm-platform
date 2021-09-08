@@ -1,6 +1,6 @@
-package org.hsh.crm.ms.audit.ep.filter;
+package org.hsh.crm.ms.users.ep.filter;
 
-import common.ep.filter.BaseTotalHttpRequestCountFilter;
+import org.hsh.ms.common.ep.filter.BaseTotalHttpRequestCountFilter;
 
 import javax.servlet.annotation.WebFilter;
 

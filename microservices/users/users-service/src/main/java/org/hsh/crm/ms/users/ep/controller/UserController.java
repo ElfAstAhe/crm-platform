@@ -33,6 +33,6 @@ public class UserController extends BaseCrudController<User> {
 
     @Override
     protected Object getDtoId(User dto) {
-        return dto.;
+        return dto.getId();
     }
 }

@@ -2,7 +2,7 @@ package org.hsh.crm.ms.audit.ep.controller.facade;
 
 import org.hsh.crm.ms.audit.dal.dao.DataAuditDao;
 import org.hsh.crm.ms.audit.dto.DataAudit;
-import org.hsh.crm.ms.audit.ep.dto.converter.DataAuditConverter;
+import org.hsh.crm.ms.audit.ep.dto.convertor.DataAuditConvertor;
 import org.hsh.ms.common.ep.facade.CrudFacade;
 import org.hsh.ms.common.exceptions.runtime.ep.ResourceGoneException;
 
@@ -19,7 +19,7 @@ public class DataAuditFacade implements CrudFacade<DataAudit> {
 
     @Override
     public DataAudit get(Object id) {
-        return DataAuditConverter.toDto(daoDataAudit.find(id));
+        return DataAuditConvertor.toDto(daoDataAudit.find(id));
     }
 
     @Override
@@ -29,12 +29,12 @@ public class DataAuditFacade implements CrudFacade<DataAudit> {
 
     @Override
     public DataAudit create(DataAudit instance) {
-        return DataAuditConverter.toDto(daoDataAudit.create(DataAuditConverter.toEntity(instance, null)));
+        return DataAuditConvertor.toDto(daoDataAudit.create(DataAuditConvertor.toEntity(instance, null)));
     }
 
     @Override
     public DataAudit edit(Object id, DataAudit instance) {
-        return DataAuditConverter.toDto(daoDataAudit.edit(DataAuditConverter.toEntity(instance, daoDataAudit::find)));
+        return DataAuditConvertor.toDto(daoDataAudit.edit(DataAuditConvertor.toEntity(instance, daoDataAudit::find)));
     }
 
     @Override

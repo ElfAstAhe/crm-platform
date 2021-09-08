@@ -24,11 +24,11 @@
             <artifactId>hsh-ms-common</artifactId>
             <version>${hsh.ms.common.version}</version>
         </dependency>
-        <!--        <dependency>-->
-        <!--            <groupId>org.hsh</groupId>-->
-        <!--            <artifactId>audit.dto</artifactId>-->
-        <!--            <version>${decstra.audit.dto.version}</version>-->
-        <!--        </dependency>-->
+        <dependency>
+            <groupId>org.hsh</groupId>
+            <artifactId>crm-ms-common</artifactId>
+            <version>${crm.ms.common.version}</version>
+        </dependency>
         <dependency>
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-lang3</artifactId>

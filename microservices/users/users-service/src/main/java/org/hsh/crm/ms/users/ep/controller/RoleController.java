@@ -10,9 +10,7 @@ import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import javax.ws.rs.Path;
 import javax.ws.rs.core.Context;
-import javax.ws.rs.core.GenericEntity;
 import javax.ws.rs.core.UriInfo;
-import java.util.List;
 
 @RequestScoped
 @Path(EpConstants.PATH_ROLE)
@@ -34,12 +32,7 @@ public class RoleController extends BaseCrudController<Role> {
     }
 
     @Override
-    protected Long getDtoId(Role instance) {
-        return null;
-    }
-
-    @Override
-    protected GenericEntity<List<Role>> getGenericEntity(List<Role> list) {
-        return new GenericEntity<List<Role>>(list){};
+    protected Object getDtoId(Role dto) {
+        return dto.getId();
     }
 }
