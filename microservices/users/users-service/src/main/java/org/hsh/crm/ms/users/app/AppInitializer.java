@@ -10,7 +10,7 @@ import javax.sql.DataSource;
 @Singleton
 @Startup
 public class AppInitializer extends BaseAppInitializer {
-    @Resource(lookup = "jdbc/users")
+    @Resource(lookup = "jdbc/crm_users")
     private DataSource dataSource;
 
     @Override
