@@ -1,4 +1,4 @@
-package org.hsh.crm.ms.audit.ep.dto.convertor;
+package org.hsh.crm.ms.audit.dto.convertor;
 
 import org.hsh.common.dal.converter.EntityLoader;
 import org.hsh.crm.ms.audit.dal.entities.dto.DataAuditValues;

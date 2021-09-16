@@ -12,7 +12,7 @@ import java.io.Serializable;
 @XmlRootElement(name = "role")
 @XmlAccessorType(XmlAccessType.FIELD)
 @JsonbPropertyOrder({PropertyOrderStrategy.ANY})
-public class Role implements Serializable {
+public class RoleDto implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @XmlElement(name = "id")
@@ -27,7 +27,11 @@ public class Role implements Serializable {
     @JsonbProperty(value = "name")
     private String name;
 
-    public Role() {
+    @XmlElement(name = "description")
+    @JsonbProperty("description")
+    private String description;
+
+    public RoleDto() {
         // default
     }
 
@@ -53,5 +57,13 @@ public class Role implements Serializable {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 }

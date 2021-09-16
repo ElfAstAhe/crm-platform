@@ -11,7 +11,7 @@ import java.util.List;
 @XmlRootElement(name = "user")
 @XmlAccessorType(XmlAccessType.FIELD)
 @JsonbPropertyOrder(PropertyOrderStrategy.ANY)
-public class User implements Serializable {
+public class UserDto implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @XmlElement(name = "id")
@@ -50,12 +50,16 @@ public class User implements Serializable {
     @JsonbProperty("cellPhone")
     private String cellPhone;
 
+    @XmlElement(name = "state")
+    @JsonbProperty("state")
+    private String state;
+
     @XmlElementWrapper(name = "roles")
     @XmlElement(name = "role")
     @JsonbProperty("roles")
-    private List<Role> roles = new ArrayList<>();
+    private List<RoleDto> roles = new ArrayList<>();
 
-    public User() {
+    public UserDto() {
         // default
     }
 
@@ -131,11 +135,19 @@ public class User implements Serializable {
         this.cellPhone = cellPhone;
     }
 
-    public List<Role> getRoles() {
+    public List<RoleDto> getRoles() {
         return roles;
     }
 
-    public void setRoles(List<Role> roles) {
+    public void setRoles(List<RoleDto> roles) {
         this.roles = roles;
+    }
+
+    public String getState() {
+        return state;
+    }
+
+    public void setState(String state) {
+        this.state = state;
     }
 }

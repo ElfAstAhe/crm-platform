@@ -1,6 +1,6 @@
 package org.hsh.crm.ms.users.ep.controller;
 
-import org.hsh.crm.ms.users.dto.Role;
+import org.hsh.crm.ms.users.dto.RoleDto;
 import org.hsh.crm.ms.users.ep.EpConstants;
 import org.hsh.crm.ms.users.ep.controller.facade.RoleFacade;
 import org.hsh.ms.common.ep.controller.BaseCrudController;
@@ -14,7 +14,7 @@ import javax.ws.rs.core.UriInfo;
 
 @RequestScoped
 @Path(EpConstants.PATH_ROLE)
-public class RoleController extends BaseCrudController<Role> {
+public class RoleController extends BaseCrudController<RoleDto> {
     @Context
     private UriInfo uriInfo;
 
@@ -22,7 +22,7 @@ public class RoleController extends BaseCrudController<Role> {
     private RoleFacade facade;
 
     @Override
-    protected CrudFacade<Role> getCrudFacade() {
+    protected CrudFacade<RoleDto> getCrudFacade() {
         return facade;
     }
 
@@ -32,7 +32,7 @@ public class RoleController extends BaseCrudController<Role> {
     }
 
     @Override
-    protected Object getDtoId(Role dto) {
+    protected Object getDtoId(RoleDto dto) {
         return dto.getId();
     }
 }

@@ -1,4 +1,4 @@
-package org.hsh.crm.ms.audit.ep.dto.convertor;
+package org.hsh.crm.ms.audit.dto.convertor;
 
 import org.hsh.crm.ms.audit.dto.Audit;
 import org.hsh.crm.ms.audit.dto.builders.AuditBuilder;

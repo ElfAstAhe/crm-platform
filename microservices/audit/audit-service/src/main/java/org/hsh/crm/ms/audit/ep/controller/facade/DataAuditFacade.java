@@ -2,7 +2,7 @@ package org.hsh.crm.ms.audit.ep.controller.facade;
 
 import org.hsh.crm.ms.audit.dal.dao.DataAuditDao;
 import org.hsh.crm.ms.audit.dto.DataAudit;
-import org.hsh.crm.ms.audit.ep.dto.convertor.DataAuditConvertor;
+import org.hsh.crm.ms.audit.dto.convertor.DataAuditConvertor;
 import org.hsh.ms.common.ep.facade.CrudFacade;
 import org.hsh.ms.common.exceptions.runtime.ep.ResourceGoneException;
 
