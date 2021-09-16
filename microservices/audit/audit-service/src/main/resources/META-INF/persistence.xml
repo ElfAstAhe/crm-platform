@@ -9,6 +9,8 @@
         <class>org.hsh.crm.ms.common.dal.entities.Setting</class>
         <class>org.hsh.crm.ms.audit.dal.entities.DataAudit</class>
         <class>org.hsh.crm.ms.audit.dal.entities.SecurityAudit</class>
+        <class>org.hsh.crm.ms.audit.dal.entities.DataAuditHistory</class>
+        <class>org.hsh.crm.ms.audit.dal.entities.SecurityAuditHistory</class>
         <exclude-unlisted-classes>true</exclude-unlisted-classes>
         <properties/>
     </persistence-unit>

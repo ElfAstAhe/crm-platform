@@ -3,7 +3,8 @@ package org.hsh.crm.ms.audit.bll.settings;
 import org.hsh.common.bll.settings.Settings;
 
 public enum AuditSettingsEnum implements Settings {
-    DUMMY("nothing", false);
+    DUMMY("nothing", false),
+    HISTORY_MAX_MONTH(3, false);
 
     private final Object defaultValue;
     private final boolean encrypted;

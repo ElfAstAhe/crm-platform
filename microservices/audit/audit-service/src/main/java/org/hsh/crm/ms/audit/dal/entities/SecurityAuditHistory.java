@@ -9,9 +9,9 @@ import java.time.OffsetDateTime;
 import java.util.StringJoiner;
 
 @Entity
-@Table(name = "data_audit")
+@Table(name = "security_audit_history")
 @Cacheable(false)
-public class DataAudit extends BaseIdEntity implements Serializable {
+public class SecurityAuditHistory extends BaseIdEntity implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Column(name = "event_date")
@@ -25,36 +25,17 @@ public class DataAudit extends BaseIdEntity implements Serializable {
 
     @Enumerated(EnumType.STRING)
     @Column(name = "event", length = 50)
-    private DataAuditEventEnum event;
-
-    @Column(name = "class_name", length = 512)
-    private String className;
-
-    @Column(name = "class_description", length = 512)
-    private String classDescription;
-
-    @Column(name = "object_id", length = 50)
-    private String objectId;
-
-    @Column(name = "object_name", length = 100)
-    private String objectName;
-
-    @Lob
-    @Column(name = "values")
-    private String values;
+    private SecurityAuditEventEnum event;
 
     @Column(name = "user_login", length = 100)
     private String userLogin;
-
-    @Column(name = "run_as_user", length = 100)
-    private String runAsUser;
 
     @Enumerated(EnumType.STRING)
     @Column(name = "status", length = 50)
     private AuditStatusEnum status;
 
-    public DataAudit() {
-        // default constructor
+    public SecurityAuditHistory() {
+        // default
     }
 
     public OffsetDateTime getEventDate() {
@@ -65,54 +46,6 @@ public class DataAudit extends BaseIdEntity implements Serializable {
         this.eventDate = eventDate;
     }
 
-    public String getRequestId() {
-        return requestId;
-    }
-
-    public void setRequestId(String requestId) {
-        this.requestId = requestId;
-    }
-
-    public DataAuditEventEnum getEvent() {
-        return event;
-    }
-
-    public void setEvent(DataAuditEventEnum event) {
-        this.event = event;
-    }
-
-    public String getClassName() {
-        return className;
-    }
-
-    public void setClassName(String className) {
-        this.className = className;
-    }
-
-    public String getClassDescription() {
-        return classDescription;
-    }
-
-    public void setClassDescription(String classDescription) {
-        this.classDescription = classDescription;
-    }
-
-    public String getObjectId() {
-        return objectId;
-    }
-
-    public void setObjectId(String objectId) {
-        this.objectId = objectId;
-    }
-
-    public String getValues() {
-        return values;
-    }
-
-    public void setValues(String values) {
-        this.values = values;
-    }
-
     public String getSource() {
         return source;
     }
@@ -121,28 +54,28 @@ public class DataAudit extends BaseIdEntity implements Serializable {
         this.source = source;
     }
 
+    public String getRequestId() {
+        return requestId;
+    }
+
+    public void setRequestId(String requestId) {
+        this.requestId = requestId;
+    }
+
+    public SecurityAuditEventEnum getEvent() {
+        return event;
+    }
+
+    public void setEvent(SecurityAuditEventEnum event) {
+        this.event = event;
+    }
+
     public String getUserLogin() {
         return userLogin;
     }
 
     public void setUserLogin(String userLogin) {
         this.userLogin = userLogin;
-    }
-
-    public String getRunAsUser() {
-        return runAsUser;
-    }
-
-    public void setRunAsUser(String runAsUser) {
-        this.runAsUser = runAsUser;
-    }
-
-    public String getObjectName() {
-        return objectName;
-    }
-
-    public void setObjectName(String objectName) {
-        this.objectName = objectName;
     }
 
     public AuditStatusEnum getStatus() {
@@ -168,7 +101,7 @@ public class DataAudit extends BaseIdEntity implements Serializable {
         return new StringJoiner(HshStringUtils.DELIMITER, HshStringUtils.buildPrefix(this), HshStringUtils.SUFFIX)
                 .add(HshStringUtils.buildKeyValue("id", HshStringUtils.toNullString(getId())))
                 .add(HshStringUtils.buildKeyValue("event", HshStringUtils.toNullString(event)))
-                .add(HshStringUtils.buildKeyValue("className", HshStringUtils.toNullString(className)))
+                .add(HshStringUtils.buildKeyValue("user", HshStringUtils.toNullString(userLogin)))
                 .toString();
     }
 }

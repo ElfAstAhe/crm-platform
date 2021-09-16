@@ -9,9 +9,9 @@ import java.time.OffsetDateTime;
 import java.util.StringJoiner;
 
 @Entity
-@Table(name = "data_audit")
+@Table(name = "data_audit_history")
 @Cacheable(false)
-public class DataAudit extends BaseIdEntity implements Serializable {
+public class DataAuditHistory extends BaseIdEntity implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Column(name = "event_date")
@@ -53,7 +53,7 @@ public class DataAudit extends BaseIdEntity implements Serializable {
     @Column(name = "status", length = 50)
     private AuditStatusEnum status;
 
-    public DataAudit() {
+    public DataAuditHistory() {
         // default constructor
     }
 
@@ -154,13 +154,13 @@ public class DataAudit extends BaseIdEntity implements Serializable {
     }
 
     @Override
-    public int hashCode() {
-        return super.hashCode();
+    public boolean equals(Object o) {
+        return super.equals(o);
     }
 
     @Override
-    public boolean equals(Object object) {
-        return super.equals(object);
+    public int hashCode() {
+        return super.hashCode();
     }
 
     @Override

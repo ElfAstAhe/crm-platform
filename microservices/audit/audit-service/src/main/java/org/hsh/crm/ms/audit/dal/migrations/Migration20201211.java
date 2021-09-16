@@ -40,9 +40,8 @@ public class Migration20201211 extends BaseSqlMigration {
                    .column(DSL.name(SqlMigrationHelper.Field.EVENT), SQLDataType.VARCHAR(50).nullable(true))
                    .column(DSL.name(SqlMigrationHelper.Field.USER_LOGIN), SQLDataType.VARCHAR(100).nullable(true))
                    .column(DSL.name(SqlMigrationHelper.Field.STATUS), SQLDataType.VARCHAR(50).nullable(true))
-                   .constraints(
-                           DSL.constraint(DSL.name(SqlMigrationHelper.Builder.buildPkConstraintName(TABLE_SECURITY_AUDIT)))
-                              .primaryKey(DSL.name(SqlMigrationHelper.Field.ID)));
+                   .constraints(DSL.constraint(DSL.name(SqlMigrationHelper.Builder.buildPkConstraintName(TABLE_SECURITY_AUDIT)))
+                                   .primaryKey(DSL.name(SqlMigrationHelper.Field.ID)));
     }
 
     private Query alterTableDataAudit(AlterTableStep ats) {

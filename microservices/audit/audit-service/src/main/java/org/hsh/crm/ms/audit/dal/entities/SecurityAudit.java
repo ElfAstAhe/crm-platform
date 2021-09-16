@@ -87,6 +87,16 @@ public class SecurityAudit extends BaseIdEntity implements Serializable {
     }
 
     @Override
+    public int hashCode() {
+        return super.hashCode();
+    }
+
+    @Override
+    public boolean equals(Object object) {
+        return super.equals(object);
+    }
+
+    @Override
     public String toString() {
         return new StringJoiner(HshStringUtils.DELIMITER, HshStringUtils.buildPrefix(this), HshStringUtils.SUFFIX)
                 .add(HshStringUtils.buildKeyValue("id", HshStringUtils.toNullString(getId())))
