@@ -44,6 +44,7 @@
         <!-- wildfly bootable -->
         <!-- oracle-datasource -->
         <!-- mysql-datasource -->
+        <wildfly.ds.galleon.pack.version>2.0.3.Final</wildfly.ds.galleon.pack.version>
         <wildfly.bootable.data-source.layer>postgresql-datasource</wildfly.bootable.data-source.layer>
 
         <!-- maven -->
