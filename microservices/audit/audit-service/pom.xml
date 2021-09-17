@@ -85,7 +85,7 @@
                         <artifactId>wildfly-jar-maven-plugin</artifactId>
                         <version>${mvn.plugin.wildfly.jar.version}</version>
                         <configuration>
-                            <outputFilename>${artifactId}-bootable-${crm.platform.audit.service.version}.jar</outputFilename>
+                            <outputFileName>${artifactId}-bootable-${crm.platform.audit.service.version}.jar</outputFileName>
                             <feature-packs>
                                 <feature-pack>
                                     <location>wildfly@maven(org.jboss.universe:community-universe)#${app.srv.wildfly.version}</location>
