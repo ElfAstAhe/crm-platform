@@ -37,20 +37,35 @@
         <crm.platform.study.non-persistence-service.version>1.0.0${crm.platform.version.suffix}</crm.platform.study.non-persistence-service.version>
         <crm.platform.study.persistence-service.version>1.0.0${crm.platform.version.suffix}</crm.platform.study.persistence-service.version>
 
+        <!-- app servers -->
+        <app.srv.wildfly.version>23.0.2.Final</app.srv.wildfly.version>
+        <app.srv.wildfly.core.version>15.0.1.Final</app.srv.wildfly.core.version>
+
+        <!-- wildfly bootable -->
+        <!-- oracle-datasource -->
+        <!-- mysql-datasource -->
+        <wildfly.bootable.data-source.layer>postgresql-datasource</wildfly.bootable.data-source.layer>
+
         <!-- maven -->
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
         <maven.test.skip>true</maven.test.skip>
         <mvn.plugin.jar.version>3.2.0</mvn.plugin.jar.version>
-        <mvn.plugin.war.version>3.2.3</mvn.plugin.war.version>
-        <mvn.plugin.ear.version>3.0.2</mvn.plugin.ear.version>
-        <mvn.plugin.ejb.version>3.0.1</mvn.plugin.ejb.version>
+        <mvn.plugin.war.version>3.3.1</mvn.plugin.war.version>
+        <mvn.plugin.ear.version>3.2.0</mvn.plugin.ear.version>
+        <mvn.plugin.ejb.version>3.1.0</mvn.plugin.ejb.version>
         <mvn.plugin.test.version>3.0.0-M5</mvn.plugin.test.version>
         <!--mvn.plugin.processor.version>2.0.5</mvn.plugin.processor.version-->
-        <mvn.plugin.processor.version>3.3.3</mvn.plugin.processor.version>
+        <!-- <mvn.plugin.processor.version>3.3.3</mvn.plugin.processor.version> -->
+        <mvn.plugin.processor.version>4.5-jdk8</mvn.plugin.processor.version>
+        <mvn.plugin.resources.version>3.2.0</mvn.plugin.resources.version>
         <mvn.plugin.deploy.version>3.0.0-M1</mvn.plugin.deploy.version>
         <mvn.plugin.exec.version>1.6.0</mvn.plugin.exec.version>
+        <mvn.plugin.build-helper.version>3.2.0</mvn.plugin.build-helper.version>
+        <mvn.plugin.templating.version>1.0.0</mvn.plugin.templating.version>
+        <mvn.plugin.wildfly.jar.version>5.0.2.Final</mvn.plugin.wildfly.jar.version>
+        <mvn.plugin.payara.jar.version>unknown</mvn.plugin.payara.jar.version>
     </properties>
     <modules>
         <module>common</module>
@@ -129,8 +144,7 @@
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-ejb-plugin</artifactId>
-<!--                    <version>${mvn.plugin.ejb.version}</version>  -->
-                    <version>3.1.0</version>
+                    <version>${mvn.plugin.ejb.version}</version>
                     <configuration>
                         <ejbVersion>3.2</ejbVersion>
                     </configuration>
@@ -138,8 +152,7 @@
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-deploy-plugin</artifactId>
-<!--                    <version>${mvn.plugin.deploy.version}</version>  -->
-                    <version>3.0.0-M1</version>
+                    <version>${mvn.plugin.deploy.version}</version>
                     <configuration>
                         <deployAtEnd>true</deployAtEnd>
                     </configuration>
@@ -147,26 +160,22 @@
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-jar-plugin</artifactId>
-<!--                    <version>${mvn.plugin.jar.version}</version>  -->
-                    <version>3.2.0</version>
+                    <version>${mvn.plugin.jar.version}</version>
                 </plugin>
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-war-plugin</artifactId>
-<!--                    <version>${mvn.plugin.war.version}</version>  -->
-                    <version>3.3.1</version>
+                    <version>${mvn.plugin.war.version}</version>
                 </plugin>
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-ear-plugin</artifactId>
-<!--                    <version>${mvn.plugin.ear.version}</version>  -->
-                    <version>3.2.0</version>
+                    <version>${mvn.plugin.ear.version}</version>
                 </plugin>
                 <plugin>
                     <groupId>org.bsc.maven</groupId>
                     <artifactId>maven-processor-plugin</artifactId>
-<!--                    <version>${mvn.plugin.processor.version}</version>  -->
-                    <version>4.4-jdk8</version>
+                    <version>${mvn.plugin.processor.version}</version>
                     <executions>
                         <execution>
                             <id>process</id>
@@ -188,7 +197,7 @@
                         <dependency>
                             <groupId>org.eclipse.persistence</groupId>
                             <artifactId>org.eclipse.persistence.jpa.modelgen.processor</artifactId>
-                            <version>2.7.7</version>
+                            <version>3.0.0</version>
                         </dependency>
                     </dependencies>
                 </plugin>
@@ -198,8 +207,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
-<!--                <version>${mvn.plugin.test.version}</version>  -->
-                <version>3.0.0-M5</version>
+                <version>${mvn.plugin.test.version}</version>
                 <configuration>
                     <!--suppress UnresolvedMavenProperty -->
                     <argLine>${surefireArgLine}</argLine>
@@ -209,7 +217,7 @@
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>build-helper-maven-plugin</artifactId>
-                <version>3.2.0</version>
+                <version>${mvn.plugin.build-helper.version}</version>
                 <executions>
                     <execution>
                         <id>add-source</id>
@@ -268,6 +276,13 @@
             </activation>
             <properties>
                 <maven.test.skip>false</maven.test.skip>
+            </properties>
+        </profile>
+        <profile>
+            <id>bootable</id>
+            <properties>
+                <wildfly.bootable.jar.version>${mvn.plugin.wildfly.jar.version}</wildfly.bootable.jar.version>
+                <wildfly.bootable.core.version>${app.srv.wildfly.version}</wildfly.bootable.core.version>
             </properties>
         </profile>
     </profiles>

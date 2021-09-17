@@ -74,6 +74,59 @@
             </plugin>
         </plugins>
     </build>
+
+    <profiles>
+        <profile>
+            <id>bootable</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.wildfly.plugins</groupId>
+                        <artifactId>wildfly-jar-maven-plugin</artifactId>
+                        <version>${mvn.plugin.wildfly.jar.version}</version>
+                        <configuration>
+                            <outputFilename>${artifactId}-bootable-${crm.platform.audit.service.version}.jar</outputFilename>
+                            <feature-packs>
+                                <feature-pack>
+                                    <location>wildfly@maven(org.jboss.universe:community-universe)#${app.srv.wildfly.version}</location>
+                                </feature-pack>
+                                <!-- https://github.com/wildfly-extras/wildfly-datasources-galleon-pack -->
+                                <feature-pack>
+                                    <groupId>org.wildfly</groupId>
+                                    <artifactId>wildfly-datasources-galleon-pack</artifactId>
+                                    <version>2.0.3.Final</version>
+                                </feature-pack>
+                            </feature-packs>
+                            <layers>
+                                <layer>jaxrs</layer>
+                                <layer>webservices</layer>
+                                <layer>ejb-lite</layer>
+                                <layer>jpa</layer>
+                                <layer>${wildfly.bootable.data-source.layer}</layer>
+                                <layer>microprofile-config</layer>
+                                <layer>logging</layer>
+                                <layer>elytron</layer>
+                            </layers>
+                            <excluded-layers>
+                                <layer>deployment-scanner</layer>
+                            </excluded-layers>
+                            <plugin-options>
+                                <jboss-fork-embedded>true</jboss-fork-embedded>
+                            </plugin-options>
+                        </configuration>
+                        <executions>
+                            <execution>
+                                <goals>
+                                    <goal>package</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
+
     <parent>
         <groupId>org.hsh</groupId>
         <version>1.0</version>
