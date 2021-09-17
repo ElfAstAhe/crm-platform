@@ -40,6 +40,7 @@
         <!-- app servers -->
         <app.srv.wildfly.version>23.0.2.Final</app.srv.wildfly.version>
         <app.srv.wildfly.core.version>15.0.1.Final</app.srv.wildfly.core.version>
+        <app.srv.payara.version>5.2021.7</app.srv.payara.version>
 
         <!-- wildfly bootable -->
         <!-- oracle-datasource -->
@@ -66,7 +67,7 @@
         <mvn.plugin.build-helper.version>3.2.0</mvn.plugin.build-helper.version>
         <mvn.plugin.templating.version>1.0.0</mvn.plugin.templating.version>
         <mvn.plugin.wildfly.jar.version>5.0.2.Final</mvn.plugin.wildfly.jar.version>
-        <mvn.plugin.payara.jar.version>unknown</mvn.plugin.payara.jar.version>
+        <mvn.plugin.payara.jar.version>1.3.0</mvn.plugin.payara.jar.version>
     </properties>
     <modules>
         <module>common</module>
@@ -285,6 +286,9 @@
                 <wildfly.bootable.jar.version>${mvn.plugin.wildfly.jar.version}</wildfly.bootable.jar.version>
                 <wildfly.bootable.core.version>${app.srv.wildfly.version}</wildfly.bootable.core.version>
             </properties>
+        </profile>
+        <profile>
+            <id>bundle</id>
         </profile>
     </profiles>
 </project>
