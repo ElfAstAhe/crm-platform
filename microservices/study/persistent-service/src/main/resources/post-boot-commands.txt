@@ -1,0 +1,9 @@
+create-jdbc-connection-pool --datasourceclassname org.postgresql.ds.PGSimpleDataSource --restype javax.sql.DataSource pool/persist-srv
+set resources.jdbc-connection-pool.pool/persist-srv.property.password=12345
+set resources.jdbc-connection-pool.pool/persist-srv.property.databaseName=persist-srv
+set resources.jdbc-connection-pool.pool/persist-srv.property.serverName=localhost
+set resources.jdbc-connection-pool.pool/persist-srv.property.user=crm
+set resources.jdbc-connection-pool.pool/persist-srv.property.portNumber=5432
+
+create-jdbc-resource --enabled=true --poolName=pool/persist-srv --target=domain jdbc/persist-srv
+create-resource-ref --enabled=true --target=server jdbc/persist-srv

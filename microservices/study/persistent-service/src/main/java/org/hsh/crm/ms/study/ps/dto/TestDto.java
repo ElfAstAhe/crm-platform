@@ -1,4 +1,4 @@
-package org.hsh.crm.ms.study.ps.ep.dto;
+package org.hsh.crm.ms.study.ps.dto;
 
 import javax.json.bind.annotation.JsonbProperty;
 import javax.json.bind.annotation.JsonbPropertyOrder;
