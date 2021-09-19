@@ -84,6 +84,63 @@
             </plugin>
         </plugins>
     </build>
+
+    <profiles>
+        <profile>
+            <id>bundle</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>fish.payara.maven.plugins</groupId>
+                        <artifactId>payara-micro-maven-plugin</artifactId>
+                        <version>${mvn.plugin.payara.jar.version}</version>
+                        <executions>
+                            <execution>
+                                <phase>package</phase>
+                                <goals>
+                                    <goal>bundle</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                        <configuration>
+                            <useUberJar>true</useUberJar>
+                            <payaraVersion>${app.srv.payara.version}</payaraVersion>
+                            <deployWar>true</deployWar>
+                            <systemProperties>
+                                <property>
+                                    <name>payaramicro.port</name>
+                                    <value>8080</value>
+                                </property>
+                                <property>
+                                    <name>payramicro.sslPort</name>
+                                    <value>8181</value>
+                                </property>
+                                <property>
+                                    <name>payaramicro.name</name>
+                                    <value>crm-users</value>
+                                </property>
+                                <property>
+                                    <name>payaramicro.instanceGroup</name>
+                                    <value>crm-users-group</value>
+                                </property>
+                            </systemProperties>
+                            <autoDeployArtifact>true</autoDeployArtifact>
+                            <autoDeployContextRoot>users</autoDeployContextRoot>
+                            <autoDeployEmptyContextRoot>false</autoDeployEmptyContextRoot>
+                            <customJars>
+                                <artifactItem>
+                                    <groupId>org.postgresql</groupId>
+                                    <artifactId>postgresql</artifactId>
+                                    <version>42.2.23</version>
+                                </artifactItem>
+                            </customJars>
+                        </configuration>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
+
     <parent>
         <groupId>org.hsh</groupId>
         <version>1.0</version>

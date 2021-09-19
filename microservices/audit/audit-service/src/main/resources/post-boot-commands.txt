@@ -1,0 +1,41 @@
+create-jdbc-connection-pool --datasourceclassname org.postgresql.ds.PGSimpleDataSource --restype javax.sql.DataSource --steadypoolsize 8 --maxpoolsize 32 --isolationlevel read-committed pool/crm_audit
+set resources.jdbc-connection-pool.pool/crm_audit.property.user=${crm.db.audit.username}
+set resources.jdbc-connection-pool.pool/crm_audit.property.password=${crm.db.audit.password}
+set resources.jdbc-connection-pool.pool/crm_audit.property.serverName=${crm.db.audit.server}
+set resources.jdbc-connection-pool.pool/crm_audit.property.portNumber=${crm.db.audit.port}
+set resources.jdbc-connection-pool.pool/crm_audit.property.databaseName=${crm.db.audit.database}
+set resources.jdbc-connection-pool.pool/crm_audit.property.stringType=unspecified
+set resources.jdbc-connection-pool.pool/crm_audit.property.applicationName=crm-audit-ms
+set resources.jdbc-connection-pool.pool/crm_audit.property.preparedStatementCacheQueries=256
+set resources.jdbc-connection-pool.pool/crm_audit.property.preparedStatementCacheSizeMiB=5
+set resources.jdbc-connection-pool.pool/crm_audit.property.prepareThreshold=5
+set resources.jdbc-connection-pool.pool/crm_audit.property.connectTimeout=10
+set resources.jdbc-connection-pool.pool/crm_audit.property.loginTimeout=0
+set resources.jdbc-connection-pool.pool/crm_audit.property.databaseMetadataCacheFields=65536
+set resources.jdbc-connection-pool.pool/crm_audit.property.tcpKeepAlive=false
+set resources.jdbc-connection-pool.pool/crm_audit.property.readOnlyMode=transaction
+set resources.jdbc-connection-pool.pool/crm_audit.property.ssl=false
+set resources.jdbc-connection-pool.pool/crm_audit.property.hostRecheckSeconds=10
+set resources.jdbc-connection-pool.pool/crm_audit.property.socketTimeout=0
+set resources.jdbc-connection-pool.pool/crm_audit.property.jaasLogin=true
+set resources.jdbc-connection-pool.pool/crm_audit.property.allowEncodingChanges=false
+set resources.jdbc-connection-pool.pool/crm_audit.property.sendBufferSize=-1
+set resources.jdbc-connection-pool.pool/crm_audit.property.recvBufferSize=-1
+set resources.jdbc-connection-pool.pool/crm_audit.property.defaultRowFetchSize=0
+set resources.jdbc-connection-pool.pool/crm_audit.property.currentSchema=public
+set resources.jdbc-connection-pool.pool/crm_audit.property.cancelSignalTimeout=10
+set resources.jdbc-connection-pool.pool/crm_audit.property.logServerErrorDetail=true
+set resources.jdbc-connection-pool.pool/crm_audit.property.escapeSyntaxCallMode=select
+set resources.jdbc-connection-pool.pool/crm_audit.property.gssLib=auto
+set resources.jdbc-connection-pool.pool/crm_audit.property.cleanupSavepoints=false
+set resources.jdbc-connection-pool.pool/crm_audit.property.gssEncMode=allow
+set resources.jdbc-connection-pool.pool/crm_audit.property.readOnly=false
+set resources.jdbc-connection-pool.pool/crm_audit.property.sspiServiceClass=POSTGRES
+set resources.jdbc-connection-pool.pool/crm_audit.property.useSpNego=false
+set resources.jdbc-connection-pool.pool/crm_audit.property.disableColumnSanitiser=false
+set resources.jdbc-connection-pool.pool/crm_audit.property.unknownLength=2147483647
+set resources.jdbc-connection-pool.pool/crm_audit.property.binaryTransfer=true
+set resources.jdbc-connection-pool.pool/crm_audit.property.targetServerType=any
+
+create-jdbc-resource --enabled=true --poolName=pool/crm_audit --target=domain jdbc/crm_audit
+create-resource-ref --enabled=true --target=server jdbc/crm_audit
