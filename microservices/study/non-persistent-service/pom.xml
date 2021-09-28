@@ -7,7 +7,7 @@
     <artifactId>non-persistent-service</artifactId>
     <version>${crm.platform.study.non-persistence-service.version}</version>
     <packaging>war</packaging>
-    <description>non persistence microservice for payara micro</description>
+    <description>non persistence microservice</description>
 
     <properties>
         <decstra.baseDir>${project.basedir}/../../..</decstra.baseDir>
@@ -62,7 +62,7 @@
 
     <profiles>
         <profile>
-            <id>bootable</id>
+            <id>wildfly-bootable</id>
             <build>
                 <plugins>
                     <plugin>
@@ -108,7 +108,7 @@
             </build>
         </profile>
         <profile>
-            <id>bundle</id>
+            <id>payara-bundle</id>
             <build>
                 <plugins>
                     <plugin>

@@ -281,14 +281,14 @@
             </properties>
         </profile>
         <profile>
-            <id>bootable</id>
+            <id>wildfly-bootable</id>
             <properties>
                 <wildfly.bootable.jar.version>${mvn.plugin.wildfly.jar.version}</wildfly.bootable.jar.version>
                 <wildfly.bootable.core.version>${app.srv.wildfly.version}</wildfly.bootable.core.version>
             </properties>
         </profile>
         <profile>
-            <id>bundle</id>
+            <id>payara-bundle</id>
         </profile>
     </profiles>
 </project>

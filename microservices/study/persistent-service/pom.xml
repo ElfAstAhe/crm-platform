@@ -7,7 +7,7 @@
     <artifactId>persistent-service</artifactId>
     <version>${crm.platform.study.persistence-service.version}</version>
     <packaging>war</packaging>
-    <description>persistence microservice for payara micro</description>
+    <description>persistence microservice</description>
 
     <properties>
         <decstra.baseDir>${project.basedir}/../../..</decstra.baseDir>
@@ -72,7 +72,7 @@
 
     <profiles>
         <profile>
-            <id>bootable</id>
+            <id>wildfly-bootable</id>
             <build>
                 <plugins>
                     <plugin>
@@ -80,6 +80,14 @@
                         <artifactId>wildfly-jar-maven-plugin</artifactId>
                         <version>${mvn.plugin.wildfly.jar.version}</version>
                         <configuration>
+                            <cli-sessions>
+                                <cli-session>
+                                    <script-files>
+                                        <script>${project.basedir}/src/main/resources/datasource.cli</script>
+                                    </script-files>
+                                    <resolve-expressions>false</resolve-expressions>
+                                </cli-session>
+                            </cli-sessions>
                             <feature-packs>
                                 <feature-pack>
                                     <location>wildfly@maven(org.jboss.universe:community-universe)#${app.srv.wildfly.version}</location>
@@ -121,7 +129,7 @@
             </build>
         </profile>
         <profile>
-            <id>bundle</id>
+            <id>payara-bundle</id>
             <build>
                 <plugins>
                     <plugin>

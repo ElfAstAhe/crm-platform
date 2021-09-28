@@ -77,7 +77,7 @@
 
     <profiles>
         <profile>
-            <id>bootable</id>
+            <id>wildfly-bootable</id>
             <build>
                 <plugins>
                     <plugin>
@@ -85,6 +85,14 @@
                         <artifactId>wildfly-jar-maven-plugin</artifactId>
                         <version>${mvn.plugin.wildfly.jar.version}</version>
                         <configuration>
+                            <cli-sessions>
+                                <cli-session>
+                                    <script-files>
+                                        <script>${project.basedir}/src/main/resources/datasource.cli</script>
+                                    </script-files>
+                                    <resolve-expressions>false</resolve-expressions>
+                                </cli-session>
+                            </cli-sessions>
                             <outputFileName>${artifactId}-bootable-${crm.platform.audit.service.version}.jar</outputFileName>
                             <feature-packs>
                                 <feature-pack>
@@ -126,7 +134,7 @@
             </build>
         </profile>
         <profile>
-            <id>bundle</id>
+            <id>payara-bundle</id>
             <build>
                 <plugins>
                     <plugin>

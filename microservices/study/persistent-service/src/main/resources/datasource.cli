@@ -1,0 +1,1 @@
+data-source add --name=pool/persist-srv --jndi-name=java:/jdbc/persist-srv --driver-name=postgresql --driver-class=org.postgresql.Driver --connection-url=jdbc:postgresql://localhost:5432/persist-srv --user-name=crm --password=12345
