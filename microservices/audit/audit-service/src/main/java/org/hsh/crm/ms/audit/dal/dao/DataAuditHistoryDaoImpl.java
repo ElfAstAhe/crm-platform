@@ -1,6 +1,5 @@
 package org.hsh.crm.ms.audit.dal.dao;
 
-import org.apache.commons.lang3.NotImplementedException;
 import org.hsh.crm.ms.audit.dal.entities.DataAuditHistory;
 
 import javax.ejb.Stateless;
