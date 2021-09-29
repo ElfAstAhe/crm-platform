@@ -5,7 +5,7 @@ public class DalConstants {
 
     public static final String PERSISTENCE_UNIT = "users.PU";
 
-    public static final String DATA_SOURCE = "java:/jdbc/crm_users";
+    public static final String DATA_SOURCE = "jdbc/crm_users";
 
     private DalConstants() {
         // hide

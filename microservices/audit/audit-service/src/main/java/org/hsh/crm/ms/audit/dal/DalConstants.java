@@ -5,6 +5,8 @@ public class DalConstants {
 
     public static final String PERSISTENCE_UNIT = "audit.PU";
 
+    public static final String DATA_SOURCE = "jdbc/crm_audit";
+
     private DalConstants() {
         // hide
     }
