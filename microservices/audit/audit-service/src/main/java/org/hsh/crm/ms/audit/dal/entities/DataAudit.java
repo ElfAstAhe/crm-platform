@@ -4,16 +4,11 @@ import org.hsh.common.util.HshStringUtils;
 import org.hsh.ms.common.dal.entity.BaseIdEntity;
 
 import javax.persistence.*;
-import java.io.Serializable;
 import java.time.OffsetDateTime;
 import java.util.StringJoiner;
 
-@Entity
-@Table(name = "data_audit")
-@Cacheable(false)
-public class DataAudit extends BaseIdEntity implements Serializable {
-    private static final long serialVersionUID = 1L;
-
+@MappedSuperclass
+public class DataAudit extends BaseIdEntity {
     @Column(name = "event_date")
     private OffsetDateTime eventDate;
 

@@ -8,12 +8,8 @@ import java.io.Serializable;
 import java.time.OffsetDateTime;
 import java.util.StringJoiner;
 
-@Entity
-@Table(name = "security_audit")
-@Cacheable(false)
-public class SecurityAudit extends BaseIdEntity implements Serializable {
-    private static final long serialVersionUID = 1L;
-
+@MappedSuperclass
+public class SecurityAudit extends BaseIdEntity {
     @Column(name = "event_date")
     private OffsetDateTime eventDate;
 

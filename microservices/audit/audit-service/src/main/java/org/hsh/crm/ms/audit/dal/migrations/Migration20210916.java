@@ -22,12 +22,11 @@ public class Migration20210916 extends BaseSqlMigration {
     public Migration20210916() {
         super(VERSION, CHECK_SUM, DESCRIPTION);
     }
+
     @Override
     protected void migrate(DSLContext dslContext) {
-        SqlMigrationHelper.Ddl
-                .createTable(dslContext, TABLE_DATA_AUDIT_HISTORY, "data audit history", this::buildTableDataAuditHistory);
-        SqlMigrationHelper.Ddl
-                .createTable(dslContext, TABLE_SECURITY_AUDIT_HISTORY, "", this::buildTableSecurityAuditHistory);
+        SqlMigrationHelper.Ddl.createTable(dslContext, TABLE_DATA_AUDIT_HISTORY, "data audit history", this::buildTableDataAuditHistory);
+        SqlMigrationHelper.Ddl.createTable(dslContext, TABLE_SECURITY_AUDIT_HISTORY, "security audit history", this::buildTableSecurityAuditHistory);
     }
 
     private Query buildTableDataAuditHistory(CreateTableColumnStep ctcs) {

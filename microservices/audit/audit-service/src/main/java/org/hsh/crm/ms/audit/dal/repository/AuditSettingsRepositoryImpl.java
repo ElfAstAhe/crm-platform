@@ -8,13 +8,11 @@ import org.hsh.ms.common.bll.repository.BaseSettingsRepository;
 
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
+import javax.inject.Inject;
 
 @Stateless
-public class AuditSettingsRepositoryImpl
-        extends BaseSettingsRepository<AuditSettingsEnum>
-        implements AuditSettingsRepository
-{
-    @EJB
+public class AuditSettingsRepositoryImpl extends BaseSettingsRepository<AuditSettingsEnum> implements AuditSettingsRepository {
+    @Inject
     private SettingDao daoSetting;
 
     @Override
