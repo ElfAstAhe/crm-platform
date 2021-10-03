@@ -1,6 +1,6 @@
 package org.hsh.crm.ms.audit.ep.controller.facade;
 
-import org.hsh.crm.ms.audit.dal.dao.SecurityAuditDao;
+import org.hsh.crm.ms.audit.dal.dao.SecurityAuditDaoStrategy;
 import org.hsh.crm.ms.audit.dto.SecurityAudit;
 import org.hsh.crm.ms.audit.dto.convertor.SecurityAuditConvertor;
 import org.hsh.ms.common.ep.facade.CrudFacade;
@@ -15,7 +15,7 @@ import java.util.List;
 @Named
 public class SecurityAuditFacade implements CrudFacade<SecurityAudit> {
     @EJB
-    private SecurityAuditDao daoSecurityAudit;
+    private SecurityAuditDaoStrategy daoSecurityAudit;
 
     @Override
     public SecurityAudit get(Object id) {

@@ -1,6 +1,7 @@
 package org.hsh.crm.ms.audit.dto.convertor;
 
 import org.hsh.common.dal.converter.EntityLoader;
+import org.hsh.crm.ms.audit.dal.entities.BaseSecurityAudit;
 import org.hsh.crm.ms.audit.dto.AuditStatusEnum;
 import org.hsh.crm.ms.audit.dto.SecurityAudit;
 import org.hsh.crm.ms.audit.dto.SecurityAuditEventEnum;
@@ -11,7 +12,7 @@ public class SecurityAuditConvertor {
         // hide constructor
     }
 
-    public static SecurityAudit toDto(org.hsh.crm.ms.audit.dal.entities.SecurityAudit entity) {
+    public static SecurityAudit toDto(BaseSecurityAudit entity) {
         if (entity == null)
             return null;
 
@@ -26,7 +27,7 @@ public class SecurityAuditConvertor {
                 .build();
     }
 
-    public static org.hsh.crm.ms.audit.dal.entities.SecurityAudit toEntity(SecurityAudit dto, EntityLoader<org.hsh.crm.ms.audit.dal.entities.SecurityAudit> loader) {
+    public static BaseSecurityAudit toEntity(SecurityAudit dto, EntityLoader<BaseSecurityAudit> loader) {
         if (dto == null)
             return null;
         if (isNew(dto))
@@ -39,29 +40,29 @@ public class SecurityAuditConvertor {
         return dto.getId() == null;
     }
 
-    private static org.hsh.crm.ms.audit.dal.entities.SecurityAudit toNewEntity(SecurityAudit dto) {
-        org.hsh.crm.ms.audit.dal.entities.SecurityAudit entity = new org.hsh.crm.ms.audit.dal.entities.SecurityAudit();
+    private static BaseSecurityAudit toNewEntity(SecurityAudit dto) {
+        BaseSecurityAudit entity = new BaseSecurityAudit();
 
         return fillEntity(entity, dto);
     }
 
-    private static org.hsh.crm.ms.audit.dal.entities.SecurityAudit toExistedEntity(SecurityAudit dto, EntityLoader<org.hsh.crm.ms.audit.dal.entities.SecurityAudit> loader) {
+    private static BaseSecurityAudit toExistedEntity(SecurityAudit dto, EntityLoader<BaseSecurityAudit> loader) {
         if (loader == null)
             return null;
-        org.hsh.crm.ms.audit.dal.entities.SecurityAudit entity = loader.getFilteredData(dto.getId());
+        BaseSecurityAudit entity = loader.getFilteredData(dto.getId());
         if (entity == null)
             return null;
 
         return fillEntity(entity, dto);
     }
 
-    private static org.hsh.crm.ms.audit.dal.entities.SecurityAudit fillEntity(org.hsh.crm.ms.audit.dal.entities.SecurityAudit entity, SecurityAudit dto) {
+    private static BaseSecurityAudit fillEntity(BaseSecurityAudit entity, SecurityAudit dto) {
         entity.setEventDate(dto.getDate());
         entity.setSource(dto.getSource());
         entity.setRequestId(dto.getRequestId());
-        entity.setEvent(org.hsh.crm.ms.audit.dal.entities.SecurityAuditEventEnum.valueOf(dto.getEvent().toString()));
+        entity.setEvent(org.hsh.crm.ms.audit.bll.model.SecurityAuditEventEnum.valueOf(dto.getEvent().toString()));
         entity.setUserLogin(dto.getUser());
-        entity.setStatus(org.hsh.crm.ms.audit.dal.entities.AuditStatusEnum.valueOf(dto.getStatus().toString()));
+        entity.setStatus(org.hsh.crm.ms.audit.bll.model.AuditStatusEnum.valueOf(dto.getStatus().toString()));
         return entity;
     }
 }

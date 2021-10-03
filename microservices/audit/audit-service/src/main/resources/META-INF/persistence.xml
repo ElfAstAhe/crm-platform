@@ -7,9 +7,13 @@
     <persistence-unit name="audit.PU" transaction-type="JTA">
         <jta-data-source>jdbc/crm_audit</jta-data-source>
         <class>org.hsh.crm.ms.common.dal.entities.Setting</class>
-        <class>org.hsh.crm.ms.audit.dal.entities.DataAudit</class>
-        <class>org.hsh.crm.ms.audit.dal.entities.SecurityAudit</class>
+        <class>org.hsh.crm.ms.audit.dal.entities.BaseDataAudit</class>
+        <class>org.hsh.crm.ms.audit.dal.entities.DataAudit1</class>
+        <class>org.hsh.crm.ms.audit.dal.entities.DataAudit2</class>
         <class>org.hsh.crm.ms.audit.dal.entities.DataAuditHistory</class>
+        <class>org.hsh.crm.ms.audit.dal.entities.BaseSecurityAudit</class>
+        <class>org.hsh.crm.ms.audit.dal.entities.SecurityAudit1</class>
+        <class>org.hsh.crm.ms.audit.dal.entities.SecurityAudit2</class>
         <class>org.hsh.crm.ms.audit.dal.entities.SecurityAuditHistory</class>
         <exclude-unlisted-classes>true</exclude-unlisted-classes>
         <properties/>

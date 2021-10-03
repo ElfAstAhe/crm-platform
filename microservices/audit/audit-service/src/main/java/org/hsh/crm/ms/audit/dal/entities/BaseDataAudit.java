@@ -1,6 +1,8 @@
 package org.hsh.crm.ms.audit.dal.entities;
 
 import org.hsh.common.util.HshStringUtils;
+import org.hsh.crm.ms.audit.bll.model.AuditStatusEnum;
+import org.hsh.crm.ms.audit.bll.model.DataAuditEventEnum;
 import org.hsh.ms.common.dal.entity.BaseIdEntity;
 
 import javax.persistence.*;
@@ -8,7 +10,7 @@ import java.time.OffsetDateTime;
 import java.util.StringJoiner;
 
 @MappedSuperclass
-public class DataAudit extends BaseIdEntity {
+public class BaseDataAudit extends BaseIdEntity {
     @Column(name = "event_date")
     private OffsetDateTime eventDate;
 
@@ -48,7 +50,7 @@ public class DataAudit extends BaseIdEntity {
     @Column(name = "status", length = 50)
     private AuditStatusEnum status;
 
-    public DataAudit() {
+    public BaseDataAudit() {
         // default constructor
     }
 

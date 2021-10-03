@@ -8,11 +8,11 @@ import java.time.OffsetDateTime;
 public class Audit {
     private Long id;
     private OffsetDateTime eventDate;
+    private String status;
     private String event;
     private String source;
     private String requestId;
     private String user;
-    private String status;
     private String additional;
 
     public Audit() {

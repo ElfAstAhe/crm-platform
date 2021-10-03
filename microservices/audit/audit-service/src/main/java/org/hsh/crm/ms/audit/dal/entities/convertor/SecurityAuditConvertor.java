@@ -2,14 +2,14 @@ package org.hsh.crm.ms.audit.dal.entities.convertor;
 
 import org.hsh.crm.ms.audit.bll.model.Audit;
 import org.hsh.crm.ms.audit.bll.model.builder.AuditBuilder;
-import org.hsh.crm.ms.audit.dal.entities.SecurityAudit;
+import org.hsh.crm.ms.audit.dal.entities.BaseSecurityAudit;
 
 public final class SecurityAuditConvertor {
     private SecurityAuditConvertor() {
         // hide
     }
 
-    public static Audit toAudit(SecurityAudit entity) {
+    public static Audit toAudit(BaseSecurityAudit entity) {
         return AuditBuilder.get()
                 .setId(entity.getId())
                 .setEventDate(entity.getEventDate())

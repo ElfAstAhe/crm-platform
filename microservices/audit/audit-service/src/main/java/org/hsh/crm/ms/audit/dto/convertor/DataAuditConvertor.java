@@ -1,6 +1,7 @@
 package org.hsh.crm.ms.audit.dto.convertor;
 
 import org.hsh.common.dal.converter.EntityLoader;
+import org.hsh.crm.ms.audit.dal.entities.BaseDataAudit;
 import org.hsh.crm.ms.audit.dal.entities.dto.DataAuditValues;
 import org.hsh.crm.ms.audit.dto.AuditStatusEnum;
 import org.hsh.crm.ms.audit.dto.DataAudit;
@@ -15,7 +16,7 @@ public class DataAuditConvertor {
         // hide constructor
     }
 
-    public static DataAudit toDto(org.hsh.crm.ms.audit.dal.entities.DataAudit entity) {
+    public static DataAudit toDto(BaseDataAudit entity) {
         if (entity == null)
             return null;
         DataAuditValues values = JsonSerializerHelper.deserialize(entity.getValues(), DataAuditValues.class);
@@ -37,7 +38,7 @@ public class DataAuditConvertor {
                                .build();
     }
 
-    public static org.hsh.crm.ms.audit.dal.entities.DataAudit toEntity(DataAudit dto, EntityLoader<org.hsh.crm.ms.audit.dal.entities.DataAudit> loader) {
+    public static BaseDataAudit toEntity(DataAudit dto, EntityLoader<BaseDataAudit> loader) {
         if (dto == null)
             return null;
         if (isNew(dto)) {
@@ -51,26 +52,26 @@ public class DataAuditConvertor {
         return dto.getId() == null;
     }
 
-    private static org.hsh.crm.ms.audit.dal.entities.DataAudit toNewEntity(DataAudit dto) {
-        org.hsh.crm.ms.audit.dal.entities.DataAudit entity = new org.hsh.crm.ms.audit.dal.entities.DataAudit();
+    private static BaseDataAudit toNewEntity(DataAudit dto) {
+        BaseDataAudit entity = new BaseDataAudit();
 
         return fillEntity(entity, dto);
     }
 
-    private static org.hsh.crm.ms.audit.dal.entities.DataAudit toExistedEntity(DataAudit dto, EntityLoader<org.hsh.crm.ms.audit.dal.entities.DataAudit> loader) {
+    private static BaseDataAudit toExistedEntity(DataAudit dto, EntityLoader<BaseDataAudit> loader) {
         if (loader == null)
             return null;
-        org.hsh.crm.ms.audit.dal.entities.DataAudit entity = loader.getFilteredData(dto.getId());
+        BaseDataAudit entity = loader.getFilteredData(dto.getId());
         if (entity == null)
             return null;
         return fillEntity(entity, dto);
     }
 
-    private static org.hsh.crm.ms.audit.dal.entities.DataAudit fillEntity(org.hsh.crm.ms.audit.dal.entities.DataAudit entity, DataAudit dto) {
+    private static BaseDataAudit fillEntity(BaseDataAudit entity, DataAudit dto) {
         entity.setEventDate(dto.getDate());
         entity.setSource(dto.getSource());
         entity.setRequestId(dto.getRequestId());
-        entity.setEvent(org.hsh.crm.ms.audit.dal.entities.DataAuditEventEnum.valueOf(dto.getEvent().toString()));
+        entity.setEvent(org.hsh.crm.ms.audit.bll.model.DataAuditEventEnum.valueOf(dto.getEvent().toString()));
         entity.setClassName(dto.getClassName());
         entity.setClassDescription(dto.getClassDescription());
         entity.setObjectId(dto.getObjectId());
@@ -78,7 +79,7 @@ public class DataAuditConvertor {
         entity.setValues(JsonSerializerHelper.serialize(new DataAuditValues(dto.getValues())));
         entity.setUserLogin(dto.getUser());
         entity.setRunAsUser(dto.getRunAsUser());
-        entity.setStatus(org.hsh.crm.ms.audit.dal.entities.AuditStatusEnum.valueOf(dto.getStatus().toString()));
+        entity.setStatus(org.hsh.crm.ms.audit.bll.model.AuditStatusEnum.valueOf(dto.getStatus().toString()));
         return entity;
     }
 }

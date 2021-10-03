@@ -8,7 +8,7 @@ import java.io.Serializable;
 @Entity
 @Table(name = "data_audit_1")
 @Cacheable(false)
-public class DataAudit1 extends DataAudit implements Serializable {
+public class DataAudit1 extends BaseDataAudit implements Serializable {
     private static final long serialVersionUID = 1L;
 
     public DataAudit1() {

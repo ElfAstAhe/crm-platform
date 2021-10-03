@@ -1,4 +1,4 @@
-package org.hsh.crm.ms.audit.dal.entities;
+package org.hsh.crm.ms.audit.bll.model;
 
 public enum SecurityAuditEventEnum {
     LOGIN,
