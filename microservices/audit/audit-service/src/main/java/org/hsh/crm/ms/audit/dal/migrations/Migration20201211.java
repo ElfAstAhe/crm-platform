@@ -21,7 +21,7 @@ public class Migration20201211 extends BaseSqlMigration {
     private static final String TABLE_DATA_AUDIT_1 = "data_audit_1";
     private static final String TABLE_DATA_AUDIT_2 = "data_audit_2";
     private static final String TABLE_SECURITY_AUDIT_1 = "security_audit_1";
-    private static final String TABLE_SECURITY_AUDIT_2 = "security_audit_1";
+    private static final String TABLE_SECURITY_AUDIT_2 = "security_audit_2";
 
     public Migration20201211() {
         super(VERSION, CHECK_SUM, DESCRIPTION);
