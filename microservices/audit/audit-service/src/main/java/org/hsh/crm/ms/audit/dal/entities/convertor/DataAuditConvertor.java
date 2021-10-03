@@ -14,7 +14,7 @@ public final class DataAuditConvertor {
         // hide
     }
 
-    public static Audit toAudit(BaseDataAudit entity) {
+    public static Audit toAudit(DataAudit entity) {
         return AuditBuilder.get()
                 .setId(entity.getId())
                 .setEventDate(entity.getEventDate())
@@ -71,7 +71,7 @@ public final class DataAuditConvertor {
         }
     }
 
-    private static String toAuditAdditional(BaseDataAudit entity) {
+    private static String toAuditAdditional(DataAudit entity) {
         return new StringJoiner(",", "", "")
                 .add("objectId=[" + entity.getObjectId() + "]")
                 .add("objectName=[" + entity.getObjectName() + "]")

@@ -1,5 +1,6 @@
 package org.hsh.crm.ms.audit.ep.controller.facade;
 
+import org.hsh.crm.ms.audit.bll.repository.SecurityAuditRepository;
 import org.hsh.crm.ms.audit.dal.dao.SecurityAuditDaoStrategy;
 import org.hsh.crm.ms.audit.dto.SecurityAudit;
 import org.hsh.crm.ms.audit.dto.convertor.SecurityAuditConvertor;
@@ -15,11 +16,11 @@ import java.util.List;
 @Named
 public class SecurityAuditFacade implements CrudFacade<SecurityAudit> {
     @EJB
-    private SecurityAuditDaoStrategy daoSecurityAudit;
+    private SecurityAuditRepository repoSecurityAudit;
 
     @Override
     public SecurityAudit get(Object id) {
-        return SecurityAuditConvertor.toDto(daoSecurityAudit.find(id));
+        return SecurityAuditConvertor.toDto(repoSecurityAudit.get(id));
     }
 
     @Override
@@ -29,16 +30,16 @@ public class SecurityAuditFacade implements CrudFacade<SecurityAudit> {
 
     @Override
     public SecurityAudit create(SecurityAudit instance) {
-        return SecurityAuditConvertor.toDto(daoSecurityAudit.create(SecurityAuditConvertor.toEntity(instance, null)));
+        return SecurityAuditConvertor.toDto(repoSecurityAudit.save(SecurityAuditConvertor.toModel(instance)));
     }
 
     @Override
     public SecurityAudit edit(Object id, SecurityAudit instance) {
-        return SecurityAuditConvertor.toDto(daoSecurityAudit.edit(SecurityAuditConvertor.toEntity(instance, daoSecurityAudit::find)));
+        return SecurityAuditConvertor.toDto(repoSecurityAudit.save(SecurityAuditConvertor.toModel(instance)));
     }
 
     @Override
     public void remove(Object id) {
-        daoSecurityAudit.remove(id);
+        repoSecurityAudit.remove(id);
     }
 }

@@ -2,10 +2,10 @@ package org.hsh.crm.ms.audit.dal.repository;
 
 import org.hsh.crm.ms.audit.bll.model.Audit;
 import org.hsh.crm.ms.audit.bll.model.DataAudit;
+import org.hsh.crm.ms.audit.bll.model.SecurityAudit;
 import org.hsh.crm.ms.audit.bll.repository.AuditRepository;
 import org.hsh.crm.ms.audit.bll.repository.DataAuditRepository;
-import org.hsh.crm.ms.audit.dal.dao.SecurityAuditDaoStrategy;
-import org.hsh.crm.ms.audit.dal.entities.BaseSecurityAudit;
+import org.hsh.crm.ms.audit.bll.repository.SecurityAuditRepository;
 import org.hsh.crm.ms.audit.dal.entities.convertor.DataAuditConvertor;
 import org.hsh.crm.ms.audit.dal.entities.convertor.SecurityAuditConvertor;
 
@@ -25,11 +25,11 @@ public class AuditRepositoryImpl implements AuditRepository {
     private DataAuditRepository repoDataAudit;
 
     @EJB
-    private SecurityAuditDaoStrategy daoSecurityAudit;
+    private SecurityAuditRepository repoSecurityAudit;
 
     public List<Audit> listAll() throws ExecutionException, InterruptedException {
         Future<List<DataAudit>> dataAuditList = repoDataAudit.listAllAsync();
-        Future<List<BaseSecurityAudit>> securityAuditList = daoSecurityAudit.listAllAsync();
+        Future<List<SecurityAudit>> securityAuditList = repoSecurityAudit.listAllAsync();
         return Stream.concat(dataAuditList.get()
                                           .stream()
                                           .map(DataAuditConvertor::toAudit),

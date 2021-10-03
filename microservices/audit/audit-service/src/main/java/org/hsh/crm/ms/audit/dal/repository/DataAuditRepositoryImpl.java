@@ -97,11 +97,9 @@ public class DataAuditRepositoryImpl implements DataAuditRepository {
 
     private DataAuditDaoStrategy selectCurrentStrategy() {
         AuditDaoStrategyKeyEnum key = AuditDaoStrategyKeyEnum.valueOf(repoSettings.getStringValue(AuditSettingsEnum.DATA_AUDIT_STRATEGY));
-        for(DataAuditDaoStrategy strategy : strategies) {
-            if(key.equals(strategy.getStrategyKey()))
-                return strategy;
-        }
-
-        throw new DalRuntimeException("unknown data audit strategy");
+        return strategies.stream()
+                         .filter(s -> key.equals(s.getStrategyKey()))
+                         .findFirst()
+                         .orElseThrow(() -> new DalRuntimeException("unknown data audit strategy"));
     }
 }

@@ -1,6 +1,6 @@
 package org.hsh.crm.ms.audit.ep.controller.facade;
 
-import org.hsh.crm.ms.audit.dal.dao.DataAudit1Dao;
+import org.hsh.crm.ms.audit.bll.repository.DataAuditRepository;
 import org.hsh.crm.ms.audit.dto.DataAudit;
 import org.hsh.crm.ms.audit.dto.convertor.DataAuditConvertor;
 import org.hsh.ms.common.ep.facade.CrudFacade;
@@ -15,11 +15,11 @@ import java.util.List;
 @Named
 public class DataAuditFacade implements CrudFacade<DataAudit> {
     @EJB
-    private DataAudit1Dao daoDataAudit;
+    private DataAuditRepository repoDataAudit;
 
     @Override
     public DataAudit get(Object id) {
-        return DataAuditConvertor.toDto(daoDataAudit.find(id));
+        return DataAuditConvertor.toDto(repoDataAudit.get(id));
     }
 
     @Override
@@ -29,16 +29,16 @@ public class DataAuditFacade implements CrudFacade<DataAudit> {
 
     @Override
     public DataAudit create(DataAudit instance) {
-        return DataAuditConvertor.toDto(daoDataAudit.create(DataAuditConvertor.toEntity(instance, null)));
+        return DataAuditConvertor.toDto(repoDataAudit.save(DataAuditConvertor.toModel(instance)));
     }
 
     @Override
     public DataAudit edit(Object id, DataAudit instance) {
-        return DataAuditConvertor.toDto(daoDataAudit.edit(DataAuditConvertor.toEntity(instance, daoDataAudit::find)));
+        return DataAuditConvertor.toDto(repoDataAudit.save(DataAuditConvertor.toModel(instance)));
     }
 
     @Override
     public void remove(Object id) {
-        daoDataAudit.remove(id);
+        repoDataAudit.remove(id);
     }
 }

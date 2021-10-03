@@ -12,21 +12,37 @@ public class SecurityAuditConvertor {
         // hide constructor
     }
 
-    public static SecurityAudit toDto(BaseSecurityAudit entity) {
-        if (entity == null)
+    public static SecurityAudit toDto(org.hsh.crm.ms.audit.bll.model.SecurityAudit model) {
+        if (model == null)
             return null;
 
         return SecurityAuditBuilder.get()
-                .setId(entity.getId())
-                .setDate(entity.getEventDate())
-                .setSource(entity.getSource())
-                .setRequestId(entity.getRequestId())
-                .setEvent(SecurityAuditEventEnum.valueOf(entity.getEvent().toString()))
-                .setUser(entity.getUserLogin())
-                .setStatus(AuditStatusEnum.valueOf(entity.getStatus().toString()))
-                .build();
+                                   .setId(model.getId())
+                                   .setDate(model.getEventDate())
+                                   .setSource(model.getSource())
+                                   .setRequestId(model.getRequestId())
+                                   .setEvent(SecurityAuditEventEnum.valueOf(model.getEvent().toString()))
+                                   .setUser(model.getUserLogin())
+                                   .setStatus(AuditStatusEnum.valueOf(model.getStatus().toString()))
+                                   .build();
     }
 
+    public static org.hsh.crm.ms.audit.bll.model.SecurityAudit toModel(SecurityAudit dto) {
+        if(dto == null)
+            return null;
+        org.hsh.crm.ms.audit.bll.model.SecurityAudit model = new org.hsh.crm.ms.audit.bll.model.SecurityAudit();
+        model.setId(dto.getId());
+        model.setEventDate(dto.getDate());
+        model.setStatus(org.hsh.crm.ms.audit.bll.model.AuditStatusEnum.valueOf(dto.getStatus().toString()));
+        model.setSource(dto.getSource());
+        model.setRequestId(dto.getRequestId());
+        model.setEvent(org.hsh.crm.ms.audit.bll.model.SecurityAuditEventEnum.valueOf(dto.getEvent().toString()));
+        model.setUserLogin(dto.getUser());
+
+        return model;
+    }
+
+/*
     public static BaseSecurityAudit toEntity(SecurityAudit dto, EntityLoader<BaseSecurityAudit> loader) {
         if (dto == null)
             return null;
@@ -65,4 +81,5 @@ public class SecurityAuditConvertor {
         entity.setStatus(org.hsh.crm.ms.audit.bll.model.AuditStatusEnum.valueOf(dto.getStatus().toString()));
         return entity;
     }
+*/
 }

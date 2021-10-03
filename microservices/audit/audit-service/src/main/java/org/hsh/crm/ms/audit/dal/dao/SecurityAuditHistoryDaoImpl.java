@@ -6,7 +6,7 @@ import javax.ejb.Stateless;
 import java.util.List;
 
 @Stateless
-public class SecurityAuditHistoryDaoImpl extends BaseAuditDao<SecurityAuditHistory, Long> implements SecurityAuditHistoryDao {
+public class SecurityAuditHistoryDaoImpl extends BaseAsyncAuditDao<SecurityAuditHistory, Long> implements SecurityAuditHistoryDao {
     public SecurityAuditHistoryDaoImpl() {
         super(SecurityAuditHistory.class);
     }
