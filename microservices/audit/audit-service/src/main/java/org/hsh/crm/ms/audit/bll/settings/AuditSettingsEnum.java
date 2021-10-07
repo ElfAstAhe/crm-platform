@@ -4,11 +4,10 @@ import org.hsh.common.bll.settings.Settings;
 import org.hsh.crm.ms.audit.dal.dao.AuditDaoStrategyKeyEnum;
 
 public enum AuditSettingsEnum implements Settings {
-    DUMMY("nothing", false),
-    HISTORY_MAX_MONTH(3, false),
+    MAX_DAYS_CURRENT(30, false),
+    HISTORY_TAIL_MONTH(3, false),
     DATA_AUDIT_STRATEGY(AuditDaoStrategyKeyEnum.FIRST.toString(), false),
-    SECURITY_AUDIT_STRATEGY(AuditDaoStrategyKeyEnum.FIRST.toString(), false),
-    HISTORY_TAIL_DAYS(30, false);
+    SECURITY_AUDIT_STRATEGY(AuditDaoStrategyKeyEnum.FIRST.toString(), false);
 
     private final Object defaultValue;
     private final boolean encrypted;
