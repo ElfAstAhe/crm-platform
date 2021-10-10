@@ -5,7 +5,9 @@ import org.hsh.common.bll.repository.CrudRepository;
 import org.hsh.crm.ms.audit.bll.model.DataAudit;
 
 import javax.ejb.Local;
+import java.time.OffsetDateTime;
 
 @Local
 public interface DataAuditRepository extends CrudRepository<DataAudit, Long>, AsyncCrudRepository<DataAudit, Long> {
+    boolean isEarlyExists(OffsetDateTime markerDate);
 }

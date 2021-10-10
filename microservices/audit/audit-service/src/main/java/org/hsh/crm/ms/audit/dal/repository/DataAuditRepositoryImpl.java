@@ -13,6 +13,7 @@ import javax.annotation.PostConstruct;
 import javax.ejb.*;
 import javax.enterprise.inject.Instance;
 import javax.inject.Inject;
+import java.time.OffsetDateTime;
 import java.util.List;
 import java.util.concurrent.Future;
 import java.util.stream.Collectors;
@@ -93,6 +94,11 @@ public class DataAuditRepositoryImpl implements DataAuditRepository {
                        .stream()
                        .map(DataAuditConvertor::toModel)
                        .collect(Collectors.toList());
+    }
+
+    @Override
+    public boolean isEarlyExists(OffsetDateTime markerDate) {
+        return strategy.isEarlyExists(markerDate);
     }
 
     private DataAuditDaoStrategy selectCurrentStrategy() {
