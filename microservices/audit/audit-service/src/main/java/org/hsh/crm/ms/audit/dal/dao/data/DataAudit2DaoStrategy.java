@@ -1,8 +1,10 @@
-package org.hsh.crm.ms.audit.dal.dao;
+package org.hsh.crm.ms.audit.dal.dao.data;
 
 import org.hsh.common.dal.dao.CrudDao;
+import org.hsh.crm.ms.audit.dal.dao.AuditDaoStrategyKeyEnum;
+import org.hsh.crm.ms.audit.dal.dao.base.BaseAuditDaoStrategy;
 import org.hsh.crm.ms.audit.dal.entities.BaseDataAudit;
-import org.hsh.crm.ms.audit.dal.entities.DataAudit1;
+import org.hsh.crm.ms.audit.dal.entities.DataAudit2;
 
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
@@ -13,17 +15,17 @@ import java.time.OffsetDateTime;
 @RequestScoped
 @Named
 @Transactional(Transactional.TxType.REQUIRED)
-public class DataAudit1DaoStrategy extends BaseAuditDaoStrategy<BaseDataAudit, DataAudit1, Long> implements DataAuditDaoStrategy {
+public class DataAudit2DaoStrategy extends BaseAuditDaoStrategy<BaseDataAudit, DataAudit2, Long> implements DataAuditDaoStrategy {
     @Inject
-    private DataAudit1Dao dao;
+    private DataAudit2Dao dao;
 
-    public DataAudit1DaoStrategy() {
-        super(DataAudit1.class);
+    public DataAudit2DaoStrategy() {
+        super(DataAudit2.class);
     }
 
     @Override
     public AuditDaoStrategyKeyEnum getStrategyKey() {
-        return AuditDaoStrategyKeyEnum.FIRST;
+        return AuditDaoStrategyKeyEnum.SECOND;
     }
 
     @Override
@@ -37,7 +39,7 @@ public class DataAudit1DaoStrategy extends BaseAuditDaoStrategy<BaseDataAudit, D
     }
 
     @Override
-    protected CrudDao<DataAudit1, Long> getDao() {
+    protected CrudDao<DataAudit2, Long> getDao() {
         return dao;
     }
 }

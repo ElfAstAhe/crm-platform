@@ -1,4 +1,4 @@
-package org.hsh.crm.ms.audit.dal.dao;
+package org.hsh.crm.ms.audit.dal.dao.base;
 
 import org.hsh.common.dal.entity.IdEntity;
 import org.hsh.crm.ms.audit.dal.DalConstants;

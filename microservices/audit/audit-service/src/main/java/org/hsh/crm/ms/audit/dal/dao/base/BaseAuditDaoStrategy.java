@@ -1,4 +1,4 @@
-package org.hsh.crm.ms.audit.dal.dao;
+package org.hsh.crm.ms.audit.dal.dao.base;
 
 import org.hsh.common.dal.dao.CrudDao;
 import org.hsh.common.dal.dao.FilterParams;

@@ -1,5 +1,6 @@
-package org.hsh.crm.ms.audit.dal.dao;
+package org.hsh.crm.ms.audit.dal.dao.security;
 
+import org.hsh.crm.ms.audit.dal.dao.base.BaseAsyncAuditDao;
 import org.hsh.crm.ms.audit.dal.entities.SecurityAuditHistory;
 
 import javax.ejb.Stateless;

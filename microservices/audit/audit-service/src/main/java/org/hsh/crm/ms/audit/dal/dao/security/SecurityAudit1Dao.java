@@ -1,6 +1,7 @@
-package org.hsh.crm.ms.audit.dal.dao;
+package org.hsh.crm.ms.audit.dal.dao.security;
 
 import org.hsh.common.dal.dao.CrudDao;
+import org.hsh.crm.ms.audit.dal.dao.base.BaseAuditDao;
 import org.hsh.crm.ms.audit.dal.entities.SecurityAudit1;
 
 import javax.enterprise.context.RequestScoped;

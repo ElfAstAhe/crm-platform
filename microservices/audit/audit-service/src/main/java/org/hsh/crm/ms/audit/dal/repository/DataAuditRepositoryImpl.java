@@ -6,7 +6,7 @@ import org.hsh.crm.ms.audit.bll.repository.AuditSettingsRepository;
 import org.hsh.crm.ms.audit.bll.repository.DataAuditRepository;
 import org.hsh.crm.ms.audit.bll.settings.AuditSettingsEnum;
 import org.hsh.crm.ms.audit.dal.dao.AuditDaoStrategyKeyEnum;
-import org.hsh.crm.ms.audit.dal.dao.DataAuditDaoStrategy;
+import org.hsh.crm.ms.audit.dal.dao.data.DataAuditDaoStrategy;
 import org.hsh.crm.ms.audit.dal.entities.convertor.DataAuditConvertor;
 
 import javax.annotation.PostConstruct;

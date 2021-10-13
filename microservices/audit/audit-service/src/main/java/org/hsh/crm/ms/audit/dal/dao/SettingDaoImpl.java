@@ -1,8 +1,8 @@
 package org.hsh.crm.ms.audit.dal.dao;
 
+import org.hsh.crm.ms.audit.dal.dao.base.BaseAuditDao;
 import org.hsh.crm.ms.common.dal.entities.Setting;
 
-import javax.ejb.Stateless;
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Named;
 import javax.persistence.LockModeType;

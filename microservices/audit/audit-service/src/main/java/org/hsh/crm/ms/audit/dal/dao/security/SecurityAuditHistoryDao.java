@@ -1,4 +1,4 @@
-package org.hsh.crm.ms.audit.dal.dao;
+package org.hsh.crm.ms.audit.dal.dao.security;
 
 import org.hsh.common.dal.dao.AsyncCrudDao;
 import org.hsh.common.dal.dao.CrudDao;

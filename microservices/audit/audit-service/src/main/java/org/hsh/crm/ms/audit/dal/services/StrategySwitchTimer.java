@@ -53,6 +53,6 @@ public class StrategySwitchTimer extends BasePeriodicTimer {
     }
 
     private AuditDaoStrategyKeyEnum getNextStrategy(AuditDaoStrategyKeyEnum current) {
-
+        return current.nextKey();
     }
 }
