@@ -10,4 +10,5 @@ import java.time.OffsetDateTime;
 @Local
 public interface DataAuditRepository extends CrudRepository<DataAudit, Long>, AsyncCrudRepository<DataAudit, Long> {
     boolean isEarlyExists(OffsetDateTime markerDate);
+    void removeOldByDate(OffsetDateTime markerDate);
 }

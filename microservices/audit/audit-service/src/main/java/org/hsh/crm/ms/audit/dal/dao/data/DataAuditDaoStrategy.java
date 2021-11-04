@@ -10,4 +10,5 @@ public interface DataAuditDaoStrategy extends CrudDao<BaseDataAudit, Long> {
     AuditDaoStrategyKeyEnum getStrategyKey();
     Class<? extends BaseDataAudit> getStrategyEntityClass();
     boolean isEarlyExists(OffsetDateTime markerDate);
+    void removeOld(OffsetDateTime markerDate);
 }

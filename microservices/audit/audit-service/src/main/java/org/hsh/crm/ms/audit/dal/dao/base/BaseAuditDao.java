@@ -26,6 +26,12 @@ public abstract class BaseAuditDao<E extends IdEntity,K extends Serializable> ex
                 .getSingleResult();
     }
 
+    public void removeOldByDate(OffsetDateTime markerDate) {
+        getEntityManager().createQuery("delete from " + DaoUtils.getEntityName(getEntityClass()) + " e where e.event_date < :event_date")
+                .setParameter("event_date", markerDate)
+                .executeUpdate();
+    }
+
     @Override
     protected EntityManager getEntityManager() {
         return em;

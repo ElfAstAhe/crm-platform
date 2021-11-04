@@ -101,6 +101,11 @@ public class DataAuditRepositoryImpl implements DataAuditRepository {
         return strategy.isEarlyExists(markerDate);
     }
 
+    @Override
+    public void removeOldByDate(OffsetDateTime markerDate) {
+        strategy.removeOld(markerDate);
+    }
+
     private DataAuditDaoStrategy selectCurrentStrategy() {
         AuditDaoStrategyKeyEnum key = AuditDaoStrategyKeyEnum.valueOf(repoSettings.getStringValue(AuditSettingsEnum.DATA_AUDIT_STRATEGY));
         return strategies.stream()

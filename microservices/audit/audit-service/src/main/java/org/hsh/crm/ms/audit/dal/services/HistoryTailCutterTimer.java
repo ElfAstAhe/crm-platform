@@ -5,7 +5,6 @@ import org.hsh.ms.common.bll.timer.BasePeriodicTimer;
 
 import javax.annotation.Resource;
 import javax.ejb.*;
-import java.time.OffsetDateTime;
 
 @Singleton
 @LocalBean

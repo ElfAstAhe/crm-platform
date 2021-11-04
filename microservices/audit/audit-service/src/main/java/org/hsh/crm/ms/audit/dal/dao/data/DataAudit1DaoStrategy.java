@@ -39,6 +39,11 @@ public class DataAudit1DaoStrategy extends BaseAuditDaoStrategy<BaseDataAudit, D
     }
 
     @Override
+    public void removeOld(OffsetDateTime markerDate) {
+        dao.removeOldByDate(markerDate);
+    }
+
+    @Override
     protected CrudDao<DataAudit1, Long> getDao() {
         return dao;
     }
