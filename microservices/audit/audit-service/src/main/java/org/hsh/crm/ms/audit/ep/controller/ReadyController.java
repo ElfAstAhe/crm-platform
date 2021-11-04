@@ -2,6 +2,7 @@ package org.hsh.crm.ms.audit.ep.controller;
 
 import org.hsh.crm.ms.audit.app.AppInitializer;
 import org.hsh.crm.ms.common.ep.CrmEpCommon;
+import org.hsh.ms.common.ep.controller.BaseController;
 
 import javax.ejb.EJB;
 import javax.enterprise.context.RequestScoped;
@@ -16,7 +17,7 @@ import javax.ws.rs.core.Response;
  */
 @RequestScoped
 @Path(CrmEpCommon.RsPath.READY)
-public class ReadyController {
+public class ReadyController extends BaseController {
     @EJB
     private AppInitializer initializer;
 
@@ -25,6 +26,6 @@ public class ReadyController {
         if (initializer.isReady())
             return Response.ok().build();
 
-        return Response.status(Response.Status.BAD_REQUEST).build();
+        return buildBadRequest();
     }
 }

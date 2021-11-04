@@ -17,11 +17,12 @@ public abstract class BaseDataAuditService implements DataAuditService{
 
     @PostConstruct
     public void postConstruct() {
-        client = new DataAuditClient(getClientParams().getBaseUri(),
-                                     getClientParams().getConnectionTimeoutMillis(),
-                                     getClientParams().getReadTimeoutMillis(),
-                                     getClientParams().getJwtSupplier(),
-                                     getClientParams().getSslHostnameVerifier(),
+        AuditClientParams clientParams = getClientParams();
+        client = new DataAuditClient(clientParams.getBaseUri(),
+                                     clientParams.getConnectionTimeoutMillis(),
+                                     clientParams.getReadTimeoutMillis(),
+                                     clientParams.getJwtSupplier(),
+                                     clientParams.getSslHostnameVerifier(),
                                      sExecutor);
     }
 
