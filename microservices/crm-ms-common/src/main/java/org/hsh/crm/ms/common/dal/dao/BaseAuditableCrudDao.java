@@ -5,7 +5,6 @@ import org.hsh.common.dal.entity.IdEntity;
 import org.hsh.crm.ms.common.bll.services.audit.DataAuditService;
 import org.hsh.ms.common.dal.dao.BaseCrudDao;
 
-import javax.ejb.EJB;
 import java.io.Serializable;
 
 /**

@@ -37,11 +37,11 @@ public class Migration20210110 extends BaseSqlMigration {
     private Query buildTableUsers(CreateTableColumnStep ctcs) {
         return ctcs.column(DSL.name(SqlMigrationHelper.Field.ID), SQLDataType.BIGINT.nullable(false))
                    .column(DSL.name("username"), SQLDataType.VARCHAR(100).nullable(false))
-                   .column(DSL.name("password"), SQLDataType.VARCHAR(100).nullable(true))
+//                   .column(DSL.name("password"), SQLDataType.VARCHAR(100).nullable(true))
                    .column(DSL.name("password_encrypted"), SQLDataType.VARCHAR(200).nullable(true))
                    .column(DSL.name("private_key"), SQLDataType.VARCHAR(4096).nullable(true))
                    .column(DSL.name("public_key"), SQLDataType.VARCHAR(4096).nullable(true))
-                   .column(DSL.name("person"), SQLDataType.VARCHAR(200).nullable(true))
+//                   .column(DSL.name("person"), SQLDataType.VARCHAR(200).nullable(true))
                    .column(DSL.name("e_mail"), SQLDataType.VARCHAR(1024).nullable(true))
                    .column(DSL.name("cell_phone"), SQLDataType.VARCHAR(50).nullable(true))
                    .column(DSL.name(SqlMigrationHelper.Field.STATE), SQLDataType.VARCHAR(50).nullable(false).defaultValue("DRAFT"))

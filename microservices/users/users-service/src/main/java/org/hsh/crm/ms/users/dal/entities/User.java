@@ -24,8 +24,8 @@ public class User extends BaseIdEntity implements Serializable {
     @Column(name = "username", length = 100, nullable = false)
     private String username;
 
-    @Column(name = "password", length = 100)
-    private String password;
+//    @Column(name = "password", length = 100)
+//    private String password;
 
     @Column(name = "password_encrypted", length = 200)
     private String passwordEncrypted;
@@ -36,8 +36,8 @@ public class User extends BaseIdEntity implements Serializable {
     @Column(name = "public_key", length = 4096)
     private String publicKey;
 
-    @Column(name = "person", length = 200)
-    private String person;
+//    @Column(name = "person", length = 200)
+//    private String person;
 
     @Column(name = "e_mail", length = 1024)
     private String eMail;
@@ -64,22 +64,22 @@ public class User extends BaseIdEntity implements Serializable {
     // full
     public User(Long id,
                 String username,
-                String password,
+//                String password,
                 String passwordEncrypted,
                 String privateKey,
                 String publicKey,
-                String person,
+//                String person,
                 String eMail,
                 String cellPhone,
                 List<Role> roles) {
         super(id);
         this.version = 0L;
         this.username = username;
-        this.password = password;
+//        this.password = password;
         this.passwordEncrypted = passwordEncrypted;
         this.privateKey = privateKey;
         this.publicKey = publicKey;
-        this.person = person;
+//        this.person = person;
         this.eMail = eMail;
         this.cellPhone = cellPhone;
         this.roles = roles;
@@ -95,14 +95,6 @@ public class User extends BaseIdEntity implements Serializable {
 
     public void setUsername(String username) {
         this.username = username;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
     }
 
     public String getPasswordEncrypted() {
@@ -127,14 +119,6 @@ public class User extends BaseIdEntity implements Serializable {
 
     public void setPublicKey(String publicKey) {
         this.publicKey = publicKey;
-    }
-
-    public String getPerson() {
-        return person;
-    }
-
-    public void setPerson(String person) {
-        this.person = person;
     }
 
     public String geteMail() {
@@ -202,7 +186,7 @@ public class User extends BaseIdEntity implements Serializable {
                                 HshStringUtils.SUFFIX).add(HshStringUtils.buildKeyValue("id", HshStringUtils.toNullString(getId())))
                                                       .add(HshStringUtils.buildKeyValue("version", HshStringUtils.toNullString(version)))
                                                       .add(HshStringUtils.buildKeyValue("username", HshStringUtils.toNullString(username)))
-                                                      .add(HshStringUtils.buildKeyValue("person", HshStringUtils.toNullString(person)))
+//                                                      .add(HshStringUtils.buildKeyValue("person", HshStringUtils.toNullString(person)))
                                                       .add(HshStringUtils.buildKeyValue("state", state))
                                                       .toString();
     }
