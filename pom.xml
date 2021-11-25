@@ -16,9 +16,9 @@
 
         <!-- common libraries -->
         <hsh.common.version>2.2.2${crm.platform.version.suffix}</hsh.common.version>
+        <hsh.ms.common.version>1.0.2${crm.platform.version.suffix}</hsh.ms.common.version>
 
         <!-- microservices -->
-        <hsh.ms.common.version>1.0.2${crm.platform.version.suffix}</hsh.ms.common.version>
         <crm.ms.common.version>1.0.0${crm.platform.version.suffix}</crm.ms.common.version>
 
         <crm.platform.audit.service.version>1.0.0${crm.platform.version.suffix}</crm.platform.audit.service.version>
@@ -32,6 +32,15 @@
         <crm.platform.users.service.version>1.0.0${crm.platform.version.suffix}</crm.platform.users.service.version>
         <crm.platform.users.dto.version>1.0.0${crm.platform.version.suffix}</crm.platform.users.dto.version>
         <crm.platform.users.client.version>1.0.0${crm.platform.version.suffix}</crm.platform.users.client.version>
+
+        <!-- libraries -->
+        <lib.jakarta.version>8.0.0</lib.jakarta.version>
+        <lib.jcache.version>1.1.1</lib.jcache.version>
+        <lib.microprofile.version>4.0.1</lib.microprofile.version>
+        <lib.junit.version>5.8.1</lib.junit.version>
+        <lib.hamcrest.version>2.2</lib.hamcrest.version>
+        <lib.mockito.version>4.0.0</lib.mockito.version>
+        <lib.yasson.version>1.0.2</lib.yasson.version>
 
         <!-- study -->
         <crm.platform.study.non-persistence-service.version>1.0.0${crm.platform.version.suffix}</crm.platform.study.non-persistence-service.version>
@@ -78,52 +87,52 @@
         <dependency>
             <groupId>jakarta.platform</groupId>
             <artifactId>jakarta.jakartaee-api</artifactId>
-            <version>8.0.0</version>
+            <version>${lib.jakarta.version}</version>
             <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>javax.cache</groupId>
             <artifactId>cache-api</artifactId>
-            <version>1.1.1</version>
+            <version>${lib.jcache.version}</version>
             <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>org.eclipse.microprofile</groupId>
             <artifactId>microprofile</artifactId>
-            <version>4.0.1</version>
+            <version>${lib.microprofile.version}</version>
             <type>pom</type>
             <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter</artifactId>
-            <version>5.8.1</version>
+            <version>${lib.junit.version}</version>
             <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>org.hamcrest</groupId>
             <artifactId>hamcrest-library</artifactId>
-            <version>2.2</version>
+            <version>${lib.hamcrest.version}</version>
             <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>org.mockito</groupId>
             <artifactId>mockito-junit-jupiter</artifactId>
-            <version>3.12.4</version>
+            <version>${lib.mockito.version}</version>
             <scope>test</scope>
         </dependency>
         <!-- https://mvnrepository.com/artifact/org.mockito/mockito-inline -->
         <dependency>
             <groupId>org.mockito</groupId>
             <artifactId>mockito-inline</artifactId>
-            <version>3.12.4</version>
+            <version>${lib.mockito.version}</version>
             <scope>test</scope>
         </dependency>
         <!-- https://mvnrepository.com/artifact/org.eclipse/yasson -->
         <dependency>
             <groupId>org.eclipse</groupId>
             <artifactId>yasson</artifactId>
-            <version>1.0.2</version>
+            <version>${lib.yasson.version}</version>
             <scope>test</scope>
         </dependency>
         <!-- https://mvnrepository.com/artifact/org.glassfish/javax.json -->
