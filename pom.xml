@@ -41,6 +41,11 @@
         <lib.hamcrest.version>2.2</lib.hamcrest.version>
         <lib.mockito.version>4.0.0</lib.mockito.version>
         <lib.yasson.version>1.0.2</lib.yasson.version>
+        <lib.flyway.version>8.0.5</lib.flyway.version>
+        <lib.jooq.version>3.14.15</lib.jooq.version>
+        <lib.prometheus.version>0.12.0</lib.prometheus.version>
+        <lib.migesok.version>1.1.3</lib.migesok.version>
+        <lib.apache.common.lang.version>3.12.0</lib.apache.common.lang.version>
 
         <!-- study -->
         <crm.platform.study.non-persistence-service.version>1.0.0${crm.platform.version.suffix}</crm.platform.study.non-persistence-service.version>
