@@ -33,6 +33,10 @@
         <crm.platform.users.dto.version>1.0.0${crm.platform.version.suffix}</crm.platform.users.dto.version>
         <crm.platform.users.client.version>1.0.0${crm.platform.version.suffix}</crm.platform.users.client.version>
 
+        <crm.platform.infra.service.version>1.0.0${crm.platform.version.suffix}</crm.platform.infra.service.version>
+        <crm.platform.infra.dto.version>1.0.0${crm.platform.version.suffix}</crm.platform.infra.dto.version>
+        <crm.platform.infra.client.version>1.0.0${crm.platform.version.suffix}</crm.platform.infra.client.version>
+
         <!-- libraries -->
         <lib.jakarta.version>8.0.0</lib.jakarta.version>
         <lib.jcache.version>1.1.1</lib.jcache.version>
@@ -46,6 +50,7 @@
         <lib.prometheus.version>0.12.0</lib.prometheus.version>
         <lib.migesok.version>1.1.3</lib.migesok.version>
         <lib.apache.common.lang.version>3.12.0</lib.apache.common.lang.version>
+        <lib.postgresql.driver.version>42.2.24</lib.postgresql.driver.version>
 
         <!-- study -->
         <crm.platform.study.non-persistence-service.version>1.0.0${crm.platform.version.suffix}</crm.platform.study.non-persistence-service.version>
@@ -54,7 +59,7 @@
         <!-- app servers -->
         <app.srv.wildfly.version>23.0.2.Final</app.srv.wildfly.version>
         <app.srv.wildfly.core.version>15.0.1.Final</app.srv.wildfly.core.version>
-        <app.srv.payara.version>5.2021.7</app.srv.payara.version>
+        <app.srv.payara.version>5.2021.8</app.srv.payara.version>
 
         <!-- wildfly bootable -->
         <!-- oracle-datasource -->
