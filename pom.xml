@@ -9,9 +9,6 @@
     <version>1.0</version>
     <packaging>pom</packaging>
     <properties>
-        <java-version>11</java-version>
-        <surefireArgLine></surefireArgLine>
-
         <!-- root project -->
         <crm.platform.version.suffix>-SNAPSHOT</crm.platform.version.suffix>
         <crm.platfrom.version>1.0.0${crm.platform.version.suffix}</crm.platfrom.version>
@@ -19,9 +16,9 @@
 
         <!-- common libraries -->
         <hsh.common.version>2.2.2${crm.platform.version.suffix}</hsh.common.version>
+        <hsh.ms.common.version>1.0.2${crm.platform.version.suffix}</hsh.ms.common.version>
 
         <!-- microservices -->
-        <hsh.ms.common.version>1.0.2${crm.platform.version.suffix}</hsh.ms.common.version>
         <crm.ms.common.version>1.0.0${crm.platform.version.suffix}</crm.ms.common.version>
 
         <crm.platform.audit.service.version>1.0.0${crm.platform.version.suffix}</crm.platform.audit.service.version>
@@ -36,6 +33,25 @@
         <crm.platform.users.dto.version>1.0.0${crm.platform.version.suffix}</crm.platform.users.dto.version>
         <crm.platform.users.client.version>1.0.0${crm.platform.version.suffix}</crm.platform.users.client.version>
 
+        <crm.platform.infra.service.version>1.0.0${crm.platform.version.suffix}</crm.platform.infra.service.version>
+        <crm.platform.infra.dto.version>1.0.0${crm.platform.version.suffix}</crm.platform.infra.dto.version>
+        <crm.platform.infra.client.version>1.0.0${crm.platform.version.suffix}</crm.platform.infra.client.version>
+
+        <!-- libraries -->
+        <lib.jakarta.version>8.0.0</lib.jakarta.version>
+        <lib.jcache.version>1.1.1</lib.jcache.version>
+        <lib.microprofile.version>4.0.1</lib.microprofile.version>
+        <lib.junit.version>5.8.1</lib.junit.version>
+        <lib.hamcrest.version>2.2</lib.hamcrest.version>
+        <lib.mockito.version>4.0.0</lib.mockito.version>
+        <lib.yasson.version>1.0.2</lib.yasson.version>
+        <lib.flyway.version>8.0.5</lib.flyway.version>
+        <lib.jooq.version>3.14.15</lib.jooq.version>
+        <lib.prometheus.version>0.12.0</lib.prometheus.version>
+        <lib.migesok.version>1.1.3</lib.migesok.version>
+        <lib.apache.common.lang.version>3.12.0</lib.apache.common.lang.version>
+        <lib.postgresql.driver.version>42.2.24</lib.postgresql.driver.version>
+
         <!-- study -->
         <crm.platform.study.non-persistence-service.version>1.0.0${crm.platform.version.suffix}</crm.platform.study.non-persistence-service.version>
         <crm.platform.study.persistence-service.version>1.0.0${crm.platform.version.suffix}</crm.platform.study.persistence-service.version>
@@ -43,7 +59,7 @@
         <!-- app servers -->
         <app.srv.wildfly.version>23.0.2.Final</app.srv.wildfly.version>
         <app.srv.wildfly.core.version>15.0.1.Final</app.srv.wildfly.core.version>
-        <app.srv.payara.version>5.2021.7</app.srv.payara.version>
+        <app.srv.payara.version>5.2021.8</app.srv.payara.version>
 
         <!-- wildfly bootable -->
         <!-- oracle-datasource -->
@@ -51,42 +67,19 @@
         <wildfly.ds.galleon.pack.version>2.0.3.Final</wildfly.ds.galleon.pack.version>
         <wildfly.bootable.data-source.layer>postgresql-datasource</wildfly.bootable.data-source.layer>
 
-        <!-- library -->
-        <lib-jakarta-version>8.0.0</lib-jakarta-version>
-        <lib-microprofile-version>4.0.1</lib-microprofile-version>
-        <lib-jcache-version>1.1.1</lib-jcache-version>
-        <lib-jaxb-api-version>2.3.1</lib-jaxb-api-version>
-        <lib-jaxb-impl-version>2.3.2</lib-jaxb-impl-version>
-        <lib-junit-version>5.8.2</lib-junit-version>
-        <lib-hamcrest-version>2.2</lib-hamcrest-version>
-        <lib-mockito-version>4.1.0</lib-mockito-version>
-        <lib-slf4j-version>1.7.32</lib-slf4j-version>
-        <lib-yasson-version>1.0.9</lib-yasson-version>
-        <lib-flyway-version>8.1.0</lib-flyway-version>
-        <lib-jooq-version>3.15.4</lib-jooq-version>
-        <lib-reflections-version>0.10.2</lib-reflections-version>
-        <lib-prometeus-version>0.12.0</lib-prometeus-version>
-        <lib-vertx-version>4.2.1</lib-vertx-version>
-        <lib-yaml-version>1.29</lib-yaml-version>
-        <lib-apache-cc-version>1.15</lib-apache-cc-version>
-        <lib-apache-cl-version>3.12.0</lib-apache-cl-version>
-        <lib-apache-cio-version>2.11.0</lib-apache-cio-version>
-        <lib-eclipse-persistence-version>3.0.0</lib-eclipse-persistence-version>
-        <lib-eclipse-yasson-version>1.0.2</lib-eclipse-yasson-version>
-        <lib-javax-json-version>1.1.4</lib-javax-json-version>
-
-
         <!-- maven -->
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <maven.compiler.source>${java-version}</maven.compiler.source>
-        <maven.compiler.target>${java-version}</maven.compiler.target>
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>1.8</maven.compiler.target>
         <maven.test.skip>true</maven.test.skip>
         <mvn.plugin.jar.version>3.2.0</mvn.plugin.jar.version>
         <mvn.plugin.war.version>3.3.1</mvn.plugin.war.version>
         <mvn.plugin.ear.version>3.2.0</mvn.plugin.ear.version>
         <mvn.plugin.ejb.version>3.1.0</mvn.plugin.ejb.version>
         <mvn.plugin.test.version>3.0.0-M5</mvn.plugin.test.version>
-        <mvn.plugin.processor.version>4.5</mvn.plugin.processor.version>
+        <!--mvn.plugin.processor.version>2.0.5</mvn.plugin.processor.version-->
+        <!-- <mvn.plugin.processor.version>3.3.3</mvn.plugin.processor.version> -->
+        <mvn.plugin.processor.version>4.5-jdk8</mvn.plugin.processor.version>
         <mvn.plugin.resources.version>3.2.0</mvn.plugin.resources.version>
         <mvn.plugin.deploy.version>3.0.0-M1</mvn.plugin.deploy.version>
         <mvn.plugin.exec.version>1.6.0</mvn.plugin.exec.version>
@@ -104,59 +97,59 @@
         <dependency>
             <groupId>jakarta.platform</groupId>
             <artifactId>jakarta.jakartaee-api</artifactId>
-            <version>${lib-jakarta-version}</version>
+            <version>${lib.jakarta.version}</version>
             <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>javax.cache</groupId>
             <artifactId>cache-api</artifactId>
-            <version>${lib-jcache-version}</version>
+            <version>${lib.jcache.version}</version>
             <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>org.eclipse.microprofile</groupId>
             <artifactId>microprofile</artifactId>
-            <version>${lib-microprofile-version}</version>
+            <version>${lib.microprofile.version}</version>
             <type>pom</type>
             <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter</artifactId>
-            <version>${lib-junit-version}</version>
+            <version>${lib.junit.version}</version>
             <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>org.hamcrest</groupId>
             <artifactId>hamcrest-library</artifactId>
-            <version>${lib-hamcrest-version}</version>
+            <version>${lib.hamcrest.version}</version>
             <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>org.mockito</groupId>
             <artifactId>mockito-junit-jupiter</artifactId>
-            <version>${lib-mockito-version}</version>
+            <version>${lib.mockito.version}</version>
             <scope>test</scope>
         </dependency>
         <!-- https://mvnrepository.com/artifact/org.mockito/mockito-inline -->
         <dependency>
             <groupId>org.mockito</groupId>
             <artifactId>mockito-inline</artifactId>
-            <version>${lib-mockito-version}</version>
+            <version>${lib.mockito.version}</version>
             <scope>test</scope>
         </dependency>
         <!-- https://mvnrepository.com/artifact/org.eclipse/yasson -->
         <dependency>
             <groupId>org.eclipse</groupId>
             <artifactId>yasson</artifactId>
-            <version>${lib-eclipse-yasson-version}</version>
+            <version>${lib.yasson.version}</version>
             <scope>test</scope>
         </dependency>
         <!-- https://mvnrepository.com/artifact/org.glassfish/javax.json -->
         <dependency>
             <groupId>org.glassfish</groupId>
             <artifactId>javax.json</artifactId>
-            <version>${lib-javax-json-version}</version>
+            <version>1.1.4</version>
             <scope>test</scope>
         </dependency>
         <dependency>

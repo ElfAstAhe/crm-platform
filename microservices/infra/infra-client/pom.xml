@@ -4,16 +4,26 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>users-dto</artifactId>
-    <version>${crm.platform.users.dto.version}</version>
+    <artifactId>infra-client</artifactId>
+    <version>${crm.platform.infra.client.version}</version>
     <packaging>jar</packaging>
-    <description>dto сервиса users</description>
+    <description>client сервиса infra</description>
 
     <dependencies>
         <dependency>
             <groupId>org.hsh</groupId>
             <artifactId>hsh-common</artifactId>
             <version>${hsh.common.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.hsh</groupId>
+            <artifactId>hsh-ms-common</artifactId>
+            <version>${hsh.ms.common.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.hsh</groupId>
+            <artifactId>infra-dto</artifactId>
+            <version>${crm.platform.infra.dto.version}</version>
         </dependency>
         <dependency>
             <groupId>com.migesok</groupId>
@@ -29,7 +39,7 @@
     <parent>
         <groupId>org.hsh</groupId>
         <version>1.0</version>
-        <artifactId>users</artifactId>
+        <artifactId>infra</artifactId>
         <relativePath>../pom.xml</relativePath>
     </parent>
 </project>

@@ -4,10 +4,10 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>audit-service</artifactId>
-    <version>${crm.platform.audit.service.version}</version>
+    <artifactId>infra-service</artifactId>
+    <version>${crm.platform.infra.service.version}</version>
     <packaging>war</packaging>
-    <description>audit microservice</description>
+    <description>infra micros-service</description>
 
     <properties>
         <decstra.baseDir>${project.basedir}/../../..</decstra.baseDir>
@@ -31,8 +31,8 @@
         </dependency>
         <dependency>
             <groupId>org.hsh</groupId>
-            <artifactId>audit-dto</artifactId>
-            <version>${crm.platform.audit.dto.version}</version>
+            <artifactId>infra-dto</artifactId>
+            <version>${crm.platform.infra.dto.version}</version>
         </dependency>
         <dependency>
             <groupId>org.flywaydb</groupId>
@@ -93,7 +93,7 @@
                                     <resolve-expressions>false</resolve-expressions>
                                 </cli-session>
                             </cli-sessions>
-                            <outputFileName>${artifactId}-bootable-${crm.platform.audit.service.version}.jar</outputFileName>
+                            <outputFileName>${artifactId}-bootable-${crm.platform.infra.service.version}.jar</outputFileName>
                             <feature-packs>
                                 <feature-pack>
                                     <location>wildfly@maven(org.jboss.universe:community-universe)#${app.srv.wildfly.version}</location>
@@ -164,15 +164,15 @@
                                 </property>
                                 <property>
                                     <name>payaramicro.name</name>
-                                    <value>crm-audit</value>
+                                    <value>crm-infra</value>
                                 </property>
                                 <property>
                                     <name>payaramicro.instanceGroup</name>
-                                    <value>crm-audit-group</value>
+                                    <value>crm-infra-group</value>
                                 </property>
                             </systemProperties>
                             <autoDeployArtifact>true</autoDeployArtifact>
-                            <autoDeployContextRoot>audit</autoDeployContextRoot>
+                            <autoDeployContextRoot>infra</autoDeployContextRoot>
                             <autoDeployEmptyContextRoot>false</autoDeployEmptyContextRoot>
                             <customJars>
                                 <artifactItem>
@@ -191,7 +191,7 @@
     <parent>
         <groupId>org.hsh</groupId>
         <version>1.0</version>
-        <artifactId>audit</artifactId>
+        <artifactId>infra</artifactId>
         <relativePath>../pom.xml</relativePath>
     </parent>
 </project>

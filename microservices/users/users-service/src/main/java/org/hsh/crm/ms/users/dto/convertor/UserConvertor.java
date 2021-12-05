@@ -20,13 +20,13 @@ public class UserConvertor {
 
         dto.setId(entity.getId());
         dto.setUsername(entity.getUsername());
-        dto.setPassword(entity.getPassword());
+//        dto.setPassword(entity.getPassword());
         dto.setPasswordEncrypted(entity.getPasswordEncrypted());
         dto.setPrivateKey(entity.getPrivateKey());
         dto.setPublicKey(entity.getPublicKey());
         dto.seteMail(entity.geteMail());
         dto.setCellPhone(entity.getCellPhone());
-        dto.setPerson(entity.getPerson());
+//        dto.setPerson(entity.getPerson());
         dto.setState(entity.getState()
                            .toString());
         dto.setRoles(entity.getRoles()
@@ -67,13 +67,13 @@ public class UserConvertor {
 
     private static User fillEntity(UserDto dto, User entity) {
         entity.setUsername(dto.getUsername());
-        entity.setPassword(dto.getPassword());
+//        entity.setPassword(dto.getPassword());
         entity.setPasswordEncrypted(dto.getPasswordEncrypted());
         entity.setPrivateKey(dto.getPrivateKey());
         entity.setPublicKey(dto.getPublicKey());
         entity.seteMail(dto.geteMail());
         entity.setCellPhone(dto.getCellPhone());
-        entity.setPerson(dto.getPerson());
+//        entity.setPerson(dto.getPerson());
         entity.setState(UserStateEnum.valueOf(dto.getState()));
 
         return entity;

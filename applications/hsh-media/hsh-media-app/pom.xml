@@ -17,7 +17,7 @@
         <dependency>
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-lang3</artifactId>
-            <version>3.12.0</version>
+            <version>${lib.apache.common.lang.version}</version>
         </dependency>
         <!-- https://mvnrepository.com/artifact/org.primefaces/primefaces -->
         <dependency>
