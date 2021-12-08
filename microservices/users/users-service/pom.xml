@@ -57,7 +57,7 @@
         <dependency>
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-lang3</artifactId>
-            <version>${lib.apache.common.lang.version}</version>
+            <version>${lib.apache.cl.version}</version>
         </dependency>
         <dependency>
             <groupId>com.migesok</groupId>
