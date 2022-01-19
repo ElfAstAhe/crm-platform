@@ -1,6 +1,7 @@
 package org.hsh.crm.ms.audit.ep.controller;
 
 import org.hsh.crm.ms.audit.dto.SecurityAudit;
+import org.hsh.crm.ms.audit.ep.EpConstants;
 import org.hsh.crm.ms.audit.ep.controller.facade.SecurityAuditFacade;
 import org.hsh.ms.common.ep.controller.BaseCrudController;
 import org.hsh.ms.common.ep.facade.CrudFacade;
@@ -12,7 +13,7 @@ import javax.ws.rs.core.Context;
 import javax.ws.rs.core.UriInfo;
 
 @RequestScoped
-@Path("securityAudit")
+@Path(EpConstants.PATH_SECURITY_AUDIT)
 public class SecurityAuditController extends BaseCrudController<SecurityAudit> {
     @Context
     private UriInfo uriInfo;

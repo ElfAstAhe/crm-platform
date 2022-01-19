@@ -1,4 +1,4 @@
-package org.hsh.crm.ms.audit.dto;
+package org.hsh.crm.ms.common.dto;
 
 import javax.json.bind.annotation.JsonbProperty;
 import javax.json.bind.annotation.JsonbPropertyOrder;
@@ -9,21 +9,20 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import java.io.Serializable;
 
-@XmlRootElement(name = "actionAudit")
+@XmlRootElement(name = "baseDto")
 @XmlAccessorType(XmlAccessType.FIELD)
 @JsonbPropertyOrder(PropertyOrderStrategy.ANY)
-public class ActionAudit implements Serializable {
-    private static final long serialVersionUID = 1;
+public class BaseDto implements Serializable {
 
     @XmlElement(name = "id")
     @JsonbProperty(value = "id")
     private Long id;
 
-    @XmlElement(name = "event")
-    @JsonbProperty(value = "event")
-    private String event;
+    @XmlElement(name = "link")
+    @JsonbProperty(value = "link")
+    private String link;
 
-    public ActionAudit() {
+    public BaseDto() {
         // default
     }
 
@@ -35,11 +34,11 @@ public class ActionAudit implements Serializable {
         this.id = id;
     }
 
-    public String getEvent() {
-        return event;
+    public String getLink() {
+        return link;
     }
 
-    public void setEvent(String event) {
-        this.event = event;
+    public void setLink(String link) {
+        this.link = link;
     }
 }

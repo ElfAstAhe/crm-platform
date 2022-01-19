@@ -2,19 +2,17 @@ package org.hsh.crm.ms.infra.dal.entities;
 
 import org.hsh.ms.common.dal.entity.BaseIdEntity;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.io.Serializable;
-import java.util.Objects;
 import java.util.StringJoiner;
 
 @Entity
-@Table(name = "resources")
+@Table(name = "resources", uniqueConstraints = {@UniqueConstraint(name = "resources_uk", columnNames = {"code", "network_id"})})
+@Cacheable(value = false)
 public class Resource extends BaseIdEntity implements Serializable {
     private static final long serialVersionUID = 1L;
 
-    @Column(name = "code", length = 50)
+    @Column(name = "code", length = 50, nullable = false)
     private String code;
 
     @Column(name = "name", length = 512)
@@ -34,6 +32,10 @@ public class Resource extends BaseIdEntity implements Serializable {
 
     @Column(name = "description", length = 512)
     private String description;
+
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinColumn(name = "network_id", referencedColumnName = "id")
+    private Network network;
 
     public Resource() {
         // default
@@ -95,6 +97,14 @@ public class Resource extends BaseIdEntity implements Serializable {
         this.description = description;
     }
 
+    public Network getNetwork() {
+        return network;
+    }
+
+    public void setNetwork(Network network) {
+        this.network = network;
+    }
+
     @Override
     public int hashCode() {
         return super.hashCode();
@@ -108,8 +118,7 @@ public class Resource extends BaseIdEntity implements Serializable {
             return true;
         if(this.getClass() != object.getClass())
             return false;
-        Resource other = (Resource) object;
-        return Objects.equals(this.getId(), other.getId());
+        return super.equals(object);
     }
 
     @Override
@@ -122,6 +131,7 @@ public class Resource extends BaseIdEntity implements Serializable {
                 .add("ipV6='" + ipV6 + "'")
                 .add("url='" + url + "'")
                 .add("description='" + description + "'")
+                .add("network=" + network)
                 .toString();
     }
 }
