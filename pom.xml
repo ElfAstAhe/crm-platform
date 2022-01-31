@@ -64,9 +64,13 @@
         <crm.platform.study.persistence-service.version>1.0.0${crm.platform.version.suffix}</crm.platform.study.persistence-service.version>
 
         <!-- app servers -->
-        <app.srv.wildfly.version>23.0.2.Final</app.srv.wildfly.version>
-        <app.srv.wildfly.core.version>15.0.1.Final</app.srv.wildfly.core.version>
-        <app.srv.payara.version>5.2021.8</app.srv.payara.version>
+        <!--
+            wildfly: 23.0.2, core: 15.0.1
+            wildfly: 25.0.1, core: 17.0.3
+        -->
+        <app.srv.wildfly.version>25.0.1.Final</app.srv.wildfly.version>
+        <app.srv.wildfly.core.version>17.0.3.Final</app.srv.wildfly.core.version>
+        <app.srv.payara.version>5.2021.10</app.srv.payara.version>
 
         <wildfly-datasource-prefix>java:/</wildfly-datasource-prefix>
         <payara-datasource-prefix>jdbc/</payara-datasource-prefix>
@@ -76,7 +80,7 @@
         <!-- oracle-datasource -->
         <!-- mysql-datasource -->
         <!-- postgresql-datasource -->
-        <wildfly.ds.galleon.pack.version>2.0.3.Final</wildfly.ds.galleon.pack.version>
+        <wildfly.ds.galleon.pack.version>2.0.6.Final</wildfly.ds.galleon.pack.version>
         <wildfly.bootable.data-source.layer>postgresql-datasource</wildfly.bootable.data-source.layer>
 
         <!-- maven -->
@@ -98,7 +102,7 @@
         <mvn.plugin.exec.version>1.6.0</mvn.plugin.exec.version>
         <mvn.plugin.build-helper.version>3.2.0</mvn.plugin.build-helper.version>
         <mvn.plugin.templating.version>1.0.0</mvn.plugin.templating.version>
-        <mvn.plugin.wildfly.jar.version>6.1.1.Final</mvn.plugin.wildfly.jar.version>
+        <mvn.plugin.wildfly.jar.version>7.0.0.Final</mvn.plugin.wildfly.jar.version>
         <mvn.plugin.payara.jar.version>1.4.0</mvn.plugin.payara.jar.version>
     </properties>
     <modules>
