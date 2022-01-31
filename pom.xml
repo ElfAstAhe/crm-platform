@@ -68,9 +68,14 @@
         <app.srv.wildfly.core.version>15.0.1.Final</app.srv.wildfly.core.version>
         <app.srv.payara.version>5.2021.8</app.srv.payara.version>
 
+        <wildfly-datasource-prefix>java:/</wildfly-datasource-prefix>
+        <payara-datasource-prefix>jdbc/</payara-datasource-prefix>
+        <crm-datasource-prefix>${payara-datasource-prefix}</crm-datasource-prefix>
+
         <!-- wildfly bootable -->
         <!-- oracle-datasource -->
         <!-- mysql-datasource -->
+        <!-- postgresql-datasource -->
         <wildfly.ds.galleon.pack.version>2.0.3.Final</wildfly.ds.galleon.pack.version>
         <wildfly.bootable.data-source.layer>postgresql-datasource</wildfly.bootable.data-source.layer>
 
@@ -230,6 +235,11 @@
                         </dependency>
                     </dependencies>
                 </plugin>
+                <plugin>
+                    <groupId>org.codehaus.mojo</groupId>
+                    <artifactId>templating-maven-plugin</artifactId>
+                    <version>${mvn.plugin.templating.version}</version>
+                </plugin>
             </plugins>
         </pluginManagement>
         <plugins>
@@ -263,6 +273,7 @@
                         </goals>
                         <configuration>
                             <sources>
+                                <source>target/generated-sources/java-templates/</source>
                                 <source>target/generated-sources/apt</source>
                             </sources>
                         </configuration>
@@ -275,9 +286,22 @@
                         </goals>
                         <configuration>
                             <sources>
+                                <source>target/generated-test-sources/java-templates/</source>
                                 <source>target/generated-test-sources/apt</source>
                             </sources>
                         </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>templating-maven-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>filter-src</id>
+                        <goals>
+                            <goal>filter-sources</goal>
+                        </goals>
                     </execution>
                 </executions>
             </plugin>
@@ -319,10 +343,26 @@
             <properties>
                 <wildfly.bootable.jar.version>${mvn.plugin.wildfly.jar.version}</wildfly.bootable.jar.version>
                 <wildfly.bootable.core.version>${app.srv.wildfly.version}</wildfly.bootable.core.version>
+                <crm-datasource-prefix>${wildfly-datasource-prefix}</crm-datasource-prefix>
             </properties>
         </profile>
         <profile>
             <id>payara-bundle</id>
+            <properties>
+                <crm-datasource-prefix>${payara-datasource-prefix}</crm-datasource-prefix>
+            </properties>
+        </profile>
+        <profile>
+            <id>payara-server</id>
+            <properties>
+                <crm-datasource-prefix>${payara-datasource-prefix}</crm-datasource-prefix>
+            </properties>
+        </profile>
+        <profile>
+            <id>wildfly-server</id>
+            <properties>
+                <crm-datasource-prefix>${wildfly-datasource-prefix}</crm-datasource-prefix>
+            </properties>
         </profile>
     </profiles>
 </project>

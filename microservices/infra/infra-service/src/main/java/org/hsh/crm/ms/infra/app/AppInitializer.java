@@ -1,5 +1,6 @@
 package org.hsh.crm.ms.infra.app;
 
+
 import org.hsh.crm.ms.infra.dal.DalConstants;
 import org.hsh.ms.common.app.BaseAppInitializer;
 

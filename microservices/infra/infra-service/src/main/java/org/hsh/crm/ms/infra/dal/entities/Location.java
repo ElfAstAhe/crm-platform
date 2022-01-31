@@ -12,8 +12,8 @@ import java.util.StringJoiner;
 public class Location extends BaseIdEntity implements Serializable {
     private static final long serialVersionUID = 1L;
 
-    @Column(name = "location_item_id", nullable = false)
-    private Long locationItemId;
+    @Column(name = "location_id", nullable = false)
+    private Long locationId;
 
     @Column(name = "short_name", length = 50)
     private String shortName;
@@ -26,12 +26,12 @@ public class Location extends BaseIdEntity implements Serializable {
         // default
     }
 
-    public Long getLocationItemId() {
-        return locationItemId;
+    public Long getLocationId() {
+        return locationId;
     }
 
-    public void setLocationItemId(Long locationItemId) {
-        this.locationItemId = locationItemId;
+    public void setLocationId(Long locationId) {
+        this.locationId = locationId;
     }
 
     public String getShortName() {
@@ -70,7 +70,7 @@ public class Location extends BaseIdEntity implements Serializable {
     @Override
     public String toString() {
         return new StringJoiner(", ", Location.class.getSimpleName() + "[", "]")
-                .add("locationItemId=" + locationItemId)
+                .add("locationId=" + locationId)
                 .add("shortName='" + shortName + "'")
                 .add("network=" + network)
                 .toString();

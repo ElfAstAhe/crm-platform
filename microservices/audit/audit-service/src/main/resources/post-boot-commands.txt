@@ -22,7 +22,7 @@ set resources.jdbc-connection-pool.pool/crm_audit.property.allowEncodingChanges=
 set resources.jdbc-connection-pool.pool/crm_audit.property.sendBufferSize=-1
 set resources.jdbc-connection-pool.pool/crm_audit.property.recvBufferSize=-1
 set resources.jdbc-connection-pool.pool/crm_audit.property.defaultRowFetchSize=0
-set resources.jdbc-connection-pool.pool/crm_audit.property.currentSchema=public
+set resources.jdbc-connection-pool.pool/crm_audit.property.currentSchema=${crm.db.audit.schema}
 set resources.jdbc-connection-pool.pool/crm_audit.property.cancelSignalTimeout=10
 set resources.jdbc-connection-pool.pool/crm_audit.property.logServerErrorDetail=true
 set resources.jdbc-connection-pool.pool/crm_audit.property.escapeSyntaxCallMode=select
@@ -37,5 +37,5 @@ set resources.jdbc-connection-pool.pool/crm_audit.property.unknownLength=2147483
 set resources.jdbc-connection-pool.pool/crm_audit.property.binaryTransfer=true
 set resources.jdbc-connection-pool.pool/crm_audit.property.targetServerType=any
 
-create-jdbc-resource --enabled=true --poolName=pool/crm_audit --target=domain jdbc/crm_audit
-create-resource-ref --enabled=true --target=server jdbc/crm_audit
+create-jdbc-resource --enabled=true --poolName=pool/crm_audit --target=domain ${payara-datasource-prefix}crm_audit
+create-resource-ref --enabled=true --target=server ${payara-datasource-prefix}crm_audit
