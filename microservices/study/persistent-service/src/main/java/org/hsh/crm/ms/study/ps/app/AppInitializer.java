@@ -4,14 +4,12 @@ import org.hsh.crm.ms.study.ps.dal.DalConstants;
 import org.hsh.ms.common.app.BaseAppInitializer;
 
 import javax.annotation.Resource;
-import javax.ejb.Singleton;
-import javax.ejb.Startup;
-import javax.ejb.TransactionManagement;
-import javax.ejb.TransactionManagementType;
+import javax.ejb.*;
 import javax.sql.DataSource;
 
 @Singleton
 @Startup
+@LocalBean
 @TransactionManagement(TransactionManagementType.BEAN)
 public class AppInitializer extends BaseAppInitializer {
     @Resource(lookup = DalConstants.DATA_SOURCE)

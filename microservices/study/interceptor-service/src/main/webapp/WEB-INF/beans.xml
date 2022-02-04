@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/beans_2_0.xsd"
+       bean-discovery-mode="all">
+    <interceptors>
+        <class>org.hsh.crm.ms.study.swi.infra.interceptor.LoggingClassInterceptor</class>
+        <class>org.hsh.ms.common.infra.interceptors.DurationProfileInterceptor</class>
+    </interceptors>
+    <decorators>
+        <class>org.hsh.crm.ms.study.swi.ep.controller.TestFacadeDecorator</class>
+    </decorators>
+</beans>

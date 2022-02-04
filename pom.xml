@@ -62,6 +62,7 @@
         <!-- study -->
         <crm.platform.study.non-persistence-service.version>1.0.0${crm.platform.version.suffix}</crm.platform.study.non-persistence-service.version>
         <crm.platform.study.persistence-service.version>1.0.0${crm.platform.version.suffix}</crm.platform.study.persistence-service.version>
+        <crm.platform.study.interceptor-service.version>1.0.0${crm.platform.version.suffix}</crm.platform.study.interceptor-service.version>
 
         <!-- app servers -->
         <!--
