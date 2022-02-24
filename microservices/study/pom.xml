@@ -11,6 +11,8 @@
         <module>non-persistent-service</module>
         <module>persistent-service</module>
         <module>interceptor-service</module>
+        <module>helidon</module>
+        <module>quarkus</module>
     </modules>
     <properties>
         <crm.platform.baseDir>${project.basedir}/../..</crm.platform.baseDir>

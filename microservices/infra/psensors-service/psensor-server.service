@@ -1,0 +1,12 @@
+[Unit]
+Description=PSensor-Server
+After=network.target
+
+[Service]
+User=root
+ExecStart=/opt/psensor-server/start.sh
+ExecStop=/opt/psensor-server/stop.sh
+StandardOutput=null
+
+[Install]
+WantedBy=multi-user.target

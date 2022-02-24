@@ -13,4 +13,6 @@ public interface TestFacade extends BaseTestFacade {
 
     @Interceptors({DurationProfileInterceptor.class})
     String sayHello2();
+
+    String sayHello3();
 }

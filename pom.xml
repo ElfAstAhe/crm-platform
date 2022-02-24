@@ -8,6 +8,18 @@
     <artifactId>crm-platform</artifactId>
     <version>1.0</version>
     <packaging>pom</packaging>
+    <developers>
+        <developer>
+            <id>elf</id>
+            <name>Aleks.Lougen</name>
+            <roles>
+                <role>developer</role>
+                <role>maintainer</role>
+            </roles>
+            <email>elf.ast.ahe@gmail.com</email>
+            <url>https://gitlab.com/elf.ast.ahe</url>
+        </developer>
+    </developers>
     <properties>
         <java-version>11</java-version>
         <surefireArgLine>--illegal-access=permit</surefireArgLine>
@@ -39,6 +51,10 @@
         <crm.platform.infra.service.version>1.0.0${crm.platform.version.suffix}</crm.platform.infra.service.version>
         <crm.platform.infra.dto.version>1.0.0${crm.platform.version.suffix}</crm.platform.infra.dto.version>
         <crm.platform.infra.client.version>1.0.0${crm.platform.version.suffix}</crm.platform.infra.client.version>
+        <crm.platform.infra.sensors.service.version>1.0.0${crm.platform.version.suffix}</crm.platform.infra.sensors.service.version>
+        <crm.platform.infra.sensors.client.version>1.0.0${crm.platform.version.suffix}</crm.platform.infra.sensors.client.version>
+        <crm.platform.infra.psensors.server.dto.version>1.0.0${crm.platform.version.suffix}</crm.platform.infra.psensors.server.dto.version>
+        <crm.platform.infra.psensors.server.client.version>1.0.0${crm.platform.version.suffix}</crm.platform.infra.psensors.server.client.version>
 
         <!-- libraries -->
         <lib.jakarta.version>8.0.0</lib.jakarta.version>
@@ -46,8 +62,8 @@
         <lib.microprofile.version>4.0.1</lib.microprofile.version>
         <lib.junit.version>5.8.2</lib.junit.version>
         <lib.hamcrest.version>2.2</lib.hamcrest.version>
-        <lib.mockito.version>4.1.0</lib.mockito.version>
-        <lib.slf4j.version>1.7.32</lib.slf4j.version>
+        <lib.mockito.version>4.2.0</lib.mockito.version>
+        <lib.slf4j.version>1.7.35</lib.slf4j.version>
         <lib.yasson.version>1.0.9</lib.yasson.version>
         <lib.flyway.version>8.3.0</lib.flyway.version>
         <lib.jooq.version>3.15.4</lib.jooq.version>
@@ -362,6 +378,14 @@
             <properties>
                 <crm-datasource-prefix>${payara-datasource-prefix}</crm-datasource-prefix>
             </properties>
+            <dependencies>
+                <dependency>
+                    <groupId>org.slf4j</groupId>
+                    <artifactId>slf4j-api</artifactId>
+                    <version>${lib.slf4j.version}</version>
+                    <scope>compile</scope>
+                </dependency>
+            </dependencies>
         </profile>
         <profile>
             <id>wildfly-server</id>
@@ -370,4 +394,46 @@
             </properties>
         </profile>
     </profiles>
+    <repositories>
+        <repository>
+            <id>central</id>
+            <name>Maven Central</name>
+            <url>https://repo1.maven.org/maven2/</url>
+        </repository>
+        <repository>
+            <id>codehaus</id>
+            <name>Codehaus</name>
+            <url>https://repository.codehaus.org</url>
+        </repository>
+        <repository>
+            <id>jboss-maven2-release-repository</id>
+            <name>JBoss</name>
+            <url>https://repository.jboss.org/maven2/</url>
+        </repository>
+        <repository>
+            <id>jboss-community</id>
+            <name>JBoss community</name>
+            <url>https://repository.jboss.org/nexus/content/repositories/public/</url>
+        </repository>
+        <repository>
+            <id>apache</id>
+            <name>Apache maven repository</name>
+            <url>https://repo.maven.apache.org/maven2</url>
+        </repository>
+        <repository>
+            <id>sonatype</id>
+            <name>Sonatype</name>
+            <url>https://repository.sonatype.org/content/groups/public/</url>
+        </repository>
+        <repository>
+            <id>glassfish-repo-archive</id>
+            <name>Nexus repository collection for Glassfish</name>
+            <url>https://download.java.net/maven/glassfish</url>
+        </repository>
+        <repository>
+            <id>local</id>
+            <name>local maven repo</name>
+            <url>file:/$HOME/.m2/repository</url>
+        </repository>
+    </repositories>
 </project>

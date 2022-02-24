@@ -4,22 +4,16 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>infra</artifactId>
+    <artifactId>quarkus</artifactId>
     <version>1.0</version>
     <packaging>pom</packaging>
     <modules>
-        <module>infra-service</module>
-        <module>infra-dto</module>
-        <module>infra-client</module>
-        <module>infra-sensors-service</module>
-        <module>psensors-server-client</module>
-        <module>psensors-server-dto</module>
     </modules>
     <properties>
-        <crm.platform.baseDir>${project.basedir}/../..</crm.platform.baseDir>
+        <crm.platform.baseDir>${project.basedir}/../../..</crm.platform.baseDir>
     </properties>
     <parent>
-        <artifactId>microservices</artifactId>
+        <artifactId>study</artifactId>
         <groupId>org.hsh</groupId>
         <version>1.0</version>
         <relativePath>../pom.xml</relativePath>

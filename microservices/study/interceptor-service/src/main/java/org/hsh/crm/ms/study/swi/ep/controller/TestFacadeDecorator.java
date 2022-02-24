@@ -34,4 +34,9 @@ public class TestFacadeDecorator implements TestFacade {
     public String sayHello2() {
         return "hello3";
     }
+
+    @Override
+    public String sayHello3() {
+        return facade.sayHello3();
+    }
 }

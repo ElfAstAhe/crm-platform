@@ -49,4 +49,11 @@ public class TestController {
     public Response sayHello2() {
         return Response.ok(facade.sayHello2()).build();
     }
+
+    @GET
+    @Path("hello3")
+    @Produces({MimeTypes.Application.JSON})
+    public Response sayHello3() {
+        return Response.ok(facade.sayHello3()).build();
+    }
 }
