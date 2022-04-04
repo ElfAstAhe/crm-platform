@@ -13,6 +13,9 @@
     </modules>
     <properties>
         <crm.platform.baseDir>${project.basedir}/../../..</crm.platform.baseDir>
+
+        <!-- Library versions -->
+        <lib.helidon.version>2.4.2</lib.helidon.version>
     </properties>
     <parent>
         <artifactId>study</artifactId>
