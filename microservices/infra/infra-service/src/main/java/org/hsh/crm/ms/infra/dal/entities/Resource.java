@@ -21,21 +21,11 @@ public class Resource extends BaseIdEntity implements Serializable {
     @Column(name = "port")
     private int port;
 
-    @Column(name = "ip_v4", length = 50)
-    private String ipV4;
-
-    @Column(name = "ip_v6", length = 100)
-    private String ipV6;
-
     @Column(name = "url", length = 1024)
     private String url;
 
     @Column(name = "description", length = 512)
     private String description;
-
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JoinColumn(name = "network_id", referencedColumnName = "id")
-    private Network network;
 
     public Resource() {
         // default
@@ -65,22 +55,6 @@ public class Resource extends BaseIdEntity implements Serializable {
         this.port = port;
     }
 
-    public String getIpV4() {
-        return ipV4;
-    }
-
-    public void setIpV4(String ipV4) {
-        this.ipV4 = ipV4;
-    }
-
-    public String getIpV6() {
-        return ipV6;
-    }
-
-    public void setIpV6(String ipV6) {
-        this.ipV6 = ipV6;
-    }
-
     public String getUrl() {
         return url;
     }
@@ -95,14 +69,6 @@ public class Resource extends BaseIdEntity implements Serializable {
 
     public void setDescription(String description) {
         this.description = description;
-    }
-
-    public Network getNetwork() {
-        return network;
-    }
-
-    public void setNetwork(Network network) {
-        this.network = network;
     }
 
     @Override
@@ -127,11 +93,8 @@ public class Resource extends BaseIdEntity implements Serializable {
                 .add("code='" + code + "'")
                 .add("name='" + name + "'")
                 .add("port=" + port)
-                .add("ipV4='" + ipV4 + "'")
-                .add("ipV6='" + ipV6 + "'")
                 .add("url='" + url + "'")
                 .add("description='" + description + "'")
-                .add("network=" + network)
                 .toString();
     }
 }

@@ -20,7 +20,6 @@ public class Network extends BaseIdEntity implements Serializable {
     private String name;
 
     @Version
-    @Column(name = "version")
     private Long version;
 
     // Ссылка на экземпляр контрагента, микро-сервис contragents
@@ -31,14 +30,18 @@ public class Network extends BaseIdEntity implements Serializable {
     @Column(name = "contract_id")
     private Long contractId;
 
-    @OneToMany(targetEntity = Resource.class, mappedBy = "network", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private List<Resource> resources;
+    @OneToMany(targetEntity = Device.class, mappedBy = "network", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<Device> devices;
 
     @OneToMany(targetEntity = Location.class, mappedBy = "network", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private List<Location> locations;
 
     public Network() {
         // default
+    }
+
+    public Long getVersion() {
+        return version;
     }
 
     public String getCode() {
@@ -73,20 +76,20 @@ public class Network extends BaseIdEntity implements Serializable {
         this.contractId = contractId;
     }
 
-    public List<Resource> getResources() {
-        return resources;
-    }
-
-    public void setResources(List<Resource> resources) {
-        this.resources = resources;
-    }
-
     public List<Location> getLocations() {
         return locations;
     }
 
     public void setLocations(List<Location> locations) {
         this.locations = locations;
+    }
+
+    public List<Device> getDevices() {
+        return devices;
+    }
+
+    public void setDevices(List<Device> devices) {
+        this.devices = devices;
     }
 
     @Override
@@ -113,7 +116,6 @@ public class Network extends BaseIdEntity implements Serializable {
                 .add("name='" + name + "'")
                 .add("providerId=" + providerId)
                 .add("contractId=" + contractId)
-                .add("resources=" + resources)
                 .add("locations=" + locations)
                 .toString();
     }
